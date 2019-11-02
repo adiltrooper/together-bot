@@ -96,7 +96,7 @@ bot.on("message", msg => {
 const adminsOnly = async msg => {
   const member = await bot.getChatMember(msg.chat.id, msg.chat.id);
   if (member && member.user.id == keys.adminsId) {
-    setAdminList();
+    session.setAdminList();
     bot.sendMessage(
       msg.chat.id,
       `Hi ${member.user.first_name}! Welcome to the admin menu!`
