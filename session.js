@@ -6,17 +6,17 @@ class Session {
     if (process.env.REDISTOGO_URL) {
       console.log("YES");
       var rtg = require("url").parse(process.env.REDISTOGO_URL);
-      this.redis = this.redis.createClient(rtg.port, rtg.hostname);
+      var redis = this.redis.createClient(rtg.port, rtg.hostname);
 
-      this.redis.auth(rtg.auth.split(":")[1]);
+      redis.auth(rtg.auth.split(":")[1]);
     } else {
-      this.redis = require("redis").createClient(keys.redisPort);
+      redis = require("redis").createClient(keys.redisPort);
     }
   }
 
   setAdminList() {
     const adminsId = keys.adminsId;
-    return this.redis.setex(adminsId, 3600, adminsId);
+    return redis.setex(adminsId, 3600, adminsId);
   }
 }
 
