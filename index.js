@@ -89,48 +89,49 @@ bot.on("message", msg => {
     case "I wanna stay home":
       return "Nop";
   }
-
-  // function checkAdmin() {
-  //   if member && member.id
-  // }
-
-  const adminsOnly = async msg => {
-    const member = await bot.getChatMember(msg.chat.id, msg.chat.id);
-    if (member && keys.adminsId.includes(member.user.id)) {
-      return true;
-    } else {
-      bot.sendMessage(
-        msg.chat.id,
-        `Sorry ${member.user.first_name}, you are not an admin :(`
-      );
-    }
-  };
-
-  bot.onText(/\/admin/, msg => {
-    adminsOnly(msg);
-    console.log("hello");
-  });
-
-  // bot.command(
-  //   "admin",
-  //   adminsOnly(msg => {
-  //     console.log("doing admin stuff");
-  //   })
-  // );
-  // if (msg.text === "I'm feelin' adventurous") {
-  //   connection.query("SELECT * FROM testdb ORDER BY RAND() LIMIT 1", function(
-  //     err,
-  //     results,
-  //     fields
-  //   ) {
-  //     if (err) {
-  //       console.log(err.message);
-  //     } else {
-  //       bot.sendMessage(119860989, results[0].activity);
-  //     }
-  //   });
-  // }
 });
+
+// function checkAdmin() {
+//   if member && member.id
+// }
+
+const adminsOnly = async msg => {
+  const member = await bot.getChatMember(msg.chat.id, msg.chat.id);
+  if (member && keys.adminsId.includes(member.user.id)) {
+    return true;
+  } else {
+    bot.sendMessage(
+      msg.chat.id,
+      `Sorry ${member.user.first_name}, you are not an admin :(`
+    );
+  }
+};
+
+bot.onText(/\/admin/, msg => {
+  adminsOnly(msg);
+  console.log("hello");
+});
+
+// bot.command(
+//   "admin",
+//   adminsOnly(msg => {
+//     console.log("doing admin stuff");
+//   })
+// );
+// if (msg.text === "I'm feelin' adventurous") {
+//   connection.query("SELECT * FROM testdb ORDER BY RAND() LIMIT 1", function(
+//     err,
+//     results,
+//     fields
+//   ) {
+//     if (err) {
+//       console.log(err.message);
+//     } else {
+//       bot.sendMessage(119860989, results[0].activity);
+//     }
+//   });
+// }
+// });
 
 // bot.start(ctx =>
 //   ctx.reply(
