@@ -5,7 +5,7 @@ const TelegramBot = require("node-telegram-bot-api"),
   bot = new TelegramBot(token, {
     webHook: { port: process.env.PORT, host: host }
   });
-bot.setWebHook(externalUrl + `:${process.env.PORT}/bot` + token);
+bot.setWebHook(externalUrl + `:443/bot` + token);
 
 // const Session = require("./session");
 const keys = require("./config_keys/keys");
