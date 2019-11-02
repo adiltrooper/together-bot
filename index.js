@@ -7,24 +7,25 @@ const TelegramBot = require("node-telegram-bot-api"),
     webHook: { port: port, host: host }
   });
 bot.setWebHook(externalUrl + `:${port}/bot` + token);
+
 const Session = require("./session");
 
 const keys = require("./config_keys/keys");
 const axios = require("axios");
 const mysql = require("mysql");
-const db = require("./config_db/db");
+// const db = require("./config_db/db");
 const express = require("express");
 const bodyParser = require("body-parser");
 
-const connection = mysql.createConnection(db);
-
-connection.connect(function(error) {
-  if (error) {
-    console.log("Error: " + error.message);
-  } else {
-    console.log("Connected");
-  }
-});
+// const connection = mysql.createConnection(db);
+//
+// connection.connect(function(error) {
+//   if (error) {
+//     console.log("Error: " + error.message);
+//   } else {
+//     console.log("Connected");
+//   }
+// });
 
 const app = express();
 const session = new Session();
@@ -49,17 +50,17 @@ bot.onText(/\/start/, msg => {
   const first_name = msg.chat.first_name;
   const username = msg.chat.username;
 
-  connection.query(
-    "INSERT INTO user_info (chat_id, first_name, username) VALUES (?, ?, ?)",
-    [chat_id, first_name, username],
-    function(err, results, fields) {
-      if (err) {
-        console.log(err.message);
-      } else {
-        return;
-      }
-    }
-  );
+  // connection.query(
+  //   "INSERT INTO user_info (chat_id, first_name, username) VALUES (?, ?, ?)",
+  //   [chat_id, first_name, username],
+  //   function(err, results, fields) {
+  //     if (err) {
+  //       console.log(err.message);
+  //     } else {
+  //       return;
+  //     }
+  //   }
+  // );
 });
 
 bot.sendMessage(119860989, "Welcome", {
@@ -138,47 +139,12 @@ bot.on("message", msg => {
 //   )
 // );
 
-// bot.use(session());
-// bot.on("text", ctx => {
-//   console.log(ctx);
-// });
-
-// const generatorOptions = Markup.inlineKeyboard([
-//   Markup.callbackButton("Feelin' Chill", "FEELING_CHILL"),
-//   Markup.callbackButton("Adventurous", "ADVENTUROUS"),
-//   Markup.callbackButton("Stay At Home", "STAY_AT_HOME")
-// ]);
-
-// bot.on("text", ctx =>
-//   ctx.telegram.sendCopy(
-//     ctx.chat.id,
-//     ctx.message,
-//     Extra.markup(generatorOptions)
-//   )
-// );
 // bot.help(ctx => ctx.reply("Send me a sticker"));
 // bot.on("sticker", ctx => ctx.reply("👍"));
 // bot.hears("hi", ctx => ctx.reply("Hey there"));
 // bot.command("oldschool", ctx => ctx.reply("Hello"));
 // bot.command("modern", ({ reply }) => reply("Yo"));
 // bot.command("hipster", Telegraf.reply("λ"));
-
-// bot.start(ctx =>
-//   ctx.reply(
-//     "Welcome!",
-//     Markup.inlineKeyboard([
-//       Markup.callbackButton("Button 1", "BUTTON_1"),
-//       Markup.callbackButton("Button 2", "BUTTON_2")
-//     ]).extra()
-//   )
-// )
-
-// var server = app.listen(process.env.PORT, () => {
-//   var host = server.address().address;
-//   var port = server.address().port;
-//
-//   console.log(host, port);
-// });
 
 app.listen(port, () => {
   console.log(`App listening on port ${port}`);
