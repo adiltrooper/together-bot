@@ -6,7 +6,10 @@ class Session {
     if (process.env.REDISTOGO_URL) {
       console.log("YES");
       var rtg = require("url").parse(process.env.REDISTOGO_URL);
-      this.redis_client = this.redis.createClient(rtg.port, rtg.hostname);
+      this.redis_client = this.redis_client.createClient(
+        rtg.port,
+        rtg.hostname
+      );
 
       this.redis_client.auth(rtg.auth.split(":")[1]);
     } else {
