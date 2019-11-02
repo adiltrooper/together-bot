@@ -7,7 +7,7 @@ const TelegramBot = require("node-telegram-bot-api"),
   });
 bot.setWebHook(externalUrl + `:443/bot` + token);
 
-// const Session = require("./session");
+const Session = require("./session");
 const keys = require("./config_keys/keys");
 const axios = require("axios");
 const mysql = require("mysql");
@@ -27,6 +27,7 @@ const bodyParser = require("body-parser");
 // });
 
 const app = express();
+const session = new Session();
 
 bot.onText(/\/start/, msg => {
   bot.sendMessage(
@@ -90,12 +91,9 @@ bot.on("message", msg => {
   }
 });
 
-// function checkAdmin() {
-//   if member && member.id
-// }
-
 const adminsOnly = async msg => {
   const member = await bot.getChatMember(msg.chat.id, msg.chat.id);
+  setAdminList();
   if (member && member.user.id == keys.adminsId) {
     bot.sendMessage(
       msg.chat.id,
@@ -143,16 +141,3 @@ bot.onText(/\/admin/, async msg => {
 //   });
 // }
 // });
-
-// bot.start(ctx =>
-//   ctx.reply(
-//     `Hi ${ctx.message.from.first_name}! Welcome to the together community!`
-//   )
-// );
-
-// bot.help(ctx => ctx.reply("Send me a sticker"));
-// bot.on("sticker", ctx => ctx.reply("👍"));
-// bot.hears("hi", ctx => ctx.reply("Hey there"));
-// bot.command("oldschool", ctx => ctx.reply("Hello"));
-// bot.command("modern", ({ reply }) => reply("Yo"));
-// bot.command("hipster", Telegraf.reply("λ"));
