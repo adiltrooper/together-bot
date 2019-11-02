@@ -14,7 +14,7 @@ const axios = require("axios");
 const mysql = require("mysql");
 const db = require("./config_db/db");
 const express = require("express");
-const bodyParser = require("body-Parser");
+const bodyParser = require("body-parser");
 
 const connection = mysql.createConnection(db);
 
