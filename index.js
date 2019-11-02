@@ -7,7 +7,7 @@ const TelegramBot = require("node-telegram-bot-api"),
   });
 bot.setWebHook(externalUrl + `:${process.env.PORT}/bot` + token);
 
-const Session = require("./session");
+// const Session = require("./session");
 
 const keys = require("./config_keys/keys");
 const axios = require("axios");
