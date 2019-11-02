@@ -3,6 +3,7 @@ const keys = require("./config_keys/keys");
 class Session {
   constructor() {
     if (process.env.REDISTOGO_URL) {
+      console.log("YES");
       var rtg = require("url").parse(process.env.REDISTOGO_URL);
       var redis = require("redis").createClient(rtg.port, rtg.hostname);
       var rtg = require("url").parse(process.env.REDISTOGO_URL);
