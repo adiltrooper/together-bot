@@ -1,22 +1,22 @@
 const keys = require("./config_keys/keys");
+var redis = require("redis");
 
 class Session {
   constructor() {
     if (process.env.REDISTOGO_URL) {
       console.log("YES");
       var rtg = require("url").parse(process.env.REDISTOGO_URL);
-      var redis = require("redis").createClient(rtg.port, rtg.hostname);
+      this.redis = this.redis.createClient(rtg.port, rtg.hostname);
 
-      redis.auth(rtg.auth.split(":")[1]);
+      this.redis.auth(rtg.auth.split(":")[1]);
     } else {
-      const redis = require("redis").createClient(keys.redisPort);
+      this.redis = require("redis").createClient(keys.redisPort);
     }
-    console.log("Client creating!");
   }
 
   setAdminList() {
     const adminsId = keys.adminsId;
-    return redis.setex(adminsId, 3600, adminsId);
+    return this.redis.setex(adminsId, 3600, adminsId);
   }
 }
 
