@@ -94,7 +94,7 @@ bot.on("message", msg => {
 //   if member && member.id
 // }
 
-const adminsOnly = async (msg, keys) => {
+const adminsOnly = async msg => {
   const member = await bot.getChatMember(msg.chat.id, msg.chat.id);
   if (member && member.user.id === keys.adminsId) {
     bot.sendMessage(
@@ -115,7 +115,7 @@ const adminsOnly = async (msg, keys) => {
 
 bot.onText(/\/admin/, msg => {
   adminsOnly(msg);
-  console.log("hello");
+  console.log(keys.adminsId);
 });
 
 // bot.command(
