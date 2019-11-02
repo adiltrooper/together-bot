@@ -94,20 +94,9 @@ bot.on("message", msg => {
 //   if member && member.id
 // }
 
-function afn(msg) {
-  bot.onText(/\/admin/, msg => {
-    bot.sendMessage(msg.chat.id, "Select Option:", {
-      reply_markup: {
-        keyboard: [["New Post", "Custom Post"], ["Exit Admin Mode"]]
-      }
-    });
-  });
-}
-
-const adminsOnly = afn => async msg => {
+const adminsOnly = async msg => {
   const member = await bot.getChatMember(msg.chat.id, msg.chat.id);
   if (member && member.user.id == keys.adminsId) {
-    afn(msg);
     bot.sendMessage(
       msg.chat.id,
       `Hi ${member.user.first_name}! Welcome to the admin menu!`
@@ -121,17 +110,18 @@ const adminsOnly = afn => async msg => {
   }
 };
 
-// bot.onText(/\/admin/, msg => {
-//   if (adminsOnly(msg)) {
-//     bot.sendMessage(msg.chat.id, "Select Option:", {
-//       reply_markup: {
-//         keyboard: [["New Post", "Custom Post"], ["Exit Admin Mode"]]
-//       }
-//     });
-//   } else {
-//     console.log("someting wrong");
-//   }
-// });
+bot.onText(/\/admin/, async msg => {
+  const adminCheck = await adminsOnly(msg);
+  if (adminCheck) {
+    bot.sendMessage(msg.chat.id, "Select Option:", {
+      reply_markup: {
+        keyboard: [["New Post", "Custom Post"], ["Exit Admin Mode"]]
+      }
+    });
+  } else {
+    console.log("someting wrong");
+  }
+});
 
 // bot.command(
 //   "admin",
