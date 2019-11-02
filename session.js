@@ -6,8 +6,6 @@ class Session {
       console.log("YES");
       var rtg = require("url").parse(process.env.REDISTOGO_URL);
       var redis = require("redis").createClient(rtg.port, rtg.hostname);
-      var rtg = require("url").parse(process.env.REDISTOGO_URL);
-      var redis = require("redis").createClient(rtg.port, rtg.hostname);
     } else {
       const redis = require("redis").createClient(keys.redisPort);
     }
