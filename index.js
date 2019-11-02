@@ -2,7 +2,7 @@ const TelegramBot = require("node-telegram-bot-api"),
   host = process.env.HOST || "localhost", // probably this change is not required
   externalUrl = "https://together-bot.herokuapp.com",
   token = process.env.botToken,
-  bot = new TelegramBot(process.env.botToken, {
+  bot = new TelegramBot(token, {
     webHook: { port: process.env.PORT, host: host }
   });
 // bot.setWebHook(externalUrl + `:${port}/bot` + token);
@@ -145,5 +145,3 @@ bot.on("message", msg => {
 // bot.command("oldschool", ctx => ctx.reply("Hello"));
 // bot.command("modern", ({ reply }) => reply("Yo"));
 // bot.command("hipster", Telegraf.reply("λ"));
-
-app.listen(process.env.PORT || 5000);
