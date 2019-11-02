@@ -108,6 +108,8 @@ const adminsOnly = async msg => {
       `Sorry ${member.user.first_name}, you are not an admin :(`
     );
     console.log(member);
+    console.log(member.user.id);
+    console.log(keys.adminsId);
   }
 };
 
