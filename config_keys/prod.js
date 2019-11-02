@@ -1,5 +1,5 @@
 module.exports = {
-  botToken: "process.ENV.botToken",
-  redisPort: "process.ENV.redisPort",
-  adminsId: "process.ENV.adminsId"
+  botToken: process.env.botToken,
+  redisPort: process.env.redisPort,
+  adminsId: process.env.adminsId
 };
