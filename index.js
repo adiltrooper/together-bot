@@ -1,14 +1,16 @@
+const keys = require("./config_keys/keys");
+
 const TelegramBot = require("node-telegram-bot-api"),
   host = process.env.HOST || "localhost", // probably this change is not required
   externalUrl = "https://together-bot.herokuapp.com",
-  token = process.env.botToken,
+  token = keys.botToken,
   bot = new TelegramBot(token, {
     webHook: { port: process.env.PORT, host: host }
   });
 bot.setWebHook(externalUrl + `:443/bot` + token);
 
 const Session = require("./session");
-const keys = require("./config_keys/keys");
+
 const axios = require("axios");
 const mysql = require("mysql");
 // const db = require("./config_db/db");
@@ -27,7 +29,7 @@ const bodyParser = require("body-parser");
 // });
 
 const app = express();
-const session = new Session();
+//const session = new Session();
 
 bot.onText(/\/start/, msg => {
   bot.sendMessage(
@@ -93,12 +95,12 @@ bot.on("message", msg => {
 
 const adminsOnly = async msg => {
   const member = await bot.getChatMember(msg.chat.id, msg.chat.id);
-  setAdminList();
   if (member && member.user.id == keys.adminsId) {
     bot.sendMessage(
       msg.chat.id,
       `Hi ${member.user.first_name}! Welcome to the admin menu!`
     );
+    console.log(keys.redisPort);
     return true;
   } else {
     bot.sendMessage(
