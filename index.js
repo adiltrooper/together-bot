@@ -6,7 +6,7 @@ const TelegramBot = require("node-telegram-bot-api"),
   bot = new TelegramBot(process.env.TOKEN, {
     webHook: { port: port, host: host }
   });
-bot.setWebHook(externalUrl + `:${port}/bot` + token);
+// bot.setWebHook(externalUrl + `:${port}/bot` + token);
 
 const Session = require("./session");
 
@@ -147,6 +147,6 @@ bot.on("message", msg => {
 // bot.command("modern", ({ reply }) => reply("Yo"));
 // bot.command("hipster", Telegraf.reply("λ"));
 
-app.listen(port, () => {
-  console.log(`App listening on port ${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`App listening on port ${port}`);
+// });
