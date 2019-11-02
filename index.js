@@ -107,6 +107,7 @@ const adminsOnly = async msg => {
       msg.chat.id,
       `Sorry ${member.user.first_name}, you are not an admin :(`
     );
+    onsole.log(member);
   }
 };
 
