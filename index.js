@@ -111,12 +111,14 @@ const adminsOnly = async msg => {
 };
 
 bot.onText(/\/admin/, msg => {
-  if (adminsOnly(msg) == true) {
+  if (adminsOnly(msg)) {
     bot.sendMessage(msg.chat.id, "Select Option:", {
       reply_markup: {
         keyboard: [["New Post", "Custom Post"], ["Exit Admin Mode"]]
       }
     });
+  } else {
+    console.log("someting wrong");
   }
 });
 
