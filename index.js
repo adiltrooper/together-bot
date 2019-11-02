@@ -1,4 +1,12 @@
 const TelegramBot = require("node-telegram-bot-api");
+(port = process.env.PORT || 5000),
+  (host = process.env.HOST || "localhost"), // probably this change is not required
+  (externalUrl = "https://together-bot.herokuapp.com"),
+  (token = process.env.botToken),
+  (bot = new TelegramBot(process.env.TOKEN, {
+    webHook: { port: port, host: host }
+  }));
+bot.setWebHook(externalUrl + `:${port}/bot` + token);
 const Session = require("./session");
 
 const keys = require("./config_keys/keys");
@@ -174,8 +182,6 @@ bot.on("message", msg => {
 //   console.log(host, port);
 // });
 
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}`);
+app.listen(port, () => {
+  console.log(`App listening on port ${port}`);
 });
