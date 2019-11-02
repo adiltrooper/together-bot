@@ -1,4 +1,5 @@
 const keys = require("./config_keys/keys");
+const express = require("express");
 
 const TelegramBot = require("node-telegram-bot-api"),
   host = process.env.HOST || "localhost", // probably this change is not required
@@ -14,7 +15,6 @@ const Session = require("./session");
 const axios = require("axios");
 const mysql = require("mysql");
 // const db = require("./config_db/db");
-const express = require("express");
 
 const bodyParser = require("body-parser");
 
@@ -29,7 +29,7 @@ const bodyParser = require("body-parser");
 // });
 
 const app = express();
-//const session = new Session();
+const session = new Session();
 
 bot.onText(/\/start/, msg => {
   bot.sendMessage(
