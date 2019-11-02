@@ -29,8 +29,6 @@ connection.connect(function(error) {
 const app = express();
 const session = new Session();
 
-const bot = new TelegramBot(keys.botToken, { polling: true });
-
 bot.onText(/\/start/, msg => {
   bot.sendMessage(
     msg.chat.id,
