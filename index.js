@@ -5,7 +5,7 @@ const TelegramBot = require("node-telegram-bot-api"),
   bot = new TelegramBot(token, {
     webHook: { port: process.env.PORT, host: host }
   });
-// bot.setWebHook(externalUrl + `:${port}/bot` + token);
+bot.setWebHook(externalUrl + `:${process.env.PORT}/bot` + token);
 
 const Session = require("./session");
 
@@ -28,7 +28,6 @@ const bodyParser = require("body-parser");
 // });
 
 const app = express();
-const session = new Session();
 
 bot.onText(/\/start/, msg => {
   bot.sendMessage(
