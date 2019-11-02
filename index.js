@@ -107,15 +107,17 @@ const adminsOnly = async msg => {
       msg.chat.id,
       `Sorry ${member.user.first_name}, you are not an admin :(`
     );
-    console.log(member);
-    console.log(member.user.id);
-    console.log(keys.adminsId);
   }
 };
 
 bot.onText(/\/admin/, msg => {
-  adminsOnly(msg);
-  console.log(keys.adminsId);
+  if (adminsOnly(msg)) {
+    bot.sendMessage(msg.chat.id, {
+      reply_markup: {
+        keyboard: [["New Post", "Custom Post"], ["Exit Admin Mode"]]
+      }
+    });
+  }
 });
 
 // bot.command(
