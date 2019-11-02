@@ -8,8 +8,6 @@ const db = require("./config_db/db");
 const express = require("express");
 const bodyParser = require("body-Parser");
 
-const PORT = process.env.PORT || 5000;
-
 const connection = mysql.createConnection(db);
 
 connection.connect(function(error) {
@@ -22,10 +20,6 @@ connection.connect(function(error) {
 
 const app = express();
 const session = new Session();
-
-app.listen(5000, () => {
-  console.log(`App listening on port ${PORT}`);
-});
 
 const bot = new TelegramBot(keys.botToken, { polling: true });
 
@@ -172,3 +166,16 @@ bot.on("message", msg => {
 //     ]).extra()
 //   )
 // )
+
+// var server = app.listen(process.env.PORT, () => {
+//   var host = server.address().address;
+//   var port = server.address().port;
+//
+//   console.log(host, port);
+// });
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`App listening on port ${PORT}`);
+});
