@@ -117,9 +117,28 @@ bot.onText(/\/admin/, async msg => {
       reply_markup: {
         keyboard: [["New Post", "Custom Post"], ["Exit Admin Mode"]]
       }
-    });
+    }),
+      setEnterAdminState();
   } else {
-    console.log("someting wrong");
+    console.log("Sorry you are not an admin");
+  }
+});
+
+bot.on("message", msg => {
+  switch (msg.text) {
+    case "New Post":
+      return (
+        bot.sendMessage(msg.chat.id, "Select Option:", {
+          reply_markup: {
+            keyboard: [["Send Post", "Delete Postt"], ["Exit Admin Mode"]]
+          }
+        }),
+        bot.sendMessage(msg.chat.id, "Craft your Message here!")
+      );
+    case "Custom Post":
+      return "Hello";
+    case "Exit Admin Mode":
+      return "Nop";
   }
 });
 

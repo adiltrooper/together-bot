@@ -19,6 +19,10 @@ class Session {
     return redis.setex("adminsId", 3600, adminsId);
     console.log(redis.print);
   }
+
+  setEnterAdminState() {
+    redis.setex("adminState", 3600, 1);
+  }
 }
 
 module.exports = Session;
