@@ -118,7 +118,7 @@ bot.onText(/\/admin/, async msg => {
         keyboard: [["New Post", "Custom Post"], ["Exit Admin Mode"]]
       }
     }),
-      setEnterAdminState();
+      session.setEnterAdminState();
   } else {
     console.log("Sorry you are not an admin");
   }
