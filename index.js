@@ -144,7 +144,8 @@ bot.on("message", msg => {
   if (msg.text == "test") {
     const checkAdmin = async () => {
       const data = await session.getAdminList();
-      console.log(data);
+      console.log(typeof data);
+      console.log(JSON.stringify(data));
     };
     checkAdmin();
   }
