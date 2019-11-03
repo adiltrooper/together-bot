@@ -1,5 +1,4 @@
 const keys = require("./config_keys/keys");
-var redis = require("redis");
 const redis = require("redis");
 bluebird.promisifyAll(redis);
 
