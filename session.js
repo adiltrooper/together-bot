@@ -37,8 +37,6 @@ class Session {
   }
 
   getAdminList() {
-    const { promisify } = require("util");
-    const getAsync = promisify(redis.get).bind(redis);
     return getAsync("adminsId").then(function(res) {
       console.log(res); // => 'bar'
     });
@@ -49,7 +47,6 @@ class Session {
   //   console.log(res);
   // }
 }
-
 module.exports = Session;
 
 //redis://redistogo:8ea37dd6493bf8b88c4f18ed0247240a@hammerjaw.redistogo.com:10191/
