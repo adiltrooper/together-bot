@@ -148,8 +148,7 @@ const checkAdmin = async () => {
 
 bot.on("message", msg => {
   if (msg.text == "test") {
-    checkAdmin();
-    console.log(reply);
+    console.log(checkAdmin());
   }
 });
 
