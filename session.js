@@ -1,6 +1,7 @@
 const keys = require("./config_keys/keys");
 var redis = require("redis");
-const { promisify } = require("util");
+const redis = require("redis");
+bluebird.promisifyAll(redis);
 
 class Session {
   constructor() {
@@ -10,8 +11,6 @@ class Session {
       var client = redis.createClient(rtg.port, rtg.hostname);
 
       client.auth(rtg.auth.split(":")[1]);
-
-      const getAsync = promisify(client.get).bind(client);
     } else {
       client = require("redis").createClient(keys.redisPort);
     }
