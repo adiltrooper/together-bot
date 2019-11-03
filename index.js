@@ -95,7 +95,8 @@ bot.sendMessage(119860989, "Welcome", {
 
 const adminsOnly = async msg => {
   const member = await bot.getChatMember(msg.chat.id, msg.chat.id);
-  if (member && member.user.id == data) {
+  const reply = await session.getAdminList();
+  if (member && member.user.id == reply) {
     bot.sendMessage(
       msg.chat.id,
       `Hi ${member.user.first_name}! Welcome to the admin menu!`
@@ -116,8 +117,7 @@ bot.onText(/\/admin/, async msg => {
       reply_markup: {
         keyboard: [["New Post", "Custom Post"], ["Exit Admin Mode"]]
       }
-    }),
-      session.setEnterAdminState();
+    });
   } else {
     console.log("Sorry you are not an admin");
   }
@@ -141,15 +141,9 @@ bot.onText(/\/admin/, async msg => {
 //   }
 // });
 
-function checkAdmin() {
-  return session.getAdminList().then(redis_info => {
-    console.log(redis_info);
-  });
-}
-
 bot.on("message", msg => {
   if (msg.text == "test") {
-    console.log(session.getAdminList());
+    session.getAdminList().then(res => {});
   }
   //}
 });
