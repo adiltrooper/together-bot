@@ -9,11 +9,11 @@ class Session {
       redis = redis.createClient(rtg.port, rtg.hostname);
 
       redis.auth(rtg.auth.split(":")[1]);
+      const { promisify } = require("util");
+      const getAsync = promisify(redis.get).bind(redis);
     } else {
       redis = require("redis").createClient(keys.redisPort);
     }
-    const { promisify } = require("util");
-    const getAsync = promisify(redis.get).bind(redis);
   }
 
   setAdminList() {
