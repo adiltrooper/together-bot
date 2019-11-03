@@ -143,21 +143,20 @@ bot.onText(/\/admin/, async msg => {
 
 bot.on("message", msg => {
   if (msg.text == "test") {
-    const reply = session.getAdminList();
-    console.log(reply);
-  }
-});
+    // const checkAdmin = async () => {
+    //   const reply = await session.getAdminList();
+    //   console.log(reply);
+    //   return reply;
 
-// bot.on("message", msg => {
-//   if (msg.text == "test") {
-//     const checkAdmin = async () => {
-//       const reply = await session.getAdminList();
-//       console.log(reply);
-//       return reply;
-//     };
-//     checkAdmin();
-//   }
-// });
+    function checkAdmin() {
+      session.getAdminList().then(redis_value => {
+        console.log(redis_value);
+      });
+    }
+  }
+  checkAdmin();
+  //}
+});
 
 // bot.command(
 //   "admin",
