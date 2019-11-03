@@ -95,12 +95,7 @@ bot.on("message", msg => {
 
 const adminsOnly = async msg => {
   const member = await bot.getChatMember(msg.chat.id, msg.chat.id);
-  if (!session.getAdminList()) {
-    session.setAdminList();
-  } else {
-    console.log(data);
-    return data;
-  }
+
   if (member && member.user.id == data) {
     bot.sendMessage(
       msg.chat.id,
@@ -146,6 +141,10 @@ bot.on("message", msg => {
       return "Nop";
   }
 });
+bot.on("test"),
+  msg => {
+    session.setAdminList();
+  };
 
 // bot.command(
 //   "admin",
