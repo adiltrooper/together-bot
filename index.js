@@ -95,7 +95,6 @@ bot.on("message", msg => {
 
 const adminsOnly = async msg => {
   const member = await bot.getChatMember(msg.chat.id, msg.chat.id);
-
   if (member && member.user.id == data) {
     bot.sendMessage(
       msg.chat.id,
