@@ -37,6 +37,8 @@ class Session {
   }
 
   getAdminList() {
+    const { promisify } = require("util");
+    const getAsync = promisify(redis.get).bind(redis);
     return getAsync("adminsId").then(function(res) {
       console.log(res); // => 'bar'
     });
