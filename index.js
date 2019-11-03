@@ -144,12 +144,12 @@ bot.onText(/\/admin/, async msg => {
 const checkAdmin = async () => {
   const reply = await session.getAdminList();
   return reply;
-  console.log(reply);
 };
 
 bot.on("message", msg => {
   if (msg.text == "test") {
     checkAdmin();
+    console.log(reply);
   }
 });
 
