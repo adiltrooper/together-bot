@@ -42,6 +42,7 @@ class Session {
       }
 
       if (data !== null) {
+        console.log(data);
         return data;
       }
     });
