@@ -73,25 +73,25 @@ bot.sendMessage(119860989, "Welcome", {
   }
 });
 
-bot.on("message", msg => {
-  switch (msg.text) {
-    case "I'm feelin' adventurous":
-      return connection.query(
-        "SELECT * FROM testdb ORDER BY RAND() LIMIT 1",
-        function(err, results, fields) {
-          if (err) {
-            console.log(err.message);
-          } else {
-            bot.sendMessage(119860989, results[0].activity);
-          }
-        }
-      );
-    case "I'm feelin chill":
-      return "Hello";
-    case "I wanna stay home":
-      return "Nop";
-  }
-});
+// bot.on("message", msg => {
+//   switch (msg.text) {
+//     case "I'm feelin' adventurous":
+//       return connection.query(
+//         "SELECT * FROM testdb ORDER BY RAND() LIMIT 1",
+//         function(err, results, fields) {
+//           if (err) {
+//             console.log(err.message);
+//           } else {
+//             bot.sendMessage(119860989, results[0].activity);
+//           }
+//         }
+//       );
+//     case "I'm feelin chill":
+//       return "Hello";
+//     case "I wanna stay home":
+//       return "Nop";
+//   }
+// });
 
 const adminsOnly = async msg => {
   const member = await bot.getChatMember(msg.chat.id, msg.chat.id);
@@ -123,27 +123,26 @@ bot.onText(/\/admin/, async msg => {
   }
 });
 
-bot.on("message", msg => {
-  switch (msg.text) {
-    case "New Post":
-      return (
-        bot.sendMessage(msg.chat.id, "Select Option:", {
-          reply_markup: {
-            keyboard: [["Send Post", "Delete Postt"], ["Exit Admin Mode"]]
-          }
-        }),
-        bot.sendMessage(msg.chat.id, "Craft your Message here!")
-      );
-    case "Custom Post":
-      return "Hello";
-    case "Exit Admin Mode":
-      return "Nop";
-  }
+// bot.on("message", msg => {
+//   switch (msg.text) {
+//     case "New Post":
+//       return (
+//         bot.sendMessage(msg.chat.id, "Select Option:", {
+//           reply_markup: {
+//             keyboard: [["Send Post", "Delete Postt"], ["Exit Admin Mode"]]
+//           }
+//         }),
+//         bot.sendMessage(msg.chat.id, "Craft your Message here!")
+//       );
+//     case "Custom Post":
+//       return "Hello";
+//     case "Exit Admin Mode":
+//       return "Nop";
+//   }
+// });
+bot.onText("test", msg => {
+  session.setAdminList();
 });
-bot.onText("test"),
-  msg => {
-    session.setAdminList();
-  };
 
 // bot.command(
 //   "admin",
