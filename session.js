@@ -35,14 +35,9 @@ class Session {
     });
   }
 
-  getAdminList() {
-    console.log("Trying");
-    return redis.get("adminsId", (err, data) => {
-      if (data !== null) {
-        return data;
-      }
-    });
-    console.log("Still trying");
+  async getAdminList() {
+    const res = await getAsync("adminsId");
+    console.log(res);
   }
 }
 
