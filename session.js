@@ -40,6 +40,7 @@ class Session {
   getAdminList() {
     return redis.getAsync("adminsId").then(function(res) {
       console.log(res); // => 'bar'
+      return res;
     });
   }
 
