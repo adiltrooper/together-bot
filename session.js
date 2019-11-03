@@ -16,8 +16,8 @@ class Session {
 
   setAdminList() {
     const adminsId = keys.adminsId;
+    console.log("information has been set");
     return redis.setex("adminsId", 3600, adminsId);
-    console.log(redis.print);
   }
 
   setEnterAdminState() {
@@ -39,11 +39,11 @@ class Session {
     redis.get("adminsId", (err, data) => {
       if (err) {
         console.log(err);
-      }
-
-      if (data !== null) {
+      } else if (data !== null) {
         console.log(data);
         return data;
+      } else {
+        console.log("It is null");
       }
     });
   }
