@@ -10,12 +10,10 @@ class Session {
 
       redis.auth(rtg.auth.split(":")[1]);
       const { promisify } = require("util");
-      const getAsync = promisify(redis.get).bind(redis);
     } else {
       redis = require("redis").createClient(keys.redisPort);
     }
   }
-
   setAdminList() {
     const adminsId = keys.adminsId;
     console.log("information has been set");
@@ -38,6 +36,7 @@ class Session {
   }
 
   getAdminList() {
+    const getAsync = promisify(redis.get).bind(redis);
     return getAsync("adminsId").then(function(res) {
       console.log(res); // => 'bar'
     });
