@@ -37,7 +37,7 @@ class Session {
 
   getAdminList() {
     console.log("Trying");
-    return this.redis.get("adminsId");
+    return redis.get("adminsId");
   }
 }
 
