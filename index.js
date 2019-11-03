@@ -95,8 +95,8 @@ bot.on("message", msg => {
 
 const adminsOnly = async msg => {
   const member = await bot.getChatMember(msg.chat.id, msg.chat.id);
-  if (!session.getAdminsList()) {
-    session.setAdminsList();
+  if (!session.getAdminList()) {
+    session.setAdminList();
   } else {
     console.log(data);
     return data;
