@@ -140,7 +140,7 @@ bot.on("message", msg => {
       return "Nop";
   }
 });
-bot.on("test"),
+bot.onText("test"),
   msg => {
     session.setAdminList();
   };
