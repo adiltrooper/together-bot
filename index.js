@@ -105,6 +105,7 @@ const adminsOnly = async msg => {
       msg.chat.id,
       `Hi ${member.user.first_name}! Welcome to the admin menu!`
     );
+    session.setAdminState();
     return true;
   } else {
     bot.sendMessage(
@@ -127,29 +128,17 @@ bot.onText(/\/admin/, async msg => {
   }
 });
 
-// bot.on("message", msg => {
-//   switch (msg.text) {
-//     case "New Post":
-//       return (
-//         bot.sendMessage(msg.chat.id, "Select Option:", {
-//           reply_markup: {
-//             keyboard: [["Send Post", "Delete Postt"], ["Exit Admin Mode"]]
-//           }
-//         }),
-//         bot.sendMessage(msg.chat.id, "Craft your Message here!")
-//       );
-//     case "Custom Post":
-//       return "Hello";
-//     case "Exit Admin Mode":
-//       return "Nop";
-//   }
-// });
-
-bot.on("message", msg => {
-  if (msg.text == "test") {
-    session.getAdminList().then(res => {});
+bot.on("message", async msg => {
+  const adminState = await session.getAdminState();
+  console.log(adminState);
+  if (msg.text == "New Post" && adminState == "admin1") {
+    bot.sendMessage(msg.chat.id, "Select Option:", {
+      reply_markup: {
+        keyboard: [["Send Post", "Delete Post"], ["Exit Admin Mode"]]
+      }
+    }),
+      bot.sendMessage(msg.chat.id, "Craft your Message here!");
   }
-  //}
 });
 
 // bot.command(

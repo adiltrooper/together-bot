@@ -18,22 +18,16 @@ class Session {
 
   setAdminList() {
     const adminsId = keys.adminsId;
-    console.log("information has been set");
     return redis.setex("adminsId", 3600, adminsId);
   }
 
-  setEnterAdminState() {
+  setAdminState() {
     return redis.setex("adminState", 3600, "admin1");
   }
 
   getAdminState() {
-    redis.get("adminState", (err, data) => {
-      if (err) {
-        console.log(err);
-      }
-      if (data !== null) {
-        return data;
-      }
+    return redis.getAsync("adminState").then(function(res) {
+      return res;
     });
   }
 
