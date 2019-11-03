@@ -148,7 +148,6 @@ bot.on("message", msg => {
       console.log(reply);
       return reply;
     };
-
     checkAdmin();
   }
 });
