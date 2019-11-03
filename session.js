@@ -8,11 +8,11 @@ class Session {
     if (process.env.REDISTOGO_URL) {
       console.log("YES");
       var rtg = require("url").parse(process.env.REDISTOGO_URL);
-      var client = redis.createClient(rtg.port, rtg.hostname);
+      redis = redis.createClient(rtg.port, rtg.hostname);
 
-      client.auth(rtg.auth.split(":")[1]);
+      redis.auth(rtg.auth.split(":")[1]);
     } else {
-      client = require("redis").createClient(keys.redisPort);
+      redis = require("redis").createClient(keys.redisPort);
     }
   }
 
@@ -38,7 +38,7 @@ class Session {
   }
 
   getAdminList() {
-    return this.client.getAsync("adminsId").then(function(res) {
+    return redis.getAsync("adminsId").then(function(res) {
       console.log(res); // => 'bar'
     });
   }
