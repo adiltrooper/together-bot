@@ -1,7 +1,5 @@
 const keys = require("./config_keys/keys");
 const express = require("express");
-const { promisify } = require("util");
-const getAsync = promisify(redis.get).bind(redis);
 
 const TelegramBot = require("node-telegram-bot-api"),
   host = process.env.HOST || "localhost", // probably this change is not required

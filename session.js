@@ -1,5 +1,7 @@
 const keys = require("./config_keys/keys");
 var redis = require("redis");
+const { promisify } = require("util");
+const getAsync = promisify(redis.get).bind(redis);
 
 class Session {
   constructor() {
