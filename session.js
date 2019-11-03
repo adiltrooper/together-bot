@@ -1,7 +1,6 @@
 const keys = require("./config_keys/keys");
 var redis = require("redis");
 const { promisify } = require("util");
-const getAsync = promisify(client.get).bind(client);
 
 class Session {
   constructor() {
@@ -11,10 +10,13 @@ class Session {
       client = redis.createClient(rtg.port, rtg.hostname);
 
       client.auth(rtg.auth.split(":")[1]);
+
+      const getAsync = promisify(client.get).bind(client);
     } else {
       client = require("redis").createClient(keys.redisPort);
     }
   }
+
   setAdminList() {
     const adminsId = keys.adminsId;
     console.log("information has been set");
