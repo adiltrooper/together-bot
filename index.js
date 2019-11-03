@@ -145,9 +145,9 @@ bot.on("message", msg => {
     const checkAdmin = async () => {
       const data = session.getAdminList();
     };
-    console.log(data);
-  } else {
-    console.log("WRONG");
+    if (checkAdmin) {
+      console.log(data);
+    }
   }
 });
 
