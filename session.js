@@ -7,7 +7,7 @@ class Session {
     if (process.env.REDISTOGO_URL) {
       console.log("YES");
       var rtg = require("url").parse(process.env.REDISTOGO_URL);
-      client = redis.createClient(rtg.port, rtg.hostname);
+      var client = redis.createClient(rtg.port, rtg.hostname);
 
       client.auth(rtg.auth.split(":")[1]);
 
