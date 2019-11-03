@@ -1,7 +1,5 @@
 const keys = require("./config_keys/keys");
 var redis = require("redis");
-const { promisify } = require("util");
-const getAsync = promisify(redis.get).bind(redis);
 
 class Session {
   constructor() {
@@ -14,6 +12,8 @@ class Session {
     } else {
       redis = require("redis").createClient(keys.redisPort);
     }
+    const { promisify } = require("util");
+    const getAsync = promisify(redis.get).bind(redis);
   }
 
   setAdminList() {

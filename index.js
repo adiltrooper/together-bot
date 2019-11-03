@@ -153,7 +153,7 @@ bot.on("message", msg => {
     //   const reply = await session.getAdminList();
     //   console.log(reply);
     //   return reply;
-    getAdminList();
+    session.getAdminList();
   }
   //}
 });
