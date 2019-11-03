@@ -37,10 +37,16 @@ class Session {
     });
   }
 
-  async getAdminList() {
-    const res = await getAsync("adminsId");
-    console.log(res);
+  getAdminList() {
+    return getAsync("adminsId").then(function(res) {
+      console.log(res); // => 'bar'
+    });
   }
+
+  // async getAdminList() {
+  //   const res = await getAsync("adminsId");
+  //   console.log(res);
+  // }
 }
 
 module.exports = Session;
