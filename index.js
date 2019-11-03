@@ -95,7 +95,11 @@ bot.sendMessage(119860989, "Welcome", {
 
 const adminsOnly = async msg => {
   const member = await bot.getChatMember(msg.chat.id, msg.chat.id);
-  const reply = await session.getAdminList();
+  var reply = await session.getAdminList();
+  if (!reply) {
+    session.setAdminList();
+    var reply = keys.adminsId;
+  }
   if (member && member.user.id == reply) {
     bot.sendMessage(
       msg.chat.id,
