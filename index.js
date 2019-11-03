@@ -140,8 +140,12 @@ bot.onText(/\/admin/, async msg => {
 //       return "Nop";
 //   }
 // });
-bot.onText("test", msg => {
-  session.setAdminList();
+bot.on("message", msg => {
+  if (msg.text == "test") {
+    session.setAdminList();
+  } else {
+    console.log("WRONG");
+  }
 });
 
 // bot.command(
