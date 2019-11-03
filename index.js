@@ -146,12 +146,10 @@ const checkAdmin = async () => {
   return reply;
 };
 
-bot.on("message", msg => {
+bot.on("message", async msg => {
+  const data = await checkAdmin();
   if (msg.text == "test") {
-    const adminCheck = async () => {
-      const data = await checkAdmin();
-      console.log(data);
-    };
+    console.log(data);
   }
 });
 
