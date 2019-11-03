@@ -27,7 +27,7 @@ class Session {
   }
 
   getAdminState() {
-    client.get("adminState", (err, data) => {
+    redis.get("adminState", (err, data) => {
       if (err) {
         console.log(err);
       }
@@ -38,7 +38,7 @@ class Session {
   }
 
   getAdminList() {
-    return redis.getAsync("adminsId").then(function(res) {
+    redis.getAsync("adminsId").then(function(res) {
       return res;
     });
   }

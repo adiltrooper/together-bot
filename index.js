@@ -149,11 +149,7 @@ function checkAdmin() {
 
 bot.on("message", msg => {
   if (msg.text == "test") {
-    // const checkAdmin = async () => {
-    //   const reply = await session.getAdminList();
-    //   console.log(reply);
-    //   return reply;
-    checkAdmin();
+    console.log(session.getAdminList());
   }
   //}
 });
