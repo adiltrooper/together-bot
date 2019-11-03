@@ -142,8 +142,9 @@ bot.onText(/\/admin/, async msg => {
 // });
 
 function checkAdmin() {
-  session.getAdminList().then(function(redis_value) {
-    console.log(redis_value);
+  session.getAdminList().then(redis_info => {
+    console.log(redis_info);
+    return true;
   });
 }
 
