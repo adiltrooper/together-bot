@@ -1,18 +1,18 @@
 const keys = require("./config_keys/keys");
 var redis = require("redis");
 const { promisify } = require("util");
-const getAsync = promisify(redis.get).bind(redis);
+const getAsync = promisify(client.get).bind(client);
 
 class Session {
   constructor() {
     if (process.env.REDISTOGO_URL) {
       console.log("YES");
       var rtg = require("url").parse(process.env.REDISTOGO_URL);
-      redis = redis.createClient(rtg.port, rtg.hostname);
+      client = redis.createClient(rtg.port, rtg.hostname);
 
-      redis.auth(rtg.auth.split(":")[1]);
+      client.auth(rtg.auth.split(":")[1]);
     } else {
-      redis = require("redis").createClient(keys.redisPort);
+      client = require("redis").createClient(keys.redisPort);
     }
   }
   setAdminList() {
@@ -26,7 +26,7 @@ class Session {
   }
 
   getAdminState() {
-    redis.get("adminState", (err, data) => {
+    client.get("adminState", (err, data) => {
       if (err) {
         console.log(err);
       }
