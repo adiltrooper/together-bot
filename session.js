@@ -37,7 +37,12 @@ class Session {
 
   getAdminList() {
     console.log("Trying");
-    return redis.get("adminsId");
+    return redis.get("adminsId", (err, data) => {
+      if (data !== null) {
+        return data;
+      }
+    });
+    console.log("Still trying");
   }
 }
 
