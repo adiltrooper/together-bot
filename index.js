@@ -140,13 +140,14 @@ bot.onText(/\/admin/, async msg => {
 //       return "Nop";
 //   }
 // });
+
+const checkAdmin = async () => {
+  const data = await session.getAdminList();
+  console.log(data);
+};
+
 bot.on("message", msg => {
   if (msg.text == "test") {
-    const checkAdmin = async () => {
-      const data = await session.getAdminList();
-      console.log(typeof data);
-      console.log(JSON.stringify(data));
-    };
     checkAdmin();
   }
 });
