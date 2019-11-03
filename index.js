@@ -101,7 +101,6 @@ const adminsOnly = async msg => {
       msg.chat.id,
       `Hi ${member.user.first_name}! Welcome to the admin menu!`
     );
-    console.log(keys.redisPort);
     return true;
   } else {
     bot.sendMessage(

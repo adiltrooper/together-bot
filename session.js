@@ -16,7 +16,8 @@ class Session {
 
   setAdminList() {
     const adminsId = keys.adminsId;
-    return redis.setex(adminsId, 3600, adminsId);
+    return redis.setex(adminsId, 3600, administrators);
+    console.log(redis.print);
   }
 }
 
