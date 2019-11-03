@@ -38,7 +38,7 @@ class Session {
   }
 
   getAdminList() {
-    return getAsync("adminsId").then(function(res) {
+    return client.getAsync("adminsId").then(function(res) {
       console.log(res); // => 'bar'
     });
   }
