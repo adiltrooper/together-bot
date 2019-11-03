@@ -40,6 +40,7 @@ class Session {
       if (err) {
         console.log(err);
       } else if (data !== null) {
+        console.log(`The data returning is ${data}`);
         return data;
       } else {
         console.log("It is null");
