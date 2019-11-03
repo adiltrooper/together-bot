@@ -1,5 +1,6 @@
 const keys = require("./config_keys/keys");
 const redis = require("redis");
+const bluebird = require("bluebird");
 bluebird.promisifyAll(redis);
 
 class Session {
