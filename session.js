@@ -37,13 +37,11 @@ class Session {
 
   getAdminList() {
     redis.get("adminsId", (err, data) => {
-      if (err) {
-        console.log(err);
-      } else if (data !== null) {
+      if (data !== null) {
         console.log(`The data returning is ${data}`);
         return data;
       } else {
-        console.log("It is null");
+        return console.log("it is null");
       }
     });
   }
