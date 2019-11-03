@@ -155,7 +155,6 @@ bot.on("message", msg => {
     //   return reply;
     checkAdmin();
   }
-
   //}
 });
 
