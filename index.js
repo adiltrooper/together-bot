@@ -141,7 +141,7 @@ bot.onText(/\/admin/, async msg => {
 //   }
 // });
 
-const checkAdmin = async => {
+const checkAdmin = async () => {
   const reply = await session.getAdminList();
   console.log(reply);
 };
