@@ -15,7 +15,6 @@ const Session = require("./session");
 const axios = require("axios");
 const mysql = require("mysql");
 // const db = require("./config_db/db");
-
 const bodyParser = require("body-parser");
 
 // const connection = mysql.createConnection(db);
@@ -32,11 +31,18 @@ const app = express();
 const session = new Session();
 
 bot.onText(/\/start/, msg => {
+  bot.sendMessage(119860989, "Welcome", {
+    reply_markup: {
+      keyboard: [
+        ["I'm feelin' adventurous", "I'm feelin chill"],
+        ["I wanna stay home"]
+      ]
+    }
+  });
   bot.sendMessage(
     msg.chat.id,
     `Hi ${msg.from.first_name}! Welcome to the Together Community!`
   );
-
   bot.sendMessage(119860989, "Welcome", {
     reply_markup: {
       keyboard: [
@@ -62,15 +68,6 @@ bot.onText(/\/start/, msg => {
   //     }
   //   }
   // );
-});
-
-bot.sendMessage(119860989, "Welcome", {
-  reply_markup: {
-    keyboard: [
-      ["I'm feelin' adventurous", "I'm feelin chill"],
-      ["I wanna stay home"]
-    ]
-  }
 });
 
 // bot.on("message", msg => {
@@ -138,6 +135,14 @@ bot.on("message", async msg => {
       }
     }),
       bot.sendMessage(msg.chat.id, "Craft your Message here!");
+  }
+});
+
+bot.on("message", async msg => {
+  const adminState = await session.getAdminState();
+  console.log(adminState);
+  if (msg.text == "Send Post" && adminState == "admin1") {
+    //loop to cycle through database users and send them the message
   }
 });
 
