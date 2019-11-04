@@ -31,7 +31,7 @@ const app = express();
 const session = new Session();
 
 bot.onText(/\/start/, msg => {
-  bot.sendMessage(119860989, "Welcome", {
+  bot.sendMessage(msg.chat.id, "Welcome", {
     reply_markup: {
       keyboard: [
         ["I'm feelin' adventurous", "I'm feelin chill"],
@@ -43,32 +43,24 @@ bot.onText(/\/start/, msg => {
     msg.chat.id,
     `Hi ${msg.from.first_name}! Welcome to the Together Community!`
   );
-  bot.sendMessage(119860989, "Welcome", {
-    reply_markup: {
-      keyboard: [
-        ["I'm feelin' adventurous", "I'm feelin chill"],
-        ["I wanna stay home"]
-      ]
-    }
-  });
   console.log(msg);
-
-  const chat_id = msg.chat.id;
-  const first_name = msg.chat.first_name;
-  const username = msg.chat.username;
-
-  // connection.query(
-  //   "INSERT INTO user_info (chat_id, first_name, username) VALUES (?, ?, ?)",
-  //   [chat_id, first_name, username],
-  //   function(err, results, fields) {
-  //     if (err) {
-  //       console.log(err.message);
-  //     } else {
-  //       return;
-  //     }
-  //   }
-  // );
 });
+
+const chat_id = msg.chat.id;
+const first_name = msg.chat.first_name;
+const username = msg.chat.username;
+
+// connection.query(
+//   "INSERT INTO user_info (chat_id, first_name, username) VALUES (?, ?, ?)",
+//   [chat_id, first_name, username],
+//   function(err, results, fields) {
+//     if (err) {
+//       console.log(err.message);
+//     } else {
+//       return;
+//     }
+//   }
+// );
 
 // bot.on("message", msg => {
 //   switch (msg.text) {
@@ -146,6 +138,15 @@ bot.on("message", async msg => {
   }
 });
 
+// const constructedMsg = `${activity}@${location}
+//  ${shortDesc}
+//
+//  : from $${price}
+//  : ~${time} hours
+//
+//  : ${landmark}
+//  : ${site}
+//  `;
 // bot.command(
 //   "admin",
 //   adminsOnly(msg => {
