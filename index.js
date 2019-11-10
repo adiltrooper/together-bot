@@ -31,7 +31,6 @@ const session = new Session();
 
 bot.onText(/\/start/, msg => {
   console.log(msg);
-
   const chat_id = msg.chat.id;
   const first_name = msg.chat.first_name;
   const username = msg.chat.username;
