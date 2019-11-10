@@ -47,8 +47,6 @@ bot.onText(/\/start/, msg => {
     chat_id,
     `Hi ${msg.from.first_name}! Welcome to the Together Community!`
   );
-  console.log(msg);
-
   // connection.query(
   //   "INSERT INTO user_info (chat_id, first_name, username) VALUES (?, ?, ?)",
   //   [chat_id, first_name, username],
