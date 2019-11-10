@@ -128,13 +128,13 @@ bot.on("message", async msg => {
   }
 });
 
-bot.on("message", async msg => {
-  const adminState = await session.getAdminState();
-  console.log(adminState);
-  if (msg.text == "Send Post" && adminState == "admin1") {
-    //loop to cycle through database users and send them the message
-  }
-});
+// bot.on("message", async msg => {
+//   const adminState = await session.getAdminState();
+//   console.log(adminState);
+//   if (msg.text == "Send Post" && adminState == "admin1") {
+//     //loop to cycle through database users and send them the message
+//   }
+// });
 
 // const constructedMsg = `${activity}@${location}
 //  ${shortDesc}
