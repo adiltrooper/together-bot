@@ -49,17 +49,17 @@ bot.onText(/\/start/, msg => {
   );
   console.log(msg);
 
-  connection.query(
-    "INSERT INTO user_info (chat_id, first_name, username) VALUES (?, ?, ?)",
-    [chat_id, first_name, username],
-    function(err, results, fields) {
-      if (err) {
-        console.log(err.message);
-      } else {
-        return;
-      }
-    }
-  );
+  // connection.query(
+  //   "INSERT INTO user_info (chat_id, first_name, username) VALUES (?, ?, ?)",
+  //   [chat_id, first_name, username],
+  //   function(err, results, fields) {
+  //     if (err) {
+  //       console.log(err.message);
+  //     } else {
+  //       return;
+  //     }
+  //   }
+  // );
 });
 
 // bot.on("message", msg => {
