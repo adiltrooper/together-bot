@@ -31,7 +31,11 @@ const app = express();
 const session = new Session();
 
 bot.onText(/\/start/, msg => {
-  bot.sendMessage(msg.chat.id, "Welcome", {
+  const chat_id = msg.chat.id;
+  const first_name = msg.chat.first_name;
+  const username = msg.chat.username;
+
+  bot.sendMessage(chat_id, "Welcome", {
     reply_markup: {
       keyboard: [
         ["I'm feelin' adventurous", "I'm feelin chill"],
@@ -40,27 +44,23 @@ bot.onText(/\/start/, msg => {
     }
   });
   bot.sendMessage(
-    msg.chat.id,
+    chat_id,
     `Hi ${msg.from.first_name}! Welcome to the Together Community!`
   );
   console.log(msg);
+
+  connection.query(
+    "INSERT INTO user_info (chat_id, first_name, username) VALUES (?, ?, ?)",
+    [chat_id, first_name, username],
+    function(err, results, fields) {
+      if (err) {
+        console.log(err.message);
+      } else {
+        return;
+      }
+    }
+  );
 });
-
-const chat_id = msg.chat.id;
-const first_name = msg.chat.first_name;
-const username = msg.chat.username;
-
-// connection.query(
-//   "INSERT INTO user_info (chat_id, first_name, username) VALUES (?, ?, ?)",
-//   [chat_id, first_name, username],
-//   function(err, results, fields) {
-//     if (err) {
-//       console.log(err.message);
-//     } else {
-//       return;
-//     }
-//   }
-// );
 
 // bot.on("message", msg => {
 //   switch (msg.text) {
