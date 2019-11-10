@@ -14,18 +14,17 @@ const Session = require("./session");
 
 const axios = require("axios");
 const mysql = require("mysql");
-// const db = require("./config_db/db");
+const db = require("./config_db/db");
 const bodyParser = require("body-parser");
 
-// const connection = mysql.createConnection(db);
-//
-// connection.connect(function(error) {
-//   if (error) {
-//     console.log("Error: " + error.message);
-//   } else {
-//     console.log("Connected");
-//   }
-// });
+const connection = mysql.createConnection(db);
+connection.connect(function(error) {
+  if (error) {
+    console.log("Error: " + error.message);
+  } else {
+    console.log("Connected");
+  }
+});
 
 const app = express();
 const session = new Session();
@@ -49,17 +48,17 @@ bot.onText(/\/start/, msg => {
     chat_id,
     `Hi ${msg.from.first_name}! Welcome to the Together Community!`
   );
-  // connection.query(
-  //   "INSERT INTO user_info (chat_id, first_name, username) VALUES (?, ?, ?)",
-  //   [chat_id, first_name, username],
-  //   function(err, results, fields) {
-  //     if (err) {
-  //       console.log(err.message);
-  //     } else {
-  //       return;
-  //     }
-  //   }
-  // );
+  connection.query(
+    "INSERT INTO user_info (chat_id, first_name, username) VALUES (?, ?, ?)",
+    [chat_id, first_name, username],
+    function(err, results, fields) {
+      if (err) {
+        console.log(err.message);
+      } else {
+        return;
+      }
+    }
+  );
 });
 
 // bot.on("message", msg => {
