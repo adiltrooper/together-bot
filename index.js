@@ -135,13 +135,28 @@ bot.on("message", async msg => {
   }
 });
 
-// bot.on("message", async msg => {
-//   const adminState = await session.getAdminState();
-//   console.log(adminState);
-//   if (msg.text == "Send Post" && adminState == "admin1") {
-//     //loop to cycle through database users and send them the message
-//   }
-// });
+bot.on("message", async msg => {
+  const adminState = await session.getAdminState();
+  console.log(adminState);
+  if (msg.text == "Send Post" && adminState == "admin1") {
+    pool.getConnection(function(err, connection) {
+      if (err) console.log(err);
+      connection.query(
+        "SELECT * FROM user_info WHERE first_name = `Adil` ",
+        function(err, results, fields) {
+          if (err) {
+            console.log(err.message);
+          } else {
+            const userArray = [];
+            console.log(results);
+          }
+        }
+      );
+      connection.release();
+      if (err) console.log(err);
+    });
+  }
+});
 
 // const constructedMsg = `${activity}@${location}
 //  ${shortDesc}
