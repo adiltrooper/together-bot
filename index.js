@@ -149,6 +149,7 @@ bot.on("message", async msg => {
           } else {
             const userArray = [];
             console.log(results);
+            console.log(results.id);
           }
         }
       );
