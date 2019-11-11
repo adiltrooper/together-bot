@@ -142,7 +142,8 @@ bot.on("message", async msg => {
     pool.getConnection(function(err, connection) {
       if (err) console.log(err);
       connection.query(
-        'SELECT * FROM `user_info` WHERE `first_name` = "Adil" ',
+        "SELECT * FROM user_info WHERE first_name = ?",
+        ["Adil"],
         function(err, results, fields) {
           if (err) {
             console.log(err.message);
