@@ -147,14 +147,13 @@ bot.on("message", async msg => {
     pool.getConnection(function(err, connection) {
       if (err) console.log(err);
       connection.query(
-        'SELECT * FROM user_info WHERE user_type = "normal"',
+        'SELECT chat_id FROM user_info WHERE user_type = "normal"',
         function(err, results, fields) {
           if (err) {
             console.log(err.message);
           } else {
             const userArray = [];
             console.log(results);
-            console.log(results[0].id);
           }
         }
       );
