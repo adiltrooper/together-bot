@@ -35,6 +35,11 @@ bot.onText(/\/start/, msg => {
   const chat_id = msg.chat.id;
   const first_name = msg.chat.first_name;
   const username = msg.chat.username;
+  var user_type = normal;
+
+  if (keys.adminsId.includes(chat_id)) {
+    var user_type = admin;
+  }
 
   bot.sendMessage(chat_id, "Welcome", {
     reply_markup: {
@@ -52,8 +57,8 @@ bot.onText(/\/start/, msg => {
   pool.getConnection(function(err, connection) {
     if (err) console.log(err);
     connection.query(
-      "INSERT INTO user_info (chat_id, first_name, username) VALUES (?, ?, ?)",
-      [chat_id, first_name, username],
+      "INSERT INTO user_info (chat_id, first_name, username, user_type) VALUES (?, ?, ?, ?)",
+      [chat_id, first_name, username, user_type],
       function(err, results, fields) {
         if (err) {
           console.log(err.message);
