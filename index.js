@@ -35,10 +35,10 @@ bot.onText(/\/start/, msg => {
   const chat_id = msg.chat.id;
   const first_name = msg.chat.first_name;
   const username = msg.chat.username;
-  var user_type = normal;
+  var user_type = "normal";
 
   if (keys.adminsId.includes(chat_id)) {
-    var user_type = admin;
+    var user_type = "admin";
   }
 
   bot.sendMessage(chat_id, "Welcome", {
