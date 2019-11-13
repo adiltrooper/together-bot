@@ -157,7 +157,7 @@ bot.on("message", async msg => {
             userArray = results.map(userData => {
               return userData.chat_id;
             });
-            session.setUserSendList(userArray);
+            session.setUserSendList(JSON.stringify(userArray));
           }
         }
       );
