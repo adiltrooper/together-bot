@@ -152,9 +152,9 @@ bot.on("message", async msg => {
           if (err) {
             console.log(err.message);
           } else {
-            const userArray = [];
+            var userArray = [];
             console.log(results);
-            const userArray = results.map(userData => {
+            userArray = results.map(userData => {
               return userData.chat_id;
             });
             console.log(userArray);
