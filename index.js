@@ -180,6 +180,7 @@ bot.on("message", async msg => {
             return Number(numberString);
           });
       }
+
       console.log(userSendList);
 
       var userSendList = _.chunk(userSendList, 2);
@@ -194,6 +195,7 @@ bot.on("message", async msg => {
         );
       });
     };
+    retrieveUserList();
   }
 });
 
