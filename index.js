@@ -154,6 +154,9 @@ bot.on("message", async msg => {
           } else {
             const userArray = [];
             console.log(results);
+            results.forEach(userData => {
+              console.log(userData.chat_id);
+            });
           }
         }
       );
