@@ -174,11 +174,8 @@ bot.on("message", async msg => {
             return Number(numberString);
           });
       } else {
-        var userSendList = userSendList
-          .slice(1, userSendList.length - 1)
-          .map(numberString => {
-            return Number(numberString);
-          });
+        var userSendList = userSendList.slice(1, userSendList.length - 1);
+        var userSendList = Number(userSendList);
       }
 
       console.log(userSendList);
