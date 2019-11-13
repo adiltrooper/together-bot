@@ -1,5 +1,6 @@
 const keys = require("./config_keys/keys");
 const express = require("express");
+const _ = require("lodash/array");
 
 const TelegramBot = require("node-telegram-bot-api"),
   host = process.env.HOST || "localhost", // probably this change is not required
@@ -153,17 +154,18 @@ bot.on("message", async msg => {
             console.log(err.message);
           } else {
             var userArray = [];
-            console.log(results);
             userArray = results.map(userData => {
               return userData.chat_id;
             });
-            console.log(userArray);
+            session.setUserSendList(userArray);
           }
         }
       );
       connection.release();
       if (err) console.log(err);
     });
+    const userSendList = session.getUserSendList();
+    console.log(userSendList);
   }
 });
 

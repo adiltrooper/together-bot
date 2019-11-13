@@ -37,6 +37,15 @@ class Session {
     });
   }
 
+  setUserSendList(userArray) {
+    redis.setex("userSendList", 1200, userArray);
+  }
+  getUserSendList() {
+    return redis.getAsync("userSendList").then(function(res) {
+      return res;
+    });
+  }
+
   // async getAdminList() {
   //   const res = await getAsync("adminsId");
   //   console.log(res);
