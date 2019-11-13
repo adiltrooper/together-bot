@@ -186,13 +186,11 @@ bot.on("message", async msg => {
       var userSendList = _.chunk(userSendList, 2);
       console.log(userSendList);
       userSendList.map(subUserSendList => {
-        setTimeout(
-          subUserSendList.map(userId => {
-            bot.sendMessage(userId, "Hello testin");
-            console.log(userId);
-          }),
-          180
-        );
+        subUserSendList.map(userId => {
+          bot.sendMessage(userId, "Hello testin");
+          console.log(userId);
+        });
+        setTimeout(3000);
       });
     };
     retrieveUserList();
