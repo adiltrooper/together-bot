@@ -176,6 +176,9 @@ bot.on("message", async msg => {
       } else {
         var userSendList = userSendList.slice(1, userSendList.length - 1);
         var userSendList = Number(userSendList);
+        var userSendListTemp = [];
+        userSendListTemp.push(userSendList);
+        userSendList = userSendListTemp;
       }
 
       console.log(userSendList);
