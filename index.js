@@ -166,9 +166,7 @@ bot.on("message", async msg => {
     });
     const retrieveUserList = async () => {
       var userSendList = await session.getUserSendList();
-      var userSendList = userSendList
-        .slice(1, userSendList.length())
-        .split(",");
+      var userSendList = userSendList.slice(1, userSendList.length).split(",");
       console.log(userSendList);
     };
     retrieveUserList();
