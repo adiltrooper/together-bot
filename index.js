@@ -148,7 +148,7 @@ bot.on("message", async msg => {
     pool.getConnection(function(err, connection) {
       if (err) console.log(err);
       connection.query(
-        'SELECT chat_id FROM user_info WHERE user_type = "normal"',
+        'SELECT chat_id FROM user_info WHERE user_type = "admin"',
         function(err, results, fields) {
           if (err) {
             console.log(err.message);
@@ -172,9 +172,17 @@ bot.on("message", async msg => {
         .map(numberString => {
           return Number(numberString);
         });
-      console.log(userSendList);
+
+      var userSendList = _.chunk(userSendList, 2);
+      userSendList.map(subUserSendList => {
+        setTimeout(
+          subUserSendList.map(userId => {
+            bot.sendMessage(userId, "Hello testin");
+          }),
+          180
+        );
+      });
     };
-    retrieveUserList();
   }
 });
 
