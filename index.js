@@ -154,9 +154,10 @@ bot.on("message", async msg => {
           } else {
             const userArray = [];
             console.log(results);
-            results.forEach(userData => {
-              console.log(userData.chat_id);
+            const userArray = results.map(userData => {
+              return userData.chat_id;
             });
+            console.log(userArray);
           }
         }
       );
