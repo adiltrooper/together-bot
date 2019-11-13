@@ -164,8 +164,14 @@ bot.on("message", async msg => {
       connection.release();
       if (err) console.log(err);
     });
-    const userSendList = session.getUserSendList();
-    console.log(userSendList);
+    const retrieveUserList = async () => {
+      var userSendList = await session.getUserSendList();
+      var userSendList = userSendList
+        .slice(1, userSendList.length())
+        .split(",");
+      console.log(userSendList);
+    };
+    retrieveUserList();
   }
 });
 
