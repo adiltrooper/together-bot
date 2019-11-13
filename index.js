@@ -170,7 +170,7 @@ bot.on("message", async msg => {
         .slice(1, userSendList.length - 1)
         .split(",")
         .map(numberString => {
-          Number(numberString);
+          parneInt(numberString);
         });
       console.log(userSendList);
     };
