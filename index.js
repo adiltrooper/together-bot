@@ -166,12 +166,21 @@ bot.on("message", async msg => {
     });
     const retrieveUserList = async () => {
       var userSendList = await session.getUserSendList();
-      var userSendList = userSendList
-        .slice(1, userSendList.length - 1)
-        .split(",")
-        .map(numberString => {
-          return Number(numberString);
-        });
+      if (userSendList.includes(",")) {
+        var userSendList = userSendList
+          .slice(1, userSendList.length - 1)
+          .split(",")
+          .map(numberString => {
+            return Number(numberString);
+          });
+      } else {
+        var userSendList = userSendList
+          .slice(1, userSendList.length - 1)
+          .map(numberString => {
+            return Number(numberString);
+          });
+      }
+      console.log(userSendList);
 
       var userSendList = _.chunk(userSendList, 2);
       console.log(userSendList);
