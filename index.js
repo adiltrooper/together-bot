@@ -143,7 +143,7 @@ bot.on("message", async msg => {
 
 bot.on("message", async msg => {
   const adminState = await session.getAdminState();
-  if ((adminState = "admin1")) {
+  if (adminState == "admin1") {
     // session.setDraftPost(msg.text);
     console.log(msg);
   }
