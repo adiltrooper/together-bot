@@ -29,6 +29,10 @@ class Session {
     return redis.setex("adminState", 3600, "admin2");
   }
 
+  setAdminState3() {
+    return redis.setex("adminState", 3600, "admin3");
+  }
+
   getAdminState() {
     return redis.getAsync("adminState").then(function(res) {
       return res;

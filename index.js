@@ -146,6 +146,7 @@ bot.on("message", async msg => {
   const adminState = await session.getAdminState();
   if (adminState == "admin2") {
     session.setDraftPost(msg.text);
+    session.setAdminState3();
   }
 });
 
@@ -153,7 +154,7 @@ bot.on("message", async msg => {
   const adminState = await session.getAdminState();
   const draftPost = await session.getDraftPost();
   console.log(adminState);
-  if (msg.text == "Send Post" && adminState == "admin1") {
+  if (msg.text == "Send Post" && adminState == "admin3") {
     pool.getConnection(function(err, connection) {
       if (err) console.log(err);
       connection.query(
