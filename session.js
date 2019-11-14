@@ -46,6 +46,10 @@ class Session {
     });
   }
 
+  setDraftPost(draft) {
+    redis.setex("draftPost", 1200, draft);
+  }
+
   // async getAdminList() {
   //   const res = await getAsync("adminsId");
   //   console.log(res);

@@ -143,6 +143,14 @@ bot.on("message", async msg => {
 
 bot.on("message", async msg => {
   const adminState = await session.getAdminState();
+  if ((adminState = "admin1")) {
+    // session.setDraftPost(msg.text);
+    console.log(msg);
+  }
+});
+
+bot.on("message", async msg => {
+  const adminState = await session.getAdminState();
   console.log(adminState);
   if (msg.text == "Send Post" && adminState == "admin1") {
     pool.getConnection(function(err, connection) {
@@ -198,6 +206,10 @@ bot.on("message", async msg => {
     retrieveUserList();
   }
 });
+
+//send draft
+//save draft in variable
+//take variable and send
 
 // const constructedMsg = `${activity}@${location}
 //  ${shortDesc}
