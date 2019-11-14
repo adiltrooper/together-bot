@@ -25,6 +25,10 @@ class Session {
     return redis.setex("adminState", 3600, "admin1");
   }
 
+  setAdminState2() {
+    return redis.setex("adminState", 3600, "admin2");
+  }
+
   getAdminState() {
     return redis.getAsync("adminState").then(function(res) {
       return res;
@@ -48,6 +52,12 @@ class Session {
 
   setDraftPost(draft) {
     redis.setex("draftPost", 1200, draft);
+  }
+
+  getDraftPost() {
+    return redis.getAsync("draftPost").then(function(res) {
+      return res;
+    });
   }
 
   // async getAdminList() {

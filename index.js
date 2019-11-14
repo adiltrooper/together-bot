@@ -132,6 +132,7 @@ bot.on("message", async msg => {
   const adminState = await session.getAdminState();
   console.log(adminState);
   if (msg.text == "New Post" && adminState == "admin1") {
+    session.setAdminState2();
     bot.sendMessage(msg.chat.id, "Select Option:", {
       reply_markup: {
         keyboard: [["Send Post", "Delete Post"], ["Exit Admin Mode"]]
@@ -143,14 +144,14 @@ bot.on("message", async msg => {
 
 bot.on("message", async msg => {
   const adminState = await session.getAdminState();
-  if (adminState == "admin1") {
-    // session.setDraftPost(msg.text);
-    console.log(msg);
+  if (adminState == "admin2") {
+    session.setDraftPost(msg.text);
   }
 });
 
 bot.on("message", async msg => {
   const adminState = await session.getAdminState();
+  const draftPost = await session.getDraftPost();
   console.log(adminState);
   if (msg.text == "Send Post" && adminState == "admin1") {
     pool.getConnection(function(err, connection) {
@@ -196,7 +197,7 @@ bot.on("message", async msg => {
       userSendList.map(subUserSendList => {
         const postMessages = () => {
           subUserSendList.map(userId => {
-            bot.sendMessage(userId, "Hello testin");
+            bot.sendMessage(userId, draftPost);
             console.log(userId);
           });
         };
