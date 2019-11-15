@@ -1,6 +1,7 @@
 const keys = require("./config_keys/keys");
 const express = require("express");
 const _ = require("lodash/array");
+const image2base64 = require("image-to-base64");
 
 const TelegramBot = require("node-telegram-bot-api"),
   host = process.env.HOST || "localhost", // probably this change is not required
@@ -146,6 +147,10 @@ bot.on("message", async msg => {
   const adminState = await session.getAdminState();
   if (adminState == "admin2") {
     console.log(msg);
+    console.log(msg.photo.file_id);
+    image2base64(msg.photo.file_id).then(response => {
+      console.log(response);
+    });
     session.setDraftPost(msg.text);
     //session.setAdminState3();
   }
@@ -153,7 +158,7 @@ bot.on("message", async msg => {
 
 bot.on("message", async msg => {
   const adminState = await session.getAdminState();
-  const draftPost = await session.getDraftPost();
+  //const draftPost = await session.getDraftPost();
   console.log(adminState);
   if (msg.text == "Send Post" && adminState == "admin3") {
     pool.getConnection(function(err, connection) {
@@ -199,12 +204,9 @@ bot.on("message", async msg => {
       userSendList.map(subUserSendList => {
         const postMessages = () => {
           subUserSendList.map(userId => {
-            bot.sendMessage(userId, draftPost);
+            //bot.sendMessage(userId, draftPost);
             console.log(userId);
-            bot.sendPhoto(
-              userId,
-              "AgADBQAD5KgxGx_2eFaJA7VHyo_BR6YxGzMABAEAAwIAA3gAA2s0AAIWBA"
-            );
+            bot.sendPhoto(userId, "");
           });
         };
         setTimeout(postMessages, 3000);
