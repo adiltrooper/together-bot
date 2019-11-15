@@ -145,6 +145,7 @@ bot.on("message", async msg => {
 bot.on("message", async msg => {
   const adminState = await session.getAdminState();
   if (adminState == "admin2") {
+    console.log(msg);
     session.setDraftPost(msg.text);
     session.setAdminState3();
   }
