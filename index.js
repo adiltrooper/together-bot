@@ -147,8 +147,8 @@ bot.on("message", async msg => {
   const adminState = await session.getAdminState();
   if (adminState == "admin2") {
     console.log(msg);
-    console.log(msg.photo.file_id);
-    image2base64(msg.photo.file_id).then(response => {
+    console.log(msg.photo[0].file_id);
+    image2base64(msg.photo[0].file_id).then(response => {
       console.log(response);
     });
     session.setDraftPost(msg.text);
