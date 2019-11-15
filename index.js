@@ -151,7 +151,7 @@ bot.on("message", async msg => {
     image2base64(msg.photo[0].file_id).then(response => {
       console.log(response);
     });
-    session.setDraftPost(msg.text);
+    //session.setDraftPost(msg.text);
     //session.setAdminState3();
   }
 });
