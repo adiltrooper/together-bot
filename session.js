@@ -54,16 +54,25 @@ class Session {
     });
   }
 
-  setDraftPost(draft) {
-    redis.setex("draftPost", 1200, draft);
+  setDraftImage(imageId) {
+    redis.setex("draftImage", 1200, imageId);
   }
 
-  getDraftPost() {
-    return redis.getAsync("draftPost").then(function(res) {
+  setDraftCaption(caption) {
+    redis.setex("draftCaption", 1200, caption);
+  }
+
+  getDraftImage() {
+    return redis.getAsync("draftImage").then(function(res) {
       return res;
     });
   }
 
+  getDraftCaption() {
+    return redis.getAsync("draftCaption").then(function(res) {
+      return res;
+    });
+  }
   // async getAdminList() {
   //   const res = await getAsync("adminsId");
   //   console.log(res);

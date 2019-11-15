@@ -146,15 +146,16 @@ bot.on("message", async msg => {
   const adminState = await session.getAdminState();
   if (adminState == "admin2") {
     console.log(msg);
-    console.log(msg.photo[0].file_id);
-    session.setDraftPost(msg.photo[0].file_id);
+    session.setDraftImage(msg.photo[0].file_id);
+    session.setDraftCaption(msg.caption);
     session.setAdminState3();
   }
 });
 
 bot.on("message", async msg => {
   const adminState = await session.getAdminState();
-  const draftPost = await session.getDraftPost();
+  const draftImage = await session.getDraftImage();
+  const draftCaption = await session.getDraftCaption();
   console.log(adminState);
   if (msg.text == "Send Post" && adminState == "admin3") {
     pool.getConnection(function(err, connection) {
@@ -202,7 +203,7 @@ bot.on("message", async msg => {
           subUserSendList.map(userId => {
             //bot.sendMessage(userId, draftPost);
             console.log(userId);
-            bot.sendPhoto(userId, draftPost);
+            bot.sendPhoto(userId, draftPost, draftCaption);
           });
         };
         setTimeout(postMessages, 3000);
