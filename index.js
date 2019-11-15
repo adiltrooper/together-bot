@@ -147,7 +147,7 @@ bot.on("message", async msg => {
   if (adminState == "admin2") {
     console.log(msg);
     session.setDraftPost(msg.text);
-    session.setAdminState3();
+    //session.setAdminState3();
   }
 });
 
@@ -201,6 +201,10 @@ bot.on("message", async msg => {
           subUserSendList.map(userId => {
             bot.sendMessage(userId, draftPost);
             console.log(userId);
+            bot.sendPhoto(
+              userId,
+              "AgADBQAD5KgxGx_2eFaJA7VHyo_BR6YxGzMABAEAAwIAA3gAA2s0AAIWBA"
+            );
           });
         };
         setTimeout(postMessages, 3000);
