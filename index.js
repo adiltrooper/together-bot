@@ -137,7 +137,7 @@ bot.on("message", async msg => {
     session.setAdminState2();
     bot.sendMessage(msg.chat.id, "Draft your message here:", {
       reply_markup: {
-        keyboard: [["Back", "Exit Admin Mode"]],
+        keyboard: [["Back", "Exit Admin Session"]],
         resize_keyboard: true
       }
     });
