@@ -203,7 +203,7 @@ bot.on("message", async msg => {
           subUserSendList.map(userId => {
             //bot.sendMessage(userId, draftPost);
             console.log(userId);
-            bot.sendPhoto(userId, draftImage, draftCaption);
+            bot.sendPhoto(userId, draftImage, { caption: draftCaption });
           });
         };
         setTimeout(postMessages, 3000);
