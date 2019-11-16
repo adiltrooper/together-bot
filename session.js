@@ -22,7 +22,7 @@ class Session {
   }
 
   setAdminStateNull() {
-    return redis.del("adminsId");
+    return redis.del("adminsState");
   }
 
   setAdminState() {
