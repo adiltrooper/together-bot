@@ -234,6 +234,25 @@ bot.on("message", async msg => {
         resize_keyboard: true
       }
     });
+  } else if (msg.text == "Exit Admin Session" && adminState == "admin2") {
+    session.setAdminStateNull();
+    bot.sendMessage(msg.chat.id, "Back to User Mode", {
+      reply_markup: {
+        keyboard: [
+          ["I'm feelin' adventurous", "I'm feelin chill"],
+          ["I wanna stay home"]
+        ],
+        resize_keyboard: true
+      }
+    });
+  } else if (msg.text == "Back" && adminState == "admin2") {
+    session.setAdminState();
+    bot.sendMessage(msg.chat.id, "Select Option:", {
+      reply_markup: {
+        keyboard: [["New Post", "Custom Post"], ["Exit Admin Session"]],
+        resize_keyboard: true
+      }
+    });
   }
 });
 
