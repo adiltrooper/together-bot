@@ -135,7 +135,7 @@ bot.on("message", async msg => {
     session.setAdminState2();
     bot.sendMessage(msg.chat.id, "Select Option:", {
       reply_markup: {
-        keyboard: [["Send Post", "Delete Post"], ["Exit Admin Mode"]]
+        keyboard: [["Back", "Exit Admin Mode"]]
       }
     }),
       bot.sendMessage(msg.chat.id, "Craft your Message here!");
@@ -145,6 +145,11 @@ bot.on("message", async msg => {
 bot.on("message", async msg => {
   const adminState = await session.getAdminState();
   if (adminState == "admin2") {
+    bot.sendMessage(msg.chat.id, "Select Option:", {
+      reply_markup: {
+        keyboard: [["Send Post", "Back"]]
+      }
+    });
     console.log(msg);
     session.setDraftImage(msg.photo[0].file_id);
     session.setDraftCaption(msg.caption);
