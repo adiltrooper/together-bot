@@ -47,7 +47,8 @@ bot.onText(/\/start/, msg => {
       keyboard: [
         ["I'm feelin' adventurous", "I'm feelin chill"],
         ["I wanna stay home"]
-      ]
+      ],
+      resize_keyboard: true
     }
   });
   bot.sendMessage(
@@ -136,7 +137,8 @@ bot.on("message", async msg => {
     session.setAdminState2();
     bot.sendMessage(msg.chat.id, "Draft your message here:", {
       reply_markup: {
-        keyboard: [["Back", "Exit Admin Mode"]]
+        keyboard: [["Back", "Exit Admin Mode"]],
+        resize_keyboard: true
       }
     });
   }
