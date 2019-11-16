@@ -222,6 +222,7 @@ bot.on("message", async msg => {
 
 bot.on("message", async msg => {
   const adminState = await session.getAdminState();
+  console.log(msg);
   if (msg.text == "Exit Admin Session" && adminState == "admin1") {
     session.setAdminStateNull();
     bot.sendMessage(msg.chat.id, {
