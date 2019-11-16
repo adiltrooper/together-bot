@@ -146,7 +146,7 @@ bot.on("message", async msg => {
 
 bot.on("message", async msg => {
   const adminState = await session.getAdminState();
-  if (adminState == "admin2") {
+  if (adminState == "admin2" && msg.text !== "Back") {
     bot.sendMessage(msg.chat.id, "Select Option:", {
       reply_markup: {
         keyboard: [["Send Post", "Back"]]
