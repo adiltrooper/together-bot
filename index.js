@@ -120,7 +120,11 @@ bot.onText(/\/admin/, async msg => {
   if (adminCheck) {
     bot.sendMessage(msg.chat.id, "Select Option:", {
       reply_markup: {
-        keyboard: [["New Post", "Custom Post"], ["Exit Admin Mode"]]
+        keyboard: [
+          ["New Post", "Custom Post"],
+          ["Exit Admin Mode"],
+          { resize_keyboard: true }
+        ]
       }
     });
   } else {
