@@ -133,12 +133,11 @@ bot.on("message", async msg => {
   console.log(adminState);
   if (msg.text == "New Post" && adminState == "admin1") {
     session.setAdminState2();
-    bot.sendMessage(msg.chat.id, "Select Option:", {
+    bot.sendMessage(msg.chat.id, "Draft your message here:", {
       reply_markup: {
         keyboard: [["Back", "Exit Admin Mode"]]
       }
-    }),
-      bot.sendMessage(msg.chat.id, "Craft your Message here!");
+    });
   }
 });
 
