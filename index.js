@@ -225,7 +225,7 @@ bot.on("message", async msg => {
   console.log(msg);
   if (msg.text == "Exit Admin Session" && adminState == "admin1") {
     session.setAdminStateNull();
-    bot.sendMessage(msg.chat.id, {
+    bot.sendMessage(msg.chat.id, "Back to User Mode", {
       reply_markup: {
         keyboard: [
           ["I'm feelin' adventurous", "I'm feelin chill"],
