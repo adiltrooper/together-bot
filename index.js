@@ -1,6 +1,7 @@
 const keys = require("./config_keys/keys");
 const express = require("express");
 const _ = require("lodash/array");
+const cloudinary = require("cloudinary").v2;
 
 const TelegramBot = require("node-telegram-bot-api"),
   host = process.env.HOST || "localhost", // probably this change is not required
@@ -18,6 +19,12 @@ const mysql = require("mysql");
 const db = require("./config_db/db");
 const pool = mysql.createPool(db);
 const bodyParser = require("body-parser");
+
+cloudinary.config({
+  cloud_name: db.cloudinary_cloudname,
+  api_key: db.cloudinary_apikey,
+  api_secret: db.cloudinary_secret
+});
 
 // const connection = mysql.createConnection(db);
 // connection.connect(function(error) {
@@ -152,7 +159,8 @@ bot.on("message", async msg => {
   ) {
     bot.sendMessage(msg.chat.id, "Select Option:", {
       reply_markup: {
-        keyboard: [["Send Post", "Back"]]
+        keyboard: [["Send Post", "Back"]],
+        resize_keyboard: true
       }
     });
     console.log(msg);
@@ -213,7 +221,12 @@ bot.on("message", async msg => {
           subUserSendList.map(userId => {
             //bot.sendMessage(userId, draftPost);
             console.log(userId);
-            bot.sendPhoto(userId, draftImage, { caption: draftCaption });
+            // bot.sendPhoto(userId, draftImage, { caption: draftCaption });
+
+            bot.sendPhoto(
+              userId,
+              "https://res.cloudinary.com/dotogether/image/upload/v1573914246/samples/cloudinary-group.jpg"
+            );
           });
         };
         setTimeout(postMessages, 3000);
@@ -292,3 +305,7 @@ bot.on("message", async msg => {
 //   });
 // }
 // });
+
+// cloudinary.uploader.upload("sample.jpg", {"crop":"limit","tags":"samples","width":3000,"height":2000}, function(result) { console.log(result) });
+
+// cloudinary.image("sample", {"crop":"fill","gravity":"faces","width":300,"height":200,"format":"jpg"});
