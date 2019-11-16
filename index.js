@@ -121,7 +121,7 @@ bot.onText(/\/admin/, async msg => {
   if (adminCheck) {
     bot.sendMessage(msg.chat.id, "Select Option:", {
       reply_markup: {
-        keyboard: [["New Post", "Custom Post"], ["Exit Admin Mode"]],
+        keyboard: [["New Post", "Custom Post"], ["Exit Admin Session"]],
         resize_keyboard: true
       }
     });
@@ -217,6 +217,22 @@ bot.on("message", async msg => {
       });
     };
     retrieveUserList();
+  }
+});
+
+bot.on("message", async msg => {
+  const adminState = await session.getAdminState;
+  if (msg.text == "Exit Admin Session" && adminState == "admin1") {
+    session.setAdminStateNull();
+    bot.sendMessage(msg.chat.id, {
+      reply_markup: {
+        keyboard: [
+          ["I'm feelin' adventurous", "I'm feelin chill"],
+          ["I wanna stay home"]
+        ],
+        resize_keyboard: true
+      }
+    });
   }
 });
 

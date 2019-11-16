@@ -21,6 +21,10 @@ class Session {
     return redis.setex("adminsId", 3600, adminsId);
   }
 
+  setAdminStateNull() {
+    return redis.del("adminsId");
+  }
+
   setAdminState() {
     return redis.setex("adminState", 3600, "admin1");
   }
