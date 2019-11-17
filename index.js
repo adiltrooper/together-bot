@@ -221,12 +221,7 @@ bot.on("message", async msg => {
           subUserSendList.map(userId => {
             //bot.sendMessage(userId, draftPost);
             console.log(userId);
-            // bot.sendPhoto(userId, draftImage, { caption: draftCaption });
-
-            bot.sendPhoto(
-              userId,
-              "https://res.cloudinary.com/dotogether/image/upload/v1573914234/sample.jpg"
-            );
+            bot.sendPhoto(userId, draftImage, { caption: draftCaption });
           });
         };
         setTimeout(postMessages, 3000);
@@ -272,9 +267,31 @@ bot.on("message", async msg => {
   }
 });
 
-//send draft
-//save draft in variable
-//take variable and send
+bot.on("message", async msg => {
+  if (msg.text == "I'm feelin' adventurous")
+    pool.getConnection(function(err, connection) {
+      if (err) console.log(err);
+      switch (msg.text) {
+        case "I'm feelin' adventurous":
+          return connection.query(
+            "SELECT * FROM testdb ORDER BY RAND() LIMIT 1",
+            function(err, results, fields) {
+              if (err) {
+                console.log(err.message);
+              } else {
+                bot.sendMessage(119860989, results[0].activity);
+              }
+            }
+          );
+        case "I'm feelin chill":
+          return "Hello";
+        case "I wanna stay home":
+          return "Nop";
+      }
+      connection.release();
+      if (err) console.log(err);
+    });
+});
 
 // const constructedMsg = `${activity}@${location}
 //  ${shortDesc}
