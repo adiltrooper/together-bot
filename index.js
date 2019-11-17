@@ -20,11 +20,11 @@ const db = require("./config_db/db");
 const pool = mysql.createPool(db);
 const bodyParser = require("body-parser");
 
-// cloudinary.config({
-//   cloud_name: db.cloudinary_cloudname,
-//   api_key: db.cloudinary_apikey,
-//   api_secret: db.cloudinary_secret
-// });
+cloudinary.config({
+  cloud_name: db.cloudinary_cloudname,
+  api_key: db.cloudinary_apikey,
+  api_secret: db.cloudinary_secret
+});
 
 // const connection = mysql.createConnection(db);
 // connection.connect(function(error) {
