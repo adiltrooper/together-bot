@@ -294,7 +294,8 @@ bot.on("message", async msg => {
 
                   :${poi}
                   :${website}
-                  `
+                  `,
+                  { disable_web_page_preview: true }
                 );
               }
             }
