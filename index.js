@@ -285,9 +285,8 @@ bot.on("message", async msg => {
                 const website = results[0].website;
                 const category = results[0].category;
                 const imageURL = results[0].imageURL;
-                bot.sendMessage(
-                  119860989,
-                  `${activity} @ ${location}
+                bot.sendPhoto(119860989, {
+                  caption: `${activity} @ ${location}
                   ${short_desc}
 
                   : from $${price}
@@ -295,8 +294,8 @@ bot.on("message", async msg => {
                   :${poi}
                   :${website}
                   `,
-                  { disable_web_page_preview: true }
-                );
+                  disable_web_page_preview: true
+                });
               }
             }
           );
