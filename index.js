@@ -250,7 +250,7 @@ bot.on("message", async msg => {
     bot.sendMessage(msg.chat.id, "Back to User Mode", {
       reply_markup: {
         keyboard: [
-          ["I'm feelin' adventurous", "I'm feelin chill"],
+          ["Feelin' Adventurous", "I'm feelin chill"],
           ["I wanna stay home"]
         ],
         resize_keyboard: true
@@ -268,13 +268,13 @@ bot.on("message", async msg => {
 });
 
 bot.on("message", async msg => {
-  if (msg.text == "I'm feelin' adventurous")
+  if (msg.text == "Feelin' Adventurous")
     pool.getConnection(function(err, connection) {
       if (err) console.log(err);
       switch (msg.text) {
-        case "I'm feelin' adventurous":
+        case "Feelin' Adventurous":
           return connection.query(
-            "SELECT * FROM testdb ORDER BY RAND() LIMIT 1",
+            "SELECT * FROM bot_listings_db ORDER BY RAND() LIMIT 1",
             function(err, results, fields) {
               if (err) {
                 console.log(err.message);
