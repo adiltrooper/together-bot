@@ -239,7 +239,7 @@ bot.on("message", async msg => {
     bot.sendMessage(msg.chat.id, "Back to User Mode", {
       reply_markup: {
         keyboard: [
-          ["I'm feelin' adventurous", "I'm feelin chill"],
+          ["Feelin' Adventurous", "I'm feelin chill"],
           ["I wanna stay home"]
         ],
         resize_keyboard: true
