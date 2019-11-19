@@ -285,7 +285,17 @@ bot.on("message", async msg => {
                 const website = results[0].website;
                 const category = results[0].category;
                 const imageURL = results[0].imageURL;
-                bot.sendMessage(119860989, `${activity} @ ${location}`);
+                bot.sendMessage(
+                  119860989,
+                  `${activity} @ ${location}
+                  ${short_desc}
+
+                  : from $${price}
+
+                  :${poi}
+                  :${website}
+                  `
+                );
               }
             }
           );
