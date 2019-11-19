@@ -52,7 +52,7 @@ bot.onText(/\/start/, msg => {
   bot.sendMessage(chat_id, "Welcome", {
     reply_markup: {
       keyboard: [
-        ["I'm feelin' adventurous", "I'm feelin chill"],
+        ["Feelin' Adventurous", "I'm feelin chill"],
         ["I wanna stay home"]
       ],
       resize_keyboard: true
