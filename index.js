@@ -285,7 +285,7 @@ bot.on("message", async msg => {
                 const website = results[0].website;
                 const category = results[0].category;
                 const imageURL = results[0].imageURL;
-                bot.sendPhoto(119860989, {
+                bot.sendPhoto(119860989, imageURL, {
                   caption: `${activity} @ ${location}
                   ${short_desc}
 
