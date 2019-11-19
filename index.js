@@ -69,11 +69,7 @@ bot.onText(/\/start/, msg => {
       "INSERT INTO bot_user_db (chat_id, first_name, username, user_type) VALUES (?, ?, ?, ?)",
       [chat_id, first_name, username, user_type],
       function(err, results, fields) {
-        if (err) {
-          console.log(err.message);
-        } else {
-          done(null, results);
-        }
+        if (err) console.log(err.message);
       }
     );
     connection.release();
