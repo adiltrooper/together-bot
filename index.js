@@ -66,7 +66,7 @@ bot.onText(/\/start/, msg => {
   pool.getConnection(function(err, connection) {
     if (err) console.log(err);
     connection.query(
-      "INSERT INTO user_info (chat_id, first_name, username, user_type) VALUES (?, ?, ?, ?)",
+      "INSERT INTO bot_user_db (chat_id, first_name, username, user_type) VALUES (?, ?, ?, ?)",
       [chat_id, first_name, username, user_type],
       function(err, results, fields) {
         if (err) {
@@ -179,7 +179,7 @@ bot.on("message", async msg => {
     pool.getConnection(function(err, connection) {
       if (err) console.log(err);
       connection.query(
-        'SELECT chat_id FROM user_info WHERE user_type = "admin"',
+        'SELECT chat_id FROM bot_user_db WHERE user_type = "admin"',
         function(err, results, fields) {
           if (err) {
             console.log(err.message);
