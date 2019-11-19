@@ -281,8 +281,15 @@ bot.on("message", async msg => {
               if (err) {
                 console.log(err.message);
               } else {
-                bot.sendMessage(119860989, results[0].activity);
-                console.log(results);
+                const location = results[0].location;
+                const activity = results[0].activity;
+                const short_desc = results[0].short_desc;
+                const price = results[0].price;
+                const poi = results[0].poi;
+                const website = results[0].website;
+                const category = results[0].bot_category.category_name;
+                const imageURL = results[0].imageURL;
+                bot.sendMessage(119860989, `${activity} @ ${location}`);
               }
             }
           );
