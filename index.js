@@ -276,7 +276,7 @@ bot.on("message", async msg => {
       switch (msg.text) {
         case "Feelin' Adventurous":
           return connection.query(
-            "SELECT location, activity, short_desc, price, poi, website, bot_category.category_name, imageURL FROM bot_listings_db LEFT JOIN bot_listing_category ON bot_listings_db.id = bot_listing_id LEFT JOIN bot_category ON bot_category_id = bot_category.id ORDER BY RAND() LIMIT 1",
+            "SELECT location, activity, short_desc, price, poi, website, bot_category.category_name AS category, imageURL FROM bot_listings_db LEFT JOIN bot_listing_category ON bot_listings_db.id = bot_listing_id LEFT JOIN bot_category ON bot_category_id = bot_category.id ORDER BY RAND() LIMIT 1",
             function(err, results, fields) {
               if (err) {
                 console.log(err.message);
@@ -287,7 +287,7 @@ bot.on("message", async msg => {
                 const price = results[0].price;
                 const poi = results[0].poi;
                 const website = results[0].website;
-                const category = results[0].bot_category.category_name;
+                const category = results[0].category;
                 const imageURL = results[0].imageURL;
                 bot.sendMessage(119860989, `${activity} @ ${location}`);
               }
