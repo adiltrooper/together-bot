@@ -93,7 +93,7 @@ CREATE TABLE `bot_listings_db` (
 
 LOCK TABLES `bot_listings_db` WRITE;
 /*!40000 ALTER TABLE `bot_listings_db` DISABLE KEYS */;
-INSERT INTO `bot_listings_db` VALUES (1,'ABC Cooking Studio','Cooking Class','Funan, Taka, Westgate',35,'bit.ly/abccookingSG','Spice up that friendship/relationship with a cooking session! Learn how to prepare items from desserts to a Hamburg Steak. Food recipes crafted by professional Japanese Chefs. Trial classes run almost every day!','https://res.cloudinary.com/dotogether/image/upload/v1574077945/Listings/ABC%20Cooking%20Studio.jpg'),(2,'Adventure Cove','Day Out','Sentosa',38,'bit.ly/acoveSG','Snorkel over corals, ride water slides or cool off in the pool with a guaranteed enjoyable day, together.!','https://res.cloudinary.com/dotogether/image/upload/v1574078267/Listings/Adventure%20Cove.jpg'),(3,'AJ Hackett Sentosa','Bungee Jump','Sentosa',9,'bit.ly/ajhackettSG','THRILLSEEKERS! Dive head first or back flip over the edge of Singapore\'s first bungee jump! Other high-element activities includes a giant swing and a vertical skywalk (facedown!)','https://res.cloudinary.com/dotogether/image/upload/c_fill,h_632,w_632/v1574078267/Listings/Adventure%20Cove.jpg');
+INSERT INTO `bot_listings_db` VALUES (1,'ABC Cooking Studio','Cooking Class','Funan, Taka, Westgate',35,'bit.ly/abccookingSG','Spice up that friendship/relationship with a cooking session! Learn how to prepare items from desserts to a Hamburg Steak. Food recipes crafted by professional Japanese Chefs. Trial classes run almost every day!','https://res.cloudinary.com/dotogether/image/upload/v1574077945/Listings/ABC%20Cooking%20Studio.jpg'),(2,'Adventure Cove','Day Out','Sentosa',38,'bit.ly/acoveSG','Snorkel over corals, ride water slides or cool off in the pool with a guaranteed enjoyable day, together.!','https://res.cloudinary.com/dotogether/image/upload/v1574078267/Listings/Adventure%20Cove.jpg'),(3,'AJ Hackett Sentosa','Bungee Jump','Sentosa',9,'bit.ly/ajhackettSG','THRILLSEEKERS! Dive head first or back flip over the edge of Singapore\'s first bungee jump! Other high-element activities includes a giant swing and a vertical skywalk (facedown!)','https://res.cloudinary.com/dotogether/image/upload/v1574078653/Listings/AJ%20Hackett%20Sentosa.jpg');
 /*!40000 ALTER TABLE `bot_listings_db` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -133,4 +133,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-19 19:44:24
+-- Dump completed on 2019-11-19 22:06:16

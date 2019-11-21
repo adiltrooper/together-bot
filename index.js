@@ -296,6 +296,7 @@ bot.on("message", async msg => {
                   `,
                   disable_web_page_preview: true
                 });
+                bot.getFile(results[0].imageURL);
               }
             }
           );
