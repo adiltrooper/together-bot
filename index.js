@@ -279,7 +279,7 @@ bot.on("message", async msg => {
               } else {
                 console.log(results);
                 const newResults = results.map(result => {
-                  return `${results.location}, ${results.activity}`;
+                  return `${result.location}, ${result.activity}`;
                 });
                 console.log(newResults);
 
