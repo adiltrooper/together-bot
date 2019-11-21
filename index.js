@@ -279,11 +279,14 @@ bot.on("message", async msg => {
               } else {
                 console.log(results);
                 const newResults = results.map(result => {
-                  return `${result.location}, ${result.activity}`;
+                  return `${result.location} @ ${result.activity}
+                  ${result.short_desc}
+                  : from $${result.price}
+                  `;
                 });
                 console.log(newResults);
 
-                //session.setRandomAdventurous(results);
+                session.setRandomAdventurous(newResults);
                 const location = results[0].location;
                 const activity = results[0].activity;
                 const short_desc = results[0].short_desc;
