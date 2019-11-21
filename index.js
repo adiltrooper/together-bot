@@ -272,11 +272,12 @@ bot.on("message", async msg => {
       switch (msg.text) {
         case "Feelin' Adventurous":
           return connection.query(
-            "SELECT location, activity, short_desc, price, poi, website, bot_category.category_name AS category, imageURL FROM bot_listings_db LEFT JOIN bot_listing_category ON bot_listings_db.id = bot_listing_id LEFT JOIN bot_category ON bot_category_id = bot_category.id ORDER BY RAND() LIMIT 1",
+            "SELECT location, activity, short_desc, price, poi, website, bot_category.category_name AS category, imageURL FROM bot_listings_db LEFT JOIN bot_listing_category ON bot_listings_db.id = bot_listing_id LEFT JOIN bot_category ON bot_category_id = bot_category.id ORDER BY RAND() LIMIT 2",
             function(err, results, fields) {
               if (err) {
                 console.log(err.message);
               } else {
+                console.log(results);
                 const location = results[0].location;
                 const activity = results[0].activity;
                 const short_desc = results[0].short_desc;
@@ -296,7 +297,6 @@ bot.on("message", async msg => {
                   `,
                   disable_web_page_preview: true
                 });
-                bot.getFile(imageURL);
               }
             }
           );
