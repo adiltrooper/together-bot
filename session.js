@@ -79,8 +79,8 @@ class Session {
   }
 
   setRandomAdventurous(results) {
-    results.map(result => {
-      redis.LPUSH("randomAdvTempArray", 3600, result);
+    results.forEach(result => {
+      redis.LPUSH("randomAdvTempArray", result);
     });
   }
   // async getAdminList() {

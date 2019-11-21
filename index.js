@@ -278,19 +278,7 @@ bot.on("message", async msg => {
                 console.log(err.message);
               } else {
                 console.log(results);
-                const unArrayedResults = results.map(result => {
-                  return;
-                  `${result.location},
-                    ${results.activity},
-                    ${result.short_desc},
-                    ${result.price},
-                    ${result.poi},
-                    ${result.website},
-                    ${result.category},
-                    ${result.imageURL}`;
-                });
-                console.log(unArrayedResults);
-                session.setRandomAdventurous(unArrayedResults);
+                session.setRandomAdventurous(results);
                 const location = results[0].location;
                 const activity = results[0].activity;
                 const short_desc = results[0].short_desc;
