@@ -296,7 +296,7 @@ bot.on("message", async msg => {
                   `,
                   disable_web_page_preview: true
                 });
-                bot.getFile(iamgeURL);
+                bot.getFile(imageURL);
               }
             }
           );
