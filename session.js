@@ -77,6 +77,12 @@ class Session {
       return res;
     });
   }
+
+  setRandomAdventurous(results) {
+    results.map(result => {
+      redis.LPUSH("randomAdvTempArray", 3600, result);
+    });
+  }
   // async getAdminList() {
   //   const res = await getAsync("adminsId");
   //   console.log(res);
