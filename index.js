@@ -279,7 +279,16 @@ bot.on("message", async msg => {
               } else {
                 console.log(results);
                 const unArrayedResults = results.map(result => {
-                  return result;
+                  return [
+                    result.location,
+                    results.activity,
+                    result.short_desc,
+                    result.price,
+                    result.poi,
+                    result.website,
+                    result.category,
+                    result.imageURL
+                  ];
                 });
                 console.log(unArrayedResults);
                 session.setRandomAdventurous(unArrayedResults);
