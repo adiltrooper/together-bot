@@ -279,9 +279,9 @@ bot.on("message", async msg => {
               } else {
                 console.log(results);
                 const newResults = results.map(result => {
-                  return `${result.location} @ ${result.activity}
-                  ${result.short_desc}
-                  : from $${result.price}
+                  return `${result.activity} @ ${result.location}\n ${
+                    result.short_desc
+                  }\n : from $${result.price}
                   `;
                 });
                 console.log(newResults);
