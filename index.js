@@ -280,14 +280,15 @@ bot.on("message", async msg => {
                 console.log(results);
                 // prettier-ignore
                 const newResults = results.map(result => {
-                  return `${result.activity} @ ${result.location}
+                  return (
+                 `${result.activity} @ ${result.location}
                   ${result.short_desc}
 
                   : from $${result.price}
                   : ${result.poi}
 
                   : ${result.website}
-                  `;
+                  `);
                 });
                 console.log(newResults);
 
