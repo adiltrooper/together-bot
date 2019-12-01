@@ -281,12 +281,12 @@ bot.on("message", async msg => {
                 // prettier-ignore
                 const newResults = results.map(result => {
                   return `${result.activity} @ ${result.location}
-${result.short_desc}
+                  ${result.short_desc}
 
-: from $${result.price}
-: ${result.poi}
+                  : from $${result.price}
+                  : ${result.poi}
 
-: ${results.website}
+                  : ${result.website}
                   `;
                 });
                 console.log(newResults);
