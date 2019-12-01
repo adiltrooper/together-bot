@@ -300,12 +300,12 @@ bot.on("message", async msg => {
                 const imageURL = results[0].imageURL;
                 bot.sendPhoto(119860989, imageURL, {
                   caption: `${activity} @ ${location}
-                  ${short_desc}
+${short_desc}
 
-                  : from $${price}
+: from $${price}
 
-                  :${poi}
-                  :${website}
+:${poi}
+:${website}
                   `,
                   disable_web_page_preview: true
                 });
