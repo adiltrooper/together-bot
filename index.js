@@ -290,7 +290,7 @@ ${result.short_desc}☀️
                 });
                 console.log(newResults);
 
-                session.setRandomAdventurous(newResults);
+                session.setRandomAdventures(newResults);
                 const location = results[0].location;
                 const activity = results[0].activity;
                 const short_desc = results[0].short_desc;
@@ -299,6 +299,7 @@ ${result.short_desc}☀️
                 const website = results[0].website;
                 const category = results[0].category;
                 const imageURL = results[0].imageURL;
+
                 bot.sendPhoto(119860989, imageURL, {
                   caption: `<b>☀️${activity} @ ${location}☀️</b>
 

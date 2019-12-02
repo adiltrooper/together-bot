@@ -78,9 +78,16 @@ class Session {
     });
   }
 
-  setRandomAdventurous(results) {
+  setRandomAdventures(results) {
     results.forEach(result => {
       redis.LPUSH("randomAdvTempArray", result);
+    });
+  }
+
+  getRandomAdventures() {
+    return redis.LRANGE("randomAdvTempArray", 0, 0).then(function(res) {
+      return res;
+      console.log(res);
     });
   }
   // async getAdminList() {
