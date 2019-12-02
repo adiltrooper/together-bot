@@ -110,52 +110,76 @@ class Session {
     });
   }
 
-  getRandomAdventures() {
+  getCachedAdventurous() {
     return redis
       .multi()
-      .lrange("cachedActivity", 0, 0)
-      .lrange("cachedLocation", 0, 0)
-      .lrange("cachedShort_desc", 0, 0)
-      .lrange("cachedPrice", 0, 0)
-      .lrange("cachedPoi", 0, 0)
-      .lrange("cachedWebsite", 0, 0)
-      .lrange("cachedImageURL", 0, 0)
-      .ltrim("cachedActivity", 1, -1)
-      .ltrim("cachedLocation", 1, -1)
-      .ltrim("cachedShort_desc", 1, -1)
-      .ltrim("cachedPrice", 1, -1)
-      .ltrim("cachedPoi", 1, -1)
-      .ltrim("cachedWebsite", 1, -1)
-      .ltrim("cachedImageURL", 1, -1)
+      .lrange("cachedActivity_Adventurous", 0, 0)
+      .lrange("cachedLocation_Adventurous", 0, 0)
+      .lrange("cachedShort_desc_Adventurous", 0, 0)
+      .lrange("cachedPrice_Adventurous", 0, 0)
+      .lrange("cachedPoi_Adventurous", 0, 0)
+      .lrange("cachedWebsite_Adventurous", 0, 0)
+      .lrange("cachedImageURL_Adventurous", 0, 0)
+      .ltrim("cachedActivity_Adventurous", 1, -1)
+      .ltrim("cachedLocation_Adventurous", 1, -1)
+      .ltrim("cachedShort_desc_Adventurous", 1, -1)
+      .ltrim("cachedPrice_Adventurous", 1, -1)
+      .ltrim("cachedPoi_Adventurous", 1, -1)
+      .ltrim("cachedWebsite_Adventurous", 1, -1)
+      .ltrim("cachedImageURL_Adventurous", 1, -1)
       .execAsync()
       .then(function(res) {
         console.log(res);
         return res;
       });
+  }
 
-    // return (
-    //   redis.lrangeAsync("cachedActivity", 0, 0).then(function(act) {
-    //     return act;
-    //   }),
-    //   redis.lrangeAsync("cachedLocation", 0, 0).then(function(loc) {
-    //     return loc;
-    //   }),
-    //   redis.lrangeAsync("cachedShort_desc", 0, 0).then(function(desc) {
-    //     return desc;
-    //   }),
-    //   redis.lrangeAsync("cachedPrice", 0, 0).then(function(pr) {
-    //     return pr;
-    //   }),
-    //   redis.lrangeAsync("cachedPoi", 0, 0).then(function(p) {
-    //     return p;
-    //   }),
-    //   redis.lrangeAsync("cachedWebsite", 0, 0).then(function(site) {
-    //     return site;
-    //   }),
-    //   redis.lrangeAsync("cachedImageURL", 0, 0).then(function(url) {
-    //     return url;
-    //   })
-    // );
+  getCachedChill() {
+    return redis
+      .multi()
+      .lrange("cachedActivity_Chill", 0, 0)
+      .lrange("cachedLocation_Chill", 0, 0)
+      .lrange("cachedShort_desc_Chill", 0, 0)
+      .lrange("cachedPrice_Chill", 0, 0)
+      .lrange("cachedPoi_Chill", 0, 0)
+      .lrange("cachedWebsite_Chill", 0, 0)
+      .lrange("cachedImageURL_Chill", 0, 0)
+      .ltrim("cachedActivity_Chill", 1, -1)
+      .ltrim("cachedLocation_Chill", 1, -1)
+      .ltrim("cachedShort_desc_Chill", 1, -1)
+      .ltrim("cachedPrice_Chill", 1, -1)
+      .ltrim("cachedPoi_Chill", 1, -1)
+      .ltrim("cachedWebsite_Chill", 1, -1)
+      .ltrim("cachedImageURL_Chill", 1, -1)
+      .execAsync()
+      .then(function(res) {
+        console.log(res);
+        return res;
+      });
+  }
+
+  getCachedHome() {
+    return redis
+      .multi()
+      .lrange("cachedActivity_Home", 0, 0)
+      .lrange("cachedLocation_Home", 0, 0)
+      .lrange("cachedShort_desc_Home", 0, 0)
+      .lrange("cachedPrice_Home", 0, 0)
+      .lrange("cachedPoi_Home", 0, 0)
+      .lrange("cachedWebsite_Home", 0, 0)
+      .lrange("cachedImageURL_Home", 0, 0)
+      .ltrim("cachedActivity_Home", 1, -1)
+      .ltrim("cachedLocation_Home", 1, -1)
+      .ltrim("cachedShort_desc_Home", 1, -1)
+      .ltrim("cachedPrice_Home", 1, -1)
+      .ltrim("cachedPoi_Home", 1, -1)
+      .ltrim("cachedWebsite_Home", 1, -1)
+      .ltrim("cachedImageURL_Home", 1, -1)
+      .execAsync()
+      .then(function(res) {
+        console.log(res);
+        return res;
+      });
   }
 }
 module.exports = Session;

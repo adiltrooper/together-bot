@@ -274,25 +274,27 @@ bot.on("message", async msg => {
     switch (msg.text) {
       case "Feelin' Adventurous":
         var cat_id = 1;
+        const cachedListing = await session.getCachedAdventurous();
         break;
       case "I'm feelin chill":
         var cat_id = 2;
+        const cachedListing = await session.getCachedChill();
         break;
       case "I wanna stay home":
         var cat_id = 3;
+        const cachedListing = await session.getCachedHome();
         break;
       default:
         var cat_id = 1;
     }
-    const tempAdv = await session.getRandomAdventures();
 
-    const activity = tempAdv[0][0];
-    const location = tempAdv[1][0];
-    const short_desc = tempAdv[2][0];
-    const price = tempAdv[3][0];
-    const poi = tempAdv[4][0];
-    const website = tempAdv[5][0];
-    const imageURL = tempAdv[6][0];
+    const activity = cachedListing[0][0];
+    const location = cachedListing[1][0];
+    const short_desc = cachedListing[2][0];
+    const price = cachedListing[3][0];
+    const poi = cachedListing[4][0];
+    const website = cachedListing[5][0];
+    const imageURL = cachedListing[6][0];
 
     if (tempAdv[0][0]) {
       console.log("From Cache");
