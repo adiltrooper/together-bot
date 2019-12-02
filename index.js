@@ -269,6 +269,19 @@ bot.on("message", async msg => {
   if (msg.text == "Feelin' Adventurous") {
     const tempAdv = await session.getRandomAdventures();
     console.log(tempAdv);
+    bot.sendPhoto(119860989, imageURL, {
+      caption: `<b>☀️${activity} @ ${location}☀️</b>
+
+${short_desc}
+
+💸: from $${price}
+
+📍: ${poi}
+📮: ${website}
+        `,
+      disable_web_page_preview: true,
+      parse_mode: "HTML"
+    });
   }
   pool.getConnection(function(err, connection) {
     if (err) console.log(err);
@@ -281,19 +294,38 @@ bot.on("message", async msg => {
               console.log(err.message);
             } else {
               console.log(results);
-              const newResults = results.map(result => {
-                return `☀️${result.activity} @ ${result.location}
-${result.short_desc}☀️
 
-💸: from $${result.price}
-
-📍: ${result.poi}
-📮: ${result.website}
-                  `;
+              const cachedActivity = results.map(result => {
+                return result.activity;
               });
-              console.log(newResults);
+              const cachedLocation = results.map(result => {
+                return results.location;
+              });
+              const cachedShort_desc = results.map(result => {
+                return results.short_desc;
+              });
+              const cachedPrice = results.map(result => {
+                return results.price;
+              });
+              const cachedPoi = results.map(result => {
+                return results.poi;
+              });
+              const cachedWebsite = results.map(result => {
+                return results.website;
+              });
+              const cachedImageUrl = results.map(result => {
+                return results.imageURL;
+              });
 
-              session.setRandomAdventures(newResults);
+              session.setRandomAdventures(
+                cachedActivity,
+                cachedLocation,
+                cachedShort_desc,
+                cachedPrice,
+                cachedPoi,
+                cachedWebsite,
+                cachedImageURL
+              );
               const location = results[0].location;
               const activity = results[0].activity;
               const short_desc = results[0].short_desc;

@@ -78,17 +78,62 @@ class Session {
     });
   }
 
-  setRandomAdventures(results) {
-    results.forEach(result => {
-      redis.LPUSH("randomAdvTempArray", result);
+  setRandomAdventures(
+    activity,
+    location,
+    short_desc,
+    price,
+    poi,
+    website,
+    imageURL
+  ) {
+    activity.forEach(act => {
+      redis.LPUSH("cachedActivity", act);
+    });
+    location.forEach(loc => {
+      redis.LPUSH("cachedLocation", loc);
+    });
+    short_desc.forEach(desc => {
+      redis.LPUSH("cachedShort_desc", desc);
+    });
+    price.forEach(pr => {
+      redis.LPUSH("cachedPrice", pr);
+    });
+    poi.forEach(p => {
+      redis.LPUSH("cachedPoi", p);
+    });
+    website.forEach(site => {
+      redis.LPUSH("cachedWebsite", site);
+    });
+    imageURL.forEach(url => {
+      redis.LPUSH("cachedImageURL", url);
     });
   }
 
   getRandomAdventures() {
-    return redis.lrangeAsync("randomAdvTempArray", 0, 0).then(function(res) {
-      return res;
-      console.log(res);
-    });
+    return (
+      redis.lrangeAsync("cachedActivity", 0, 0).then(function(res) {
+        return res;
+      }),
+      redis.lrangeAsync("cachedLocation", 0, 0).then(function(res) {
+        return res;
+      }),
+      redis.lrangeAsync("cachedShort_desc", 0, 0).then(function(res) {
+        return res;
+      }),
+      redis.lrangeAsync("cachedPrice", 0, 0).then(function(res) {
+        return res;
+      }),
+      redis.lrangeAsync("cachedPoi", 0, 0).then(function(res) {
+        return res;
+      }),
+      redis.lrangeAsync("cachedWebsite", 0, 0).then(function(res) {
+        return res;
+      }),
+      redis.lrangeAsync("cachedImageURL", 0, 0).then(function(res) {
+        return res;
+      })
+    );
   }
   // async getAdminList() {
   //   const res = await getAsync("adminsId");
