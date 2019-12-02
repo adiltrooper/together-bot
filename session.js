@@ -78,7 +78,8 @@ class Session {
     });
   }
 
-  setRandomAdventures(
+  setCachedListings(
+    cat_id,
     activity,
     location,
     short_desc,
@@ -87,26 +88,37 @@ class Session {
     website,
     imageURL
   ) {
+    switch (cat_id) {
+      case 1:
+        var cat = "Adventurous";
+        break;
+      case 2:
+        var cat = "Chill";
+        break;
+      case 3:
+        var cat = "Home";
+    }
+
     activity.forEach(act => {
-      redis.LPUSH("cachedActivity", act);
+      redis.LPUSH(`cachedActivity_${cat}`, act);
     });
     location.forEach(loc => {
-      redis.LPUSH("cachedLocation", loc);
+      redis.LPUSH(`cachedLocation_${cat}`, loc);
     });
     short_desc.forEach(desc => {
-      redis.LPUSH("cachedShort_desc", desc);
+      redis.LPUSH(`cachedShort_desc_${cat}`, desc);
     });
     price.forEach(pr => {
-      redis.LPUSH("cachedPrice", pr);
+      redis.LPUSH(`cachedPrice_${cat}`, pr);
     });
     poi.forEach(p => {
-      redis.LPUSH("cachedPoi", p);
+      redis.LPUSH(`cachedPoi_${cat}`, p);
     });
     website.forEach(site => {
-      redis.LPUSH("cachedWebsite", site);
+      redis.LPUSH(`cachedWebsite_${cat}`, site);
     });
     imageURL.forEach(url => {
-      redis.LPUSH("cachedImageURL", url);
+      redis.LPUSH(`cachedImageURL_${cat}`, url);
     });
   }
 

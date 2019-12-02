@@ -348,7 +348,8 @@ ${short_desc}
                 return result.imageURL;
               });
 
-              session.setRandomAdventures(
+              session.setCachedListings(
+                cat_id,
                 cachedActivity,
                 cachedLocation,
                 cachedShort_desc,
