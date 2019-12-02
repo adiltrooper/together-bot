@@ -330,6 +330,7 @@ ${short_desc}
                     cachedWebsite,
                     cachedImageURL
                   );
+
                   const location = results[0].location;
                   const activity = results[0].activity;
                   const short_desc = results[0].short_desc;
