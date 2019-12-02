@@ -328,15 +328,17 @@ ${short_desc}
                   throw err;
                 });
               } else {
-                bot.sendPhoto(119860989, results.imageURL, {
-                  caption: `<b>☀️${results.activity} @ ${results.location}☀️</b>
+                bot.sendPhoto(119860989, results[0].imageURL, {
+                  caption: `<b>☀️${results[0].activity} @ ${
+                    results[0].location
+                  }☀️</b>
 
-      ${results.short_desc}
+      ${results[0].short_desc}
 
-      💸: from $${results.price}
+      💸: from $${results[0].price}
 
-      📍: ${results.poi}
-      📮: ${results.website}
+      📍: ${results[0].poi}
+      📮: ${results[0].website}
               `,
                   disable_web_page_preview: true,
                   parse_mode: "HTML"
