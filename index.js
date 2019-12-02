@@ -269,6 +269,7 @@ bot.on("message", async msg => {
   if (msg.text == "Feelin' Adventurous") {
     const tempAdv = await session.getRandomAdventures();
     console.log(tempAdv);
+    console.log("getting");
     if (tempAdv[0]) {
       console.log("nothing inside");
       bot.sendPhoto(119860989, imageURL, {
