@@ -49,9 +49,9 @@ bot.onText(/\/start/, msg => {
     chat_id,
     `Hi ${msg.from.first_name}! Welcome to the Together Community!
 
-    So what can this bot do for you?
-    💡Get an outing idea with a single click below!
-    💡Stay tuned for specially curated ideas from the together team posted 3 times weekly!
+So what can this bot do for you?
+💡Get an outing idea with a single click below!
+💡Stay tuned for specially curated ideas from the together team posted 3 times weekly!
   `,
     {
       reply_markup: {
