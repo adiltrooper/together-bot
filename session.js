@@ -113,8 +113,8 @@ class Session {
   getRandomAdventures() {
     return redis
       .multi()
-      .lrangeAsync("cachedActivity", 0, 0)
-      .lrangeAsync("cachedLocation", 0, 0)
+      .lrange("cachedActivity", 0, 0)
+      .lrange("cachedLocation", 0, 0)
       .execAsync()
       .then(function(res) {
         console.log(res);
