@@ -59,9 +59,9 @@ So what can this bot do for you?
           ["Feelin' Adventurous", "I'm feelin chill"],
           ["I wanna stay home"]
         ],
-        resize_keyboard: true,
-        parse_mode: "HTML"
-      }
+        resize_keyboard: true
+      },
+      parse_mode: "HTML"
     }
   );
 
