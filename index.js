@@ -300,6 +300,8 @@ ${result.short_desc}☀️
                 const category = results[0].category;
                 const imageURL = results[0].imageURL;
 
+                session.getRandomAdventures();
+
                 bot.sendPhoto(119860989, imageURL, {
                   caption: `<b>☀️${activity} @ ${location}☀️</b>
 
