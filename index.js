@@ -270,7 +270,7 @@ bot.on("message", async msg => {
     const tempAdv = await session.getRandomAdventures();
     console.log(tempAdv);
     console.log("getting");
-    if (tempAdv[0]) {
+    if (tempAdv != []) {
       console.log("nothing inside");
       bot.sendPhoto(119860989, imageURL, {
         caption: `<b>☀️${activity} @ ${location}☀️</b>
