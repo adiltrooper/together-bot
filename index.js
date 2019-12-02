@@ -364,19 +364,19 @@ ${short_desc}
               const category = results[0].category;
               const imageURL = results[0].imageURL;
 
-              bot.sendPhoto(119860989, imageURL, {
-                caption: `<b>☀️${activity} @ ${location}☀️</b>
-
-${short_desc}
-
-💸: from $${price}
-
-📍: ${poi}
-📮: ${website}
-                  `,
-                disable_web_page_preview: true,
-                parse_mode: "HTML"
-              });
+              //               bot.sendPhoto(119860989, imageURL, {
+              //                 caption: `<b>☀️${activity} @ ${location}☀️</b>
+              //
+              // ${short_desc}
+              //
+              // 💸: from $${price}
+              //
+              // 📍: ${poi}
+              // 📮: ${website}
+              //                   `,
+              //                 disable_web_page_preview: true,
+              //                 parse_mode: "HTML"
+              //               });
             }
           }
         );
