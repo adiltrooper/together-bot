@@ -84,11 +84,10 @@ class Session {
     });
   }
 
-  getRandomAdventures() {
-    return redis.LRANGE("randomAdvTempArray", 0, 0).then(function(res) {
-      return res;
-      console.log(res);
-    });
+  async getRandomAdventures() {
+    const activity = await redis.LRANGE("randomAdvTempArray", 0, 0);
+    return activity;
+    console.log(activity);
   }
   // async getAdminList() {
   //   const res = await getAsync("adminsId");
