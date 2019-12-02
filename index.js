@@ -288,6 +288,7 @@ bot.on("message", async msg => {
         var cat_id = 1;
     }
 
+    console.log(cachedListing);
     const activity = cachedListing[0][0];
     const location = cachedListing[1][0];
     const short_desc = cachedListing[2][0];
