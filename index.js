@@ -273,13 +273,13 @@ bot.on("message", async msg => {
   ) {
     switch (msg.text) {
       case "Feelin' Adventurous":
-        let cat_id = 1;
+        var cat_id = 1;
       case "I'm feelin chill":
-        let cat_id = 2;
+        var cat_id = 2;
       case "I wanna stay home":
-        let cat_id = 3;
+        var cat_id = 3;
       default:
-        let cat_id = 1;
+        var cat_id = 1;
     }
     const tempAdv = await session.getRandomAdventures();
 
