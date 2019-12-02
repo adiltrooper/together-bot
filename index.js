@@ -277,9 +277,8 @@ bot.on("message", async msg => {
     const website = tempAdv[5][0];
     const imageURL = tempAdv[6][0];
 
-    console.log("getting");
     if (tempAdv) {
-      console.log("something inside");
+      console.log("From Cache");
       bot.sendPhoto(119860989, imageURL, {
         caption: `<b>☀️${activity} @ ${location}☀️</b>
 
