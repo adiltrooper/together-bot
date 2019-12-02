@@ -294,6 +294,7 @@ ${short_desc}
       });
     } else {
       console.log("attempting");
+
       pool.getConnection(function(err, connection) {
         if (err) console.log(err);
         switch (msg.text) {
