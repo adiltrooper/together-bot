@@ -135,10 +135,6 @@ class Session {
       })
     );
   }
-  // async getAdminList() {
-  //   const res = await getAsync("adminsId");
-  //   console.log(res);
-  // }
 }
 module.exports = Session;
 
