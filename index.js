@@ -269,7 +269,14 @@ bot.on("message", async msg => {
   if (msg.text == "Feelin' Adventurous") {
     const tempAdv = await session.getRandomAdventures();
 
-    console.log(tempAdv[0][0]);
+    const activity = tempAdv[0][0];
+    const location = tempAdv[1][0];
+    const short_desc = tempAdv[2][0];
+    const price = tempAdv[3][0];
+    const poi = tempAdv[4][0];
+    const website = tempAdv[5][0];
+    const imageURL = tempAdv[6][0];
+
     console.log("getting");
     if (tempAdv) {
       console.log("something inside");
