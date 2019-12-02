@@ -114,15 +114,11 @@ class Session {
     return redis
       .multi()
       .lrangeAsync("cachedActivity", 0, 0)
-      .then(function(act) {
-        return act;
-      })
       .lrangeAsync("cachedLocation", 0, 0)
-      .then(function(act) {
-        return loc;
-      })
-      .exec(function(err, replies) {
-        console.log(replies);
+      .execAsync()
+      .then(function(res) {
+        console.log(res);
+        return res;
       });
 
     // return (
