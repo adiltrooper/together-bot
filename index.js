@@ -285,63 +285,62 @@ ${short_desc}
         disable_web_page_preview: true,
         parse_mode: "HTML"
       });
-    }
-  } else {
-    console.log("attempting");
-    pool.getConnection(function(err, connection) {
-      if (err) console.log(err);
-      switch (msg.text) {
-        case "Feelin' Adventurous":
-          return connection.query(
-            "SELECT location, activity, short_desc, price, poi, website, bot_category.category_name AS category, imageURL FROM bot_listings_db LEFT JOIN bot_listing_category ON bot_listings_db.id = bot_listing_id LEFT JOIN bot_category ON bot_category_id = bot_category.id WHERE bot_category_id = 1 ORDER BY RAND() LIMIT 2",
-            function(err, results, fields) {
-              if (err) {
-                console.log(err.message);
-              } else {
-                console.log(results);
+    } else {
+      console.log("attempting");
+      pool.getConnection(function(err, connection) {
+        if (err) console.log(err);
+        switch (msg.text) {
+          case "Feelin' Adventurous":
+            return connection.query(
+              "SELECT location, activity, short_desc, price, poi, website, bot_category.category_name AS category, imageURL FROM bot_listings_db LEFT JOIN bot_listing_category ON bot_listings_db.id = bot_listing_id LEFT JOIN bot_category ON bot_category_id = bot_category.id WHERE bot_category_id = 1 ORDER BY RAND() LIMIT 2",
+              function(err, results, fields) {
+                if (err) {
+                  console.log(err.message);
+                } else {
+                  console.log(results);
 
-                const cachedActivity = results.map(result => {
-                  return result.activity;
-                });
-                const cachedLocation = results.map(result => {
-                  return results.location;
-                });
-                const cachedShort_desc = results.map(result => {
-                  return results.short_desc;
-                });
-                const cachedPrice = results.map(result => {
-                  return results.price;
-                });
-                const cachedPoi = results.map(result => {
-                  return results.poi;
-                });
-                const cachedWebsite = results.map(result => {
-                  return results.website;
-                });
-                const cachedImageUrl = results.map(result => {
-                  return results.imageURL;
-                });
+                  const cachedActivity = results.map(result => {
+                    return result.activity;
+                  });
+                  const cachedLocation = results.map(result => {
+                    return results.location;
+                  });
+                  const cachedShort_desc = results.map(result => {
+                    return results.short_desc;
+                  });
+                  const cachedPrice = results.map(result => {
+                    return results.price;
+                  });
+                  const cachedPoi = results.map(result => {
+                    return results.poi;
+                  });
+                  const cachedWebsite = results.map(result => {
+                    return results.website;
+                  });
+                  const cachedImageUrl = results.map(result => {
+                    return results.imageURL;
+                  });
 
-                session.setRandomAdventures(
-                  cachedActivity,
-                  cachedLocation,
-                  cachedShort_desc,
-                  cachedPrice,
-                  cachedPoi,
-                  cachedWebsite,
-                  cachedImageURL
-                );
-                const location = results[0].location;
-                const activity = results[0].activity;
-                const short_desc = results[0].short_desc;
-                const price = results[0].price;
-                const poi = results[0].poi;
-                const website = results[0].website;
-                const category = results[0].category;
-                const imageURL = results[0].imageURL;
+                  session.setRandomAdventures(
+                    cachedActivity,
+                    cachedLocation,
+                    cachedShort_desc,
+                    cachedPrice,
+                    cachedPoi,
+                    cachedWebsite,
+                    cachedImageURL
+                  );
+                  const location = results[0].location;
+                  const activity = results[0].activity;
+                  const short_desc = results[0].short_desc;
+                  const price = results[0].price;
+                  const poi = results[0].poi;
+                  const website = results[0].website;
+                  const category = results[0].category;
+                  const imageURL = results[0].imageURL;
 
-                bot.sendPhoto(119860989, imageURL, {
-                  caption: `<b>☀️${activity} @ ${location}☀️</b>
+                  bot.sendPhoto(119860989, imageURL, {
+                    caption: `<b>☀️${activity} @ ${location}☀️</b>
 
 ${short_desc}
 
@@ -350,53 +349,20 @@ ${short_desc}
 📍: ${poi}
 📮: ${website}
                   `,
-                  disable_web_page_preview: true,
-                  parse_mode: "HTML"
-                });
+                    disable_web_page_preview: true,
+                    parse_mode: "HTML"
+                  });
+                }
               }
-            }
-          );
-        case "I'm feelin chill":
-          return "Hello";
-        case "I wanna stay home":
-          return "Nop";
-      }
-      connection.release();
-      if (err) console.log(err);
-    });
+            );
+          case "I'm feelin chill":
+            return "Hello";
+          case "I wanna stay home":
+            return "Nop";
+        }
+        connection.release();
+        if (err) console.log(err);
+      });
+    }
   }
 });
-
-// const constructedMsg = `${activity}@${location}
-//  ${shortDesc}
-//
-//  : from $${price}
-//  : ~${time} hours
-//
-//  : ${landmark}
-//  : ${site}
-//  `;
-// bot.command(
-//   "admin",
-//   adminsOnly(msg => {
-//     console.log("doing admin stuff");
-//   })
-// );
-// if (msg.text === "I'm feelin' adventurous") {
-//   connection.query("SELECT * FROM testdb ORDER BY RAND() LIMIT 1", function(
-//     err,
-//     results,
-//     fields
-//   ) {
-//     if (err) {
-//       console.log(err.message);
-//     } else {
-//       bot.sendMessage(119860989, results[0].activity);
-//     }
-//   });
-// }
-// });
-
-// cloudinary.uploader.upload("sample.jpg", {"crop":"limit","tags":"samples","width":3000,"height":2000}, function(result) { console.log(result) });
-
-// cloudinary.image("sample", {"crop":"fill","gravity":"faces","width":300,"height":200,"format":"jpg"});
