@@ -47,11 +47,11 @@ bot.onText(/\/start/, msg => {
 
   bot.sendMessage(
     chat_id,
-    `Hi ${msg.from.first_name}! Welcome to the Together Community!
+    `<b>Hi ${msg.from.first_name}! Welcome to the Together Community!</b>
 
 So what can this bot do for you?
 💡Get an outing idea with a single click below!
-💡Stay tuned for specially curated ideas from the together team posted 3 times weekly!
+💡Stay tuned for specially curated ideas from the together team posted <b>3 times weekly</b>!
   `,
     {
       reply_markup: {
@@ -59,7 +59,8 @@ So what can this bot do for you?
           ["Feelin' Adventurous", "I'm feelin chill"],
           ["I wanna stay home"]
         ],
-        resize_keyboard: true
+        resize_keyboard: true,
+        parse_mode: "HTML"
       }
     }
   );
