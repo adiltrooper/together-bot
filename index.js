@@ -266,7 +266,21 @@ bot.on("message", async msg => {
 //GENERATOR FUNCTIONALITY
 
 bot.on("message", async msg => {
-  if (msg.text == "Feelin' Adventurous") {
+  if (
+    msg.text == "Feelin' Adventurous" ||
+    "I'm feelin chill" ||
+    "I wanna stay home"
+  ) {
+    switch (msg.text) {
+      case "Feelin' Adventurous":
+        const category_id = 1;
+      case "I'm feelin chill":
+        const category_id = 2;
+      case "I wanna stay home":
+        const category_id = 3;
+      default:
+        const category_id = 1;
+    }
     const tempAdv = await session.getRandomAdventures();
 
     const activity = tempAdv[0][0];
@@ -297,59 +311,58 @@ ${short_desc}
 
       pool.getConnection(function(err, connection) {
         if (err) console.log(err);
-        switch (msg.text) {
-          case "Feelin' Adventurous":
-            return connection.query(
-              "SELECT location, activity, short_desc, price, poi, website, bot_category.category_name AS category, imageURL FROM bot_listings_db LEFT JOIN bot_listing_category ON bot_listings_db.id = bot_listing_id LEFT JOIN bot_category ON bot_category_id = bot_category.id WHERE bot_category_id = 1 ORDER BY RAND() LIMIT 10",
-              function(err, results, fields) {
-                if (err) {
-                  console.log(err.message);
-                } else {
-                  console.log(results);
+        return connection.query(
+          "SELECT location, activity, short_desc, price, poi, website, bot_category.category_name AS category, imageURL FROM bot_listings_db LEFT JOIN bot_listing_category ON bot_listings_db.id = bot_listing_id LEFT JOIN bot_category ON bot_category_id = bot_category.id WHERE bot_category_id = ? ORDER BY RAND() LIMIT 10",
+          [category_id],
+          function(err, results, fields) {
+            if (err) {
+              console.log(err.message);
+            } else {
+              console.log(results);
 
-                  const cachedActivity = results.map(result => {
-                    return result.activity;
-                  });
-                  const cachedLocation = results.map(result => {
-                    return result.location;
-                  });
-                  const cachedShort_desc = results.map(result => {
-                    return result.short_desc;
-                  });
-                  const cachedPrice = results.map(result => {
-                    return result.price;
-                  });
-                  const cachedPoi = results.map(result => {
-                    return result.poi;
-                  });
-                  const cachedWebsite = results.map(result => {
-                    return result.website;
-                  });
-                  const cachedImageURL = results.map(result => {
-                    return result.imageURL;
-                  });
+              const cachedActivity = results.map(result => {
+                return result.activity;
+              });
+              const cachedLocation = results.map(result => {
+                return result.location;
+              });
+              const cachedShort_desc = results.map(result => {
+                return result.short_desc;
+              });
+              const cachedPrice = results.map(result => {
+                return result.price;
+              });
+              const cachedPoi = results.map(result => {
+                return result.poi;
+              });
+              const cachedWebsite = results.map(result => {
+                return result.website;
+              });
+              const cachedImageURL = results.map(result => {
+                return result.imageURL;
+              });
 
-                  session.setRandomAdventures(
-                    cachedActivity,
-                    cachedLocation,
-                    cachedShort_desc,
-                    cachedPrice,
-                    cachedPoi,
-                    cachedWebsite,
-                    cachedImageURL
-                  );
+              session.setRandomAdventures(
+                cachedActivity,
+                cachedLocation,
+                cachedShort_desc,
+                cachedPrice,
+                cachedPoi,
+                cachedWebsite,
+                cachedImageURL
+              );
 
-                  const location = results[0].location;
-                  const activity = results[0].activity;
-                  const short_desc = results[0].short_desc;
-                  const price = results[0].price;
-                  const poi = results[0].poi;
-                  const website = results[0].website;
-                  const category = results[0].category;
-                  const imageURL = results[0].imageURL;
+              const location = results[0].location;
+              const activity = results[0].activity;
+              const short_desc = results[0].short_desc;
+              const price = results[0].price;
+              const poi = results[0].poi;
+              const website = results[0].website;
+              const category = results[0].category;
+              const imageURL = results[0].imageURL;
 
-                  bot.sendPhoto(119860989, imageURL, {
-                    caption: `<b>☀️${activity} @ ${location}☀️</b>
+              bot.sendPhoto(119860989, imageURL, {
+                caption: `<b>☀️${activity} @ ${location}☀️</b>
 
 ${short_desc}
 
@@ -358,17 +371,12 @@ ${short_desc}
 📍: ${poi}
 📮: ${website}
                   `,
-                    disable_web_page_preview: true,
-                    parse_mode: "HTML"
-                  });
-                }
-              }
-            );
-          case "I'm feelin chill":
-            return "Hello";
-          case "I wanna stay home":
-            return "Nop";
-        }
+                disable_web_page_preview: true,
+                parse_mode: "HTML"
+              });
+            }
+          }
+        );
         connection.release();
         if (err) console.log(err);
       });
