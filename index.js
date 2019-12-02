@@ -268,7 +268,8 @@ bot.on("message", async msg => {
 bot.on("message", async msg => {
   if (msg.text == "Feelin' Adventurous") {
     const tempAdv = await session.getRandomAdventures();
-    console.log(tempAdv);
+
+    console.log(tempAdv[0]);
     console.log("getting");
     if (tempAdv) {
       console.log("something inside");

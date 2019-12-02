@@ -115,6 +115,11 @@ class Session {
       .multi()
       .lrange("cachedActivity", 0, 0)
       .lrange("cachedLocation", 0, 0)
+      .lrange("cachedShort_desc", 0, 0)
+      .lrange("cachedPrice", 0, 0)
+      .lrange("cachedPoi", 0, 0)
+      .lrange("cachedWebsite", 0, 0)
+      .lrange("cachedImageURL", 0, 0)
       .execAsync()
       .then(function(res) {
         console.log(res);
