@@ -302,7 +302,7 @@ bot.on("message", async msg => {
                   caption: `${activity} @ ${location}
 ${short_desc}
 
-&#x1F4B8;:from $${price}
+💸:from $${price}
 
 :${poi}
 :${website}
