@@ -303,22 +303,22 @@ ${short_desc}
                     return result.activity;
                   });
                   const cachedLocation = results.map(result => {
-                    return results.location;
+                    return result.location;
                   });
                   const cachedShort_desc = results.map(result => {
-                    return results.short_desc;
+                    return result.short_desc;
                   });
                   const cachedPrice = results.map(result => {
-                    return results.price;
+                    return result.price;
                   });
                   const cachedPoi = results.map(result => {
-                    return results.poi;
+                    return result.poi;
                   });
                   const cachedWebsite = results.map(result => {
-                    return results.website;
+                    return result.website;
                   });
-                  const cachedImageUrl = results.map(result => {
-                    return results.imageURL;
+                  const cachedImageURL = results.map(result => {
+                    return result.imageURL;
                   });
 
                   session.setRandomAdventures(
