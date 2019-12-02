@@ -299,15 +299,16 @@ bot.on("message", async msg => {
                 const category = results[0].category;
                 const imageURL = results[0].imageURL;
                 bot.sendPhoto(119860989, imageURL, {
-                  caption: `${activity} @ ${location}
+                  caption: `<b>☀️${activity} @ ${location}☀️</b>
 ${short_desc}
 
-💸:from $${price}
+💸: from $${price}
 
-:${poi}
-:${website}
+📍: ${poi}
+📮: ${website}
                   `,
-                  disable_web_page_preview: true
+                  disable_web_page_preview: true,
+                  parse_mode: "HTML"
                 });
               }
             }
