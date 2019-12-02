@@ -111,29 +111,43 @@ class Session {
   }
 
   getRandomAdventures() {
-    return (
-      redis.lrangeAsync("cachedActivity", 0, 0).then(function(act) {
+    return redis
+      .multi()
+      .lrangeAsync("cachedActivity", 0, 0)
+      .then(function(act) {
         return act;
-      }),
-      redis.lrangeAsync("cachedLocation", 0, 0).then(function(loc) {
-        return loc;
-      }),
-      redis.lrangeAsync("cachedShort_desc", 0, 0).then(function(desc) {
-        return desc;
-      }),
-      redis.lrangeAsync("cachedPrice", 0, 0).then(function(pr) {
-        return pr;
-      }),
-      redis.lrangeAsync("cachedPoi", 0, 0).then(function(p) {
-        return p;
-      }),
-      redis.lrangeAsync("cachedWebsite", 0, 0).then(function(site) {
-        return site;
-      }),
-      redis.lrangeAsync("cachedImageURL", 0, 0).then(function(url) {
-        return url;
       })
-    );
+      .lrangeAsync("cachedLocation", 0, 0)
+      .then(function(act) {
+        return loc;
+      })
+      .exec(function(err, replies) {
+        console.log(replies);
+      });
+
+    // return (
+    //   redis.lrangeAsync("cachedActivity", 0, 0).then(function(act) {
+    //     return act;
+    //   }),
+    //   redis.lrangeAsync("cachedLocation", 0, 0).then(function(loc) {
+    //     return loc;
+    //   }),
+    //   redis.lrangeAsync("cachedShort_desc", 0, 0).then(function(desc) {
+    //     return desc;
+    //   }),
+    //   redis.lrangeAsync("cachedPrice", 0, 0).then(function(pr) {
+    //     return pr;
+    //   }),
+    //   redis.lrangeAsync("cachedPoi", 0, 0).then(function(p) {
+    //     return p;
+    //   }),
+    //   redis.lrangeAsync("cachedWebsite", 0, 0).then(function(site) {
+    //     return site;
+    //   }),
+    //   redis.lrangeAsync("cachedImageURL", 0, 0).then(function(url) {
+    //     return url;
+    //   })
+    // );
   }
 }
 module.exports = Session;

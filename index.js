@@ -271,7 +271,7 @@ bot.on("message", async msg => {
     console.log(tempAdv);
     console.log("getting");
     if (tempAdv) {
-      console.log("nothing inside");
+      console.log("something inside");
       bot.sendPhoto(119860989, imageURL, {
         caption: `<b>☀️${activity} @ ${location}☀️</b>
 
