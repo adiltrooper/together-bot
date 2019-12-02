@@ -26,15 +26,6 @@ cloudinary.config({
   api_secret: db.cloudinary_secret
 });
 
-// const connection = mysql.createConnection(db);
-// connection.connect(function(error) {
-//   if (error) {
-//     console.log("Error: " + error.message);
-//   } else {
-//     console.log("Connected");
-//   }
-// });
-
 const app = express();
 const session = new Session();
 
@@ -49,18 +40,28 @@ bot.onText(/\/start/, msg => {
     var user_type = "admin";
   }
 
-  bot.sendMessage(chat_id, "Welcome", {
-    reply_markup: {
-      keyboard: [
-        ["Feelin' Adventurous", "I'm feelin chill"],
-        ["I wanna stay home"]
-      ],
-      resize_keyboard: true
-    }
-  });
+  bot.sendPhoto(
+    chat_id,
+    "https://res.cloudinary.com/dotogether/image/upload/v1575297277/Listings/Welcome%20Image.png"
+  );
+
   bot.sendMessage(
     chat_id,
-    `Hi ${msg.from.first_name}! Welcome to the Together Community!`
+    `Hi ${msg.from.first_name}! Welcome to the Together Community!
+
+    So what can this bot do for you?
+    💡Get an outing idea with a single click below!
+    💡Stay tuned for specially curated ideas from the together team posted 3 times weekly!
+  `,
+    {
+      reply_markup: {
+        keyboard: [
+          ["Feelin' Adventurous", "I'm feelin chill"],
+          ["I wanna stay home"]
+        ],
+        resize_keyboard: true
+      }
+    }
   );
 
   pool.getConnection(function(err, connection) {
@@ -76,26 +77,6 @@ bot.onText(/\/start/, msg => {
     if (err) console.log(err);
   });
 });
-
-// bot.on("message", msg => {
-//   switch (msg.text) {
-//     case "I'm feelin' adventurous":
-//       return connection.query(
-//         "SELECT * FROM testdb ORDER BY RAND() LIMIT 1",
-//         function(err, results, fields) {
-//           if (err) {
-//             console.log(err.message);
-//           } else {
-//             bot.sendMessage(119860989, results[0].activity);
-//           }
-//         }
-//       );
-//     case "I'm feelin chill":
-//       return "Hello";
-//     case "I wanna stay home":
-//       return "Nop";
-//   }
-// });
 
 const adminsOnly = async msg => {
   const member = await bot.getChatMember(msg.chat.id, msg.chat.id);
