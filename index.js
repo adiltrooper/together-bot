@@ -279,13 +279,13 @@ bot.on("message", async msg => {
               } else {
                 console.log(results);
                 const newResults = results.map(result => {
-                  return `${result.activity} @ ${result.location}
-${result.short_desc}
+                  return `☀️${result.activity} @ ${result.location}
+${result.short_desc}☀️
 
-: from $${result.price}
+💸: from $${result.price}
 
-: ${result.poi}
-: ${result.website}
+📍: ${result.poi}
+📮: ${result.website}
                   `;
                 });
                 console.log(newResults);
