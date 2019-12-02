@@ -273,13 +273,13 @@ bot.on("message", async msg => {
   ) {
     switch (msg.text) {
       case "Feelin' Adventurous":
-        const category_id = 1;
+        const cat_id = 1;
       case "I'm feelin chill":
-        const category_id = 2;
+        const cat_id = 2;
       case "I wanna stay home":
-        const category_id = 3;
+        const cat_id = 3;
       default:
-        const category_id = 1;
+        const cat_id = 1;
     }
     const tempAdv = await session.getRandomAdventures();
 
@@ -313,7 +313,7 @@ ${short_desc}
         if (err) console.log(err);
         return connection.query(
           "SELECT location, activity, short_desc, price, poi, website, bot_category.category_name AS category, imageURL FROM bot_listings_db LEFT JOIN bot_listing_category ON bot_listings_db.id = bot_listing_id LEFT JOIN bot_category ON bot_category_id = bot_category.id WHERE bot_category_id = ? ORDER BY RAND() LIMIT 10",
-          [category_id],
+          [cat_id],
           function(err, results, fields) {
             if (err) {
               console.log(err.message);
