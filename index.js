@@ -270,6 +270,7 @@ bot.on("message", async msg => {
     const tempAdv = await session.getRandomAdventures();
     console.log(tempAdv);
     if (tempAdv[0]) {
+      console.log("nothing inside");
       bot.sendPhoto(119860989, imageURL, {
         caption: `<b>☀️${activity} @ ${location}☀️</b>
 
@@ -285,6 +286,7 @@ ${short_desc}
       });
     }
   } else {
+    console.log("attempting");
     pool.getConnection(function(err, connection) {
       if (err) console.log(err);
       switch (msg.text) {
