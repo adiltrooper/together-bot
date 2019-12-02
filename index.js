@@ -296,7 +296,7 @@ bot.on("message", async msg => {
     const website = cachedListing[5][0];
     const imageURL = cachedListing[6][0];
 
-    if (tempAdv[0][0]) {
+    if (cachedListing[0][0]) {
       console.log("From Cache");
       bot.sendPhoto(119860989, imageURL, {
         caption: `<b>☀️${activity} @ ${location}☀️</b>
