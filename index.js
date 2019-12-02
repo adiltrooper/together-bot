@@ -278,14 +278,15 @@ bot.on("message", async msg => {
                 console.log(err.message);
               } else {
                 console.log(results);
-                // prettier-ignore
                 const newResults = results.map(result => {
-                  return (
-                 `${result.activity} @ ${result.location}${result.short_desc}
-                  : from $${result.price}
-                  : ${result.poi}
-                  : ${result.website}
-                  `);
+                  return `${result.activity} @ ${result.location}
+${result.short_desc}
+
+: from $${result.price}
+
+: ${result.poi}
+: ${result.website}
+                  `;
                 });
                 console.log(newResults);
 
