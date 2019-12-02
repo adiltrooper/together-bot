@@ -266,20 +266,23 @@ bot.on("message", async msg => {
 //GENERATOR FUNCTIONALITY
 
 bot.on("message", async msg => {
-  if (msg.text == "Feelin' Adventurous")
-    pool.getConnection(function(err, connection) {
-      if (err) console.log(err);
-      switch (msg.text) {
-        case "Feelin' Adventurous":
-          return connection.query(
-            "SELECT location, activity, short_desc, price, poi, website, bot_category.category_name AS category, imageURL FROM bot_listings_db LEFT JOIN bot_listing_category ON bot_listings_db.id = bot_listing_id LEFT JOIN bot_category ON bot_category_id = bot_category.id WHERE bot_category_id = 1 ORDER BY RAND() LIMIT 2",
-            function(err, results, fields) {
-              if (err) {
-                console.log(err.message);
-              } else {
-                console.log(results);
-                const newResults = results.map(result => {
-                  return `☀️${result.activity} @ ${result.location}
+  if (msg.text == "Feelin' Adventurous") {
+    const tempAdv = await session.getRandomAdventures();
+    console.log(tempAdv);
+  }
+  pool.getConnection(function(err, connection) {
+    if (err) console.log(err);
+    switch (msg.text) {
+      case "Feelin' Adventurous":
+        return connection.query(
+          "SELECT location, activity, short_desc, price, poi, website, bot_category.category_name AS category, imageURL FROM bot_listings_db LEFT JOIN bot_listing_category ON bot_listings_db.id = bot_listing_id LEFT JOIN bot_category ON bot_category_id = bot_category.id WHERE bot_category_id = 1 ORDER BY RAND() LIMIT 2",
+          function(err, results, fields) {
+            if (err) {
+              console.log(err.message);
+            } else {
+              console.log(results);
+              const newResults = results.map(result => {
+                return `☀️${result.activity} @ ${result.location}
 ${result.short_desc}☀️
 
 💸: from $${result.price}
@@ -287,23 +290,21 @@ ${result.short_desc}☀️
 📍: ${result.poi}
 📮: ${result.website}
                   `;
-                });
-                console.log(newResults);
+              });
+              console.log(newResults);
 
-                session.setRandomAdventures(newResults);
-                const location = results[0].location;
-                const activity = results[0].activity;
-                const short_desc = results[0].short_desc;
-                const price = results[0].price;
-                const poi = results[0].poi;
-                const website = results[0].website;
-                const category = results[0].category;
-                const imageURL = results[0].imageURL;
+              session.setRandomAdventures(newResults);
+              const location = results[0].location;
+              const activity = results[0].activity;
+              const short_desc = results[0].short_desc;
+              const price = results[0].price;
+              const poi = results[0].poi;
+              const website = results[0].website;
+              const category = results[0].category;
+              const imageURL = results[0].imageURL;
 
-                session.getRandomAdventures();
-
-                bot.sendPhoto(119860989, imageURL, {
-                  caption: `<b>☀️${activity} @ ${location}☀️</b>
+              bot.sendPhoto(119860989, imageURL, {
+                caption: `<b>☀️${activity} @ ${location}☀️</b>
 
 ${short_desc}
 
@@ -312,20 +313,20 @@ ${short_desc}
 📍: ${poi}
 📮: ${website}
                   `,
-                  disable_web_page_preview: true,
-                  parse_mode: "HTML"
-                });
-              }
+                disable_web_page_preview: true,
+                parse_mode: "HTML"
+              });
             }
-          );
-        case "I'm feelin chill":
-          return "Hello";
-        case "I wanna stay home":
-          return "Nop";
-      }
-      connection.release();
-      if (err) console.log(err);
-    });
+          }
+        );
+      case "I'm feelin chill":
+        return "Hello";
+      case "I wanna stay home":
+        return "Nop";
+    }
+    connection.release();
+    if (err) console.log(err);
+  });
 });
 
 // const constructedMsg = `${activity}@${location}
