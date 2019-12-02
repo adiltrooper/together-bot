@@ -274,10 +274,13 @@ bot.on("message", async msg => {
     switch (msg.text) {
       case "Feelin' Adventurous":
         var cat_id = 1;
+        break;
       case "I'm feelin chill":
         var cat_id = 2;
+        break;
       case "I wanna stay home":
         var cat_id = 3;
+        break;
       default:
         var cat_id = 1;
     }
