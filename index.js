@@ -327,9 +327,9 @@ ${short_desc}
                   console.log(err.message);
                   throw err;
                 });
-              }
-              bot.sendPhoto(119860989, results.imageURL, {
-                caption: `<b>☀️${results.activity} @ ${results.location}☀️</b>
+              } else {
+                bot.sendPhoto(119860989, results.imageURL, {
+                  caption: `<b>☀️${results.activity} @ ${results.location}☀️</b>
 
       ${results.short_desc}
 
@@ -338,9 +338,10 @@ ${short_desc}
       📍: ${results.poi}
       📮: ${results.website}
               `,
-                disable_web_page_preview: true,
-                parse_mode: "HTML"
-              });
+                  disable_web_page_preview: true,
+                  parse_mode: "HTML"
+                });
+              }
               connection.query(
                 "SELECT location, activity, short_desc, price, poi, website, bot_category.category_name AS category, imageURL FROM bot_listings_db LEFT JOIN bot_listing_category ON bot_listings_db.id = bot_listing_id LEFT JOIN bot_category ON bot_category_id = bot_category.id WHERE bot_category_id = ? ORDER BY RAND() LIMIT 10",
                 [cat_id],
