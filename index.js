@@ -284,10 +284,10 @@ bot.on("message", async msg => {
 
 ${short_desc}
 
-${price != "null" ? `💸: from $${price}` : ""}
+${price != "null" ? `💸: from $${price}` : null}
 
-📍: ${poi}
-📮: ${website}
+${poi != "null" ? `📍: ${poi}` : null}
+${website != "null" ? `📮: ${website}` : null}
         `,
         disable_web_page_preview: true,
         parse_mode: "HTML"
@@ -317,10 +317,10 @@ ${price != "null" ? `💸: from $${price}` : ""}
 
       ${results[0].short_desc}
 
-      ${price != "null" ? `💸: from $${price}` : ""}
+      ${price != "null" ? `💸: from $${price}` : null}
 
-      📍: ${results[0].poi}
-      📮: ${results[0].website}
+      ${poi != "null" ? `📍: ${poi}` : null}
+      ${website != "null" ? `📮: ${website}` : null}
               `,
                   disable_web_page_preview: true,
                   parse_mode: "HTML"
