@@ -44,7 +44,6 @@ bot.onText(/\/start/, msg => {
     chat_id,
     "https://res.cloudinary.com/dotogether/image/upload/v1575297277/Listings/Welcome%20Image.png"
   );
-
   bot.sendMessage(
     chat_id,
     `<b>Hi ${msg.from.first_name}! Welcome to the Together Community!</b>
@@ -285,7 +284,7 @@ bot.on("message", async msg => {
 
 ${short_desc}
 
-💸: from $${price}
+${price ? `💸: from $${price}` : ""}
 
 📍: ${poi}
 📮: ${website}
