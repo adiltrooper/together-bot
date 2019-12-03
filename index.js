@@ -309,6 +309,7 @@ ${price ? `💸: from $${price}` : ""}
                   throw err;
                 });
               } else {
+                console.log(results);
                 bot.sendPhoto(119860989, results[0].imageURL, {
                   caption: `<b>☀️${results[0].activity} @ ${
                     results[0].location
