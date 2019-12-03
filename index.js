@@ -276,7 +276,9 @@ bot.on("message", async msg => {
     const poi = cachedListing[4][0];
     const website = cachedListing[5][0];
     const imageURL = cachedListing[6][0];
-    var fill;
+    function tony() {
+      return;
+    }
 
     if (cachedListing[0][0]) {
       console.log("From Cache");
@@ -285,7 +287,7 @@ bot.on("message", async msg => {
 
 ${short_desc}
 
-${price != "null" ? `💸: from $${price}` : `${fill} = "fill"`}
+${price != "null" ? `💸: from $${price}` : tony()}
 
 ${poi != "null" ? `📍: ${poi}` : null}
 ${website != "null" ? `📮: ${website}` : null}
