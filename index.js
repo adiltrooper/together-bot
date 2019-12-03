@@ -284,11 +284,11 @@ bot.on("message", async msg => {
 
 ${short_desc}
 
-${() => {
+${(() => {
           if (price != "null") {
             return `💸: from $${price}`;
           }
-        }}
+        })()}
 
 ${poi != "null" ? `📍: ${poi}` : null}
 ${website != "null" ? `📮: ${website}` : null}
