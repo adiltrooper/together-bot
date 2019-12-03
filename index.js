@@ -284,7 +284,7 @@ bot.on("message", async msg => {
 
 ${short_desc}
 
-${price ? `💸: from $${price}` : ""}
+${price != "null" ? `💸: from $${price}` : ""}
 
 📍: ${poi}
 📮: ${website}
@@ -317,7 +317,7 @@ ${price ? `💸: from $${price}` : ""}
 
       ${results[0].short_desc}
 
-      💸: from $${results[0].price}
+      ${price != "null" ? `💸: from $${price}` : ""}
 
       📍: ${results[0].poi}
       📮: ${results[0].website}
