@@ -277,22 +277,21 @@ bot.on("message", async msg => {
     var website = cachedListing[5][0];
     var imageURL = cachedListing[6][0];
 
-    if (price != "null") {
-      var priceLine = `💸: from $${price}`;
-    }
-
     if (cachedListing[0][0]) {
       console.log("From Cache");
       bot.sendPhoto(119860989, imageURL, {
-        caption: `<b>☀️${activity} @ ${location}☀️</b>
+        caption:
+          activity + " @ " + location + "\n" + short_desc + "\n" + priceLine,
 
-${short_desc}
-
-${priceLine}
-
-${poi != "null" ? `📍: ${poi}` : null}
-${website != "null" ? `📮: ${website}` : null}
-        `,
+        //         caption: `<b>☀️${activity} @ ${location}☀️</b>
+        //
+        // ${short_desc}
+        //
+        // ${price}
+        //
+        // ${poi != "null" ? `📍: ${poi}` : null}
+        // ${website != "null" ? `📮: ${website}` : null}
+        //         `
         disable_web_page_preview: true,
         parse_mode: "HTML"
       });
