@@ -269,13 +269,17 @@ bot.on("message", async msg => {
         var cat_id = 1;
     }
 
-    const activity = cachedListing[0][0];
-    const location = cachedListing[1][0];
-    const short_desc = cachedListing[2][0];
-    const price = cachedListing[3][0];
-    const poi = cachedListing[4][0];
-    const website = cachedListing[5][0];
-    const imageURL = cachedListing[6][0];
+    var activity = cachedListing[0][0];
+    var location = cachedListing[1][0];
+    var short_desc = cachedListing[2][0];
+    var price = cachedListing[3][0];
+    var poi = cachedListing[4][0];
+    var website = cachedListing[5][0];
+    var imageURL = cachedListing[6][0];
+
+    if (price != "null") {
+      var priceLine = `💸: from $${price}`;
+    }
 
     if (cachedListing[0][0]) {
       console.log("From Cache");
@@ -284,11 +288,7 @@ bot.on("message", async msg => {
 
 ${short_desc}
 
-${(() => {
-          if (price != "null") {
-            return `💸: from $${price}`;
-          }
-        })()}
+${priceLine}
 
 ${poi != "null" ? `📍: ${poi}` : null}
 ${website != "null" ? `📮: ${website}` : null}
