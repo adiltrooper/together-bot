@@ -281,11 +281,28 @@ bot.on("message", async msg => {
       var priceLine = `💸: from $${price}`;
     }
 
+    if (poi != "null") {
+      var poiLine = `📍: ${poi}`;
+    }
+
+    if (website != "null") {
+      var websiteLine = `📮: ${website}`;
+    }
+
     if (cachedListing[0][0]) {
       console.log("From Cache");
       bot.sendPhoto(119860989, imageURL, {
         caption:
-          activity + " @ " + location + "\n" + short_desc + "\n" + priceLine,
+          activity +
+          " @ " +
+          location +
+          "\n\n" +
+          short_desc +
+          "\n\n" +
+          priceLine +
+          "\n\n" +
+          poiLine +
+          websiteLine,
 
         //         caption: `<b>☀️${activity} @ ${location}☀️</b>
         //
