@@ -277,6 +277,10 @@ bot.on("message", async msg => {
     var website = cachedListing[5][0];
     var imageURL = cachedListing[6][0];
 
+    if (price != "null") {
+      var priceLine = `💸: from $${price}`;
+    }
+
     if (cachedListing[0][0]) {
       console.log("From Cache");
       bot.sendPhoto(119860989, imageURL, {
