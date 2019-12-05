@@ -357,7 +357,7 @@ ${short_desc}
             📍: ${poi}
             📮: ${website}
                 `);
-                  } else if (price == "null" && poi && website) {
+                  } else if (!price && poi && website) {
                     return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
 
             ${short_desc}
@@ -365,25 +365,20 @@ ${short_desc}
             📍: ${poi}
             📮: ${website}
               `);
-                  } else if (price == "null" && poi == "null" && website) {
+                  } else if (!price && !poi && website) {
                     return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
 
             ${short_desc}
 
             📮: ${website}
               `);
-                  } else if (
-                    price == "null" &&
-                    poi == "null" &&
-                    website == "null"
-                  ) {
+                  } else if (!price && !poi && !website) {
                     return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
 
             ${short_desc}
             `);
                   }
                 }
-                console.log(caption2);
                 determineFormat2(price, poi, website);
 
                 bot.sendPhoto(119860989, results[0].imageURL, {
