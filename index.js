@@ -383,7 +383,7 @@ ${short_desc}
             `);
                   }
                 }
-
+                console.log(caption2);
                 determineFormat2(price, poi, website);
 
                 bot.sendPhoto(119860989, results[0].imageURL, {
