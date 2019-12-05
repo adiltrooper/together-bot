@@ -296,28 +296,15 @@ bot.on("message", async msg => {
     if (cachedListing[0][0]) {
       console.log("From Cache");
       bot.sendPhoto(119860989, imageURL, {
-        caption:
-          activity +
-          " @ " +
-          location +
-          "\n\n" +
-          short_desc +
-          "\n\n" +
-          priceLine +
-          "\n\n" +
-          poiLine +
-          "\n" +
-          websiteLine,
+        caption: `<b>☀️${activity} @ ${location}☀️</b>
 
-        //         caption: `<b>☀️${activity} @ ${location}☀️</b>
-        //
-        // ${short_desc}
-        //
-        // ${price}
-        //
-        // ${poi != "null" ? `📍: ${poi}` : null}
-        // ${website != "null" ? `📮: ${website}` : null}
-        //         `
+        ${short_desc}
+
+        ${price != "null" ? `💸: from $${price}` : ""}
+
+        ${poi != "null" ? `📍: ${poi}` : ""}
+        ${website != "null" ? `📮: ${website}` : ""}
+                `,
         disable_web_page_preview: true,
         parse_mode: "HTML"
       });
