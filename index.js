@@ -345,7 +345,7 @@ ${short_desc}
                 var poi = results[0].poi;
                 var website = results[0].website;
                 var imageURL = results[0].imageURL;
-
+                console.log("HELLLLOOOOOOO");
                 console.log(`this is the ${price}`);
 
                 function determineFormat2(price, poi, website) {
