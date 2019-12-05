@@ -311,7 +311,7 @@ ${short_desc}
       }
     }
 
-    determineFormat();
+    determineFormat(price, poi, website);
 
     if (cachedListing[0][0]) {
       console.log("From Cache");
@@ -380,7 +380,7 @@ ${short_desc}
                   }
                 }
 
-                determineFormat2();
+                determineFormat2(price, poi, website);
 
                 bot.sendPhoto(119860989, results[0].imageURL, {
                   caption: caption2,
