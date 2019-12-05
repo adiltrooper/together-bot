@@ -279,14 +279,20 @@ bot.on("message", async msg => {
 
     if (price != "null") {
       var priceLine = `💸: from $${price}`;
+    } else {
+      var priceLine = "";
     }
 
     if (poi != "null") {
       var poiLine = `📍: ${poi}`;
+    } else {
+      var poiLine = "";
     }
 
     if (website != "null") {
       var websiteLine = `📮: ${website}`;
+    } else {
+      var websiteLine = "";
     }
 
     if (cachedListing[0][0]) {
@@ -341,14 +347,20 @@ bot.on("message", async msg => {
 
                 if (price != "null") {
                   var priceLine = `💸: from $${price}`;
+                } else {
+                  var priceLine = "";
                 }
 
                 if (poi != "null") {
                   var poiLine = `📍: ${poi}`;
+                } else {
+                  var poiLine = "";
                 }
 
                 if (website != "null") {
                   var websiteLine = `📮: ${website}`;
+                } else {
+                  var websiteLine = "";
                 }
                 bot.sendPhoto(119860989, results[0].imageURL, {
                   caption:
