@@ -283,10 +283,14 @@ bot.on("message", async msg => {
 
     if (poi != "null") {
       var poiLine = `📍: ${poi}`;
+    } else {
+      var poiLine = "";
     }
 
     if (website != "null") {
       var websiteLine = `📮: ${website}`;
+    } else {
+      var websiteLine = "";
     }
 
     if (cachedListing[0][0]) {
@@ -302,6 +306,7 @@ bot.on("message", async msg => {
           priceLine +
           "\n\n" +
           poiLine +
+          "\n" +
           websiteLine,
 
         //         caption: `<b>☀️${activity} @ ${location}☀️</b>
