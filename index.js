@@ -370,11 +370,11 @@ bot.on("message", async msg => {
                     "\n\n" +
                     results[0].short_desc +
                     "\n\n" +
-                    results[0].priceLine +
+                    priceLine +
                     "\n\n" +
-                    results[0].poiLine +
+                    poiLine +
                     "\n" +
-                    results[0].websiteLine,
+                    websiteLine,
                   //             caption: `<b>☀️${results[0].activity} @ ${
                   //               results[0].location
                   //             }☀️</b>
