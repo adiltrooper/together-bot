@@ -277,9 +277,8 @@ bot.on("message", async msg => {
     var website = cachedListing[5][0];
     var imageURL = cachedListing[6][0];
 
-    switch ((price, poi, website)) {
-      case (price, poi, website):
-        var caption = `<b>☀️${activity} @ ${location}☀️</b>
+    if ((price, poi, website)) {
+      var caption = `<b>☀️${activity} @ ${location}☀️</b>
 
 ${short_desc}
 
@@ -288,34 +287,26 @@ ${short_desc}
 📍: ${poi}
 📮: ${website}
     `;
-        break;
-      case ("null", poi, website):
-        var caption = `<b>☀️${activity} @ ${location}☀️</b>
+    } else if ((price == "null", poi, website)) {
+      var caption = `<b>☀️${activity} @ ${location}☀️</b>
 
 ${short_desc}
 
 📍: ${poi}
 📮: ${website}
   `;
-        break;
-      case ("null", "null", website):
-        var caption = `<b>☀️${activity} @ ${location}☀️</b>
+    } else if ((price == "null", poi == "null", website)) {
+      var caption = `<b>☀️${activity} @ ${location}☀️</b>
 
 ${short_desc}
 
 📮: ${website}
   `;
-        break;
-      case ("null", "null", "null"):
-        var caption = `<b>☀️${activity} @ ${location}☀️</b>
+    } else if ((price == "null", poi == "null", website == "null")) {
+      var caption = `<b>☀️${activity} @ ${location}☀️</b>
 
 ${short_desc}
 `;
-      default:
-        var caption = `<b>☀️${activity} @ ${location}☀️</b>
-
-  ${short_desc}
-  `;
     }
 
     if (cachedListing[0][0]) {
@@ -351,9 +342,8 @@ ${short_desc}
                 var website = results[0].website;
                 var imageURL = results[0].imageURL;
 
-                switch ((price, poi, website)) {
-                  case (price, poi, website):
-                    var caption = `<b>☀️${activity} @ ${location}☀️</b>
+                if ((price, poi, website)) {
+                  var caption = `<b>☀️${activity} @ ${location}☀️</b>
 
             ${short_desc}
 
@@ -362,34 +352,26 @@ ${short_desc}
             📍: ${poi}
             📮: ${website}
                 `;
-                    break;
-                  case (null, poi, website):
-                    var caption = `<b>☀️${activity} @ ${location}☀️</b>
+                } else if ((price == null, poi, website)) {
+                  var caption = `<b>☀️${activity} @ ${location}☀️</b>
 
             ${short_desc}
 
             📍: ${poi}
             📮: ${website}
               `;
-                    break;
-                  case (null, null, website):
-                    var caption = `<b>☀️${activity} @ ${location}☀️</b>
+                } else if ((price == null, poi == null, website)) {
+                  var caption = `<b>☀️${activity} @ ${location}☀️</b>
 
             ${short_desc}
 
             📮: ${website}
               `;
-                    break;
-                  case (null, null, null):
-                    var caption = `<b>☀️${activity} @ ${location}☀️</b>
+                } else if ((price == null, poi == null, website == null)) {
+                  var caption = `<b>☀️${activity} @ ${location}☀️</b>
 
             ${short_desc}
             `;
-                  default:
-                    var caption = `<b>☀️${activity} @ ${location}☀️</b>
-
-              ${short_desc}
-              `;
                 }
 
                 bot.sendPhoto(119860989, results[0].imageURL, {
