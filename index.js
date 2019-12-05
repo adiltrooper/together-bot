@@ -346,7 +346,7 @@ ${short_desc}
                 var website = results[0].website;
                 var imageURL = results[0].imageURL;
 
-                console.log(price);
+                console.log(`this is the ${price}`);
 
                 function determineFormat2(price, poi, website) {
                   if (price && poi && website) {
