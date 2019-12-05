@@ -277,8 +277,9 @@ bot.on("message", async msg => {
     var website = cachedListing[5][0];
     var imageURL = cachedListing[6][0];
 
-    if (price && poi && website) {
-      var caption = `<b>☀️${activity} @ ${location}☀️</b>
+    function determineFormat() {
+      if (price && poi && website) {
+        var caption = `<b>☀️${activity} @ ${location}☀️</b>
 
 ${short_desc}
 
@@ -287,26 +288,27 @@ ${short_desc}
 📍: ${poi}
 📮: ${website}
     `;
-    } else if (price == "null" && poi && website) {
-      var caption = `<b>☀️${activity} @ ${location}☀️</b>
+      } else if (price == "null" && poi && website) {
+        var caption = `<b>☀️${activity} @ ${location}☀️</b>
 
 ${short_desc}
 
 📍: ${poi}
 📮: ${website}
   `;
-    } else if (price == "null" && poi == "null" && website) {
-      var caption = `<b>☀️${activity} @ ${location}☀️</b>
+      } else if (price == "null" && poi == "null" && website) {
+        var caption = `<b>☀️${activity} @ ${location}☀️</b>
 
 ${short_desc}
 
 📮: ${website}
   `;
-    } else if (price == "null" && poi == "null" && website == "null") {
-      var caption = `<b>☀️${activity} @ ${location}☀️</b>
+      } else if (price == "null" && poi == "null" && website == "null") {
+        var caption = `<b>☀️${activity} @ ${location}☀️</b>
 
 ${short_desc}
 `;
+      }
     }
 
     determineFormat();
