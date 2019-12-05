@@ -305,6 +305,17 @@ ${short_desc}
 
 📮: ${website}
   `;
+        break;
+      case ("null", "null", "null"):
+        var caption = `<b>☀️${activity} @ ${location}☀️</b>
+
+${short_desc}
+`;
+      default:
+        var caption = `<b>☀️${activity} @ ${location}☀️</b>
+
+  ${short_desc}
+  `;
     }
 
     if (cachedListing[0][0]) {
@@ -344,30 +355,41 @@ ${short_desc}
                   case (price, poi, website):
                     var caption = `<b>☀️${activity} @ ${location}☀️</b>
 
-                ${short_desc}
+            ${short_desc}
 
-                💸: from $${price}
+            💸: from $${price}
 
-                📍: ${poi}
-                📮: ${website}
+            📍: ${poi}
+            📮: ${website}
                 `;
                     break;
                   case (null, poi, website):
                     var caption = `<b>☀️${activity} @ ${location}☀️</b>
 
-                ${short_desc}
+            ${short_desc}
 
-                📍: ${poi}
-                📮: ${website}
-                `;
+            📍: ${poi}
+            📮: ${website}
+              `;
                     break;
                   case (null, null, website):
                     var caption = `<b>☀️${activity} @ ${location}☀️</b>
 
-                ${short_desc}
+            ${short_desc}
 
-                📮: ${website}
-                `;
+            📮: ${website}
+              `;
+                    break;
+                  case (null, null, null):
+                    var caption = `<b>☀️${activity} @ ${location}☀️</b>
+
+            ${short_desc}
+            `;
+                  default:
+                    var caption = `<b>☀️${activity} @ ${location}☀️</b>
+
+              ${short_desc}
+              `;
                 }
 
                 bot.sendPhoto(119860989, results[0].imageURL, {
