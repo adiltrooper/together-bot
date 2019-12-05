@@ -352,7 +352,7 @@ ${short_desc}
                 📮: ${website}
                 `;
                     break;
-                  case ("null", poi, website):
+                  case (null, poi, website):
                     var caption = `<b>☀️${activity} @ ${location}☀️</b>
 
                 ${short_desc}
@@ -361,7 +361,7 @@ ${short_desc}
                 📮: ${website}
                 `;
                     break;
-                  case ("null", "null", website):
+                  case (null, null, website):
                     var caption = `<b>☀️${activity} @ ${location}☀️</b>
 
                 ${short_desc}
@@ -372,17 +372,7 @@ ${short_desc}
 
                 bot.sendPhoto(119860989, results[0].imageURL, {
                   caption: caption,
-                  //             caption: `<b>☀️${results[0].activity} @ ${
-                  //               results[0].location
-                  //             }☀️</b>
-                  //
-                  // ${results[0].short_desc}
-                  //
-                  // ${price != "null" ? `💸: from $${price}` : ""}
-                  //
-                  // ${poi != "null" ? `📍: ${poi}` : ""}
-                  // ${website != "null" ? `📮: ${website}` : ""}
-                  //         `,
+
                   disable_web_page_preview: true,
                   parse_mode: "HTML"
                 });
@@ -450,3 +440,15 @@ ${short_desc}
     }
   }
 });
+
+//             caption: `<b>☀️${results[0].activity} @ ${
+//               results[0].location
+//             }☀️</b>
+//
+// ${results[0].short_desc}
+//
+// ${price != "null" ? `💸: from $${price}` : ""}
+//
+// ${poi != "null" ? `📍: ${poi}` : ""}
+// ${website != "null" ? `📮: ${website}` : ""}
+//         `,
