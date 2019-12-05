@@ -344,7 +344,7 @@ ${short_desc}
 
                 function determineFormat(price, poi, website) {
                   if (price && poi && website) {
-                    var caption = `<b>☀️${activity} @ ${location}☀️</b>
+                    var caption2 = `<b>☀️${activity} @ ${location}☀️</b>
 
             ${short_desc}
 
@@ -354,7 +354,7 @@ ${short_desc}
             📮: ${website}
                 `;
                   } else if (price == null && poi && website) {
-                    var caption = `<b>☀️${activity} @ ${location}☀️</b>
+                    var caption2 = `<b>☀️${activity} @ ${location}☀️</b>
 
             ${short_desc}
 
@@ -362,14 +362,14 @@ ${short_desc}
             📮: ${website}
               `;
                   } else if ((price == null, poi == null, website)) {
-                    var caption = `<b>☀️${activity} @ ${location}☀️</b>
+                    var caption2 = `<b>☀️${activity} @ ${location}☀️</b>
 
             ${short_desc}
 
             📮: ${website}
               `;
                   } else if (price == null && poi == null && website == null) {
-                    var caption = `<b>☀️${activity} @ ${location}☀️</b>
+                    var caption2 = `<b>☀️${activity} @ ${location}☀️</b>
 
             ${short_desc}
             `;
@@ -377,7 +377,7 @@ ${short_desc}
                 }
 
                 bot.sendPhoto(119860989, results[0].imageURL, {
-                  caption: caption,
+                  caption: caption2,
 
                   disable_web_page_preview: true,
                   parse_mode: "HTML"
