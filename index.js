@@ -277,49 +277,40 @@ bot.on("message", async msg => {
     var website = cachedListing[5][0];
     var imageURL = cachedListing[6][0];
 
-    if (price != "null") {
-      var priceLine = `💸: from $${price}`;
-    } else {
-      var priceLine = "";
-    }
+    switch ((price, poi, website)) {
+      case (price, poi, website):
+        var caption = `<b>☀️${activity} @ ${location}☀️</b>
 
-    if (poi != "null") {
-      var poiLine = `📍: ${poi}`;
-    } else {
-      var poiLine = "";
-    }
+${short_desc}
 
-    if (website != "null") {
-      var websiteLine = `📮: ${website}`;
-    } else {
-      var websiteLine = "";
+💸: from $${price}
+
+📍: ${poi}
+📮: ${website}
+    `;
+        break;
+      case ("null", poi, website):
+        var caption = `<b>☀️${activity} @ ${location}☀️</b>
+
+${short_desc}
+
+📍: ${poi}
+📮: ${website}
+  `;
+        break;
+      case ("null", "null", website):
+        var caption = `<b>☀️${activity} @ ${location}☀️</b>
+
+${short_desc}
+
+📮: ${website}
+  `;
     }
 
     if (cachedListing[0][0]) {
       console.log("From Cache");
       bot.sendPhoto(119860989, imageURL, {
-        caption:
-          activity +
-          " @ " +
-          location +
-          "\n\n" +
-          short_desc +
-          "\n\n" +
-          priceLine +
-          "\n\n" +
-          poiLine +
-          "\n" +
-          websiteLine,
-
-        //           `<b>☀️${activity} @ ${location}☀️</b>
-        //
-        // ${short_desc}
-        //
-        // ${price != "null" ? `💸: from $${price}` : ""}
-        //
-        // ${poi != "null" ? `📍: ${poi}` : ""}
-        // ${website != "null" ? `📮: ${website}` : ""}
-        //                 `,
+        caption: caption,
         disable_web_page_preview: true,
         parse_mode: "HTML"
       });
@@ -341,40 +332,46 @@ bot.on("message", async msg => {
                 });
               } else {
                 console.log(results);
+                var activity = results[0].activity;
+                var location = results[0].location;
+                var short_desc = results[0].short_desc;
                 var price = results[0].price;
                 var poi = results[0].poi;
                 var website = results[0].website;
+                var imageURL = results[0].imageURL;
 
-                if (price != "null") {
-                  var priceLine = `💸: from $${price}`;
-                } else {
-                  var priceLine = "";
+                switch ((price, poi, website)) {
+                  case (price, poi, website):
+                    var caption = `<b>☀️${activity} @ ${location}☀️</b>
+
+                ${short_desc}
+
+                💸: from $${price}
+
+                📍: ${poi}
+                📮: ${website}
+                `;
+                    break;
+                  case ("null", poi, website):
+                    var caption = `<b>☀️${activity} @ ${location}☀️</b>
+
+                ${short_desc}
+
+                📍: ${poi}
+                📮: ${website}
+                `;
+                    break;
+                  case ("null", "null", website):
+                    var caption = `<b>☀️${activity} @ ${location}☀️</b>
+
+                ${short_desc}
+
+                📮: ${website}
+                `;
                 }
 
-                if (poi != "null") {
-                  var poiLine = `📍: ${poi}`;
-                } else {
-                  var poiLine = "";
-                }
-
-                if (website != "null") {
-                  var websiteLine = `📮: ${website}`;
-                } else {
-                  var websiteLine = "";
-                }
                 bot.sendPhoto(119860989, results[0].imageURL, {
-                  caption:
-                    results[0].activity +
-                    " @ " +
-                    results[0].location +
-                    "\n\n" +
-                    results[0].short_desc +
-                    "\n\n" +
-                    priceLine +
-                    "\n\n" +
-                    poiLine +
-                    "\n" +
-                    websiteLine,
+                  caption: caption,
                   //             caption: `<b>☀️${results[0].activity} @ ${
                   //               results[0].location
                   //             }☀️</b>
