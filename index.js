@@ -346,6 +346,8 @@ ${short_desc}
                 var website = results[0].website;
                 var imageURL = results[0].imageURL;
 
+                console.log(price);
+
                 function determineFormat2(price, poi, website) {
                   if (price && poi && website) {
                     return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
