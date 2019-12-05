@@ -296,14 +296,27 @@ bot.on("message", async msg => {
     if (cachedListing[0][0]) {
       console.log("From Cache");
       bot.sendPhoto(119860989, imageURL, {
-        caption: `<b>☀️${activity} @ ${location}☀️</b>
+        caption:
+          // activity +
+          // " @ " +
+          // location +
+          // "\n\n" +
+          // short_desc +
+          // "\n\n" +
+          // priceLine +
+          // "\n\n" +
+          // poiLine +
+          // "\n" +
+          // websiteLine,
 
-        ${short_desc}
+          `<b>☀️${activity} @ ${location}☀️</b>
 
-        ${price != "null" ? `💸: from $${price}` : ""}
+${short_desc}
 
-        ${poi != "null" ? `📍: ${poi}` : ""}
-        ${website != "null" ? `📮: ${website}` : ""}
+${price != "null" ? `💸: from $${price}` : ""}
+
+${poi != "null" ? `📍: ${poi}` : ""}
+${website != "null" ? `📮: ${website}` : ""}
                 `,
         disable_web_page_preview: true,
         parse_mode: "HTML"
@@ -333,10 +346,10 @@ bot.on("message", async msg => {
 
       ${results[0].short_desc}
 
-      ${price != "null" ? `💸: from $${price}` : null}
+      ${price != "null" ? `💸: from $${price}` : ""}
 
-      ${poi != "null" ? `📍: ${poi}` : null}
-      ${website != "null" ? `📮: ${website}` : null}
+      ${poi != "null" ? `📍: ${poi}` : ""}
+      ${website != "null" ? `📮: ${website}` : ""}
               `,
                   disable_web_page_preview: true,
                   parse_mode: "HTML"
