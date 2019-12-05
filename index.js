@@ -309,6 +309,8 @@ ${short_desc}
 `;
     }
 
+    determineFormat();
+
     if (cachedListing[0][0]) {
       console.log("From Cache");
       bot.sendPhoto(119860989, imageURL, {
@@ -342,7 +344,7 @@ ${short_desc}
                 var website = results[0].website;
                 var imageURL = results[0].imageURL;
 
-                function determineFormat(price, poi, website) {
+                function determineFormat2(price, poi, website) {
                   if (price && poi && website) {
                     var caption2 = `<b>☀️${activity} @ ${location}☀️</b>
 
@@ -375,6 +377,8 @@ ${short_desc}
             `;
                   }
                 }
+
+                determineFormat2();
 
                 bot.sendPhoto(119860989, results[0].imageURL, {
                   caption: caption2,
