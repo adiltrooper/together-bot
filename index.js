@@ -350,7 +350,7 @@ ${short_desc}
 
                 function determineFormat2(price, poi, website) {
                   if (price && poi && website) {
-                    return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
+                    return (caption = `<b>☀️${activity} @ ${location}☀️</b>
 
             ${short_desc}
 
@@ -360,7 +360,7 @@ ${short_desc}
             📮: ${website}
                 `);
                   } else if (price == "null" && poi && website) {
-                    return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
+                    return (caption = `<b>☀️${activity} @ ${location}☀️</b>
 
             ${short_desc}
 
@@ -368,7 +368,7 @@ ${short_desc}
             📮: ${website}
               `);
                   } else if (price == "null" && poi == "null" && website) {
-                    return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
+                    return (caption = `<b>☀️${activity} @ ${location}☀️</b>
 
             ${short_desc}
 
@@ -379,7 +379,7 @@ ${short_desc}
                     poi == "null" &&
                     website == "null"
                   ) {
-                    return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
+                    return (caption = `<b>☀️${activity} @ ${location}☀️</b>
 
             ${short_desc}
             `);
