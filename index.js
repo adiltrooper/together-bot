@@ -357,7 +357,7 @@ ${short_desc}
             📍: ${poi}
             📮: ${website}
                 `);
-                  } else if (price == null && poi && website) {
+                  } else if (price == "null" && poi && website) {
                     return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
 
             ${short_desc}
@@ -365,14 +365,18 @@ ${short_desc}
             📍: ${poi}
             📮: ${website}
               `);
-                  } else if (price == null && poi == null && website) {
+                  } else if (price == "null" && poi == "null" && website) {
                     return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
 
             ${short_desc}
 
             📮: ${website}
               `);
-                  } else if (price == null && poi == null && website == null) {
+                  } else if (
+                    price == "null" &&
+                    poi == "null" &&
+                    website == "null"
+                  ) {
                     return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
 
             ${short_desc}
