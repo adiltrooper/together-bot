@@ -283,41 +283,37 @@ bot.on("message", async msg => {
 
     if (poi != "null") {
       var poiLine = `📍: ${poi}`;
-    } else {
-      var poiLine = "";
     }
 
     if (website != "null") {
       var websiteLine = `📮: ${website}`;
-    } else {
-      var websiteLine = "";
     }
 
     if (cachedListing[0][0]) {
       console.log("From Cache");
       bot.sendPhoto(119860989, imageURL, {
         caption:
-          // activity +
-          // " @ " +
-          // location +
-          // "\n\n" +
-          // short_desc +
-          // "\n\n" +
-          // priceLine +
-          // "\n\n" +
-          // poiLine +
-          // "\n" +
-          // websiteLine,
+          activity +
+          " @ " +
+          location +
+          "\n\n" +
+          short_desc +
+          "\n\n" +
+          priceLine +
+          "\n\n" +
+          poiLine +
+          "\n" +
+          websiteLine,
 
-          `<b>☀️${activity} @ ${location}☀️</b>
-
-${short_desc}
-
-${price != "null" ? `💸: from $${price}` : ""}
-
-${poi != "null" ? `📍: ${poi}` : ""}
-${website != "null" ? `📮: ${website}` : ""}
-                `,
+        //           `<b>☀️${activity} @ ${location}☀️</b>
+        //
+        // ${short_desc}
+        //
+        // ${price != "null" ? `💸: from $${price}` : ""}
+        //
+        // ${poi != "null" ? `📍: ${poi}` : ""}
+        // ${website != "null" ? `📮: ${website}` : ""}
+        //                 `,
         disable_web_page_preview: true,
         parse_mode: "HTML"
       });
@@ -339,18 +335,45 @@ ${website != "null" ? `📮: ${website}` : ""}
                 });
               } else {
                 console.log(results);
+                var price = results[0].price;
+                var poi = results[0].poi;
+                var website = results[0].website;
+
+                if (price != "null") {
+                  var priceLine = `💸: from $${price}`;
+                }
+
+                if (poi != "null") {
+                  var poiLine = `📍: ${poi}`;
+                }
+
+                if (website != "null") {
+                  var websiteLine = `📮: ${website}`;
+                }
                 bot.sendPhoto(119860989, results[0].imageURL, {
-                  caption: `<b>☀️${results[0].activity} @ ${
-                    results[0].location
-                  }☀️</b>
-
-      ${results[0].short_desc}
-
-      ${price != "null" ? `💸: from $${price}` : ""}
-
-      ${poi != "null" ? `📍: ${poi}` : ""}
-      ${website != "null" ? `📮: ${website}` : ""}
-              `,
+                  caption:
+                    results[0].activity +
+                    " @ " +
+                    results[0].location +
+                    "\n\n" +
+                    results[0].short_desc +
+                    "\n\n" +
+                    results[0].priceLine +
+                    "\n\n" +
+                    results[0].poiLine +
+                    "\n" +
+                    results[0].websiteLine,
+                  //             caption: `<b>☀️${results[0].activity} @ ${
+                  //               results[0].location
+                  //             }☀️</b>
+                  //
+                  // ${results[0].short_desc}
+                  //
+                  // ${price != "null" ? `💸: from $${price}` : ""}
+                  //
+                  // ${poi != "null" ? `📍: ${poi}` : ""}
+                  // ${website != "null" ? `📮: ${website}` : ""}
+                  //         `,
                   disable_web_page_preview: true,
                   parse_mode: "HTML"
                 });
