@@ -278,7 +278,12 @@ bot.on("message", async msg => {
     var imageURL = cachedListing[6][0];
 
     function determineFormat(price, poi, website) {
-      if (price !== "null" && poi !== "null" && website !== "null") {
+      if (
+        price !== "null" &&
+        price !== 0 &&
+        poi !== "null" &&
+        website !== "null"
+      ) {
         return (caption = `<b>☀️${activity} @ ${location}☀️</b>
 
 ${short_desc}
@@ -287,27 +292,44 @@ ${short_desc}
 
 📍: ${poi}
 📮: ${website}`);
-      } else if (price == "null" && poi !== "null" && website !== "null") {
+      } else if (
+        (price == "null" || price == 0) &&
+        poi !== "null" &&
+        website !== "null"
+      ) {
         return (caption = `<b>☀️${activity} @ ${location}☀️</>
 
 ${short_desc}
 
 📍: ${poi}
 📮: ${website}`);
-      } else if (price == "null" && poi == "null" && website !== "null") {
+      } else if (
+        (price == "null" || price == 0) &&
+        poi == "null" &&
+        website !== "null"
+      ) {
         return (caption = `<b>☀️${activity} @ ${location}☀️</b>
 
 ${short_desc}
 
 📮: ${website}`);
-      } else if (price !== "null" && poi == "null" && website !== "null") {
+      } else if (
+        price !== "null" &&
+        price !== 0 &&
+        poi == "null" &&
+        website !== "null"
+      ) {
         return (caption = `<b>☀️${activity} @ ${location}☀️</b>
 
 ${short_desc}
 
 📍: ${poi}
 📮: ${website}`);
-      } else if (price == "null" && poi == "null" && website == "null") {
+      } else if (
+        (price == "null" || price == 0) &&
+        poi == "null" &&
+        website == "null"
+      ) {
         return (caption = `<b>☀️${activity} @ ${location}☀️</b>
 
 ${short_desc}`);
@@ -350,11 +372,13 @@ ${short_desc}`);
                 var imageURL = results[0].imageURL;
 
                 function determineFormat2(price, poi, website) {
-                  if (price !== null && poi !== null && website !== null) {
+                  if (
+                    price !== null &&
+                    price !== 0 &&
+                    poi !== null &&
+                    website !== null
+                  ) {
                     console.log("try0");
-                    console.log(price);
-                    console.log(poi);
-                    console.log(website);
                     return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
 
 ${short_desc}
@@ -365,7 +389,7 @@ ${short_desc}
 📮: ${website}
                 `);
                   } else if (
-                    price == null &&
+                    (price == null || price == 0) &&
                     poi !== null &&
                     website !== null
                   ) {
@@ -377,7 +401,11 @@ ${short_desc}
 📍: ${poi}
 📮: ${website}
               `);
-                  } else if (price == null && poi == null && website !== null) {
+                  } else if (
+                    (price == null || price == 0) &&
+                    poi == null &&
+                    website !== null
+                  ) {
                     console.log("try2");
                     return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
 
@@ -387,6 +415,7 @@ ${short_desc}
               `);
                   } else if (
                     price !== null &&
+                    price !== 0 &&
                     poi == null &&
                     website !== null
                   ) {
@@ -398,7 +427,11 @@ ${short_desc}
 📍: ${poi}
 📮: ${website}
 `);
-                  } else if (price == null && poi == null && website == null) {
+                  } else if (
+                    (price == null || price == 0) &&
+                    poi == null &&
+                    website == null
+                  ) {
                     console.log("try4");
                     return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
 
@@ -480,15 +513,3 @@ ${short_desc}
     }
   }
 });
-
-//             caption: `<b>☀️${results[0].activity} @ ${
-//               results[0].location
-//             }☀️</b>
-//
-// ${results[0].short_desc}
-//
-// ${price != "null" ? `💸: from $${price}` : ""}
-//
-// ${poi != "null" ? `📍: ${poi}` : ""}
-// ${website != "null" ? `📮: ${website}` : ""}
-//         `,
