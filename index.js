@@ -361,7 +361,11 @@ ${short_desc}
             📍: ${poi}
             📮: ${website}
                 `);
-                  } else if (price == null && poi && website) {
+                  } else if (
+                    (price == null || price == "null") &&
+                    poi &&
+                    website
+                  ) {
                     console.log("try1");
                     return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
 
@@ -370,7 +374,11 @@ ${short_desc}
             📍: ${poi}
             📮: ${website}
               `);
-                  } else if (price == null && poi == null && website) {
+                  } else if (
+                    (price == null || price == "null") &&
+                    (poi == null || poi == "null") &&
+                    website
+                  ) {
                     console.log("try2");
                     return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
 
@@ -378,7 +386,11 @@ ${short_desc}
 
             📮: ${website}
               `);
-                  } else if (price == null && poi == null && website == null) {
+                  } else if (
+                    (price == null || price == "null") &&
+                    (poi == null || poi == "null") &&
+                    website == null
+                  ) {
                     console.log("try3");
                     return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
 
