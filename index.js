@@ -352,7 +352,7 @@ ${short_desc}
                 function determineFormat2(price, poi, website) {
                   if (price && poi && website) {
                     console.log("try0");
-                    return (caption = `<b>☀️${activity} @ ${location}☀️</b>
+                    return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
 
             ${short_desc}
 
@@ -361,9 +361,9 @@ ${short_desc}
             📍: ${poi}
             📮: ${website}
                 `);
-                  } else if (price == "null" && poi && website) {
+                  } else if (price == null && poi && website) {
                     console.log("try1");
-                    return (caption = `<b>☀️${activity} @ ${location}☀️</b>
+                    return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
 
             ${short_desc}
 
@@ -372,7 +372,7 @@ ${short_desc}
               `);
                   } else if (price == null && poi == null && website) {
                     console.log("try2");
-                    return (caption = `<b>☀️${activity} @ ${location}☀️</b>
+                    return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
 
             ${short_desc}
 
@@ -380,7 +380,7 @@ ${short_desc}
               `);
                   } else if (price == null && poi == null && website == null) {
                     console.log("try3");
-                    return (caption = `<b>☀️${activity} @ ${location}☀️</b>
+                    return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
 
             ${short_desc}
             `);
