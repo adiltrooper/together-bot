@@ -181,6 +181,7 @@ bot.on("message", async msg => {
           .map(numberString => {
             return Number(numberString);
           });
+        console.log(userSendList);
       } else {
         var userSendList = userSendList.slice(1, userSendList.length - 1);
         var userSendList = Number(userSendList);
