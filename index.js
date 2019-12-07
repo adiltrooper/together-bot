@@ -294,7 +294,7 @@ ${short_desc}
 
 📍: ${poi}
 📮: ${website}`);
-      } else if (price == "null" && poi == "null" && website) {
+      } else if (price == "null" && poi == "null" && website !== "null") {
         return (caption = `<b>☀️${activity} @ ${location}☀️</b>
 
 ${short_desc}
@@ -343,7 +343,11 @@ ${short_desc}`);
                 var imageURL = results[0].imageURL;
 
                 function determineFormat2(price, poi, website) {
-                  if (price && poi && website) {
+                  if (
+                    (price !== null || price !== "null") &&
+                    (poi !== null || poi !== "null") &&
+                    (website !== null || website !== "null")
+                  ) {
                     console.log("try0");
                     return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
 
@@ -356,8 +360,8 @@ ${short_desc}
                 `);
                   } else if (
                     (price == null || price == "null") &&
-                    poi &&
-                    website
+                    (poi !== null || poi !== "null") &&
+                    (website !== null || poi !== "null")
                   ) {
                     console.log("try1");
                     return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
@@ -370,7 +374,7 @@ ${short_desc}
                   } else if (
                     (price == null || price == "null") &&
                     (poi == null || poi == "null") &&
-                    website
+                    (website !== null || poi !== "null")
                   ) {
                     console.log("try2");
                     return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
