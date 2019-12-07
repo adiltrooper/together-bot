@@ -216,8 +216,8 @@ bot.on("message", async msg => {
     bot.sendMessage(msg.chat.id, "Back to User Mode", {
       reply_markup: {
         keyboard: [
-          ["Feelin' Adventurous", "I'm feelin chill"],
-          ["I wanna stay home"]
+          ["Feelin' Adventurous", "Feelin chill"],
+          ["I Wanna Stay Home"]
         ],
         resize_keyboard: true
       }
@@ -227,8 +227,8 @@ bot.on("message", async msg => {
     bot.sendMessage(msg.chat.id, "Back to User Mode", {
       reply_markup: {
         keyboard: [
-          ["Feelin' Adventurous", "I'm feelin chill"],
-          ["I wanna stay home"]
+          ["Feelin' Adventurous", "Feelin chill"],
+          ["I Wanna Stay Home"]
         ],
         resize_keyboard: true
       }
@@ -347,8 +347,6 @@ ${short_desc}`);
         parse_mode: "HTML"
       });
     } else {
-      console.log("attempting");
-
       pool.getConnection(function(err, connection) {
         if (err) console.log(err);
         connection.beginTransaction(function(err) {
