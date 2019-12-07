@@ -55,8 +55,8 @@ So what can this bot do for you?
     {
       reply_markup: {
         keyboard: [
-          ["Feelin' Adventurous", "Feelin chill"],
-          ["I Wanna Stay home"]
+          ["☀️Feelin' Adventurous", "🧘🏼‍Feelin' Chill"],
+          ["🏠I Wanna Stay Home"]
         ],
         resize_keyboard: true
       },
@@ -216,8 +216,8 @@ bot.on("message", async msg => {
     bot.sendMessage(msg.chat.id, "Back to User Mode", {
       reply_markup: {
         keyboard: [
-          ["Feelin' Adventurous", "Feelin chill"],
-          ["I Wanna Stay Home"]
+          ["☀️Feelin' Adventurous", "🧘🏼‍Feelin' Chill"],
+          ["🏠I Wanna Stay Home"]
         ],
         resize_keyboard: true
       }
@@ -227,8 +227,8 @@ bot.on("message", async msg => {
     bot.sendMessage(msg.chat.id, "Back to User Mode", {
       reply_markup: {
         keyboard: [
-          ["Feelin' Adventurous", "Feelin chill"],
-          ["I Wanna Stay Home"]
+          ["☀️Feelin' Adventurous", "🧘🏼‍Feelin' Chill"],
+          ["🏠I Wanna Stay Home"]
         ],
         resize_keyboard: true
       }
@@ -248,20 +248,20 @@ bot.on("message", async msg => {
 
 bot.on("message", async msg => {
   if (
-    msg.text == "Feelin' Adventurous" ||
-    "I'm feelin chill" ||
-    "I wanna stay home"
+    msg.text == "☀️Feelin' Adventurous" ||
+    "🧘🏼‍Feelin' Chill" ||
+    "🏠I Wanna Stay Home"
   ) {
     switch (msg.text) {
-      case "Feelin' Adventurous":
+      case "☀️Feelin' Adventurous":
         var cat_id = 1;
         var cachedListing = await session.getCachedAdventurous();
         break;
-      case "I'm feelin chill":
+      case "🧘🏼‍Feelin' Chill":
         var cat_id = 2;
         var cachedListing = await session.getCachedChill();
         break;
-      case "I wanna stay home":
+      case "🏠I Wanna Stay Home":
         var cat_id = 3;
         var cachedListing = await session.getCachedHome();
         break;
