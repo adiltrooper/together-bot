@@ -343,11 +343,7 @@ ${short_desc}`);
                 var imageURL = results[0].imageURL;
 
                 function determineFormat2(price, poi, website) {
-                  if (
-                    (price !== null || price !== "null") &&
-                    (poi !== null || poi !== "null") &&
-                    (website !== null || website !== "null")
-                  ) {
+                  if (price !== null && poi !== null && website !== null) {
                     console.log("try0");
                     console.log(price);
                     console.log(poi);
