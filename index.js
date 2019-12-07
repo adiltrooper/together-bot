@@ -370,7 +370,7 @@ ${short_desc}
             📍: ${poi}
             📮: ${website}
               `);
-                  } else if (price == "null" && poi == "null" && website) {
+                  } else if (price == null && poi == null && website) {
                     console.log("try2");
                     return (caption = `<b>☀️${activity} @ ${location}☀️</b>
 
@@ -378,11 +378,7 @@ ${short_desc}
 
             📮: ${website}
               `);
-                  } else if (
-                    price == "null" &&
-                    poi == "null" &&
-                    website == "null"
-                  ) {
+                  } else if (price == null && poi == null && website == null) {
                     console.log("try3");
                     return (caption = `<b>☀️${activity} @ ${location}☀️</b>
 
