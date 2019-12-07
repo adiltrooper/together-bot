@@ -349,6 +349,9 @@ ${short_desc}`);
                     (website !== null || website !== "null")
                   ) {
                     console.log("try0");
+                    console.log(price);
+                    console.log(poi);
+                    console.log(website);
                     return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
 
 ${short_desc}
