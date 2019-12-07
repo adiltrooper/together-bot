@@ -111,7 +111,8 @@ CREATE TABLE `bot_user_db` (
   `username` varchar(30) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `user_type` varchar(15) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `date_joined` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `chat_id_UNIQUE` (`chat_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -133,4 +134,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-03 21:45:38
+-- Dump completed on 2019-12-07 15:30:11
