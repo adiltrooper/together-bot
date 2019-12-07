@@ -318,7 +318,7 @@ ${short_desc}`);
 
     if (cachedListing[0][0]) {
       console.log("From Cache");
-      bot.sendPhoto(119860989, imageURL, {
+      bot.sendPhoto(msg.chat.id, imageURL, {
         caption: caption,
         disable_web_page_preview: true,
         parse_mode: "HTML"
@@ -410,7 +410,7 @@ ${short_desc}
                 }
                 determineFormat2(price, poi, website);
 
-                bot.sendPhoto(119860989, results[0].imageURL, {
+                bot.sendPhoto(msg.chat.id, results[0].imageURL, {
                   caption: caption2,
 
                   disable_web_page_preview: true,
