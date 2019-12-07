@@ -79,8 +79,14 @@ So what can this bot do for you?
 });
 
 const adminsOnly = async msg => {
-  const member = await bot.getChatMember(msg.chat.id, msg.chat.id);
-  var reply = await session.getAdminList();
+  const member = await bot
+    .getChatMember(msg.chat.id, msg.chat.id)
+    .catch(err => {
+      console.log(err.message);
+    });
+  var reply = await session.getAdminList().catch(err => {
+    console.log(err.message);
+  });
   if (!reply) {
     session.setAdminList();
     var reply = keys.adminsId;
@@ -101,7 +107,9 @@ const adminsOnly = async msg => {
 };
 
 bot.onText(/\/admin/, async msg => {
-  const adminCheck = await adminsOnly(msg);
+  const adminCheck = await adminsOnly(msg).catch(err => {
+    console.log(err.message);
+  });
   if (adminCheck) {
     bot.sendMessage(msg.chat.id, "Select Option:", {
       reply_markup: {
@@ -115,7 +123,9 @@ bot.onText(/\/admin/, async msg => {
 });
 
 bot.on("message", async msg => {
-  const adminState = await session.getAdminState();
+  const adminState = await session.getAdminState().catch(err => {
+    console.log(err.message);
+  });
   console.log(adminState);
   if (msg.text == "New Post" && adminState == "admin1") {
     session.setAdminState2();
@@ -129,7 +139,9 @@ bot.on("message", async msg => {
 });
 
 bot.on("message", async msg => {
-  const adminState = await session.getAdminState();
+  const adminState = await session.getAdminState().catch(err => {
+    console.log(err.message);
+  });
   if (
     adminState == "admin2" &&
     (msg.text !== "Back") | (msg.text !== "Exit Admin Session")
@@ -148,9 +160,15 @@ bot.on("message", async msg => {
 });
 
 bot.on("message", async msg => {
-  const adminState = await session.getAdminState();
-  const draftImage = await session.getDraftImage();
-  const draftCaption = await session.getDraftCaption();
+  const adminState = await session.getAdminState().catch(err => {
+    console.log(err.message);
+  });
+  const draftImage = await session.getDraftImage().catch(err => {
+    console.log(err.message);
+  });
+  const draftCaption = await session.getDraftCaption().catch(err => {
+    console.log(err.message);
+  });
   console.log(adminState);
   if (msg.text == "Send Post" && adminState == "admin3") {
     pool.getConnection(function(err, connection) {
@@ -174,7 +192,9 @@ bot.on("message", async msg => {
       if (err) console.log(err);
     });
     const retrieveUserList = async () => {
-      var userSendList = await session.getUserSendList();
+      var userSendList = await session.getUserSendList().catch(err => {
+        console.log(err.message);
+      });
       console.log(userSendList);
       if (userSendList.includes(",")) {
         var userSendList = userSendList
@@ -212,7 +232,9 @@ bot.on("message", async msg => {
 });
 
 bot.on("message", async msg => {
-  const adminState = await session.getAdminState();
+  const adminState = await session.getAdminState().catch(err => {
+    console.log(err.message);
+  });
   console.log(msg);
   if (msg.text == "Exit Admin Session" && adminState == "admin1") {
     session.setAdminStateNull();
@@ -268,15 +290,21 @@ bot.on("message", async msg => {
     switch (msg.text) {
       case "☀️Feelin' Adventurous":
         var cat_id = 1;
-        var cachedListing = await session.getCachedAdventurous();
+        var cachedListing = await session.getCachedAdventurous().catch(err => {
+          console.log(err.message);
+        });
         break;
       case "🧘🏼‍Feelin' Chill":
         var cat_id = 2;
-        var cachedListing = await session.getCachedChill();
+        var cachedListing = await session.getCachedChill().catch(err => {
+          console.log(err.message);
+        });
         break;
       case "🏠I Wanna Stay Home":
         var cat_id = 3;
-        var cachedListing = await session.getCachedHome();
+        var cachedListing = await session.getCachedHome().catch(err => {
+          console.log(err.message);
+        });
         break;
       default:
         var cat_id = 1;
