@@ -280,7 +280,7 @@ bot.on("message", async msg => {
     function determineFormat(price, poi, website) {
       if (
         price !== "null" &&
-        price !== 0 &&
+        price !== "0" &&
         poi !== "null" &&
         website !== "null"
       ) {
@@ -293,7 +293,7 @@ ${short_desc}
 📍: ${poi}
 📮: ${website}`);
       } else if (
-        (price == "null" || price == 0) &&
+        (price == "null" || price == "0") &&
         poi !== "null" &&
         website !== "null"
       ) {
@@ -304,7 +304,7 @@ ${short_desc}
 📍: ${poi}
 📮: ${website}`);
       } else if (
-        (price == "null" || price == 0) &&
+        (price == "null" || price == "0") &&
         poi == "null" &&
         website !== "null"
       ) {
@@ -315,7 +315,7 @@ ${short_desc}
 📮: ${website}`);
       } else if (
         price !== "null" &&
-        price !== 0 &&
+        price !== "0" &&
         poi == "null" &&
         website !== "null"
       ) {
@@ -327,7 +327,7 @@ ${short_desc}
 
 📮: ${website}`);
       } else if (
-        (price == "null" || price == 0) &&
+        (price == "null" || price == "0") &&
         poi == "null" &&
         website == "null"
       ) {
