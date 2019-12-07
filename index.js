@@ -278,7 +278,7 @@ bot.on("message", async msg => {
     var imageURL = cachedListing[6][0];
 
     function determineFormat(price, poi, website) {
-      if (price && poi && website) {
+      if (price !== "null" && poi !== "null" && website !== "null") {
         return (caption = `<b>☀️${activity} @ ${location}☀️</b>
 
 ${short_desc}
@@ -286,28 +286,24 @@ ${short_desc}
 💸: from $${price}
 
 📍: ${poi}
-📮: ${website}
-    `);
-      } else if (price == "null" && poi && website) {
-        return (caption = `<b>☀️${activity} @ ${location}☀️</b>
+📮: ${website}`);
+      } else if (price == "null" && poi !== "null" && website !== "null") {
+        return (caption = `<b>☀️${activity} @ ${location}☀️</>
 
 ${short_desc}
 
 📍: ${poi}
-📮: ${website}
-  `);
+📮: ${website}`);
       } else if (price == "null" && poi == "null" && website) {
         return (caption = `<b>☀️${activity} @ ${location}☀️</b>
 
 ${short_desc}
 
-📮: ${website}
-  `);
+📮: ${website}`);
       } else if (price == "null" && poi == "null" && website == "null") {
         return (caption = `<b>☀️${activity} @ ${location}☀️</b>
 
-${short_desc}
-`);
+${short_desc}`);
       }
     }
 
@@ -345,21 +341,18 @@ ${short_desc}
                 var poi = results[0].poi;
                 var website = results[0].website;
                 var imageURL = results[0].imageURL;
-                console.log("HELLLLOOOOOOO");
-                console.log(`this is the ${price}`);
-                console.log(price);
 
                 function determineFormat2(price, poi, website) {
                   if (price && poi && website) {
                     console.log("try0");
                     return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
 
-            ${short_desc}
+${short_desc}
 
-            💸: from $${price}
+💸: from $${price}
 
-            📍: ${poi}
-            📮: ${website}
+📍: ${poi}
+📮: ${website}
                 `);
                   } else if (
                     (price == null || price == "null") &&
@@ -369,10 +362,10 @@ ${short_desc}
                     console.log("try1");
                     return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
 
-            ${short_desc}
+${short_desc}
 
-            📍: ${poi}
-            📮: ${website}
+📍: ${poi}
+📮: ${website}
               `);
                   } else if (
                     (price == null || price == "null") &&
@@ -382,9 +375,9 @@ ${short_desc}
                     console.log("try2");
                     return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
 
-            ${short_desc}
+${short_desc}
 
-            📮: ${website}
+📮: ${website}
               `);
                   } else if (
                     (price == null || price == "null") &&
@@ -394,7 +387,7 @@ ${short_desc}
                     console.log("try3");
                     return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
 
-            ${short_desc}
+${short_desc}
             `);
                   } else {
                     console.log("FAILUREEEE");
