@@ -323,7 +323,8 @@ ${short_desc}
 
 ${short_desc}
 
-📍: ${poi}
+💸: from $${price}
+
 📮: ${website}`);
       } else if (
         (price == "null" || price == 0) &&
@@ -424,7 +425,8 @@ ${short_desc}
 
 ${short_desc}
 
-📍: ${poi}
+💸: from $${price}
+
 📮: ${website}
 `);
                   } else if (
