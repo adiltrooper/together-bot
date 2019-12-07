@@ -155,20 +155,21 @@ bot.on("message", async msg => {
   if (msg.text == "Send Post" && adminState == "admin3") {
     pool.getConnection(function(err, connection) {
       if (err) console.log(err);
-      connection.query(
-        'SELECT chat_id FROM bot_user_db WHERE user_type = "normal"',
-        function(err, results, fields) {
-          if (err) {
-            console.log(err.message);
-          } else {
-            var userArray = [];
-            userArray = results.map(userData => {
-              return userData.chat_id;
-            });
-            session.setUserSendList(JSON.stringify(userArray));
-          }
+      connection.query("SELECT chat_id FROM bot_user_db", function(
+        err,
+        results,
+        fields
+      ) {
+        if (err) {
+          console.log(err.message);
+        } else {
+          var userArray = [];
+          userArray = results.map(userData => {
+            return userData.chat_id;
+          });
+          session.setUserSendList(JSON.stringify(userArray));
         }
-      );
+      });
       connection.release();
       if (err) console.log(err);
     });
