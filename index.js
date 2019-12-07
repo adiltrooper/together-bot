@@ -174,6 +174,7 @@ bot.on("message", async msg => {
     });
     const retrieveUserList = async () => {
       var userSendList = await session.getUserSendList();
+      console.log(userSendList);
       if (userSendList.includes(",")) {
         var userSendList = userSendList
           .slice(1, userSendList.length - 1)
