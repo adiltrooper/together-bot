@@ -55,8 +55,8 @@ So what can this bot do for you?
     {
       reply_markup: {
         keyboard: [
-          ["Feelin' Adventurous", "I'm feelin chill"],
-          ["I wanna stay home"]
+          ["Feelin' Adventurous", "Feelin chill"],
+          ["I Wanna Stay home"]
         ],
         resize_keyboard: true
       },
