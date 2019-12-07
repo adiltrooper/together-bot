@@ -156,7 +156,7 @@ bot.on("message", async msg => {
     pool.getConnection(function(err, connection) {
       if (err) console.log(err);
       connection.query(
-        'SELECT chat_id FROM bot_user_db WHERE user_type = "admin"',
+        'SELECT chat_id FROM bot_user_db WHERE user_type = "normal"',
         function(err, results, fields) {
           if (err) {
             console.log(err.message);
