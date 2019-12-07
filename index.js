@@ -382,7 +382,7 @@ ${short_desc}
                   } else if (
                     (price == null || price == "null") &&
                     (poi == null || poi == "null") &&
-                    website == null
+                    (website == null || website == "null")
                   ) {
                     console.log("try3");
                     return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
