@@ -172,7 +172,7 @@ bot.on("message", async msg => {
       connection.release();
       if (err) console.log(err);
     });
-    const retrieveUserList = async => {
+    const retrieveUserList = async () => {
       var userSendList = await session.getUserSendList();
       console.log(userSendList);
       if (userSendList.includes(",")) {
