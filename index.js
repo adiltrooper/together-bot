@@ -300,6 +300,13 @@ ${short_desc}
 ${short_desc}
 
 📮: ${website}`);
+      } else if (price !== "null" && poi == "null" && website !== "null") {
+        return (caption = `<b>☀️${activity} @ ${location}☀️</b>
+
+${short_desc}
+
+📍: ${poi}
+📮: ${website}`);
       } else if (price == "null" && poi == "null" && website == "null") {
         return (caption = `<b>☀️${activity} @ ${location}☀️</b>
 
@@ -378,8 +385,21 @@ ${short_desc}
 
 📮: ${website}
               `);
-                  } else if (price == null && poi == null && website == null) {
+                  } else if (
+                    price !== null &&
+                    poi == null &&
+                    website !== null
+                  ) {
                     console.log("try3");
+                    return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
+
+${short_desc}
+
+📍: ${poi}
+📮: ${website}
+`);
+                  } else if (price == null && poi == null && website == null) {
+                    console.log("try4");
                     return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
 
 ${short_desc}
