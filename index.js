@@ -244,6 +244,16 @@ bot.on("message", async msg => {
         resize_keyboard: true
       }
     });
+  } else if (msg.text == "Back" && adminState == "admin3") {
+    session.setAdminState2();
+    session.delDraftImage();
+    session.delDraftCaption();
+    bot.sendMessage(msg.chat.id, "Draft your message here:", {
+      reply_markup: {
+        keyboard: [["Back", "Exit Admin Session"]],
+        resize_keyboard: true
+      }
+    });
   }
 });
 

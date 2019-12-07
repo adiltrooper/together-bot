@@ -79,6 +79,14 @@ class Session {
     });
   }
 
+  delDraftImage() {
+    redis.del("draftImage");
+  }
+
+  delDraftCaption() {
+    redis.del("draftCaption");
+  }
+
   setCachedListings(
     cat_id,
     activity,
