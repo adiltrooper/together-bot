@@ -148,7 +148,11 @@ bot.on("message", async msg => {
   });
   if (
     adminState == "admin2" &&
-    (msg.text !== "Back" || msg.text !== "Exit Admin Session")
+    (msg.text !== "Back" ||
+      msg.text !== "Exit Admin Session" ||
+      msg.text !== "☀️Feelin' Adventurous" ||
+      msg.text !== "🧘🏼‍Feelin' Chill" ||
+      msg.text !== "🏠I Wanna Stay Home")
   ) {
     bot.sendMessage(msg.chat.id, "Select Option:", {
       reply_markup: {
@@ -200,7 +204,6 @@ bot.on("message", async msg => {
       const retrieveUserList = async () => {
         var userSendList = await session.getUserSendList().catch(err => {
           console.log(err.message);
-          console.log("HERE IS A userSendList");
         });
         console.log(`This is the after ${userSendList}`);
         if (userSendList.includes(",")) {
