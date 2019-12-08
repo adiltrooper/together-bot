@@ -206,8 +206,9 @@ bot.on("message", async msg => {
       const retrieveUserList = async () => {
         var userSendList = await session.getUserSendList().catch(err => {
           console.log(err.message);
+          console.log("HERE IS A userSendList");
         });
-        console.log(userSendList);
+        console.log(`This is the after ${userSendList}`);
         if (userSendList.includes(",")) {
           var userSendList = userSendList
             .slice(1, userSendList.length - 1)
