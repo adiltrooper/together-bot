@@ -32,7 +32,8 @@ const session = new Session();
 ////////////// JOIN BOT //////////////////
 
 bot.onText(/\/start/, msg => {
-  const { chat_id, first_name, username } = msg.chat;
+  const { first_name, username } = msg.chat;
+  const chat_id = msg.chat.id;
   const checkUserType = async () => {
     var user_type = await (keys.adminsId.includes(chat_id)
       ? "admin"
