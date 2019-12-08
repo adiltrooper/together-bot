@@ -12,6 +12,7 @@ class Session {
 
       redis.auth(rtg.auth.split(":")[1]);
     } else {
+      console.log("SOMETHING WRONG WITH REDIS");
       redis = require("redis").createClient(keys.redisPort);
     }
   }

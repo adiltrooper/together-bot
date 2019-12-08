@@ -29,24 +29,23 @@ cloudinary.config({
 const app = express();
 const session = new Session();
 
+////////////// JOIN BOT //////////////////
+
 bot.onText(/\/start/, msg => {
-  console.log(msg);
-  const chat_id = msg.chat.id;
-  const first_name = msg.chat.first_name;
-  const username = msg.chat.username;
-  var user_type = "normal";
-
-  if (keys.adminsId.includes(chat_id)) {
-    var user_type = "admin";
-  }
-
+  const { chat_id, first_name, username } = msg.chat;
+  const checkUserType = async () => {
+    var user_type = await (keys.adminsId.includes(chat_id)
+      ? "admin"
+      : "normal");
+  };
+  checkUserType();
   bot.sendPhoto(
     chat_id,
     "https://res.cloudinary.com/dotogether/image/upload/v1575297277/Listings/Welcome%20Image.png"
   );
   bot.sendMessage(
     chat_id,
-    `<b>Hi ${msg.from.first_name}! Welcome to the Together Community!</b>
+    `<b>Hi ${first_name}! Welcome to the Together Community!</b>
 
 So what can this bot do for you?
 💡Get an outing idea with a single click below!
@@ -78,6 +77,8 @@ So what can this bot do for you?
   });
 });
 
+/////////////// ADMIN CHECK FUNCTION ///////////////////
+
 const adminsOnly = async msg => {
   const member = await bot
     .getChatMember(msg.chat.id, msg.chat.id)
@@ -106,6 +107,8 @@ const adminsOnly = async msg => {
   }
 };
 
+////////////////// ENTER ADMIN STATE /////////////////////
+
 bot.onText(/\/admin/, async msg => {
   const adminCheck = await adminsOnly(msg).catch(err => {
     console.log(err.message);
@@ -123,18 +126,20 @@ bot.onText(/\/admin/, async msg => {
 });
 
 bot.on("message", async msg => {
-  const adminState = await session.getAdminState().catch(err => {
-    console.log(err.message);
-  });
-  console.log(adminState);
-  if (msg.text == "New Post" && adminState == "admin1") {
-    session.setAdminState2();
-    bot.sendMessage(msg.chat.id, "Draft your message here:", {
-      reply_markup: {
-        keyboard: [["Back", "Exit Admin Session"]],
-        resize_keyboard: true
-      }
+  if (msg.text == "New Post") {
+    const adminState = await session.getAdminState().catch(err => {
+      console.log(err.message);
     });
+    console.log(adminState);
+    if (adminState == "admin1") {
+      session.setAdminState2();
+      bot.sendMessage(msg.chat.id, "Draft your message here:", {
+        reply_markup: {
+          keyboard: [["Back", "Exit Admin Session"]],
+          resize_keyboard: true
+        }
+      });
+    }
   }
 });
 
