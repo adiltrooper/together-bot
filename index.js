@@ -164,74 +164,76 @@ bot.on("message", async msg => {
 });
 
 bot.on("message", async msg => {
-  const adminState = await session.getAdminState().catch(err => {
-    console.log(err.message);
-  });
-  const draftImage = await session.getDraftImage().catch(err => {
-    console.log(err.message);
-  });
-  const draftCaption = await session.getDraftCaption().catch(err => {
-    console.log(err.message);
-  });
-  console.log(adminState);
-  if (msg.text == "Send Post" && adminState == "admin3") {
-    pool.getConnection(function(err, connection) {
-      if (err) console.log(err);
-      connection.query("SELECT chat_id FROM bot_user_db", function(
-        err,
-        results,
-        fields
-      ) {
-        if (err) {
-          console.log(err.message);
-        } else {
-          var userArray = [];
-          userArray = results.map(userData => {
-            return userData.chat_id;
-          });
-          session.setUserSendList(JSON.stringify(userArray));
-        }
-      });
-      connection.release();
-      if (err) console.log(err);
+  if (msg.text == "Send Post") {
+    const adminState = await session.getAdminState().catch(err => {
+      console.log(err.message);
     });
-    const retrieveUserList = async () => {
-      var userSendList = await session.getUserSendList().catch(err => {
-        console.log(err.message);
+    const draftImage = await session.getDraftImage().catch(err => {
+      console.log(err.message);
+    });
+    const draftCaption = await session.getDraftCaption().catch(err => {
+      console.log(err.message);
+    });
+    console.log(adminState);
+    if (adminState == "admin3") {
+      pool.getConnection(function(err, connection) {
+        if (err) console.log(err);
+        connection.query("SELECT chat_id FROM bot_user_db", function(
+          err,
+          results,
+          fields
+        ) {
+          if (err) {
+            console.log(err.message);
+          } else {
+            var userArray = [];
+            userArray = results.map(userData => {
+              return userData.chat_id;
+            });
+            session.setUserSendList(JSON.stringify(userArray));
+          }
+        });
+        connection.release();
+        if (err) console.log(err);
       });
-      console.log(userSendList);
-      if (userSendList.includes(",")) {
-        var userSendList = userSendList
-          .slice(1, userSendList.length - 1)
-          .split(",")
-          .map(numberString => {
-            return Number(numberString);
-          });
+      const retrieveUserList = async () => {
+        var userSendList = await session.getUserSendList().catch(err => {
+          console.log(err.message);
+        });
         console.log(userSendList);
-      } else {
-        var userSendList = userSendList.slice(1, userSendList.length - 1);
-        var userSendList = Number(userSendList);
-        var userSendListTemp = [];
-        userSendListTemp.push(userSendList);
-        userSendList = userSendListTemp;
-      }
+        if (userSendList.includes(",")) {
+          var userSendList = userSendList
+            .slice(1, userSendList.length - 1)
+            .split(",")
+            .map(numberString => {
+              return Number(numberString);
+            });
+          console.log(userSendList);
+        } else {
+          var userSendList = userSendList.slice(1, userSendList.length - 1);
+          var userSendList = Number(userSendList);
+          var userSendListTemp = [];
+          userSendListTemp.push(userSendList);
+          userSendList = userSendListTemp;
+        }
 
-      console.log(userSendList);
+        console.log(userSendList);
 
-      var userSendList = _.chunk(userSendList, 2);
-      console.log(userSendList);
-      userSendList.map(subUserSendList => {
-        const postMessages = () => {
-          subUserSendList.map(userId => {
-            //bot.sendMessage(userId, draftPost);
-            console.log(userId);
-            bot.sendPhoto(userId, draftImage, { caption: draftCaption });
-          });
-        };
-        setTimeout(postMessages, 3000);
-      });
-    };
-    retrieveUserList();
+        var userSendList = _.chunk(userSendList, 2);
+        console.log(userSendList);
+        userSendList.map(subUserSendList => {
+          const postMessages = () => {
+            subUserSendList.map(userId => {
+              //bot.sendMessage(userId, draftPost);
+              console.log(userId);
+              bot.sendPhoto(userId, draftImage, { caption: draftCaption });
+            });
+          };
+          setTimeout(postMessages, 3000);
+        });
+      };
+      retrieveUserList();
+    }
   }
 });
 
