@@ -165,6 +165,7 @@ bot.on("message", async msg => {
         console.log(err.message);
       });
     };
+    setCachedPost();
     session.setAdminState3();
   }
 });
