@@ -308,6 +308,9 @@ bot.on("message", async msg => {
         break;
       default:
         var cat_id = 1;
+        var cachedListing = await session.getCachedAdventurous().catch(err => {
+          console.log(err.message);
+        });
     }
 
     var activity = cachedListing[0][0];
