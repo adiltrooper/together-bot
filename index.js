@@ -148,11 +148,11 @@ bot.on("message", async msg => {
   });
   if (
     adminState == "admin2" &&
-    (msg.text !== "Back" ||
-      msg.text !== "Exit Admin Session" ||
-      msg.text !== "☀️Feelin' Adventurous" ||
-      msg.text !== "🧘🏼‍Feelin' Chill" ||
-      msg.text !== "🏠I Wanna Stay Home")
+    msg.text !== "Back" &&
+    msg.text !== "Exit Admin Session" &&
+    msg.text !== "☀️Feelin' Adventurous" &&
+    msg.text !== "🧘🏼‍Feelin' Chill" &&
+    msg.text !== "🏠I Wanna Stay Home"
   ) {
     bot.sendMessage(msg.chat.id, "Select Option:", {
       reply_markup: {
