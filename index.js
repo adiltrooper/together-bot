@@ -157,15 +157,9 @@ bot.on("message", async msg => {
       }
     });
     console.log(msg);
-    const setCachedPost = async (_file, _caption) => {
-      await session.setDraftImage(_file).catch(err => {
-        console.log(err.message);
-      });
-      await session.setDraftCaption(_caption).catch(err => {
-        console.log(err.message);
-      });
-    };
-    setCachedPost(msg.photo[0].file_id, msg.caption);
+
+    session.setDraftImage(msg.photo[0].file_id);
+    session.setDraftCaption(msg.caption);
     session.setAdminState3();
   }
 });
