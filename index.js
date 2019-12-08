@@ -157,9 +157,11 @@ bot.on("message", async msg => {
       }
     });
     console.log(msg);
-    session.setDraftImage(msg.photo[0].file_id);
-    session.setDraftCaption(msg.caption);
-    session.setAdminState3();
+    await session.setDraftImage(msg.photo[0].file_id).catch(err => {
+      console.log(err.message);
+    });
+    await session.setDraftCaption(msg.caption);
+    await session.setAdminState3();
   }
 });
 

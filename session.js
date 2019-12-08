@@ -61,7 +61,9 @@ class Session {
   }
 
   setDraftImage(imageId) {
-    redis.setex("draftImage", 1200, imageId);
+    redis.setAsync("draftImage", imageId).then(function(res) {
+      console.log("DRAFT IMAGE IN");
+    });
   }
 
   setDraftCaption(caption) {
