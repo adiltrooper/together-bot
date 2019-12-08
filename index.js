@@ -308,23 +308,24 @@ bot.on("message", async msg => {
         break;
       default:
         var cat_id = 1;
+    }
 
-        var activity = cachedListing[0][0];
-        var location = cachedListing[1][0];
-        var short_desc = cachedListing[2][0];
-        var price = cachedListing[3][0];
-        var poi = cachedListing[4][0];
-        var website = cachedListing[5][0];
-        var imageURL = cachedListing[6][0];
+    var activity = cachedListing[0][0];
+    var location = cachedListing[1][0];
+    var short_desc = cachedListing[2][0];
+    var price = cachedListing[3][0];
+    var poi = cachedListing[4][0];
+    var website = cachedListing[5][0];
+    var imageURL = cachedListing[6][0];
 
-        function determineFormat(price, poi, website) {
-          if (
-            price !== "null" &&
-            price !== "0" &&
-            poi !== "null" &&
-            website !== "null"
-          ) {
-            return (caption = `<b>☀️${activity} @ ${location}☀️</b>
+    function determineFormat(price, poi, website) {
+      if (
+        price !== "null" &&
+        price !== "0" &&
+        poi !== "null" &&
+        website !== "null"
+      ) {
+        return (caption = `<b>☀️${activity} @ ${location}☀️</b>
 
 ${short_desc}
 
@@ -332,67 +333,166 @@ ${short_desc}
 
 📍: ${poi}
 📮: ${website}`);
-          } else if (
-            (price == "null" || price == "0") &&
-            poi !== "null" &&
-            website !== "null"
-          ) {
-            return (caption = `<b>☀️${activity} @ ${location}☀️</>
+      } else if (
+        (price == "null" || price == "0") &&
+        poi !== "null" &&
+        website !== "null"
+      ) {
+        return (caption = `<b>☀️${activity} @ ${location}☀️</>
 
 ${short_desc}
 
 📍: ${poi}
 📮: ${website}`);
-          } else if (
-            (price == "null" || price == "0") &&
-            poi == "null" &&
-            website !== "null"
-          ) {
-            return (caption = `<b>☀️${activity} @ ${location}☀️</b>
+      } else if (
+        (price == "null" || price == "0") &&
+        poi == "null" &&
+        website !== "null"
+      ) {
+        return (caption = `<b>☀️${activity} @ ${location}☀️</b>
 
 ${short_desc}
 
 📮: ${website}`);
-          } else if (
-            price !== "null" &&
-            price !== "0" &&
-            poi == "null" &&
-            website !== "null"
-          ) {
-            return (caption = `<b>☀️${activity} @ ${location}☀️</b>
+      } else if (
+        price !== "null" &&
+        price !== "0" &&
+        poi == "null" &&
+        website !== "null"
+      ) {
+        return (caption = `<b>☀️${activity} @ ${location}☀️</b>
 
 ${short_desc}
 
 💸: from $${price}
 
 📮: ${website}`);
-          } else if (
-            (price == "null" || price == "0") &&
-            poi == "null" &&
-            website == "null"
-          ) {
-            return (caption = `<b>☀️${activity} @ ${location}☀️</b>
+      } else if (
+        (price == "null" || price == "0") &&
+        poi == "null" &&
+        website == "null"
+      ) {
+        return (caption = `<b>☀️${activity} @ ${location}☀️</b>
 
 ${short_desc}`);
-          }
-        }
+      }
+    }
 
-        determineFormat(price, poi, website);
+    determineFormat(price, poi, website);
 
-        if (cachedListing[0][0]) {
-          console.log("From Cache");
-          bot.sendPhoto(msg.chat.id, imageURL, {
-            caption: caption,
-            disable_web_page_preview: true,
-            parse_mode: "HTML"
-          });
-        } else {
-          pool.getConnection(function(err, connection) {
-            if (err) console.log(err);
-            connection.beginTransaction(function(err) {
-              if (err) console.log(err);
+    if (cachedListing[0][0]) {
+      console.log("From Cache");
+      bot.sendPhoto(msg.chat.id, imageURL, {
+        caption: caption,
+        disable_web_page_preview: true,
+        parse_mode: "HTML"
+      });
+    } else {
+      pool.getConnection(function(err, connection) {
+        if (err) console.log(err);
+        connection.beginTransaction(function(err) {
+          if (err) console.log(err);
+          connection.query(
+            "SELECT location, activity, short_desc, price, poi, website, bot_category.category_name AS category, imageURL FROM bot_listings_db LEFT JOIN bot_listing_category ON bot_listings_db.id = bot_listing_id LEFT JOIN bot_category ON bot_category_id = bot_category.id WHERE bot_category_id = ? ORDER BY RAND() LIMIT 1",
+            [cat_id],
+            function(err, results, fields) {
+              if (err) {
+                return connection.rollback(function() {
+                  console.log(err.message);
+                  throw err;
+                });
+              } else {
+                console.log(results);
+                var activity = results[0].activity;
+                var location = results[0].location;
+                var short_desc = results[0].short_desc;
+                var price = results[0].price;
+                var poi = results[0].poi;
+                var website = results[0].website;
+                var imageURL = results[0].imageURL;
+
+                function determineFormat2(price, poi, website) {
+                  if (
+                    price !== null &&
+                    price !== 0 &&
+                    poi !== null &&
+                    website !== null
+                  ) {
+                    console.log("try0");
+                    return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
+
+${short_desc}
+
+💸: from $${price}
+
+📍: ${poi}
+📮: ${website}
+                `);
+                  } else if (
+                    (price == null || price == 0) &&
+                    poi !== null &&
+                    website !== null
+                  ) {
+                    console.log("try1");
+                    return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
+
+${short_desc}
+
+📍: ${poi}
+📮: ${website}
+              `);
+                  } else if (
+                    (price == null || price == 0) &&
+                    poi == null &&
+                    website !== null
+                  ) {
+                    console.log("try2");
+                    return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
+
+${short_desc}
+
+📮: ${website}
+              `);
+                  } else if (
+                    price !== null &&
+                    price !== 0 &&
+                    poi == null &&
+                    website !== null
+                  ) {
+                    console.log("try3");
+                    return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
+
+${short_desc}
+
+💸: from $${price}
+
+📮: ${website}
+`);
+                  } else if (
+                    (price == null || price == 0) &&
+                    poi == null &&
+                    website == null
+                  ) {
+                    console.log("try4");
+                    return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
+
+${short_desc}
+            `);
+                  } else {
+                    console.log("FAILUREEEE");
+                  }
+                }
+                determineFormat2(price, poi, website);
+
+                bot.sendPhoto(msg.chat.id, results[0].imageURL, {
+                  caption: caption2,
+
+                  disable_web_page_preview: true,
+                  parse_mode: "HTML"
+                });
+              }
               connection.query(
-                "SELECT location, activity, short_desc, price, poi, website, bot_category.category_name AS category, imageURL FROM bot_listings_db LEFT JOIN bot_listing_category ON bot_listings_db.id = bot_listing_id LEFT JOIN bot_category ON bot_category_id = bot_category.id WHERE bot_category_id = ? ORDER BY RAND() LIMIT 1",
+                "SELECT location, activity, short_desc, price, poi, website, bot_category.category_name AS category, imageURL FROM bot_listings_db LEFT JOIN bot_listing_category ON bot_listings_db.id = bot_listing_id LEFT JOIN bot_category ON bot_category_id = bot_category.id WHERE bot_category_id = ? ORDER BY RAND() LIMIT 10",
                 [cat_id],
                 function(err, results, fields) {
                   if (err) {
@@ -402,155 +502,55 @@ ${short_desc}`);
                     });
                   } else {
                     console.log(results);
-                    var activity = results[0].activity;
-                    var location = results[0].location;
-                    var short_desc = results[0].short_desc;
-                    var price = results[0].price;
-                    var poi = results[0].poi;
-                    var website = results[0].website;
-                    var imageURL = results[0].imageURL;
 
-                    function determineFormat2(price, poi, website) {
-                      if (
-                        price !== null &&
-                        price !== 0 &&
-                        poi !== null &&
-                        website !== null
-                      ) {
-                        console.log("try0");
-                        return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
-
-${short_desc}
-
-💸: from $${price}
-
-📍: ${poi}
-📮: ${website}
-                `);
-                      } else if (
-                        (price == null || price == 0) &&
-                        poi !== null &&
-                        website !== null
-                      ) {
-                        console.log("try1");
-                        return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
-
-${short_desc}
-
-📍: ${poi}
-📮: ${website}
-              `);
-                      } else if (
-                        (price == null || price == 0) &&
-                        poi == null &&
-                        website !== null
-                      ) {
-                        console.log("try2");
-                        return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
-
-${short_desc}
-
-📮: ${website}
-              `);
-                      } else if (
-                        price !== null &&
-                        price !== 0 &&
-                        poi == null &&
-                        website !== null
-                      ) {
-                        console.log("try3");
-                        return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
-
-${short_desc}
-
-💸: from $${price}
-
-📮: ${website}
-`);
-                      } else if (
-                        (price == null || price == 0) &&
-                        poi == null &&
-                        website == null
-                      ) {
-                        console.log("try4");
-                        return (caption2 = `<b>☀️${activity} @ ${location}☀️</b>
-
-${short_desc}
-            `);
-                      } else {
-                        console.log("FAILUREEEE");
-                      }
-                    }
-                    determineFormat2(price, poi, website);
-
-                    bot.sendPhoto(msg.chat.id, results[0].imageURL, {
-                      caption: caption2,
-
-                      disable_web_page_preview: true,
-                      parse_mode: "HTML"
+                    const cachedActivity = results.map(result => {
+                      return result.activity;
                     });
+                    const cachedLocation = results.map(result => {
+                      return result.location;
+                    });
+                    const cachedShort_desc = results.map(result => {
+                      return result.short_desc;
+                    });
+                    const cachedPrice = results.map(result => {
+                      return result.price;
+                    });
+                    const cachedPoi = results.map(result => {
+                      return result.poi;
+                    });
+                    const cachedWebsite = results.map(result => {
+                      return result.website;
+                    });
+                    const cachedImageURL = results.map(result => {
+                      return result.imageURL;
+                    });
+
+                    session.setCachedListings(
+                      cat_id,
+                      cachedActivity,
+                      cachedLocation,
+                      cachedShort_desc,
+                      cachedPrice,
+                      cachedPoi,
+                      cachedWebsite,
+                      cachedImageURL
+                    );
                   }
-                  connection.query(
-                    "SELECT location, activity, short_desc, price, poi, website, bot_category.category_name AS category, imageURL FROM bot_listings_db LEFT JOIN bot_listing_category ON bot_listings_db.id = bot_listing_id LEFT JOIN bot_category ON bot_category_id = bot_category.id WHERE bot_category_id = ? ORDER BY RAND() LIMIT 10",
-                    [cat_id],
-                    function(err, results, fields) {
-                      if (err) {
-                        return connection.rollback(function() {
-                          console.log(err.message);
-                          throw err;
-                        });
-                      } else {
-                        console.log(results);
-
-                        const cachedActivity = results.map(result => {
-                          return result.activity;
-                        });
-                        const cachedLocation = results.map(result => {
-                          return result.location;
-                        });
-                        const cachedShort_desc = results.map(result => {
-                          return result.short_desc;
-                        });
-                        const cachedPrice = results.map(result => {
-                          return result.price;
-                        });
-                        const cachedPoi = results.map(result => {
-                          return result.poi;
-                        });
-                        const cachedWebsite = results.map(result => {
-                          return result.website;
-                        });
-                        const cachedImageURL = results.map(result => {
-                          return result.imageURL;
-                        });
-
-                        session.setCachedListings(
-                          cat_id,
-                          cachedActivity,
-                          cachedLocation,
-                          cachedShort_desc,
-                          cachedPrice,
-                          cachedPoi,
-                          cachedWebsite,
-                          cachedImageURL
-                        );
-                      }
-                      connection.commit(function(err) {
-                        if (err) {
-                          return connection.rollback(function() {
-                            console.log(err);
-                          });
-                        }
-                        console.log("cached");
+                  connection.commit(function(err) {
+                    if (err) {
+                      return connection.rollback(function() {
+                        console.log(err);
                       });
                     }
-                  );
+                    console.log("cached");
+                  });
                 }
               );
-            });
-            connection.release();
-          });
-        }
+            }
+          );
+        });
+        connection.release();
+      });
     }
   }
 });
