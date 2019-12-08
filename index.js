@@ -152,7 +152,8 @@ bot.on("message", async msg => {
     msg.text !== "Exit Admin Session" &&
     msg.text !== "☀️Feelin' Adventurous" &&
     msg.text !== "🧘🏼‍Feelin' Chill" &&
-    msg.text !== "🏠I Wanna Stay Home"
+    msg.text !== "🏠I Wanna Stay Home" &&
+    msg.text !== "/start"
   ) {
     bot.sendMessage(msg.chat.id, "Select Option:", {
       reply_markup: {
