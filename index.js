@@ -34,12 +34,10 @@ const session = new Session();
 bot.onText(/\/start/, msg => {
   const { first_name, username } = msg.chat;
   const chat_id = msg.chat.id;
-  const checkUserType = async () => {
-    var user_type = await (keys.adminsId.includes(chat_id)
-      ? "admin"
-      : "normal");
-  };
-  checkUserType();
+  if (keys.adminsId.includes(chat_id)) {
+    var user_type = "admin";
+  } else var user_type = "normal";
+
   bot.sendPhoto(
     chat_id,
     "https://res.cloudinary.com/dotogether/image/upload/v1575297277/Listings/Welcome%20Image.png"
