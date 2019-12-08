@@ -284,8 +284,8 @@ bot.on("message", async msg => {
 bot.on("message", async msg => {
   if (
     msg.text == "☀️Feelin' Adventurous" ||
-    "🧘🏼‍Feelin' Chill" ||
-    "🏠I Wanna Stay Home"
+    msg.text == "🧘🏼‍Feelin' Chill" ||
+    msg.text == "🏠I Wanna Stay Home"
   ) {
     switch (msg.text) {
       case "☀️Feelin' Adventurous":
