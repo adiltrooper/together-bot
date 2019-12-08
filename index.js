@@ -88,9 +88,7 @@ const adminsOnly = async msg => {
     console.log(err.message);
   });
   if (!reply) {
-    session.setAdminList().catch(err => {
-      console.log(err.message);
-    });
+    session.setAdminList();
     var reply = keys.adminsId;
   }
   if (member && member.user.id == reply) {
@@ -98,9 +96,7 @@ const adminsOnly = async msg => {
       msg.chat.id,
       `Hi ${member.user.first_name}! Welcome to the admin menu!`
     );
-    session.setAdminState().catch(err => {
-      console.log(err.message);
-    });
+    session.setAdminState();
     return true;
   } else {
     bot.sendMessage(
@@ -132,9 +128,7 @@ bot.on("message", async msg => {
   });
   console.log(adminState);
   if (msg.text == "New Post" && adminState == "admin1") {
-    session.setAdminState2().catch(err => {
-      console.log(err.message);
-    });
+    session.setAdminState2();
     bot.sendMessage(msg.chat.id, "Draft your message here:", {
       reply_markup: {
         keyboard: [["Back", "Exit Admin Session"]],
@@ -159,15 +153,9 @@ bot.on("message", async msg => {
       }
     });
     console.log(msg);
-    session.setDraftImage(msg.photo[0].file_id).catch(err => {
-      console.log(err.message);
-    });
-    session.setDraftCaption(msg.caption).catch(err => {
-      console.log(err.message);
-    });
-    session.setAdminState3().catch(err => {
-      console.log(err.message);
-    });
+    session.setDraftImage(msg.photo[0].file_id);
+    session.setDraftCaption(msg.caption);
+    session.setAdminState3();
   }
 });
 
