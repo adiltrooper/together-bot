@@ -147,8 +147,8 @@ bot.on("message", async msg => {
     console.log(err.message);
   });
   if (
-    adminState == "admin2" &&
-    (msg.text !== "Back") | (msg.text !== "Exit Admin Session")
+    (adminState == "admin2" && msg.text !== "Back") ||
+    msg.text !== "Exit Admin Session"
   ) {
     bot.sendMessage(msg.chat.id, "Select Option:", {
       reply_markup: {
