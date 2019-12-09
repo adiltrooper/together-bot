@@ -194,7 +194,10 @@ bot.onText(/Send Post/, async msg => {
             userArray = results.map(userData => {
               return userData.chat_id;
             });
-            session.setUserSendList(JSON.stringify(userArray));
+            const setList = await session.setUserSendList(
+              JSON.stringify(userArray)
+            );
+            console.log(setList);
           };
           setUserSendList();
         }
