@@ -124,23 +124,39 @@ bot.onText(/\/admin/, async msg => {
   }
 });
 
-bot.on("message", async msg => {
-  if (msg.text == "New Post") {
-    const adminState = await session.getAdminState().catch(err => {
-      console.log(err.message);
+bot.onText(/New Post/, async msg => {
+  const adminState = await session.getAdminState().catch(err => {
+    console.log(err.message);
+  });
+  console.log(adminState);
+  if (adminState == "admin1") {
+    session.setAdminState2();
+    bot.sendMessage(msg.chat.id, "Draft your message here:", {
+      reply_markup: {
+        keyboard: [["Back", "Exit Admin Session"]],
+        resize_keyboard: true
+      }
     });
-    console.log(adminState);
-    if (adminState == "admin1") {
-      session.setAdminState2();
-      bot.sendMessage(msg.chat.id, "Draft your message here:", {
-        reply_markup: {
-          keyboard: [["Back", "Exit Admin Session"]],
-          resize_keyboard: true
-        }
-      });
-    }
   }
 });
+
+// bot.on("message", async msg => {
+//   if (msg.text == "New Post") {
+//     const adminState = await session.getAdminState().catch(err => {
+//       console.log(err.message);
+//     });
+//     console.log(adminState);
+//     if (adminState == "admin1") {
+//       session.setAdminState2();
+//       bot.sendMessage(msg.chat.id, "Draft your message here:", {
+//         reply_markup: {
+//           keyboard: [["Back", "Exit Admin Session"]],
+//           resize_keyboard: true
+//         }
+//       });
+//     }
+//   }
+// });
 
 bot.on("message", async msg => {
   const adminState = await session.getAdminState().catch(err => {
@@ -168,6 +184,78 @@ bot.on("message", async msg => {
     session.setAdminState3();
   }
 });
+
+// bot.onText(/Send Post/, async msg => {
+//   const adminState = await session.getAdminState().catch(err => {
+//     console.log(err.message);
+//   });
+//   const draftImage = await session.getDraftImage().catch(err => {
+//     console.log(err.message);
+//   });
+//   const draftCaption = await session.getDraftCaption().catch(err => {
+//     console.log(err.message);
+//   });
+//   console.log(adminState);
+//   if (adminState == "admin3") {
+//     pool.getConnection(function(err, connection) {
+//       if (err) console.log(err);
+//       connection.query("SELECT chat_id FROM bot_user_db", function(
+//         err,
+//         results,
+//         fields
+//       ) {
+//         if (err) {
+//           console.log(err.message);
+//         } else {
+//           var userArray = [];
+//           userArray = results.map(userData => {
+//             return userData.chat_id;
+//           });
+//           session.setUserSendList(JSON.stringify(userArray));
+//         }
+//       });
+//       connection.release();
+//       if (err) console.log(err);
+//     });
+//     const retrieveUserList = async () => {
+//       var userSendList = await session.getUserSendList().catch(err => {
+//         console.log(err.message);
+//       });
+//       console.log(`This is the after ${userSendList}`);
+//       if (userSendList.includes(",")) {
+//         var userSendList = userSendList
+//           .slice(1, userSendList.length - 1)
+//           .split(",")
+//           .map(numberString => {
+//             return Number(numberString);
+//           });
+//         console.log(userSendList);
+//       } else {
+//         var userSendList = userSendList.slice(1, userSendList.length - 1);
+//         var userSendList = Number(userSendList);
+//         var userSendListTemp = [];
+//         userSendListTemp.push(userSendList);
+//         userSendList = userSendListTemp;
+//       }
+//
+//       console.log(userSendList);
+//
+//       var userSendList = _.chunk(userSendList, 2);
+//       console.log(userSendList);
+//       userSendList.map(subUserSendList => {
+//         const postMessages = () => {
+//           subUserSendList.map(userId => {
+//             //bot.sendMessage(userId, draftPost);
+//             console.log(userId);
+//             bot.sendPhoto(userId, draftImage, { caption: draftCaption });
+//           });
+//         };
+//         setTimeout(postMessages, 3000);
+//       });
+//     };
+//     retrieveUserList();
+//   }
+// });
 
 bot.on("message", async msg => {
   if (msg.text == "Send Post") {
