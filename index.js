@@ -194,15 +194,18 @@ bot.onText(/Send Post/, async msg => {
           console.log("fuck2");
         } else {
           console.log(results);
-          const setUserSendList = async () => {
+          const setUserSendList = async results => {
             var userArray = [];
             userArray = await results.map(userData => {
               return userData.chat_id;
             });
-            const setList = await session.setUserSendList(
+            var setList = await session.setUserSendList(
               JSON.stringify(userArray)
             );
-            console.log(setList);
+            var setList = async () => {
+              return (setListContent = await session.getUserSendList());
+              console.log(setListContent);
+            };
           };
           setUserSendList();
         }
