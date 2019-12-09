@@ -51,7 +51,9 @@ class Session {
   }
 
   setUserSendList(userArray) {
-    redis.setex("userSendList", 1200, userArray);
+    redis.setAsync("userSendList", userArray).then(function(res) {
+      console.log("userSendList IS SET");
+    });
   }
   getUserSendList() {
     return redis.getAsync("userSendList").then(function(res) {
