@@ -180,7 +180,10 @@ bot.onText(/Send Post/, async msg => {
   console.log(adminState);
   if (adminState == "admin3") {
     pool.getConnection(function(err, connection) {
-      if (err) console.log(err);
+      if (err) {
+        console.log(err);
+        console.log("fuck");
+      }
       connection.query("SELECT chat_id FROM bot_user_db", function(
         err,
         results,
@@ -188,10 +191,12 @@ bot.onText(/Send Post/, async msg => {
       ) {
         if (err) {
           console.log(err.message);
+          console.log("fuck2");
         } else {
+          console.log(results);
           const setUserSendList = async () => {
             var userArray = [];
-            userArray = results.map(userData => {
+            userArray = await results.map(userData => {
               return userData.chat_id;
             });
             const setList = await session.setUserSendList(
