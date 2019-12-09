@@ -189,11 +189,14 @@ bot.onText(/Send Post/, async msg => {
         if (err) {
           console.log(err.message);
         } else {
-          var userArray = [];
-          userArray = results.map(userData => {
-            return userData.chat_id;
-          });
-          session.setUserSendList(JSON.stringify(userArray));
+          const setUserSendList = async () => {
+            var userArray = [];
+            userArray = results.map(userData => {
+              return userData.chat_id;
+            });
+            session.setUserSendList(JSON.stringify(userArray));
+          };
+          setUserSendList();
         }
       });
       connection.release();
