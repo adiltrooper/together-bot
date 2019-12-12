@@ -57,6 +57,7 @@ class Session {
   }
   getUserSendList() {
     return redis.getAsync("userSendList").then(function(res) {
+      console.log("getting");
       return res;
     });
   }

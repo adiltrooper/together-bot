@@ -212,7 +212,10 @@ bot.onText(/Send Post/, async msg => {
           userArray = results.map(userData => {
             return userData.chat_id;
           });
-          session.setUserSendList(JSON.stringify(userArray));
+          const asyncSetUser = async () => {
+            await session.setUserSendList(JSON.stringify(userArray));
+          };
+          asyncSetUser();
         }
       });
       connection.release();
