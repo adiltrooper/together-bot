@@ -163,8 +163,12 @@ bot.on("message", async msg => {
     });
     console.log(msg);
 
-    session.setDraftImage(msg.photo[0].file_id);
-    session.setDraftCaption(msg.caption);
+    session.setDraftImage(msg.photo[0].file_id).catch(err => {
+      console.log(err.message);
+    });
+    session.setDraftCaption(msg.caption).catch(err => {
+      console.log(err.message);
+    });
     session.setAdminState3();
   }
 });
