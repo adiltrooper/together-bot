@@ -271,31 +271,31 @@ bot.onText(/Exit Admin Session/, async msg => {
   }
 });
 
-// bot.onText(/Back/, async msg => {
-//   const adminState = await session.getAdminState().catch(err => {
-//     console.log(err.message);
-//   });
-//   switch (adminState) {
-//     case "admin2":
-//       session.setAdminState();
-//       bot.sendMessage(msg.chat.id, "Select Option:", {
-//         reply_markup: {
-//           keyboard: [["New Post", "Custom Post"], ["Exit Admin Session"]],
-//           resize_keyboard: true
-//         }
-//       });
-//     case "admin3":
-//       session.setAdminState2();
-//       session.delDraftImage();
-//       session.delDraftCaption();
-//       bot.sendMessage(msg.chat.id, "Draft your message here:", {
-//         reply_markup: {
-//           keyboard: [["Back", "Exit Admin Session"]],
-//           resize_keyboard: true
-//         }
-//       });
-//   }
-// });
+bot.onText(/Back/, async msg => {
+  const adminState = await session.getAdminState().catch(err => {
+    console.log(err.message);
+  });
+  switch (adminState) {
+    case "admin2":
+      session.setAdminState();
+      bot.sendMessage(msg.chat.id, "Select Option:", {
+        reply_markup: {
+          keyboard: [["New Post", "Custom Post"], ["Exit Admin Session"]],
+          resize_keyboard: true
+        }
+      });
+    case "admin3":
+      session.setAdminState2();
+      session.delDraftImage();
+      session.delDraftCaption();
+      bot.sendMessage(msg.chat.id, "Draft your message here:", {
+        reply_markup: {
+          keyboard: [["Back", "Exit Admin Session"]],
+          resize_keyboard: true
+        }
+      });
+  }
+});
 //
 // bot.on("message", async msg => {
 //   const adminState = await session.getAdminState().catch(err => {
