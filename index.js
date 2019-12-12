@@ -111,7 +111,8 @@ bot.onText(/\/admin/, async msg => {
   if (adminCheck) {
     bot.sendMessage(
       msg.chat.id,
-      `Hi <b>${msg.chat.first_name}</b>! Welcome to the admin menu!`,
+      `Hi <b>${msg.chat.first_name}</b>! Welcome to the admin menu!
+Please Select an Option:`,
       {
         reply_markup: {
           keyboard: [["New Post", "Custom Post"], ["Exit Admin Session"]],
