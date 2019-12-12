@@ -40,7 +40,7 @@ bot.onText(/\/start/, msg => {
 
   bot.sendPhoto(
     chat_id,
-    "https://res.cloudinary.com/dotogether/image/upload/v1575297277/Listings/Welcome%20Image.png"
+    "https://res.cloudinary.com/dotogether/image/upload/v1576154842/Listings/Welcome%20Image.png"
   );
   bot.sendMessage(
     chat_id,
@@ -198,66 +198,65 @@ bot.onText(/Send Post/, async msg => {
   });
   console.log(adminState);
   if (adminState == "admin3") {
-    pool.getConnection(function(err, connection) {
-      if (err) console.log(err);
-      connection.query("SELECT chat_id FROM bot_user_db", function(
-        err,
-        results,
-        fields
-      ) {
-        if (err) {
+    const getUsersFromDB = async () => {
+      await pool.getConnection(function(err, connection) {
+        if (err) console.log(err);
+        connection.query("SELECT chat_id FROM bot_user_db", function(
+          err,
+          results,
+          fields
+        ) {
+          if (err) {
+            console.log(err.message);
+          } else {
+            var userArray = [];
+            userArray = results.map(userData => {
+              return userData.chat_id;
+            });
+            session.setUserSendList(JSON.stringify(userArray));
+          }
+        });
+        connection.release();
+        if (err) console.log(err);
+      });
+      const retrieveUserList = async () => {
+        var userSendList = await session.getUserSendList().catch(err => {
           console.log(err.message);
+        });
+        console.log(`This is the after ${userSendList}`);
+        if (userSendList.includes(",")) {
+          var userSendList = userSendList
+            .slice(1, userSendList.length - 1)
+            .split(",")
+            .map(numberString => {
+              return Number(numberString);
+            });
+          console.log(userSendList);
         } else {
-          var userArray = [];
-          userArray = results.map(userData => {
-            return userData.chat_id;
-          });
-          const asyncSetUser = async () => {
-            await session.setUserSendList(JSON.stringify(userArray));
-          };
-          asyncSetUser();
+          var userSendList = userSendList.slice(1, userSendList.length - 1);
+          var userSendList = Number(userSendList);
+          var userSendListTemp = [];
+          userSendListTemp.push(userSendList);
+          userSendList = userSendListTemp;
         }
-      });
-      connection.release();
-      if (err) console.log(err);
-    });
-    const retrieveUserList = async () => {
-      var userSendList = await session.getUserSendList().catch(err => {
-        console.log(err.message);
-      });
-      console.log(`This is the after ${userSendList}`);
-      if (userSendList.includes(",")) {
-        var userSendList = userSendList
-          .slice(1, userSendList.length - 1)
-          .split(",")
-          .map(numberString => {
-            return Number(numberString);
-          });
+
         console.log(userSendList);
-      } else {
-        var userSendList = userSendList.slice(1, userSendList.length - 1);
-        var userSendList = Number(userSendList);
-        var userSendListTemp = [];
-        userSendListTemp.push(userSendList);
-        userSendList = userSendListTemp;
-      }
 
-      console.log(userSendList);
-
-      var userSendList = _.chunk(userSendList, 2);
-      console.log(userSendList);
-      userSendList.map(subUserSendList => {
-        const postMessages = () => {
-          subUserSendList.map(userId => {
-            //bot.sendMessage(userId, draftPost);
-            console.log(userId);
-            bot.sendPhoto(userId, draftImage, { caption: draftCaption });
-          });
-        };
-        setTimeout(postMessages, 3000);
-      });
+        var userSendList = _.chunk(userSendList, 2);
+        console.log(userSendList);
+        userSendList.map(subUserSendList => {
+          const postMessages = () => {
+            subUserSendList.map(userId => {
+              //bot.sendMessage(userId, draftPost);
+              console.log(userId);
+              bot.sendPhoto(userId, draftImage, { caption: draftCaption });
+            });
+          };
+          setTimeout(postMessages, 3000);
+        });
+      };
+      retrieveUserList();
     };
-    retrieveUserList();
   }
 });
 
