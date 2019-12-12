@@ -239,127 +239,111 @@ bot.onText(/Send Post/, async msg => {
   }
 });
 
-// bot.on("message", async msg => {
-//   if (msg.text == "Send Post") {
-//     const adminState = await session.getAdminState().catch(err => {
-//       console.log(err.message);
-//     });
-//     const draftImage = await session.getDraftImage().catch(err => {
-//       console.log(err.message);
-//     });
-//     const draftCaption = await session.getDraftCaption().catch(err => {
-//       console.log(err.message);
-//     });
-//     console.log(adminState);
-//     if (adminState == "admin3") {
-//       pool.getConnection(function(err, connection) {
-//         if (err) console.log(err);
-//         connection.query("SELECT chat_id FROM bot_user_db", function(
-//           err,
-//           results,
-//           fields
-//         ) {
-//           if (err) {
-//             console.log(err.message);
-//           } else {
-//             var userArray = [];
-//             userArray = results.map(userData => {
-//               return userData.chat_id;
-//             });
-//             session.setUserSendList(JSON.stringify(userArray));
-//           }
-//         });
-//         connection.release();
-//         if (err) console.log(err);
-//       });
-//       const retrieveUserList = async () => {
-//         var userSendList = await session.getUserSendList().catch(err => {
-//           console.log(err.message);
-//         });
-//         console.log(`This is the after ${userSendList}`);
-//         if (userSendList.includes(",")) {
-//           var userSendList = userSendList
-//             .slice(1, userSendList.length - 1)
-//             .split(",")
-//             .map(numberString => {
-//               return Number(numberString);
-//             });
-//           console.log(userSendList);
-//         } else {
-//           var userSendList = userSendList.slice(1, userSendList.length - 1);
-//           var userSendList = Number(userSendList);
-//           var userSendListTemp = [];
-//           userSendListTemp.push(userSendList);
-//           userSendList = userSendListTemp;
-//         }
-//
-//         console.log(userSendList);
-//
-//         var userSendList = _.chunk(userSendList, 2);
-//         console.log(userSendList);
-//         userSendList.map(subUserSendList => {
-//           const postMessages = () => {
-//             subUserSendList.map(userId => {
-//               //bot.sendMessage(userId, draftPost);
-//               console.log(userId);
-//               bot.sendPhoto(userId, draftImage, { caption: draftCaption });
-//             });
-//           };
-//           setTimeout(postMessages, 3000);
-//         });
-//       };
-//       retrieveUserList();
-//     }
-//   }
-// });
+/////////////////// EXITING /////////////////////////
 
-bot.on("message", async msg => {
+bot.onText(/Exit Admin Session/, async msg => {
   const adminState = await session.getAdminState().catch(err => {
     console.log(err.message);
   });
-  console.log(msg);
-  if (msg.text == "Exit Admin Session" && adminState == "admin1") {
-    session.setAdminStateNull();
-    bot.sendMessage(msg.chat.id, "Back to User Mode", {
-      reply_markup: {
-        keyboard: [
-          ["☀️Feelin' Adventurous", "🧘🏼‍Feelin' Chill"],
-          ["🏠I Wanna Stay Home"]
-        ],
-        resize_keyboard: true
-      }
-    });
-  } else if (msg.text == "Exit Admin Session" && adminState == "admin2") {
-    session.setAdminStateNull();
-    bot.sendMessage(msg.chat.id, "Back to User Mode", {
-      reply_markup: {
-        keyboard: [
-          ["☀️Feelin' Adventurous", "🧘🏼‍Feelin' Chill"],
-          ["🏠I Wanna Stay Home"]
-        ],
-        resize_keyboard: true
-      }
-    });
-  } else if (msg.text == "Back" && adminState == "admin2") {
-    session.setAdminState();
-    bot.sendMessage(msg.chat.id, "Select Option:", {
-      reply_markup: {
-        keyboard: [["New Post", "Custom Post"], ["Exit Admin Session"]],
-        resize_keyboard: true
-      }
-    });
-  } else if (msg.text == "Back" && adminState == "admin3") {
-    session.setAdminState2();
-    session.delDraftImage();
-    session.delDraftCaption();
-    bot.sendMessage(msg.chat.id, "Draft your message here:", {
-      reply_markup: {
-        keyboard: [["Back", "Exit Admin Session"]],
-        resize_keyboard: true
-      }
-    });
+  switch (adminState) {
+    case "admin1":
+      session.setAdminStateNull();
+      bot.sendMessage(msg.chat.id, "Back to User Mode", {
+        reply_markup: {
+          keyboard: [
+            ["☀️Feelin' Adventurous", "🧘🏼‍Feelin' Chill"],
+            ["🏠I Wanna Stay Home"]
+          ],
+          resize_keyboard: true
+        }
+      });
+    case "admin2":
+      session.setAdminStateNull();
+      bot.sendMessage(msg.chat.id, "Back to User Mode", {
+        reply_markup: {
+          keyboard: [
+            ["☀️Feelin' Adventurous", "🧘🏼‍Feelin' Chill"],
+            ["🏠I Wanna Stay Home"]
+          ],
+          resize_keyboard: true
+        }
+      });
   }
 });
+
+// bot.onText(/Back/, async msg => {
+//   const adminState = await session.getAdminState().catch(err => {
+//     console.log(err.message);
+//   });
+//   switch (adminState) {
+//     case "admin2":
+//       session.setAdminState();
+//       bot.sendMessage(msg.chat.id, "Select Option:", {
+//         reply_markup: {
+//           keyboard: [["New Post", "Custom Post"], ["Exit Admin Session"]],
+//           resize_keyboard: true
+//         }
+//       });
+//     case "admin3":
+//       session.setAdminState2();
+//       session.delDraftImage();
+//       session.delDraftCaption();
+//       bot.sendMessage(msg.chat.id, "Draft your message here:", {
+//         reply_markup: {
+//           keyboard: [["Back", "Exit Admin Session"]],
+//           resize_keyboard: true
+//         }
+//       });
+//   }
+// });
+//
+// bot.on("message", async msg => {
+//   const adminState = await session.getAdminState().catch(err => {
+//     console.log(err.message);
+//   });
+//   console.log(msg);
+//   if (msg.text == "Exit Admin Session" && adminState == "admin1") {
+//     session.setAdminStateNull();
+//     bot.sendMessage(msg.chat.id, "Back to User Mode", {
+//       reply_markup: {
+//         keyboard: [
+//           ["☀️Feelin' Adventurous", "🧘🏼‍Feelin' Chill"],
+//           ["🏠I Wanna Stay Home"]
+//         ],
+//         resize_keyboard: true
+//       }
+//     });
+//   } else if (msg.text == "Exit Admin Session" && adminState == "admin2") {
+//     session.setAdminStateNull();
+//     bot.sendMessage(msg.chat.id, "Back to User Mode", {
+//       reply_markup: {
+//         keyboard: [
+//           ["☀️Feelin' Adventurous", "🧘🏼‍Feelin' Chill"],
+//           ["🏠I Wanna Stay Home"]
+//         ],
+//         resize_keyboard: true
+//       }
+//     });
+//   } else if (msg.text == "Back" && adminState == "admin2") {
+//     session.setAdminState();
+//     bot.sendMessage(msg.chat.id, "Select Option:", {
+//       reply_markup: {
+//         keyboard: [["New Post", "Custom Post"], ["Exit Admin Session"]],
+//         resize_keyboard: true
+//       }
+//     });
+//   } else if (msg.text == "Back" && adminState == "admin3") {
+//     session.setAdminState2();
+//     session.delDraftImage();
+//     session.delDraftCaption();
+//     bot.sendMessage(msg.chat.id, "Draft your message here:", {
+//       reply_markup: {
+//         keyboard: [["Back", "Exit Admin Session"]],
+//         resize_keyboard: true
+//       }
+//     });
+//   }
+// });
 
 //GENERATOR FUNCTIONALITY
 
