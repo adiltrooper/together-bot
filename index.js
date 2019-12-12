@@ -280,7 +280,7 @@ bot.onText(/Back/, async msg => {
   switch (adminState) {
     case "admin2":
       session.setAdminState();
-      bot.sendMessage(msg.chat.id, "Select Option:", {
+      bot.sendMessage(msg.chat.id, `Please Select an Option:`, {
         reply_markup: {
           keyboard: [["New Post", "Custom Post"], ["Exit Admin Session"]],
           resize_keyboard: true
