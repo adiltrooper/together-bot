@@ -172,12 +172,16 @@ bot.on("message", async msg => {
     msg.text !== "/start" &&
     msg.text !== "New Post"
   ) {
-    bot.sendMessage(msg.chat.id, "What do you want to do with your draft:", {
-      reply_markup: {
-        keyboard: [["Send Post", "Back"]],
-        resize_keyboard: true
+    await bot.sendMessage(
+      msg.chat.id,
+      "What do you want to do with your draft:",
+      {
+        reply_markup: {
+          keyboard: [["Send Post", "Back"]],
+          resize_keyboard: true
+        }
       }
-    });
+    );
     console.log(msg);
 
     session.setDraftImage(msg.photo[0].file_id);
