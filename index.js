@@ -139,6 +139,21 @@ bot.onText(/New Post/, async msg => {
         resize_keyboard: true
       }
     });
+  } else {
+    session.setAdminStateNull();
+    bot.sendMessage(
+      msg.chat.id,
+      "Something went wrong, Please inform Adil. You can try again if you want to.",
+      {
+        reply_markup: {
+          keyboard: [
+            ["☀️Feelin' Adventurous", "🧘🏼‍Feelin' Chill"],
+            ["🏠I Wanna Stay Home"]
+          ],
+          resize_keyboard: true
+        }
+      }
+    );
   }
 });
 
@@ -153,9 +168,10 @@ bot.on("message", async msg => {
     msg.text !== "☀️Feelin' Adventurous" &&
     msg.text !== "🧘🏼‍Feelin' Chill" &&
     msg.text !== "🏠I Wanna Stay Home" &&
-    msg.text !== "/start"
+    msg.text !== "/start" &&
+    msg.text !== "New Post"
   ) {
-    bot.sendMessage(msg.chat.id, "Select Option:", {
+    bot.sendMessage(msg.chat.id, "What do you want to do with your draft:", {
       reply_markup: {
         keyboard: [["Send Post", "Back"]],
         resize_keyboard: true
@@ -163,12 +179,8 @@ bot.on("message", async msg => {
     });
     console.log(msg);
 
-    session.setDraftImage(msg.photo[0].file_id).catch(err => {
-      console.log(err.message);
-    });
-    session.setDraftCaption(msg.caption).catch(err => {
-      console.log(err.message);
-    });
+    session.setDraftImage(msg.photo[0].file_id);
+    session.setDraftCaption(msg.caption);
     session.setAdminState3();
   }
 });
