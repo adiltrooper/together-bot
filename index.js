@@ -92,10 +92,6 @@ const adminsOnly = async msg => {
     var reply = keys.adminsId;
   }
   if (reply.includes(member.user.id)) {
-    bot.sendMessage(
-      msg.chat.id,
-      `Hi ${member.user.first_name}! Welcome to the admin menu!`
-    );
     session.setAdminState();
     return true;
   } else {
@@ -113,12 +109,17 @@ bot.onText(/\/admin/, async msg => {
     console.log(err.message);
   });
   if (adminCheck) {
-    bot.sendMessage(msg.chat.id, "Select Option:", {
-      reply_markup: {
-        keyboard: [["New Post", "Custom Post"], ["Exit Admin Session"]],
-        resize_keyboard: true
+    bot.sendMessage(
+      msg.chat.id,
+      `Hi ${msg.chat.first_name}
+      PLEASE SELECT AN OPTION:`,
+      {
+        reply_markup: {
+          keyboard: [["New Post", "Custom Post"], ["Exit Admin Session"]],
+          resize_keyboard: true
+        }
       }
-    });
+    );
   } else {
     console.log("Sorry you are not an admin");
   }
