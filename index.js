@@ -109,6 +109,7 @@ bot.onText(/\/admin/, async msg => {
     console.log(err.message);
   });
   if (adminCheck) {
+    session.setAdminState();
     bot.sendMessage(
       msg.chat.id,
       `Hi <b>${msg.chat.first_name}</b>! Welcome to the admin menu!
