@@ -264,9 +264,7 @@ bot.onText(/Send Post/, async msg => {
 /////////////////// EXITING /////////////////////////
 
 bot.onText(/Exit Admin Session/, async msg => {
-  await session.setAdminStateNull().catch(err => {
-    console.log(err.message);
-  });
+  await session.setAdminStateNull();
   bot.sendMessage(msg.chat.id, "Back to User Mode", {
     reply_markup: {
       keyboard: [
