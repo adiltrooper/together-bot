@@ -244,33 +244,16 @@ bot.onText(/Send Post/, async msg => {
 /////////////////// EXITING /////////////////////////
 
 bot.onText(/Exit Admin Session/, async msg => {
-  const adminState = await session.getAdminState().catch(err => {
-    console.log(err.message);
+  session.setAdminStateNull();
+  bot.sendMessage(msg.chat.id, "Back to User Mode", {
+    reply_markup: {
+      keyboard: [
+        ["☀️Feelin' Adventurous", "🧘🏼‍Feelin' Chill"],
+        ["🏠I Wanna Stay Home"]
+      ],
+      resize_keyboard: true
+    }
   });
-  switch (adminState) {
-    case "admin1":
-      session.setAdminStateNull();
-      bot.sendMessage(msg.chat.id, "Back to User Mode", {
-        reply_markup: {
-          keyboard: [
-            ["☀️Feelin' Adventurous", "🧘🏼‍Feelin' Chill"],
-            ["🏠I Wanna Stay Home"]
-          ],
-          resize_keyboard: true
-        }
-      });
-    case "admin2":
-      session.setAdminStateNull();
-      bot.sendMessage(msg.chat.id, "Back to User Mode", {
-        reply_markup: {
-          keyboard: [
-            ["☀️Feelin' Adventurous", "🧘🏼‍Feelin' Chill"],
-            ["🏠I Wanna Stay Home"]
-          ],
-          resize_keyboard: true
-        }
-      });
-  }
 });
 
 bot.onText(/Back/, async msg => {
@@ -286,6 +269,7 @@ bot.onText(/Back/, async msg => {
           resize_keyboard: true
         }
       });
+      break;
     case "admin3":
       session.setAdminState2();
       session.delDraftImage();
@@ -293,6 +277,15 @@ bot.onText(/Back/, async msg => {
       bot.sendMessage(msg.chat.id, "Draft your message here:", {
         reply_markup: {
           keyboard: [["Back", "Exit Admin Session"]],
+          resize_keyboard: true
+        }
+      });
+      break;
+    default:
+      session.setAdminState();
+      bot.sendMessage(msg.chat.id, `Please Select an Option:`, {
+        reply_markup: {
+          keyboard: [["New Post", "Custom Post"], ["Exit Admin Session"]],
           resize_keyboard: true
         }
       });
