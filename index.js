@@ -170,7 +170,9 @@ bot.on("message", async msg => {
     msg.text !== "🧘🏼‍Feelin' Chill" &&
     msg.text !== "🏠I Wanna Stay Home" &&
     msg.text !== "/start" &&
-    msg.text !== "New Post"
+    msg.text !== "New Post" &&
+    msg.text !== "/admin" &&
+    msg.text !== "/start"
   ) {
     await bot.sendMessage(
       msg.chat.id,
