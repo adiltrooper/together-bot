@@ -257,6 +257,7 @@ bot.onText(/Send Post/, async msg => {
       };
       retrieveUserList();
     };
+    getUsersFromDB();
   }
 });
 
