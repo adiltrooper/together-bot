@@ -91,7 +91,7 @@ const adminsOnly = async msg => {
     session.setAdminList();
     var reply = keys.adminsId;
   }
-  if (member && member.user.id == reply) {
+  if (reply.includes(member.user.id)) {
     bot.sendMessage(
       msg.chat.id,
       `Hi ${member.user.first_name}! Welcome to the admin menu!`
