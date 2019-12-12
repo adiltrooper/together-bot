@@ -117,7 +117,7 @@ bot.onText(/\/admin/, async msg => {
           keyboard: [["New Post", "Custom Post"], ["Exit Admin Session"]],
           resize_keyboard: true
         },
-        parse_mode: HTML
+        parse_mode: "HTML"
       }
     );
   } else {
