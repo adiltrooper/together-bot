@@ -210,7 +210,7 @@ bot.onText(/Send Post/, async msg => {
   });
   console.log(adminState);
   if (adminState == "admin3") {
-    const getUsersFromDB = async () => {
+    const getUsersAndSend = async () => {
       await pool.getConnection(function(err, connection) {
         if (err) console.log(err);
         connection.query("SELECT chat_id FROM bot_user_db", function(
@@ -252,15 +252,16 @@ bot.onText(/Send Post/, async msg => {
           userSendList = userSendListTemp;
         }
 
-        console.log(userSendList);
-
         var userSendList = _.chunk(userSendList, 2);
         console.log(userSendList);
         userSendList.map(subUserSendList => {
           const postMessages = () => {
             subUserSendList.map(userId => {
               if (!draftImage) {
-                bot.sendMessage(userId, draftMessage);
+                bot.sendMessage(userId, draftMessage).catch(err => {
+                  console.log(err);
+                  console.log(err.message);
+                });
               } else {
                 console.log(userId);
                 bot.sendPhoto(userId, draftImage, { caption: draftCaption });
@@ -272,7 +273,7 @@ bot.onText(/Send Post/, async msg => {
       };
       retrieveUserList();
     };
-    getUsersFromDB();
+    getUsersAndSend();
   }
 });
 
