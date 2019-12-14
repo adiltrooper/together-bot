@@ -94,6 +94,12 @@ class Session {
     redis.del("draftCaption");
   }
 
+  setDraftMessage(message) {
+    redis.setAsync("draftMessage", message).then(function(res) {
+      console.log("DRAFT MESSAGE IN");
+    });
+  }
+
   setCachedListings(
     cat_id,
     activity,
