@@ -34,6 +34,7 @@ const session = new Session();
 bot.onText(/\/start/, msg => {
   const { first_name, username } = msg.chat;
   const chat_id = msg.chat.id;
+  var status = "normal";
   if (keys.adminsId.includes(chat_id)) {
     var user_type = "admin";
   } else var user_type = "normal";
@@ -65,8 +66,8 @@ So what can this bot do for you?
   pool.getConnection(function(err, connection) {
     if (err) console.log(err);
     connection.query(
-      "INSERT INTO bot_user_db (chat_id, first_name, username, user_type) VALUES (?, ?, ?, ?)",
-      [chat_id, first_name, username, user_type],
+      "INSERT INTO bot_user_db (chat_id, first_name, username, user_type, status) VALUES (?, ?, ?, ?, ?)",
+      [chat_id, first_name, username, user_type, status],
       function(err, results, fields) {
         if (err) console.log(err.message);
       }
@@ -260,11 +261,52 @@ bot.onText(/Send Post/, async msg => {
               if (!draftImage) {
                 bot.sendMessage(userId, draftMessage).catch(err => {
                   console.log(err);
-                  console.log(err.message);
+                  if (err.statusCode == 403) {
+                    const blocked_id = err.body.substring(
+                      err.body.lastIndexOf("=") + 1,
+                      err.body.lastIndexOf("&")
+                    );
+
+                    pool.getConnection(function(err, connection) {
+                      if (err) console.log(err);
+                      connection.query(
+                        "INSERT INTO bot_user_db (status) WHERE chat_id = ?",
+                        [blocked_id],
+                        function(err, results, fields) {
+                          if (err) console.log(err.message);
+                        }
+                      );
+                      connection.release();
+                      if (err) console.log(err);
+                    });
+                  }
                 });
               } else {
                 console.log(userId);
-                bot.sendPhoto(userId, draftImage, { caption: draftCaption });
+                bot
+                  .sendPhoto(userId, draftImage, { caption: draftCaption })
+                  .catch(err => {
+                    console.log(err);
+                    if (err.statusCode == 403) {
+                      const blocked_id = err.body.substring(
+                        err.body.lastIndexOf("=") + 1,
+                        err.body.lastIndexOf("&")
+                      );
+
+                      pool.getConnection(function(err, connection) {
+                        if (err) console.log(err);
+                        connection.query(
+                          "INSERT INTO bot_user_db (status) WHERE chat_id = ?",
+                          [blocked_id],
+                          function(err, results, fields) {
+                            if (err) console.log(err.message);
+                          }
+                        );
+                        connection.release();
+                        if (err) console.log(err);
+                      });
+                    }
+                  });
               }
             });
           };
