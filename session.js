@@ -100,6 +100,12 @@ class Session {
     });
   }
 
+  getDraftMessage() {
+    return redis.getAsync("draftMessage").then(function(res) {
+      return res;
+    });
+  }
+
   setCachedListings(
     cat_id,
     activity,
