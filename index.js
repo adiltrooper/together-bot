@@ -133,13 +133,12 @@ Please Select an Option:`,
 });
 
 bot.onText(/Subscriber Count/, async msg => {
+  var subsCount;
   const adminState = await session.getAdminState().catch(err => {
     console.log(err.message);
   });
-  var subsCount;
-
-  async function getSubsCount(subsCount) {
-    await pool.getConnection(async function(err, connection) {
+  function getSubsCount() {
+    pool.getConnection(async function(err, connection) {
       if (err) console.log(err);
       await connection.query(
         "SELECT COUNT(*) AS subsCount FROM bot_user_db",
@@ -155,7 +154,7 @@ bot.onText(/Subscriber Count/, async msg => {
     });
   }
 
-  getSubsCount();
+  await getSubsCount();
 
   console.log(subsCount);
 
