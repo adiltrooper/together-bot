@@ -117,7 +117,10 @@ bot.onText(/\/admin/, async msg => {
 Please Select an Option:`,
       {
         reply_markup: {
-          keyboard: [["New Post", "Custom Post"], ["Exit Admin Session"]],
+          keyboard: [
+            ["New Post", "Custom Post"]["Subscriber Count"],
+            ["Exit Admin Session"]
+          ],
           resize_keyboard: true
         },
         parse_mode: "HTML"
@@ -125,6 +128,27 @@ Please Select an Option:`,
     );
   } else {
     console.log("Sorry you are not an admin");
+  }
+});
+
+bot.onText(/Subscriber Count/, async msg => {
+  const adminState = await session.getAdminState().catch(err => {
+    console.log(err.message);
+  });
+  if (adminState == "admin1") {
+    pool.getConnection(function(err, connection) {
+      if (err) console.log(err);
+      connection.query("SELECT COUNT(*) FROM bot_user_db", function(
+        err,
+        results,
+        fields
+      ) {
+        if (err) console.log(err.message);
+        console.log(results);
+      });
+      connection.release();
+      if (err) console.log(err);
+    });
   }
 });
 
@@ -343,7 +367,11 @@ bot.onText(/Back/, async msg => {
       session.setAdminState();
       bot.sendMessage(msg.chat.id, `Please Select an Option:`, {
         reply_markup: {
-          keyboard: [["New Post", "Custom Post"], ["Exit Admin Session"]],
+          keyboard: [
+            ["New Post", "Custom Post"],
+            ["Subscriber Count"],
+            ["Exit Admin Session"]
+          ],
           resize_keyboard: true
         }
       });
@@ -363,7 +391,11 @@ bot.onText(/Back/, async msg => {
       session.setAdminState();
       bot.sendMessage(msg.chat.id, `Please Select an Option:`, {
         reply_markup: {
-          keyboard: [["New Post", "Custom Post"], ["Exit Admin Session"]],
+          keyboard: [
+            ["New Post", "Custom Post"],
+            ["Subscriber Count"],
+            ["Exit Admin Session"]
+          ],
           resize_keyboard: true
         }
       });
