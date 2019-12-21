@@ -146,10 +146,17 @@ bot.onText(/Subscriber Count/, async msg => {
       ) {
         if (err) console.log(err.message);
         console.log(results);
+        var subsCount = results[0];
       });
       connection.release();
       if (err) console.log(err);
     });
+
+    bot.sendMessage(
+      msg.chat.id,
+      `TogetherSG now has <b>${subsCount}</b> subsribers!`,
+      { parse_mode: "HTML" }
+    );
   }
 });
 
