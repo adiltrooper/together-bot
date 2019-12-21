@@ -118,7 +118,8 @@ Please Select an Option:`,
       {
         reply_markup: {
           keyboard: [
-            ["New Post", "Custom Post"]["Subscriber Count"],
+            ["New Post", "Custom Post"],
+            ["Subscriber Count"],
             ["Exit Admin Session"]
           ],
           resize_keyboard: true
