@@ -224,11 +224,7 @@ bot.on("message", async msg => {
     var three = "/3/";
     var four = "/4/";
 
-    var option1 = msg.text.substring(
-      msg.text.lastIndexOf(one) + 1,
-      msg.text.lastIndexOf(two)
-    );
-
+    var option1 = msg.text.match("/1/(.*)/2/");
     console.log(option1);
   }
 });
