@@ -155,7 +155,7 @@ bot.onText(/Subscriber Count/, async msg => {
     });
   }
 
-  await getSubsCount();
+  getSubsCount();
 
   console.log(subsCount);
 
