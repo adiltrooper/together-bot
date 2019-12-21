@@ -37,6 +37,12 @@ class Session {
   setAdminState3() {
     return redis.setex("adminState", 1200, "admin3");
   }
+  setAdminState4() {
+    return redis.setex("adminState", 1200, "admin4");
+  }
+  setAdminState5() {
+    return redis.setex("adminState", 1200, "admin5");
+  }
 
   getAdminState() {
     return redis.getAsync("adminState").then(function(res) {
