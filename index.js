@@ -153,6 +153,7 @@ bot.onText(/Subscriber Count/, async msg => {
   }
 
   const result = await getSubsCount();
+  console.log(result);
   var subsCount = result[0].subsCount;
   console.log(subsCount);
 
