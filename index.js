@@ -136,8 +136,9 @@ bot.onText(/Subscriber Count/, async msg => {
   const adminState = await session.getAdminState().catch(err => {
     console.log(err.message);
   });
+  var subsCount;
 
-  async function getSubsCount() {
+  async function getSubsCount(subsCount) {
     await pool.getConnection(async function(err, connection) {
       if (err) console.log(err);
       await connection.query(
