@@ -137,19 +137,23 @@ bot.onText(/Subscriber Count/, async msg => {
     console.log(err.message);
   });
   var subsCount;
-  pool.getConnection(async function(err, connection) {
-    if (err) console.log(err);
-    await connection.query(
-      "SELECT COUNT(*) AS subsCount FROM bot_user_db",
-      function(err, results, fields) {
-        if (err) console.log(err.message);
-        console.log(results[0].subsCount);
-        var subsCount = results[0].subsCount;
-      }
-    );
-    connection.release();
-    if (err) console.log(err);
-  });
+  function getSubsCount() {
+    pool.getConnection(function(err, connection) {
+      if (err) console.log(err);
+      connection.query(
+        "SELECT COUNT(*) AS subsCount FROM bot_user_db",
+        function(err, results, fields) {
+          if (err) console.log(err.message);
+          console.log(results[0].subsCount);
+          var subsCount = results[0].subsCount;
+        }
+      );
+      connection.release();
+      if (err) console.log(err);
+    });
+  }
+  await getSubsCount();
+
   console.log(subsCount);
 
   if (adminState == "admin1") {
