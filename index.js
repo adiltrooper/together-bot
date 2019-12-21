@@ -138,7 +138,7 @@ bot.onText(/Subscriber Count/, async msg => {
   });
   if (adminState == "admin1") {
     var subsCount;
-    pool.getConnection(function(err, connection) {
+    await pool.getConnection(function(err, connection) {
       if (err) console.log(err);
       connection.query("SELECT COUNT(*) FROM bot_user_db", function(
         err,
@@ -147,7 +147,7 @@ bot.onText(/Subscriber Count/, async msg => {
       ) {
         if (err) console.log(err.message);
         console.log(results[0]["COUNT(*)"]);
-        var subsCount = results[0]["COUNT(*)"];
+        subsCount = results[0]["COUNT(*)"];
       });
       connection.release();
       if (err) console.log(err);
