@@ -146,8 +146,8 @@ bot.onText(/Subscriber Count/, async msg => {
         fields
       ) {
         if (err) console.log(err.message);
-        console.log(results[0]);
-        var subsCount = results[0];
+        console.log(results[0]["COUNT(*)"]);
+        var subsCount = results[0]["COUNT(*)"];
       });
       connection.release();
       if (err) console.log(err);
