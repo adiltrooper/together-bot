@@ -156,8 +156,6 @@ bot.onText(/Subscriber Count/, async msg => {
       connection.release();
       if (err) console.log(err);
     });
-
-    console.log(subsCount);
   }
 });
 
