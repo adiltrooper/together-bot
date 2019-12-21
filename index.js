@@ -138,9 +138,9 @@ bot.onText(/Subscriber Count/, async msg => {
     console.log(err.message);
   });
   function getSubsCount() {
-    pool.getConnection(async function(err, connection) {
+    pool.getConnection(function(err, connection) {
       if (err) console.log(err);
-      await connection.query(
+      connection.query(
         "SELECT COUNT(*) AS subsCount FROM bot_user_db",
         function(err, results, fields) {
           if (err) console.log(err.message);
@@ -154,7 +154,7 @@ bot.onText(/Subscriber Count/, async msg => {
     });
   }
 
-  await getSubsCount();
+  const x = await getSubsCount();
 
   console.log(subsCount);
 
