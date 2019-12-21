@@ -133,11 +133,11 @@ Please Select an Option:`,
 });
 
 bot.onText(/Subscriber Count/, async msg => {
-  const adminState = session.getAdminState().catch(err => {
+  const adminState = await session.getAdminState().catch(err => {
     console.log(err.message);
   });
   var subsCount;
-  const getSubsCount = pool.getConnection(function(err, connection) {
+  let getSubsCount = await pool.getConnection(function(err, connection) {
     if (err) console.log(err);
     connection.query("SELECT COUNT(*) AS subsCount FROM bot_user_db", function(
       err,
@@ -151,8 +151,6 @@ bot.onText(/Subscriber Count/, async msg => {
     connection.release();
     if (err) console.log(err);
   });
-  await adminState;
-  await getSubsCount;
   console.log(subsCount);
 
   if (adminState == "admin1") {
