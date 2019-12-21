@@ -133,11 +133,10 @@ Please Select an Option:`,
 });
 
 bot.onText(/Subscriber Count/, async msg => {
-  var subsCount;
   const adminState = await session.getAdminState().catch(err => {
     console.log(err.message);
   });
-  function getSubsCount() {
+  if (adminState == "admin1") {
     pool.getConnection(function(err, connection) {
       if (err) console.log(err);
       connection.query(
@@ -146,24 +145,19 @@ bot.onText(/Subscriber Count/, async msg => {
           if (err) console.log(err.message);
           console.log(results[0].subsCount);
           var subsCount = results[0].subsCount;
-          return subsCount;
+
+          bot.sendMessage(
+            msg.chat.id,
+            `TogetherSG now has <b>${subsCount}</b> subsribers!`,
+            { parse_mode: "HTML" }
+          );
         }
       );
       connection.release();
       if (err) console.log(err);
     });
-  }
 
-  const x = await getSubsCount();
-
-  console.log(subsCount);
-
-  if (adminState == "admin1") {
-    bot.sendMessage(
-      msg.chat.id,
-      `TogetherSG now has <b>${subsCount}</b> subsribers!`,
-      { parse_mode: "HTML" }
-    );
+    console.log(subsCount);
   }
 });
 
