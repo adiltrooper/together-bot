@@ -224,7 +224,7 @@ bot.on("message", async msg => {
     var three = "/3/";
     var four = "/4/";
 
-    var option1 = msg.text.match("/1/(.*)/2/");
+    var option1 = msg.text.match(new RegExp(one + "(.*)" + two));
     console.log(option1);
   }
 });
