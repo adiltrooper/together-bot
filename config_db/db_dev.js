@@ -2,7 +2,7 @@ module.exports = {
   connectionlimit: 10,
   host: "localhost",
   user: "root",
-  password: "Grandmaster13",
+  password: "",
   database: "togather",
   multipleStatements: true
 };
