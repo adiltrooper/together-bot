@@ -234,7 +234,7 @@ bot.on("message", async msg => {
     var option4 = msg.text.match(
       new RegExp("(?:" + four + ")(.[\\s\\S]*)(?:" + end + ")", "g")
     );
-    console.log(option);
+    console.log(`${option1} + ${option2} + ${option3} + ${option4}`);
   }
 });
 
