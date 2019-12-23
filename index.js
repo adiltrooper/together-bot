@@ -222,14 +222,27 @@ bot.on("message", async msg => {
     var four = "/4/";
     var end = "/end/";
 
-    var option1 = msg.text.match(
-      new RegExp(one + "(.[\\s\\S]*)" + two || one + "(.[\\s\\S]*)" + end)
-    );
+    var option1 = msg.text.match(new RegExp(one + "(.[\\s\\S]*)" + two));
     var option2 = msg.text.match(new RegExp(two + "(.[\\s\\S]*)" + three));
     var option2 = msg.text.match(new RegExp(three + "(.[\\s\\S]*)" + four));
     var option2 = msg.text.match(new RegExp(four + "(.[\\s\\S]*)" + end));
 
-    console.log(option1[1]);
+    bot.sendMessage(msg.chat.id, "earlier msg", {
+      reply_markup: {
+        inline_keyboard: [
+          [
+            {
+              text: option1,
+              callback_data: option1
+            },
+            {
+              text: option2,
+              callback_data: option2
+            }
+          ]
+        ]
+      }
+    });
   }
 });
 
