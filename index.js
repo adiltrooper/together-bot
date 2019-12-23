@@ -234,7 +234,6 @@ bot.on("message", async msg => {
       new RegExp("(?:" + four + ")(.[\\s\\S]*)(?:" + end + ")", "g")
     );
     console.log(option1[1]);
-    console.log(option2[1]);
 
     bot.sendMessage(msg.chat.id, option1);
   }
