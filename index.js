@@ -159,84 +159,84 @@ bot.onText(/Subscriber Count/, async msg => {
   }
 });
 
-bot.onText(/Custom Post/, async msg => {
-  const adminState = await session.getAdminState().catch(err => {
-    console.log(err.message);
-  });
-  session.setAdminState4();
-  bot.sendMessage(msg.chat.id, "Draft your main message:", {
-    reply_markup: {
-      keyboard: [["Back", "Exit Admin Session"]],
-      resize_keyboard: true
-    }
-  });
-});
-
-bot.on("message", async msg => {
-  const adminState = await session.getAdminState().catch(err => {
-    console.log(err.message);
-  });
-  if (
-    adminState == "admin4" &&
-    msg.text !== "Back" &&
-    msg.text !== "Exit Admin Session" &&
-    msg.text !== "☀️Feelin' Adventurous" &&
-    msg.text !== "🧘🏼‍Feelin' Chill" &&
-    msg.text !== "🏠I Wanna Stay Home" &&
-    msg.text !== "/start" &&
-    msg.text !== "New Post" &&
-    msg.text !== "/admin" &&
-    msg.text !== "/start"
-  ) {
-    await bot.sendMessage(msg.chat.id, "Send your options in the form of");
-    console.log(msg);
-    if (msg.photo) {
-      session.setDraftImage(msg.photo[0].file_id);
-      session.setDraftCaption(msg.caption);
-    } else {
-      session.setDraftMessage(msg.text);
-    }
-    session.setAdminState5();
-  }
-});
-
-bot.on("message", async msg => {
-  const adminState = await session.getAdminState().catch(err => {
-    console.log(err.message);
-  });
-  if (
-    adminState == "admin5" &&
-    msg.text !== "Back" &&
-    msg.text !== "Exit Admin Session" &&
-    msg.text !== "☀️Feelin' Adventurous" &&
-    msg.text !== "🧘🏼‍Feelin' Chill" &&
-    msg.text !== "🏠I Wanna Stay Home" &&
-    msg.text !== "/start" &&
-    msg.text !== "New Post" &&
-    msg.text !== "/admin" &&
-    msg.text !== "/start"
-  ) {
-    var one = "/1/";
-    var two = "/2/";
-    var three = "/3/";
-    var four = "/4/";
-    var end = "/end/";
-
-    var option1 = msg.text.match(
-      new RegExp("(?:" + one + ")(.[\\s\\S]*)(?:" + two + ")", "g")
-    );
-    var option2 = msg.text.match(
-      new RegExp("(?:" + two + ")(.[\\s\\S]*)(?:" + three + ")", "g")
-    );
-    var option3 = msg.text.match(
-      new RegExp("(?:" + three + ")(.[\\s\\S]*)(?:" + four + ")", "g")
-    );
-    var option4 = msg.text.match(
-      new RegExp("(?:" + four + ")(.[\\s\\S]*)(?:" + end + ")", "g")
-    );
-    console.log(option);
-  }
-});
+// bot.onText(/Custom Post/, async msg => {
+//   const adminState = await session.getAdminState().catch(err => {
+//     console.log(err.message);
+//   });
+//   session.setAdminState4();
+//   bot.sendMessage(msg.chat.id, "Draft your main message:", {
+//     reply_markup: {
+//       keyboard: [["Back", "Exit Admin Session"]],
+//       resize_keyboard: true
+//     }
+//   });
+// });
+//
+// bot.on("message", async msg => {
+//   const adminState = await session.getAdminState().catch(err => {
+//     console.log(err.message);
+//   });
+//   if (
+//     adminState == "admin4" &&
+//     msg.text !== "Back" &&
+//     msg.text !== "Exit Admin Session" &&
+//     msg.text !== "☀️Feelin' Adventurous" &&
+//     msg.text !== "🧘🏼‍Feelin' Chill" &&
+//     msg.text !== "🏠I Wanna Stay Home" &&
+//     msg.text !== "/start" &&
+//     msg.text !== "New Post" &&
+//     msg.text !== "/admin" &&
+//     msg.text !== "/start"
+//   ) {
+//     await bot.sendMessage(msg.chat.id, "Send your options in the form of");
+//     console.log(msg);
+//     if (msg.photo) {
+//       session.setDraftImage(msg.photo[0].file_id);
+//       session.setDraftCaption(msg.caption);
+//     } else {
+//       session.setDraftMessage(msg.text);
+//     }
+//     session.setAdminState5();
+//   }
+// });
+//
+// bot.on("message", async msg => {
+//   const adminState = await session.getAdminState().catch(err => {
+//     console.log(err.message);
+//   });
+//   if (
+//     adminState == "admin5" &&
+//     msg.text !== "Back" &&
+//     msg.text !== "Exit Admin Session" &&
+//     msg.text !== "☀️Feelin' Adventurous" &&
+//     msg.text !== "🧘🏼‍Feelin' Chill" &&
+//     msg.text !== "🏠I Wanna Stay Home" &&
+//     msg.text !== "/start" &&
+//     msg.text !== "New Post" &&
+//     msg.text !== "/admin" &&
+//     msg.text !== "/start"
+//   ) {
+//     var one = "/1/";
+//     var two = "/2/";
+//     var three = "/3/";
+//     var four = "/4/";
+//     var end = "/end/";
+//
+//     var option1 = msg.text.match(
+//       new RegExp("(?:" + one + ")(.[\\s\\S]*)(?:" + two + ")", "g")
+//     );
+//     var option2 = msg.text.match(
+//       new RegExp("(?:" + two + ")(.[\\s\\S]*)(?:" + three + ")", "g")
+//     );
+//     var option3 = msg.text.match(
+//       new RegExp("(?:" + three + ")(.[\\s\\S]*)(?:" + four + ")", "g")
+//     );
+//     var option4 = msg.text.match(
+//       new RegExp("(?:" + four + ")(.[\\s\\S]*)(?:" + end + ")", "g")
+//     );
+//     console.log(option);
+//   }
+// });
 
 bot.onText(/New Post/, async msg => {
   const adminState = await session.getAdminState().catch(err => {
