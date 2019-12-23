@@ -227,7 +227,7 @@ bot.on("message", async msg => {
     var option3 = msg.text.match(new RegExp(three + "(.[\\s\\S]*)" + four));
     var option4 = msg.text.match(new RegExp(four + "(.[\\s\\S]*)" + end));
 
-    if (option1) {
+    if (option1 && !option2 && !option3 && !option4) {
       bot.sendMessage(msg.chat.id, "earlier msg", {
         reply_markup: {
           inline_keyboard: [
@@ -240,7 +240,7 @@ bot.on("message", async msg => {
           ]
         }
       });
-    } else if (option2) {
+    } else if (option1 && option2 && !option3 && !option4) {
       bot.sendMessage(msg.chat.id, "earlier msg", {
         reply_markup: {
           inline_keyboard: [
@@ -259,7 +259,7 @@ bot.on("message", async msg => {
           ]
         }
       });
-    } else if (option3) {
+    } else if (option1 && option2 && option3 && !option4) {
       bot.sendMessage(msg.chat.id, "earlier msg", {
         reply_markup: {
           inline_keyboard: [
@@ -284,7 +284,7 @@ bot.on("message", async msg => {
           ]
         }
       });
-    } else if (option4) {
+    } else if (option1 && option2 && option3 && option4) {
       bot.sendMessage(msg.chat.id, "earlier msg", {
         reply_markup: {
           inline_keyboard: [
