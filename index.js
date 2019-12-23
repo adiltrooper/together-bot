@@ -228,11 +228,95 @@ bot.on("message", async msg => {
     var option3 = msg.text.match(new RegExp(three + "(.[\\s\\S]*)" + four));
     var option4 = msg.text.match(new RegExp(four + "(.[\\s\\S]*)" + end));
 
-    bot.sendMessage(msg.chat.id, "earlier msg", {
-      reply_markup: {
-        inline_keyboard: inlineKeyboardOptions.keyboardWith1
-      }
-    });
+    if (option1) {
+      bot.sendMessage(msg.chat.id, "earlier msg", {
+        reply_markup: {
+          inline_keyboard: [
+            [
+              {
+                text: option1[1],
+                callback_data: option1[1]
+              }
+            ]
+          ]
+        }
+      });
+    } else if (option2) {
+      bot.sendMessage(msg.chat.id, "earlier msg", {
+        reply_markup: {
+          inline_keyboard: [
+            [
+              {
+                text: option1[1],
+                callback_data: option1[1]
+              }
+            ],
+            [
+              {
+                text: option2[1],
+                callback_data: option2[1]
+              }
+            ]
+          ]
+        }
+      });
+    } else if (option3) {
+      bot.sendMessage(msg.chat.id, "earlier msg", {
+        reply_markup: {
+          inline_keyboard: [
+            [
+              {
+                text: option1[1],
+                callback_data: option1[1]
+              }
+            ],
+            [
+              {
+                text: option2[1],
+                callback_data: option2[1]
+              }
+            ],
+            [
+              {
+                text: option3[1],
+                callback_data: option3[1]
+              }
+            ]
+          ]
+        }
+      });
+    } else if (option4) {
+      bot.sendMessage(msg.chat.id, "earlier msg", {
+        reply_markup: {
+          inline_keyboard: [
+            [
+              {
+                text: option1[1],
+                callback_data: option1[1]
+              }
+            ],
+            [
+              {
+                text: option2[1],
+                callback_data: option2[1]
+              }
+            ],
+            [
+              {
+                text: option3[1],
+                callback_data: option3[1]
+              }
+            ],
+            [
+              {
+                text: option4[1],
+                callback_data: option4[1]
+              }
+            ]
+          ]
+        }
+      });
+    }
   }
 });
 
