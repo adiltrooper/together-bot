@@ -224,8 +224,8 @@ bot.on("message", async msg => {
 
     var option1 = msg.text.match(new RegExp(one + "(.[\\s\\S]*)" + two));
     var option2 = msg.text.match(new RegExp(two + "(.[\\s\\S]*)" + three));
-    var option2 = msg.text.match(new RegExp(three + "(.[\\s\\S]*)" + four));
-    var option2 = msg.text.match(new RegExp(four + "(.[\\s\\S]*)" + end));
+    var option3 = msg.text.match(new RegExp(three + "(.[\\s\\S]*)" + four));
+    var option4 = msg.text.match(new RegExp(four + "(.[\\s\\S]*)" + end));
 
     bot.sendMessage(msg.chat.id, "earlier msg", {
       reply_markup: {
