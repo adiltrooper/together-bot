@@ -9,5 +9,3 @@ module.exports = {
   cloudinary_secret: process.env.CLOUDINARY_SECRET,
   multipleStatements: true
 };
-
-//mysql://bcc3900cf87914:864f0abe@us-cdbr-iron-east-05.cleardb.net/heroku_98de1e49a2cdd06?reconnect=true
