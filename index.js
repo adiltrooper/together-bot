@@ -222,20 +222,18 @@ bot.on("message", async msg => {
     var four = "/4/";
     var end = "/end/";
 
-    var option1 = msg.text.match(new RegExp(one + "(.[\\s\\S]*)" + two));
-
-    var option2 = msg.text.match(new RegExp(two + "(.[\\s\\S]*)" + three));
-
-    var option3 = msg.text.match(
-      new RegExp("(?:" + three + ")(.[\\s\\S]*)(?:" + four + ")", "g")
+    var option1 = msg.text.match(
+      new RegExp(one + "(.[\\s\\S]*)" + (two || end))
     );
-
-    var option4 = msg.text.match(
-      new RegExp("(?:" + four + ")(.[\\s\\S]*)(?:" + end + ")", "g")
+    var option2 = msg.text.match(
+      new RegExp(two + "(.[\\s\\S]*)" + (three || end))
     );
+    var option2 = msg.text.match(
+      new RegExp(three + "(.[\\s\\S]*)" + (four || end))
+    );
+    var option2 = msg.text.match(new RegExp(four + "(.[\\s\\S]*)" + end));
+
     console.log(option1[1]);
-
-    bot.sendMessage(msg.chat.id, option1[1]);
   }
 });
 
