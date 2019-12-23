@@ -224,7 +224,7 @@ bot.on("message", async msg => {
 
     //prettier-ignore
     var option1 = msg.text.match(
-      new RegExp("^(?:"+one+")(.*?)(?:"+two+")$", "g")
+      new RegExp("(?:"+one+")(.*?)(?:"+two+")", "g")
     );
     //prettier-ignore
     var option2 = msg.text.match(
