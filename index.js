@@ -232,12 +232,12 @@ bot.on("message", async msg => {
         inline_keyboard: [
           [
             {
-              text: option1,
-              callback_data: option1
+              text: option1[1],
+              callback_data: option1[1]
             },
             {
-              text: option2,
-              callback_data: option2
+              text: option2[1],
+              callback_data: option2[1]
             }
           ]
         ]
