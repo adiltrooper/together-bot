@@ -1,6 +1,7 @@
 const keys = require("./config_keys/keys");
 const express = require("express");
 const _ = require("lodash/array");
+const inlineKeyboardOptions = require("./inlineKeyboardOptions");
 var cloudinary = require("cloudinary");
 
 const TelegramBot = require("node-telegram-bot-api"),
@@ -191,10 +192,10 @@ bot.on("message", async msg => {
     await bot.sendMessage(msg.chat.id, "Send your options in the form of");
     console.log(msg);
     if (msg.photo) {
-      session.setDraftImage(msg.photo[0].file_id);
-      session.setDraftCaption(msg.caption);
+      session.setDraftCustomImage(msg.photo[0].file_id);
+      session.setDraftCustomCaption(msg.caption);
     } else {
-      session.setDraftMessage(msg.text);
+      session.setDraftCustomMessage(msg.text);
     }
     session.setAdminState5();
   }
@@ -229,18 +230,7 @@ bot.on("message", async msg => {
 
     bot.sendMessage(msg.chat.id, "earlier msg", {
       reply_markup: {
-        inline_keyboard: [
-          [
-            {
-              text: option1[1],
-              callback_data: option1[1]
-            },
-            {
-              text: option2[1],
-              callback_data: option2[1]
-            }
-          ]
-        ]
+        inline_keyboard: inlineKeyboardOptions.keyboardWith1
       }
     });
   }
