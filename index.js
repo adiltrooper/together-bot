@@ -235,6 +235,8 @@ bot.on("message", async msg => {
     );
     console.log(option1[1]);
     console.log(option2[1]);
+
+    bot.sendMessage(msg.chat.id, option1);
   }
 });
 
