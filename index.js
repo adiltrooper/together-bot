@@ -222,17 +222,21 @@ bot.on("message", async msg => {
     var four = "/4/";
     var end = "/end/";
 
+    //prettier-ignore
     var option1 = msg.text.match(
-      new RegExp("(?:" + one + ")(.*?)(?:" + two + ")", "g")
+      new RegExp("^(?:"+one+")(.*?)(?:"+two+")$", "g")
     );
+    //prettier-ignore
     var option2 = msg.text.match(
-      new RegExp("(?:" + two + ")(.[\\s\\S]*)(?:" + three + ")", "g")
+      new RegExp("(?:"+two+")(.[\\s\\S]*)(?:"+three+")", "g")
     );
+    //prettier-ignore
     var option3 = msg.text.match(
-      new RegExp("(?:" + three + ")(.[\\s\\S]*)(?:" + four + ")", "g")
+      new RegExp("(?:"+three+")(.[\\s\\S]*)(?:"+four+")", "g")
     );
+    //prettier-ignore
     var option4 = msg.text.match(
-      new RegExp("(?:" + four + ")(.[\\s\\S]*)(?:" + end + ")", "g")
+      new RegExp("(?:"+four+")(.[\\s\\S]*)(?:"+end+")", "g")
     );
     console.log(option1);
   }
