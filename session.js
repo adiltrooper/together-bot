@@ -75,6 +75,18 @@ class Session {
   }
 
   setDraftCaption(caption) {
+    redis.setAsync("draftCustomCaption", caption).then(function(res) {
+      console.log("DRAFT CAPTION IN");
+    });
+  }
+
+  setDraftCustomImage(imageId) {
+    redis.setAsync("draftCustomImage", imageId).then(function(res) {
+      console.log("DRAFT IMAGE IN");
+    });
+  }
+
+  setDraftCustomCaption(caption) {
     redis.setAsync("draftCaption", caption).then(function(res) {
       console.log("DRAFT CAPTION IN");
     });
@@ -100,14 +112,38 @@ class Session {
     redis.del("draftCaption");
   }
 
+  getDraftCustomImage() {
+    return redis.getAsync("draftCustomImage").then(function(res) {
+      return res;
+    });
+  }
+
+  getDraftCustomCaption() {
+    return redis.getAsync("draftCustomCaption").then(function(res) {
+      return res;
+    });
+  }
+
   setDraftMessage(message) {
     redis.setAsync("draftMessage", message).then(function(res) {
       console.log("DRAFT MESSAGE IN");
     });
   }
 
+  setDraftCustomMessage(message) {
+    redis.setAsync("draftCustomMessage", message).then(function(res) {
+      console.log("DRAFT MESSAGE IN");
+    });
+  }
+
   getDraftMessage() {
     return redis.getAsync("draftMessage").then(function(res) {
+      return res;
+    });
+  }
+
+  getDraftCustomMessage() {
+    return redis.getAsync("draftCustomMessage").then(function(res) {
       return res;
     });
   }
