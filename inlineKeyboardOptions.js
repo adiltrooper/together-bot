@@ -1,3 +1,14 @@
+var one = "/1/";
+var two = "/2/";
+var three = "/3/";
+var four = "/4/";
+var end = "/end/";
+
+var option1 = msg.text.match(new RegExp(one + "(.[\\s\\S]*)" + two));
+var option2 = msg.text.match(new RegExp(two + "(.[\\s\\S]*)" + three));
+var option3 = msg.text.match(new RegExp(three + "(.[\\s\\S]*)" + four));
+var option4 = msg.text.match(new RegExp(four + "(.[\\s\\S]*)" + end));
+
 exports.keyboardWith1 = [
   [
     {
