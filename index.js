@@ -223,14 +223,10 @@ bot.on("message", async msg => {
     var end = "/end/";
 
     var option1 = msg.text.match(
-      new RegExp(one + "(.[\\s\\S]*)" + (two || end))
+      new RegExp(one + "(.[\\s\\S]*)" + two || one + "(.[\\s\\S]*)" + end)
     );
-    var option2 = msg.text.match(
-      new RegExp(two + "(.[\\s\\S]*)" + (three || end))
-    );
-    var option2 = msg.text.match(
-      new RegExp(three + "(.[\\s\\S]*)" + (four || end))
-    );
+    var option2 = msg.text.match(new RegExp(two + "(.[\\s\\S]*)" + three));
+    var option2 = msg.text.match(new RegExp(three + "(.[\\s\\S]*)" + four));
     var option2 = msg.text.match(new RegExp(four + "(.[\\s\\S]*)" + end));
 
     console.log(option1[1]);
