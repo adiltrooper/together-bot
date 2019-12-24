@@ -438,7 +438,11 @@ bot.onText(/Send Post/, async msg => {
           const postMessages = () => {
             subUserSendList.map(userId => {
               if (!draftCustomImage) {
-                bot.sendMessage(userId, draftCustomMessage, customMessageFn());
+                bot.sendMessage(
+                  userId,
+                  draftCustomMessage,
+                  customMessageFn(option1, option2, option3, option4)
+                );
                 bot.sendMessage(userId, draftCustomMessage).catch(err => {
                   console.log(err);
                   if (err.statusCode == 403) {
