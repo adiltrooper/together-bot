@@ -286,7 +286,7 @@ Your Options:
 4: ${option4[1]}
             `);
         }
-      } else if (draftCustomCaption) {
+      } else if (draftCustomCaption && draftCustomImage) {
         if (option1 && !option2 && !option3 && !option4) {
           return (draftCustom = `
 Your Options:
@@ -324,6 +324,7 @@ Your Options:
       bot.sendPhoto(msg.chat.id, draftCustomImage, {
         caption: draftCustomCaption
       });
+      bot.sendMessage(msg.chat.id, draftCustom);
     }
 
     // if (draftCustomMessage) {
