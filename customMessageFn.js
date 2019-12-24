@@ -1,4 +1,4 @@
-function customMessageFn(option1, option2, option3, option4) {
+export default function(option1, option2, option3, option4) {
   if (option1 && !option2 && !option3 && !option4) {
     return bot.sendMessage(userId, draftCustomMessage, {
       reply_markup: {
@@ -89,5 +89,3 @@ function customMessageFn(option1, option2, option3, option4) {
     });
   }
 }
-
-export default customMessageFn;
