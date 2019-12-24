@@ -159,10 +159,13 @@ class Session {
   }
 
   getCustomOptions() {
-    return redis.LRANGE("customOptions", 0, -1).then(function(res) {
-      console.log(res);
-      return res;
-    });
+    return redis
+      .LRANGE("customOptions", 0, -1)
+      .execAsync()
+      .then(function(res) {
+        console.log(res);
+        return res;
+      });
   }
 
   setCachedListings(
