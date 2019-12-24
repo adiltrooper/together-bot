@@ -248,10 +248,10 @@ bot.on("message", async msg => {
       ${draftCustomMessage}
 
       Your Options:
-      1:(${option1[1]} ? ${option1[1]} : "")
-      2:(${option2[1]} ? ${option2[1]} : "")
-      3:(${option3[1]} ? ${option3[1]} : "")
-      4:(${option4[1]} ? ${option4[1]} : "")
+      1:(${option1} ? ${option1[1]} : "")
+      2:(${option2} ? ${option2[1]} : "")
+      3:(${option3} ? ${option3[1]} : "")
+      4:(${option4} ? ${option4[1]} : "")
       `
     );
 
