@@ -380,7 +380,7 @@ bot.onText(/Send Post/, async msg => {
   });
 
   console.log(customOptions);
-  const inlineKeyboardOptions = customOptions[0].map(option);
+  const inlineKeyboardOptions = customOptions[0];
   console.log(inlineKeyboardOptions);
   var option1 = inlineKeyboardOptions[0];
   var option2 = inlineKeyboardOptions[1];
