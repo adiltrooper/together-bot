@@ -241,97 +241,112 @@ bot.on("message", async msg => {
         console.log(err.message);
       });
 
-    if (draftCustomMessage) {
-      if (option1 && !option2 && !option3 && !option4) {
-        bot.sendMessage(msg.chat.id, draftCustomMessage, {
-          reply_markup: {
-            inline_keyboard: [
-              [
-                {
-                  text: option1[1],
-                  callback_data: option1[1]
-                }
-              ]
-            ]
-          }
-        });
-      } else if (option1 && option2 && !option3 && !option4) {
-        bot.sendMessage(msg.chat.id, draftCustomMessage, {
-          reply_markup: {
-            inline_keyboard: [
-              [
-                {
-                  text: option1[1],
-                  callback_data: option1[1]
-                }
-              ],
-              [
-                {
-                  text: option2[1],
-                  callback_data: option2[1]
-                }
-              ]
-            ]
-          }
-        });
-      } else if (option1 && option2 && option3 && !option4) {
-        bot.sendMessage(msg.chat.id, draftCustomMessage, {
-          reply_markup: {
-            inline_keyboard: [
-              [
-                {
-                  text: option1[1],
-                  callback_data: option1[1]
-                }
-              ],
-              [
-                {
-                  text: option2[1],
-                  callback_data: option2[1]
-                }
-              ],
-              [
-                {
-                  text: option3[1],
-                  callback_data: option3[1]
-                }
-              ]
-            ]
-          }
-        });
-      } else if (option1 && option2 && option3 && option4) {
-        bot.sendMessage(msg.chat.id, draftCustomMessage, {
-          reply_markup: {
-            inline_keyboard: [
-              [
-                {
-                  text: option1[1],
-                  callback_data: option1[1]
-                }
-              ],
-              [
-                {
-                  text: option2[1],
-                  callback_data: option2[1]
-                }
-              ],
-              [
-                {
-                  text: option3[1],
-                  callback_data: option3[1]
-                }
-              ],
-              [
-                {
-                  text: option4[1],
-                  callback_data: option4[1]
-                }
-              ]
-            ]
-          }
-        });
-      }
-    }
+    bot.sendMessage(
+      msg.chat.id,
+      `This is your draft:
+
+      ${draftCustomMessage}
+
+      Options:
+      1:${option1[1]}
+      2:${option2[1]}
+      3:${option3[1]}
+      4:${option4[1]}
+
+      `
+    );
+
+    // if (draftCustomMessage) {
+    //   if (option1 && !option2 && !option3 && !option4) {
+    //     bot.sendMessage(msg.chat.id, draftCustomMessage, {
+    //       reply_markup: {
+    //         inline_keyboard: [
+    //           [
+    //             {
+    //               text: option1[1],
+    //               callback_data: option1[1]
+    //             }
+    //           ]
+    //         ]
+    //       }
+    //     });
+    //   } else if (option1 && option2 && !option3 && !option4) {
+    //     bot.sendMessage(msg.chat.id, draftCustomMessage, {
+    //       reply_markup: {
+    //         inline_keyboard: [
+    //           [
+    //             {
+    //               text: option1[1],
+    //               callback_data: option1[1]
+    //             }
+    //           ],
+    //           [
+    //             {
+    //               text: option2[1],
+    //               callback_data: option2[1]
+    //             }
+    //           ]
+    //         ]
+    //       }
+    //     });
+    //   } else if (option1 && option2 && option3 && !option4) {
+    //     bot.sendMessage(msg.chat.id, draftCustomMessage, {
+    //       reply_markup: {
+    //         inline_keyboard: [
+    //           [
+    //             {
+    //               text: option1[1],
+    //               callback_data: option1[1]
+    //             }
+    //           ],
+    //           [
+    //             {
+    //               text: option2[1],
+    //               callback_data: option2[1]
+    //             }
+    //           ],
+    //           [
+    //             {
+    //               text: option3[1],
+    //               callback_data: option3[1]
+    //             }
+    //           ]
+    //         ]
+    //       }
+    //     });
+    //   } else if (option1 && option2 && option3 && option4) {
+    //     bot.sendMessage(msg.chat.id, draftCustomMessage, {
+    //       reply_markup: {
+    //         inline_keyboard: [
+    //           [
+    //             {
+    //               text: option1[1],
+    //               callback_data: option1[1]
+    //             }
+    //           ],
+    //           [
+    //             {
+    //               text: option2[1],
+    //               callback_data: option2[1]
+    //             }
+    //           ],
+    //           [
+    //             {
+    //               text: option3[1],
+    //               callback_data: option3[1]
+    //             }
+    //           ],
+    //           [
+    //             {
+    //               text: option4[1],
+    //               callback_data: option4[1]
+    //             }
+    //           ]
+    //         ]
+    //       }
+    //     });
+    //   }
+    // }
     //else {
     //   if (option1 && !option2 && !option3 && !option4) {
     //     bot.sendPhoto(msg.chat.id, "earlier message", {
