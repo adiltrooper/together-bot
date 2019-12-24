@@ -563,6 +563,8 @@ bot.onText(/Send Post/, async msg => {
   });
 
   console.log(customOptions);
+  const inlineKeyboardOptions = customOptions.map(option);
+  console.log(inlineKeyboardOptions);
   console.log(adminState);
   if (adminState == "admin5") {
     const getUsersAndSend = async () => {
@@ -613,28 +615,34 @@ bot.onText(/Send Post/, async msg => {
           const postMessages = () => {
             subUserSendList.map(userId => {
               if (!draftCustomImage) {
-                bot.sendMessage(userId, draftCustomMessage).catch(err => {
-                  console.log(err);
-                  if (err.statusCode == 403) {
-                    const blocked_id = err.body.substring(
-                      err.body.lastIndexOf("=") + 1,
-                      err.body.lastIndexOf("&")
-                    );
-
-                    pool.getConnection(function(err, connection) {
-                      if (err) console.log(err);
-                      connection.query(
-                        "INSERT INTO bot_user_db (status) WHERE chat_id = ?",
-                        [blocked_id],
-                        function(err, results, fields) {
-                          if (err) console.log(err.message);
-                        }
+                bot
+                  .sendMessage(userId, draftCustomMessage, {
+                    reply_markup: {
+                      inline_keyboard: [[{}]]
+                    }
+                  })
+                  .catch(err => {
+                    console.log(err);
+                    if (err.statusCode == 403) {
+                      const blocked_id = err.body.substring(
+                        err.body.lastIndexOf("=") + 1,
+                        err.body.lastIndexOf("&")
                       );
-                      connection.release();
-                      if (err) console.log(err);
-                    });
-                  }
-                });
+
+                      pool.getConnection(function(err, connection) {
+                        if (err) console.log(err);
+                        connection.query(
+                          "INSERT INTO bot_user_db (status) WHERE chat_id = ?",
+                          [blocked_id],
+                          function(err, results, fields) {
+                            if (err) console.log(err.message);
+                          }
+                        );
+                        connection.release();
+                        if (err) console.log(err);
+                      });
+                    }
+                  });
               } else {
                 console.log(userId);
                 bot
