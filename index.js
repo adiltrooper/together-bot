@@ -286,7 +286,7 @@ Your Options:
 4: ${option4[1]}
             `);
         }
-      } else if (draftCustomCaption && draftCustomImage) {
+      } else if (draftCustomImage) {
         if (option1 && !option2 && !option3 && !option4) {
           return (draftCustom = `
 Your Options:

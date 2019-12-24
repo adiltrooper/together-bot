@@ -87,7 +87,7 @@ class Session {
   }
 
   setDraftCustomCaption(caption) {
-    redis.setAsync("draftCaption", caption).then(function(res) {
+    redis.setAsync("draftCustomCaption", caption).then(function(res) {
       console.log("DRAFT CAPTION IN");
     });
   }
