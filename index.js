@@ -247,71 +247,71 @@ bot.on("message", async msg => {
           return (draftCustom = `
             This is your draft message
 
-            ${draftCustomMessage}
+${draftCustomMessage}
 
-            Your Options:
-            1: ${option1[1]}
+Your Options:
+1: ${option1[1]}
             `);
         } else if (option1 && option2 && !option3 && !option4) {
           return (draftCustom = `
             This is your draft message
 
-            ${draftCustomMessage}
+${draftCustomMessage}
 
-            Your Options:
-            1: ${option1[1]}
-            2: ${option2[1]}
+Your Options:
+1: ${option1[1]}
+2: ${option2[1]}
             `);
         } else if (option1 && option2 && option3 && !option4) {
           return (draftCustom = `
             This is your draft message
 
-            ${draftCustomMessage}
+${draftCustomMessage}
 
-            Your Options:
-            1: ${option1[1]}
-            2: ${option2[1]}
-            3: ${option3[1]}
+Your Options:
+1: ${option1[1]}
+2: ${option2[1]}
+3: ${option3[1]}
             `);
         } else if (option1 && option2 && option3 && option4) {
           return (draftCustom = `
             This is your draft message
 
-            ${draftCustomMessage}
+${draftCustomMessage}
 
-            Your Options:
-            1: ${option1[1]}
-            2: ${option2[1]}
-            3: ${option3[1]}
-            4: ${option4[1]}
+Your Options:
+1: ${option1[1]}
+2: ${option2[1]}
+3: ${option3[1]}
+4: ${option4[1]}
             `);
         }
       } else if (draftCustomCaption) {
         if (option1 && !option2 && !option3 && !option4) {
           return (draftCustom = `
-            Your Options:
-            1: ${option1[1]}
+Your Options:
+1: ${option1[1]}
             `);
         } else if (option1 && option2 && !option3 && !option4) {
           return (draftCustom = `
-            Your Options:
-            1: ${option1[1]}
-            2: ${option2[1]}
+Your Options:
+1: ${option1[1]}
+2: ${option2[1]}
             `);
         } else if (option1 && option2 && option3 && !option4) {
           return (draftCustom = `
-            Your Options:
-            1: ${option1[1]}
-            2: ${option2[1]}
-            3: ${option3[1]}
+Your Options:
+1: ${option1[1]}
+2: ${option2[1]}
+3: ${option3[1]}
             `);
         } else if (option1 && option2 && option3 && option4) {
           return (draftCustom = `
-            Your Options:
-            1: ${option1[1]}
-            2: ${option2[1]}
-            3: ${option3[1]}
-            4: ${option4[1]}
+Your Options:
+1: ${option1[1]}
+2: ${option2[1]}
+3: ${option3[1]}
+4: ${option4[1]}
             `);
         }
       }
