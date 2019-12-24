@@ -1,7 +1,7 @@
 const keys = require("./config_keys/keys");
 const express = require("express");
 const _ = require("lodash/array");
-import customMessageFn from "./customMessageFn";
+const customMessageFn = require("./customMessageFn");
 var cloudinary = require("cloudinary");
 
 const TelegramBot = require("node-telegram-bot-api"),

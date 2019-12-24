@@ -1,6 +1,6 @@
 function customMessageFn(option1, option2, option3, option4) {
   if (option1 && !option2 && !option3 && !option4) {
-    bot.sendMessage(userId, draftCustomMessage, {
+    return bot.sendMessage(userId, draftCustomMessage, {
       reply_markup: {
         inline_keyboard: [
           [
@@ -13,7 +13,7 @@ function customMessageFn(option1, option2, option3, option4) {
       }
     });
   } else if (option1 && option2 && !option3 && !option4) {
-    bot.sendMessage(userId, draftCustomMessage, {
+    return bot.sendMessage(userId, draftCustomMessage, {
       reply_markup: {
         inline_keyboard: [
           [
@@ -32,7 +32,7 @@ function customMessageFn(option1, option2, option3, option4) {
       }
     });
   } else if (option1 && option2 && option3 && !option4) {
-    bot.sendMessage(userId, draftCustomMessage, {
+    return bot.sendMessage(userId, draftCustomMessage, {
       reply_markup: {
         inline_keyboard: [
           [
@@ -57,7 +57,7 @@ function customMessageFn(option1, option2, option3, option4) {
       }
     });
   } else if (option1 && option2 && option3 && option4) {
-    bot.sendMessage(userId, draftCustomMessage, {
+    return bot.sendMessage(userId, draftCustomMessage, {
       reply_markup: {
         inline_keyboard: [
           [
