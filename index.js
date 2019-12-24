@@ -241,19 +241,90 @@ bot.on("message", async msg => {
         console.log(err.message);
       });
 
-    bot.sendMessage(
-      msg.chat.id,
-      `This is your draft:
+    const customFormatfn = () => {
+      if (draftCustomMessage) {
+        if (option1 && !option2 && !option3 && !option4) {
+          return (draftCustom = `
+            This is your draft message
 
-      ${draftCustomMessage}
+            ${draftCustomMessage}
 
-      Your Options:
-      1:(${option1} ? ${option1[1]} : "")
-      2:(${option2} ? ${option2[1]} : "")
-      3:(${option3} ? ${option3[1]} : "")
-      4:(${option4} ? ${option4[1]} : "")
-      `
-    );
+            Your Options:
+            1: ${option1[1]}
+            `);
+        } else if (option1 && option2 && !option3 && !option4) {
+          return (draftCustom = `
+            This is your draft message
+
+            ${draftCustomMessage}
+
+            Your Options:
+            1: ${option1[1]}
+            2: ${option2[1]}
+            `);
+        } else if (option1 && option2 && option3 && !option4) {
+          return (draftCustom = `
+            This is your draft message
+
+            ${draftCustomMessage}
+
+            Your Options:
+            1: ${option1[1]}
+            2: ${option2[1]}
+            3: ${option3[1]}
+            `);
+        } else if (option1 && option2 && option3 && option4) {
+          return (draftCustom = `
+            This is your draft message
+
+            ${draftCustomMessage}
+
+            Your Options:
+            1: ${option1[1]}
+            2: ${option2[1]}
+            3: ${option3[1]}
+            4: ${option4[1]}
+            `);
+        }
+      } else if (draftCustomCaption) {
+        if (option1 && !option2 && !option3 && !option4) {
+          return (draftCustom = `
+            Your Options:
+            1: ${option1[1]}
+            `);
+        } else if (option1 && option2 && !option3 && !option4) {
+          return (draftCustom = `
+            Your Options:
+            1: ${option1[1]}
+            2: ${option2[1]}
+            `);
+        } else if (option1 && option2 && option3 && !option4) {
+          return (draftCustom = `
+            Your Options:
+            1: ${option1[1]}
+            2: ${option2[1]}
+            3: ${option3[1]}
+            `);
+        } else if (option1 && option2 && option3 && option4) {
+          return (draftCustom = `
+            Your Options:
+            1: ${option1[1]}
+            2: ${option2[1]}
+            3: ${option3[1]}
+            4: ${option4[1]}
+            `);
+        }
+      }
+    };
+    customFormatfn();
+
+    if (draftCustomMessage) {
+      bot.sendMessage(msg.chat.id, draftCustom);
+    } else if (draftCustomImage) {
+      bot.sendPhoto(msg.chat.id, draftCustomImage, {
+        caption: draftCustomCaption
+      });
+    }
 
     // if (draftCustomMessage) {
     //   if (option1 && !option2 && !option3 && !option4) {
