@@ -469,11 +469,34 @@ bot.onText(/Send Post/, async msg => {
                   });
               } else {
                 console.log(userId);
-                bot.sendImage(
-                  userId,
-                  draftCustomImage,
-                  customImageFn(option1, option2, option3, option4)
-                );
+                bot
+                  .sendPhoto(
+                    userId,
+                    draftCustomImage,
+                    customImageFn(option1, option2, option3, option4)
+                  )
+                  .catch(err => {
+                    console.log(err);
+                    if (err.statusCode == 403) {
+                      const blocked_id = err.body.substring(
+                        err.body.lastIndexOf("=") + 1,
+                        err.body.lastIndexOf("&")
+                      );
+
+                      pool.getConnection(function(err, connection) {
+                        if (err) console.log(err);
+                        connection.query(
+                          "INSERT INTO bot_user_db (status) WHERE chat_id = ?",
+                          [blocked_id],
+                          function(err, results, fields) {
+                            if (err) console.log(err.message);
+                          }
+                        );
+                        connection.release();
+                        if (err) console.log(err);
+                      });
+                    }
+                  });
               }
             });
           };
