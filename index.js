@@ -252,9 +252,7 @@ bot.on("message", async msg => {
                   callback_data: option1[1]
                 }
               ]
-            ],
-            keyboard: [["Back", "Send Post"]],
-            resize_keyboard: true
+            ]
           }
         });
       } else if (option1 && option2 && !option3 && !option4) {
@@ -273,9 +271,7 @@ bot.on("message", async msg => {
                   callback_data: option2[1]
                 }
               ]
-            ],
-            keyboard: [["Back", "Send Post"]],
-            resize_keyboard: true
+            ]
           }
         });
       } else if (option1 && option2 && option3 && !option4) {
