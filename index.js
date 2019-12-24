@@ -354,189 +354,6 @@ Your Options:
         resize_keyboard: true
       });
     }
-
-    // if (draftCustomMessage) {
-    //   if (option1 && !option2 && !option3 && !option4) {
-    //     bot.sendMessage(msg.chat.id, draftCustomMessage, {
-    //       reply_markup: {
-    //         inline_keyboard: [
-    //           [
-    //             {
-    //               text: option1[1],
-    //               callback_data: option1[1]
-    //             }
-    //           ]
-    //         ]
-    //       }
-    //     });
-    //   } else if (option1 && option2 && !option3 && !option4) {
-    //     bot.sendMessage(msg.chat.id, draftCustomMessage, {
-    //       reply_markup: {
-    //         inline_keyboard: [
-    //           [
-    //             {
-    //               text: option1[1],
-    //               callback_data: option1[1]
-    //             }
-    //           ],
-    //           [
-    //             {
-    //               text: option2[1],
-    //               callback_data: option2[1]
-    //             }
-    //           ]
-    //         ]
-    //       }
-    //     });
-    //   } else if (option1 && option2 && option3 && !option4) {
-    //     bot.sendMessage(msg.chat.id, draftCustomMessage, {
-    //       reply_markup: {
-    //         inline_keyboard: [
-    //           [
-    //             {
-    //               text: option1[1],
-    //               callback_data: option1[1]
-    //             }
-    //           ],
-    //           [
-    //             {
-    //               text: option2[1],
-    //               callback_data: option2[1]
-    //             }
-    //           ],
-    //           [
-    //             {
-    //               text: option3[1],
-    //               callback_data: option3[1]
-    //             }
-    //           ]
-    //         ]
-    //       }
-    //     });
-    //   } else if (option1 && option2 && option3 && option4) {
-    //     bot.sendMessage(msg.chat.id, draftCustomMessage, {
-    //       reply_markup: {
-    //         inline_keyboard: [
-    //           [
-    //             {
-    //               text: option1[1],
-    //               callback_data: option1[1]
-    //             }
-    //           ],
-    //           [
-    //             {
-    //               text: option2[1],
-    //               callback_data: option2[1]
-    //             }
-    //           ],
-    //           [
-    //             {
-    //               text: option3[1],
-    //               callback_data: option3[1]
-    //             }
-    //           ],
-    //           [
-    //             {
-    //               text: option4[1],
-    //               callback_data: option4[1]
-    //             }
-    //           ]
-    //         ]
-    //       }
-    //     });
-    //   }
-    // }
-    //else {
-    //   if (option1 && !option2 && !option3 && !option4) {
-    //     bot.sendPhoto(msg.chat.id, "earlier message", {
-    //       reply_markup: {
-    //         inline_keyboard: [
-    //           [
-    //             {
-    //               text: option1[1],
-    //               callback_data: option1[1]
-    //             }
-    //           ]
-    //         ]
-    //       }
-    //     });
-    //   } else if (option1 && option2 && !option3 && !option4) {
-    //     bot.sendMessage(msg.chat.id, "earlier msg", {
-    //       reply_markup: {
-    //         inline_keyboard: [
-    //           [
-    //             {
-    //               text: option1[1],
-    //               callback_data: option1[1]
-    //             }
-    //           ],
-    //           [
-    //             {
-    //               text: option2[1],
-    //               callback_data: option2[1]
-    //             }
-    //           ]
-    //         ]
-    //       }
-    //     });
-    //   } else if (option1 && option2 && option3 && !option4) {
-    //     bot.sendMessage(msg.chat.id, "earlier msg", {
-    //       reply_markup: {
-    //         inline_keyboard: [
-    //           [
-    //             {
-    //               text: option1[1],
-    //               callback_data: option1[1]
-    //             }
-    //           ],
-    //           [
-    //             {
-    //               text: option2[1],
-    //               callback_data: option2[1]
-    //             }
-    //           ],
-    //           [
-    //             {
-    //               text: option3[1],
-    //               callback_data: option3[1]
-    //             }
-    //           ]
-    //         ]
-    //       }
-    //     });
-    //   } else if (option1 && option2 && option3 && option4) {
-    //     bot.sendMessage(msg.chat.id, "earlier msg", {
-    //       reply_markup: {
-    //         inline_keyboard: [
-    //           [
-    //             {
-    //               text: option1[1],
-    //               callback_data: option1[1]
-    //             }
-    //           ],
-    //           [
-    //             {
-    //               text: option2[1],
-    //               callback_data: option2[1]
-    //             }
-    //           ],
-    //           [
-    //             {
-    //               text: option3[1],
-    //               callback_data: option3[1]
-    //             }
-    //           ],
-    //           [
-    //             {
-    //               text: option4[1],
-    //               callback_data: option4[1]
-    //             }
-    //           ]
-    //         ]
-    //       }
-    //     });
-    //   }
-    // }
   }
 });
 
@@ -563,7 +380,13 @@ bot.onText(/Send Post/, async msg => {
   });
 
   console.log(customOptions);
-  console.log(customOptions[0]);
+  const inlineKeyboardOptions = customOptions[0].map(option);
+  console.log(inlineKeyboardOptions);
+  var option1 = inlineKeyboardOptions[0];
+  var option2 = inlineKeyboardOptions[1];
+  var option3 = inlineKeyboardOptions[2];
+  var option4 = inlineKeyboardOptions[3];
+
   console.log(adminState);
   if (adminState == "admin5") {
     const getUsersAndSend = async () => {
@@ -614,60 +437,208 @@ bot.onText(/Send Post/, async msg => {
           const postMessages = () => {
             subUserSendList.map(userId => {
               if (!draftCustomImage) {
-                bot
-                  .sendMessage(userId, draftCustomMessage, {
+                if (option1 && !option2 && !option3 && !option4) {
+                  bot.sendMessage(userId, draftCustomMessage, {
                     reply_markup: {
-                      inline_keyboard: [[{}]]
-                    }
-                  })
-                  .catch(err => {
-                    console.log(err);
-                    if (err.statusCode == 403) {
-                      const blocked_id = err.body.substring(
-                        err.body.lastIndexOf("=") + 1,
-                        err.body.lastIndexOf("&")
-                      );
-
-                      pool.getConnection(function(err, connection) {
-                        if (err) console.log(err);
-                        connection.query(
-                          "INSERT INTO bot_user_db (status) WHERE chat_id = ?",
-                          [blocked_id],
-                          function(err, results, fields) {
-                            if (err) console.log(err.message);
+                      inline_keyboard: [
+                        [
+                          {
+                            text: option1[1],
+                            callback_data: option1[1]
                           }
-                        );
-                        connection.release();
-                        if (err) console.log(err);
-                      });
+                        ]
+                      ]
                     }
                   });
+                } else if (option1 && option2 && !option3 && !option4) {
+                  bot.sendMessage(userId, draftCustomMessage, {
+                    reply_markup: {
+                      inline_keyboard: [
+                        [
+                          {
+                            text: option1[1],
+                            callback_data: option1[1]
+                          }
+                        ],
+                        [
+                          {
+                            text: option2[1],
+                            callback_data: option2[1]
+                          }
+                        ]
+                      ]
+                    }
+                  });
+                } else if (option1 && option2 && option3 && !option4) {
+                  bot.sendMessage(userId, draftCustomMessage, {
+                    reply_markup: {
+                      inline_keyboard: [
+                        [
+                          {
+                            text: option1[1],
+                            callback_data: option1[1]
+                          }
+                        ],
+                        [
+                          {
+                            text: option2[1],
+                            callback_data: option2[1]
+                          }
+                        ],
+                        [
+                          {
+                            text: option3[1],
+                            callback_data: option3[1]
+                          }
+                        ]
+                      ]
+                    }
+                  });
+                } else if (option1 && option2 && option3 && option4) {
+                  bot.sendMessage(userId, draftCustomMessage, {
+                    reply_markup: {
+                      inline_keyboard: [
+                        [
+                          {
+                            text: option1[1],
+                            callback_data: option1[1]
+                          }
+                        ],
+                        [
+                          {
+                            text: option2[1],
+                            callback_data: option2[1]
+                          }
+                        ],
+                        [
+                          {
+                            text: option3[1],
+                            callback_data: option3[1]
+                          }
+                        ],
+                        [
+                          {
+                            text: option4[1],
+                            callback_data: option4[1]
+                          }
+                        ]
+                      ]
+                    }
+                  });
+                }
+                bot.sendMessage(userId, draftCustomMessage).catch(err => {
+                  console.log(err);
+                  if (err.statusCode == 403) {
+                    const blocked_id = err.body.substring(
+                      err.body.lastIndexOf("=") + 1,
+                      err.body.lastIndexOf("&")
+                    );
+
+                    pool.getConnection(function(err, connection) {
+                      if (err) console.log(err);
+                      connection.query(
+                        "INSERT INTO bot_user_db (status) WHERE chat_id = ?",
+                        [blocked_id],
+                        function(err, results, fields) {
+                          if (err) console.log(err.message);
+                        }
+                      );
+                      connection.release();
+                      if (err) console.log(err);
+                    });
+                  }
+                });
               } else {
                 console.log(userId);
-                bot
-                  .sendPhoto(userId, draftImage, { caption: draftCaption })
-                  .catch(err => {
-                    console.log(err);
-                    if (err.statusCode == 403) {
-                      const blocked_id = err.body.substring(
-                        err.body.lastIndexOf("=") + 1,
-                        err.body.lastIndexOf("&")
-                      );
-
-                      pool.getConnection(function(err, connection) {
-                        if (err) console.log(err);
-                        connection.query(
-                          "INSERT INTO bot_user_db (status) WHERE chat_id = ?",
-                          [blocked_id],
-                          function(err, results, fields) {
-                            if (err) console.log(err.message);
+                if (option1 && !option2 && !option3 && !option4) {
+                  bot.sendPhoto(userId, draftCustomImage, {
+                    reply_markup: {
+                      inline_keyboard: [
+                        [
+                          {
+                            text: option1[1],
+                            callback_data: option1[1]
                           }
-                        );
-                        connection.release();
-                        if (err) console.log(err);
-                      });
+                        ]
+                      ]
                     }
                   });
+                } else if (option1 && option2 && !option3 && !option4) {
+                  bot.sendPhoto(userId, draftCustomImage, {
+                    reply_markup: {
+                      inline_keyboard: [
+                        [
+                          {
+                            text: option1[1],
+                            callback_data: option1[1]
+                          }
+                        ],
+                        [
+                          {
+                            text: option2[1],
+                            callback_data: option2[1]
+                          }
+                        ]
+                      ]
+                    }
+                  });
+                } else if (option1 && option2 && option3 && !option4) {
+                  bot.sendPhoto(userId, draftCustomImage, {
+                    reply_markup: {
+                      inline_keyboard: [
+                        [
+                          {
+                            text: option1[1],
+                            callback_data: option1[1]
+                          }
+                        ],
+                        [
+                          {
+                            text: option2[1],
+                            callback_data: option2[1]
+                          }
+                        ],
+                        [
+                          {
+                            text: option3[1],
+                            callback_data: option3[1]
+                          }
+                        ]
+                      ]
+                    }
+                  });
+                } else if (option1 && option2 && option3 && option4) {
+                  bot.sendPhoto(userId, draftCustomImage, {
+                    reply_markup: {
+                      inline_keyboard: [
+                        [
+                          {
+                            text: option1[1],
+                            callback_data: option1[1]
+                          }
+                        ],
+                        [
+                          {
+                            text: option2[1],
+                            callback_data: option2[1]
+                          }
+                        ],
+                        [
+                          {
+                            text: option3[1],
+                            callback_data: option3[1]
+                          }
+                        ],
+                        [
+                          {
+                            text: option4[1],
+                            callback_data: option4[1]
+                          }
+                        ]
+                      ]
+                    }
+                  });
+                }
               }
             });
           };
