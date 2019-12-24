@@ -150,18 +150,19 @@ class Session {
 
   setCustomOptions(option1, option2, option3, option4) {
     if (option1 && !option2 && !option3 && !option4) {
-      return redis.LPUSH("customOptions", [option1[1]]);
+      return redis.LPUSH("customOptions", option1[1]);
     } else if (option1 && option2 && !option3 && !option4) {
-      return redis.LPUSH("customOptions", [option1[1], option2[1]]);
+      return redis.LPUSH("customOptions", option1[1], option2[1]);
     } else if (option1 && option2 && option3 && !option4) {
-      return redis.LPUSH("customOptions", [option1[1], option2[1], option3[1]]);
+      return redis.LPUSH("customOptions", option1[1], option2[1], option3[1]);
     } else if (option1 && option2 && option3 && option4) {
-      return redis.LPUSH("customOptions", [
+      return redis.LPUSH(
+        "customOptions",
         option1[1],
         option2[1],
         option3[1],
         option4[1]
-      ]);
+      );
     }
   }
 
