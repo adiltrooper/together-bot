@@ -1,6 +1,6 @@
 module.exports = function(option1, option2, option3, option4) {
   if (option1 && !option2 && !option3 && !option4) {
-    bot.sendMessage(userId, draftCustomMessage, {
+    return {
       reply_markup: {
         inline_keyboard: [
           [
@@ -11,9 +11,9 @@ module.exports = function(option1, option2, option3, option4) {
           ]
         ]
       }
-    });
+    };
   } else if (option1 && option2 && !option3 && !option4) {
-    bot.sendMessage(userId, draftCustomMessage, {
+    return {
       reply_markup: {
         inline_keyboard: [
           [
@@ -30,9 +30,9 @@ module.exports = function(option1, option2, option3, option4) {
           ]
         ]
       }
-    });
+    };
   } else if (option1 && option2 && option3 && !option4) {
-    bot.sendMessage(userId, draftCustomMessage, {
+    return {
       reply_markup: {
         inline_keyboard: [
           [
@@ -55,9 +55,9 @@ module.exports = function(option1, option2, option3, option4) {
           ]
         ]
       }
-    });
+    };
   } else if (option1 && option2 && option3 && option4) {
-    bot.sendMessage(userId, draftCustomMessage, {
+    return {
       reply_markup: {
         inline_keyboard: [
           [
@@ -86,6 +86,6 @@ module.exports = function(option1, option2, option3, option4) {
           ]
         ]
       }
-    });
+    };
   }
 };
