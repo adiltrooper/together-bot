@@ -148,6 +148,23 @@ class Session {
     });
   }
 
+  setCustomOptions(option1, option2, option3, option4) {
+    return redis.LPUSH(
+      "customOptions",
+      option1[1],
+      option2[1],
+      option3[1],
+      option4[1]
+    );
+  }
+
+  getCustomOptions() {
+    return redis.LRANGE("customOptions", 0, -1).then(function(res) {
+      console.log(res);
+      return res;
+    });
+  }
+
   setCachedListings(
     cat_id,
     activity,

@@ -322,7 +322,8 @@ Your Options:
       bot.sendMessage(msg.chat.id, draftCustom, {
         reply_markup: {
           keyboard: [["Back", "Send Post"]]
-        }
+        },
+        resize_keyboard: true
       });
     } else if (draftCustomImage) {
       bot.sendPhoto(msg.chat.id, draftCustomImage, {
@@ -331,7 +332,8 @@ Your Options:
       bot.sendMessage(msg.chat.id, draftCustom, {
         reply_markup: {
           keyboard: [["Back", "Send Post"]]
-        }
+        },
+        resize_keyboard: true
       });
     }
 
@@ -517,6 +519,139 @@ Your Options:
     //     });
     //   }
     // }
+  }
+});
+
+bot.onText(/Send Post/, async msg => {
+  const adminState = await session.getAdminState().catch(err => {
+    console.log(err.message);
+  });
+  const draftCustomImage = await session.getDraftCustomImage().catch(err => {
+    console.log(err.message);
+  });
+  const draftCustomCaption = await session
+    .getDraftCustomCaption()
+    .catch(err => {
+      console.log(err.message);
+    });
+  const draftCustomMessage = await session
+    .getDraftCustomMessage()
+    .catch(err => {
+      console.log(err.message);
+    });
+
+  const customOptions = await session.getCustomOptions().catch(err => {
+    console.log(err.message);
+  });
+
+  console.log(customOptions);
+  console.log(adminState);
+  if (adminState == "admin5") {
+    const getUsersAndSend = async () => {
+      await pool.getConnection(function(err, connection) {
+        if (err) console.log(err);
+        connection.query("SELECT chat_id FROM bot_user_db", function(
+          err,
+          results,
+          fields
+        ) {
+          if (err) {
+            console.log(err.message);
+          } else {
+            var userArray = [];
+            userArray = results.map(userData => {
+              return userData.chat_id;
+            });
+            session.setUserSendList(JSON.stringify(userArray));
+          }
+        });
+        connection.release();
+        if (err) console.log(err);
+      });
+      const retrieveUserList = async () => {
+        var userSendList = await session.getUserSendList().catch(err => {
+          console.log(err.message);
+        });
+        console.log(`This is the after ${userSendList}`);
+        if (userSendList.includes(",")) {
+          var userSendList = userSendList
+            .slice(1, userSendList.length - 1)
+            .split(",")
+            .map(numberString => {
+              return Number(numberString);
+            });
+          console.log(userSendList);
+        } else {
+          var userSendList = userSendList.slice(1, userSendList.length - 1);
+          var userSendList = Number(userSendList);
+          var userSendListTemp = [];
+          userSendListTemp.push(userSendList);
+          userSendList = userSendListTemp;
+        }
+
+        var userSendList = _.chunk(userSendList, 2);
+        console.log(userSendList);
+        userSendList.map(subUserSendList => {
+          const postMessages = () => {
+            subUserSendList.map(userId => {
+              if (!draftCustomImage) {
+                bot.sendMessage(userId, draftCustomMessage).catch(err => {
+                  console.log(err);
+                  if (err.statusCode == 403) {
+                    const blocked_id = err.body.substring(
+                      err.body.lastIndexOf("=") + 1,
+                      err.body.lastIndexOf("&")
+                    );
+
+                    pool.getConnection(function(err, connection) {
+                      if (err) console.log(err);
+                      connection.query(
+                        "INSERT INTO bot_user_db (status) WHERE chat_id = ?",
+                        [blocked_id],
+                        function(err, results, fields) {
+                          if (err) console.log(err.message);
+                        }
+                      );
+                      connection.release();
+                      if (err) console.log(err);
+                    });
+                  }
+                });
+              } else {
+                console.log(userId);
+                bot
+                  .sendPhoto(userId, draftImage, { caption: draftCaption })
+                  .catch(err => {
+                    console.log(err);
+                    if (err.statusCode == 403) {
+                      const blocked_id = err.body.substring(
+                        err.body.lastIndexOf("=") + 1,
+                        err.body.lastIndexOf("&")
+                      );
+
+                      pool.getConnection(function(err, connection) {
+                        if (err) console.log(err);
+                        connection.query(
+                          "INSERT INTO bot_user_db (status) WHERE chat_id = ?",
+                          [blocked_id],
+                          function(err, results, fields) {
+                            if (err) console.log(err.message);
+                          }
+                        );
+                        connection.release();
+                        if (err) console.log(err);
+                      });
+                    }
+                  });
+              }
+            });
+          };
+          setTimeout(postMessages, 3000);
+        });
+      };
+      retrieveUserList();
+    };
+    getUsersAndSend();
   }
 });
 
