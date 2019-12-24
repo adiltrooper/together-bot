@@ -2,6 +2,7 @@ const keys = require("./config_keys/keys");
 const express = require("express");
 const _ = require("lodash/array");
 const customMessageFn = require("./customMessageFn");
+const customImageFn = require("./customImageFn");
 var cloudinary = require("cloudinary");
 
 const TelegramBot = require("node-telegram-bot-api"),
@@ -438,124 +439,41 @@ bot.onText(/Send Post/, async msg => {
           const postMessages = () => {
             subUserSendList.map(userId => {
               if (!draftCustomImage) {
-                bot.sendMessage(
-                  userId,
-                  draftCustomMessage,
-                  customMessageFn(option1, option2, option3, option4)
-                );
-                bot.sendMessage(userId, draftCustomMessage).catch(err => {
-                  console.log(err);
-                  if (err.statusCode == 403) {
-                    const blocked_id = err.body.substring(
-                      err.body.lastIndexOf("=") + 1,
-                      err.body.lastIndexOf("&")
-                    );
-
-                    pool.getConnection(function(err, connection) {
-                      if (err) console.log(err);
-                      connection.query(
-                        "INSERT INTO bot_user_db (status) WHERE chat_id = ?",
-                        [blocked_id],
-                        function(err, results, fields) {
-                          if (err) console.log(err.message);
-                        }
+                bot
+                  .sendMessage(
+                    userId,
+                    draftCustomMessage,
+                    customMessageFn(option1, option2, option3, option4)
+                  )
+                  .catch(err => {
+                    console.log(err);
+                    if (err.statusCode == 403) {
+                      const blocked_id = err.body.substring(
+                        err.body.lastIndexOf("=") + 1,
+                        err.body.lastIndexOf("&")
                       );
-                      connection.release();
-                      if (err) console.log(err);
-                    });
-                  }
-                });
+
+                      pool.getConnection(function(err, connection) {
+                        if (err) console.log(err);
+                        connection.query(
+                          "INSERT INTO bot_user_db (status) WHERE chat_id = ?",
+                          [blocked_id],
+                          function(err, results, fields) {
+                            if (err) console.log(err.message);
+                          }
+                        );
+                        connection.release();
+                        if (err) console.log(err);
+                      });
+                    }
+                  });
               } else {
                 console.log(userId);
-                if (option1 && !option2 && !option3 && !option4) {
-                  bot.sendPhoto(userId, draftCustomImage, {
-                    reply_markup: {
-                      inline_keyboard: [
-                        [
-                          {
-                            text: option1[1],
-                            callback_data: option1[1]
-                          }
-                        ]
-                      ]
-                    }
-                  });
-                } else if (option1 && option2 && !option3 && !option4) {
-                  bot.sendPhoto(userId, draftCustomImage, {
-                    reply_markup: {
-                      inline_keyboard: [
-                        [
-                          {
-                            text: option1[1],
-                            callback_data: option1[1]
-                          }
-                        ],
-                        [
-                          {
-                            text: option2[1],
-                            callback_data: option2[1]
-                          }
-                        ]
-                      ]
-                    }
-                  });
-                } else if (option1 && option2 && option3 && !option4) {
-                  bot.sendPhoto(userId, draftCustomImage, {
-                    reply_markup: {
-                      inline_keyboard: [
-                        [
-                          {
-                            text: option1[1],
-                            callback_data: option1[1]
-                          }
-                        ],
-                        [
-                          {
-                            text: option2[1],
-                            callback_data: option2[1]
-                          }
-                        ],
-                        [
-                          {
-                            text: option3[1],
-                            callback_data: option3[1]
-                          }
-                        ]
-                      ]
-                    }
-                  });
-                } else if (option1 && option2 && option3 && option4) {
-                  bot.sendPhoto(userId, draftCustomImage, {
-                    reply_markup: {
-                      inline_keyboard: [
-                        [
-                          {
-                            text: option1[1],
-                            callback_data: option1[1]
-                          }
-                        ],
-                        [
-                          {
-                            text: option2[1],
-                            callback_data: option2[1]
-                          }
-                        ],
-                        [
-                          {
-                            text: option3[1],
-                            callback_data: option3[1]
-                          }
-                        ],
-                        [
-                          {
-                            text: option4[1],
-                            callback_data: option4[1]
-                          }
-                        ]
-                      ]
-                    }
-                  });
-                }
+                bot.sendImage(
+                  userId,
+                  draftCustomImage,
+                  customImageFn(option1, option2, option3, option4)
+                );
               }
             });
           };
