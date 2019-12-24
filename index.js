@@ -319,12 +319,20 @@ Your Options:
     customFormatfn();
 
     if (draftCustomMessage) {
-      bot.sendMessage(msg.chat.id, draftCustom);
+      bot.sendMessage(msg.chat.id, draftCustom, {
+        reply_markup: {
+          keyboard: [["Back", "Send Post"]]
+        }
+      });
     } else if (draftCustomImage) {
       bot.sendPhoto(msg.chat.id, draftCustomImage, {
         caption: draftCustomCaption
       });
-      bot.sendMessage(msg.chat.id, draftCustom);
+      bot.sendMessage(msg.chat.id, draftCustom, {
+        reply_markup: {
+          keyboard: [["Back", "Send Post"]]
+        }
+      });
     }
 
     // if (draftCustomMessage) {
