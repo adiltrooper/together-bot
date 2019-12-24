@@ -563,8 +563,7 @@ bot.onText(/Send Post/, async msg => {
   });
 
   console.log(customOptions);
-  const inlineKeyboardOptions = customOptions[1].map(option);
-  console.log(inlineKeyboardOptions);
+  console.log(customOptions[0]);
   console.log(adminState);
   if (adminState == "admin5") {
     const getUsersAndSend = async () => {
