@@ -1,6 +1,7 @@
 const keys = require("./config_keys/keys");
 const express = require("express");
 const _ = require("lodash/array");
+const customMessageFn = require("./customMessageFn");
 var cloudinary = require("cloudinary");
 
 const TelegramBot = require("node-telegram-bot-api"),
@@ -437,95 +438,7 @@ bot.onText(/Send Post/, async msg => {
           const postMessages = () => {
             subUserSendList.map(userId => {
               if (!draftCustomImage) {
-                if (option1 && !option2 && !option3 && !option4) {
-                  bot.sendMessage(userId, draftCustomMessage, {
-                    reply_markup: {
-                      inline_keyboard: [
-                        [
-                          {
-                            text: option1[1],
-                            callback_data: option1[1]
-                          }
-                        ]
-                      ]
-                    }
-                  });
-                } else if (option1 && option2 && !option3 && !option4) {
-                  bot.sendMessage(userId, draftCustomMessage, {
-                    reply_markup: {
-                      inline_keyboard: [
-                        [
-                          {
-                            text: option1[1],
-                            callback_data: option1[1]
-                          }
-                        ],
-                        [
-                          {
-                            text: option2[1],
-                            callback_data: option2[1]
-                          }
-                        ]
-                      ]
-                    }
-                  });
-                } else if (option1 && option2 && option3 && !option4) {
-                  bot.sendMessage(userId, draftCustomMessage, {
-                    reply_markup: {
-                      inline_keyboard: [
-                        [
-                          {
-                            text: option1[1],
-                            callback_data: option1[1]
-                          }
-                        ],
-                        [
-                          {
-                            text: option2[1],
-                            callback_data: option2[1]
-                          }
-                        ],
-                        [
-                          {
-                            text: option3[1],
-                            callback_data: option3[1]
-                          }
-                        ]
-                      ]
-                    }
-                  });
-                } else if (option1 && option2 && option3 && option4) {
-                  bot.sendMessage(userId, draftCustomMessage, {
-                    reply_markup: {
-                      inline_keyboard: [
-                        [
-                          {
-                            text: option1[1],
-                            callback_data: option1[1]
-                          }
-                        ],
-                        [
-                          {
-                            text: option2[1],
-                            callback_data: option2[1]
-                          }
-                        ],
-                        [
-                          {
-                            text: option3[1],
-                            callback_data: option3[1]
-                          }
-                        ],
-                        [
-                          {
-                            text: option4[1],
-                            callback_data: option4[1]
-                          }
-                        ]
-                      ]
-                    }
-                  });
-                }
+                customMessageFn(option1, option2, option3, option4);
                 bot.sendMessage(userId, draftCustomMessage).catch(err => {
                   console.log(err);
                   if (err.statusCode == 403) {
