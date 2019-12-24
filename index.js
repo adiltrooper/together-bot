@@ -252,6 +252,7 @@ ${draftCustomMessage}
 Your Options:
 1: ${option1[1]}
             `);
+          session.setCustomOptions(option1[1]);
         } else if (option1 && option2 && !option3 && !option4) {
           return (draftCustom = `
             This is your draft message
@@ -262,6 +263,7 @@ Your Options:
 1: ${option1[1]}
 2: ${option2[1]}
             `);
+          session.setCustomOptions(option1[1], option2[1]);
         } else if (option1 && option2 && option3 && !option4) {
           return (draftCustom = `
             This is your draft message
@@ -273,6 +275,7 @@ Your Options:
 2: ${option2[1]}
 3: ${option3[1]}
             `);
+          session.setCustomOptions(option1[1], option2[1], option3[1]);
         } else if (option1 && option2 && option3 && option4) {
           return (draftCustom = `
             This is your draft message
@@ -285,6 +288,12 @@ Your Options:
 3: ${option3[1]}
 4: ${option4[1]}
             `);
+          session.setCustomOptions(
+            option1[1],
+            option2[1],
+            option3[1],
+            option4[1]
+          );
         }
       } else if (draftCustomImage) {
         if (option1 && !option2 && !option3 && !option4) {
@@ -292,12 +301,14 @@ Your Options:
 Your Options:
 1: ${option1[1]}
             `);
+          session.setCustomOptions(option1[1]);
         } else if (option1 && option2 && !option3 && !option4) {
           return (draftCustom = `
 Your Options:
 1: ${option1[1]}
 2: ${option2[1]}
             `);
+          session.setCustomOptions(option1[1], option2[1]);
         } else if (option1 && option2 && option3 && !option4) {
           return (draftCustom = `
 Your Options:
@@ -305,6 +316,7 @@ Your Options:
 2: ${option2[1]}
 3: ${option3[1]}
             `);
+          session.setCustomOptions(option1[1], option2[1], option3[1]);
         } else if (option1 && option2 && option3 && option4) {
           return (draftCustom = `
 Your Options:
@@ -313,6 +325,12 @@ Your Options:
 3: ${option3[1]}
 4: ${option4[1]}
             `);
+          session.setCustomOptions(
+            option1[1],
+            option2[1],
+            option3[1],
+            option4[1]
+          );
         }
       }
     };
