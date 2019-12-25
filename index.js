@@ -570,10 +570,10 @@ bot.on("callback_query", async callbackQuery => {
   });
 
   console.log(pollOption1Replies[0]);
-  console.log(pollOption1Replies[0].count);
+  console.log(pollOption1Replies[0].length);
   if (callbackQuery.data == pollOption1) {
     console.log("STARTING PART 1");
-    if (pollOption1Replies[0].count >= 1) {
+    if (pollOption1Replies[0].length >= 1) {
       session.delPollReplyOption1();
       console.log("STARTING THIS PROCESS");
       pool.getConnection(function(err, connection) {
