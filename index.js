@@ -199,6 +199,7 @@ bot.on("message", async msg => {
       session.setDraftCustomMessage(msg.text);
     }
     session.setAdminState5();
+    session.delCustomOptions();
   }
 });
 
@@ -245,8 +246,7 @@ bot.on("message", async msg => {
         console.log(err.message);
       });
 
-    const customFormatfn = async () => {
-      await session.delCustomOptions();
+    const customFormatfn = () => {
       if (draftCustomMessage) {
         if (option1 && !option2 && !option3 && !option4) {
           session.setDraftCustomTitle(title[1]);
