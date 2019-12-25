@@ -210,6 +210,39 @@ class Session {
       });
   }
 
+  getPollReplyOption2() {
+    return redis
+      .multi()
+      .LRANGE("option2voter", 0, -1)
+      .execAsync()
+      .then(function(res) {
+        console.log(res);
+        return res;
+      });
+  }
+
+  getPollReplyOption3() {
+    return redis
+      .multi()
+      .LRANGE("option3voter", 0, -1)
+      .execAsync()
+      .then(function(res) {
+        console.log(res);
+        return res;
+      });
+  }
+
+  getPollReplyOption4() {
+    return redis
+      .multi()
+      .LRANGE("option4voter", 0, -1)
+      .execAsync()
+      .then(function(res) {
+        console.log(res);
+        return res;
+      });
+  }
+
   delPollReplyOption1() {
     return redis.del("option1voter");
   }
