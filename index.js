@@ -543,7 +543,7 @@ bot.on("callback_query", async callbackQuery => {
   const callback = callbackQuery.message;
   console.log(callbackQuery.message.data);
   callbackQuery.data;
-  console.log(callbackQe.data);
+  console.log(callbackQuery.data);
   console.log(callbackQuery.message.data);
   const runningPollOptions = await session.getCustomOptions().catch(err => {
     console.log(err.message);
