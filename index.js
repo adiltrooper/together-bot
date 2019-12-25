@@ -583,6 +583,7 @@ bot.on("callback_query", async callbackQuery => {
           pollTitle,
           function(err, results, fields) {
             if (err) console.log(err.message);
+            console.log("inserted");
           }
         );
         connection.release();
