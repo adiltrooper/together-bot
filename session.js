@@ -175,7 +175,7 @@ class Session {
   getCustomOptions() {
     return redis
       .multi()
-      .LRANGE("customOptions", 0, -1)
+      .LRANGE("customOptions", 0, 3)
       .execAsync()
       .then(function(res) {
         console.log(res);

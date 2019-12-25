@@ -408,8 +408,8 @@ bot.onText(/Send Post/, async msg => {
     var option4 = inlineKeyboardOptions[3];
     pool.getConnection(function(err, connection) {
       connection.query(
-        "INSERT INTO bot_custom_posts (title, created_by) VALUES (?, ?)",
-        [draftCustomTitle, msg.chat.id],
+        "INSERT INTO bot_custom_posts (title, created_by, option1, option2, option3, option4) VALUES (?, ?, ?, ?, ?, ?)",
+        [draftCustomTitle, msg.chat.id, option1, option2, option3, option4],
         function(err, results, fields) {
           if (err) {
             console.log(err.message);
