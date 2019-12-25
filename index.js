@@ -550,8 +550,43 @@ bot.on("callback_query", async callbackQuery => {
   pollOption3 = runningPollOptions[0][2];
   pollOption4 = runningPollOptions[0][3];
 
+  const pollOption1replies = await session.getPollReplyOption1().catch(err => {
+    console.log(err.message);
+  });
+  const pollOption2replies = await session.getPollReplyOption2().catch(err => {
+    console.log(err.message);
+  });
+  const pollOption3replies = await session.getPollReplyOption3().catch(err => {
+    console.log(err.message);
+  });
+  const pollOption4replies = await session.getPollReplyOption4().catch(err => {
+    console.log(err.message);
+  });
+
   if (callbackQuery.data == pollOption1) {
+    if (pollOptionReplies[0].count == 5) {
+      pool.getConnection(function(err, connection) {
+        if (err) console.log(err);
+        connection.query(
+          "UPDATE bot_custom_posts SET option1 = option1 + 5",
+          function(err, results, fields) {
+            if (err) console.log(err.message);
+          }
+        );
+        connection.release();
+        if (err) console.log(err);
+      });
+    }
     session.setPollReplyOption1(callbackQuery.from.id);
+    bot.sendMessage(callbackQuery.from.id, "Thank you for participating");
+  } else if (callbackQuery.data == pollOption2) {
+    session.setPollReplyOption2(callbackQuery.from.id);
+    bot.sendMessage(callbackQuery.from.id, "Thank you for participating");
+  } else if (callbackQuery.data == pollOption3) {
+    session.setPollReplyOption3(callbackQuery.from.id);
+    bot.sendMessage(callbackQuery.from.id, "Thank you for participating");
+  } else if (callbackQuery.data == pollOption4) {
+    session.setPollReplyOption4(callbackQuery.from.id);
     bot.sendMessage(callbackQuery.from.id, "Thank you for participating");
   }
 });
