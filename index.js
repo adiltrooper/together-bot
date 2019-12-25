@@ -373,38 +373,39 @@ bot.onText(/Send Post/, async msg => {
   const adminState = await session.getAdminState().catch(err => {
     console.log(err.message);
   });
-  const draftCustomImage = await session.getDraftCustomImage().catch(err => {
-    console.log(err.message);
-  });
-  const draftCustomCaption = await session
-    .getDraftCustomCaption()
-    .catch(err => {
-      console.log(err.message);
-    });
-  const draftCustomMessage = await session
-    .getDraftCustomMessage()
-    .catch(err => {
-      console.log(err.message);
-    });
-
-  const draftCustomTitle = await session.getDraftCustomTitle().catch(err => {
-    console.log(err.message);
-  });
-
-  const customOptions = await session.getCustomOptions().catch(err => {
-    console.log(err.message);
-  });
-
-  console.log(customOptions);
-  const inlineKeyboardOptions = customOptions[0];
-  console.log(inlineKeyboardOptions);
-  var option1 = inlineKeyboardOptions[0];
-  var option2 = inlineKeyboardOptions[1];
-  var option3 = inlineKeyboardOptions[2];
-  var option4 = inlineKeyboardOptions[3];
 
   console.log(adminState);
   if (adminState == "admin5") {
+    const draftCustomImage = await session.getDraftCustomImage().catch(err => {
+      console.log(err.message);
+    });
+    const draftCustomCaption = await session
+      .getDraftCustomCaption()
+      .catch(err => {
+        console.log(err.message);
+      });
+    const draftCustomMessage = await session
+      .getDraftCustomMessage()
+      .catch(err => {
+        console.log(err.message);
+      });
+
+    const draftCustomTitle = await session.getDraftCustomTitle().catch(err => {
+      console.log(err.message);
+    });
+
+    const customOptions = await session.getCustomOptions().catch(err => {
+      console.log(err.message);
+    });
+
+    console.log(customOptions);
+    console.log(draftCustomTitle);
+    const inlineKeyboardOptions = customOptions[0];
+    console.log(inlineKeyboardOptions);
+    var option1 = inlineKeyboardOptions[0];
+    var option2 = inlineKeyboardOptions[1];
+    var option3 = inlineKeyboardOptions[2];
+    var option4 = inlineKeyboardOptions[3];
     pool.getConnection(function(err, connection) {
       connection.query(
         "INSERT INTO bot_custom_posts (title, created_by) VALUES (?, ?)",
