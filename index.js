@@ -231,8 +231,6 @@ bot.on("message", async msg => {
     var option3 = msg.text.match(new RegExp(three + "(.[\\s\\S]*)" + four));
     var option4 = msg.text.match(new RegExp(four + "(.[\\s\\S]*)" + end));
 
-    console.log(title);
-
     const draftCustomImage = await session.getDraftCustomImage().catch(err => {
       console.log(err.message);
     });
@@ -250,7 +248,7 @@ bot.on("message", async msg => {
     const customFormatfn = () => {
       if (draftCustomMessage) {
         if (option1 && !option2 && !option3 && !option4) {
-          session.setDraftCustomTitle(title);
+          session.setDraftCustomTitle(title[1]);
           session.setCustomOptions(option1[1]);
           return (draftCustom = `
             This is your draft message
@@ -261,7 +259,7 @@ Your Options:
 1: ${option1[1]}
             `);
         } else if (option1 && option2 && !option3 && !option4) {
-          session.setDraftCustomTitle(title);
+          session.setDraftCustomTitle(title[1]);
           session.setCustomOptions(option1[1], option2[1]);
           return (draftCustom = `
             This is your draft message
@@ -273,7 +271,7 @@ Your Options:
 2: ${option2[1]}
             `);
         } else if (option1 && option2 && option3 && !option4) {
-          session.setDraftCustomTitle(title);
+          session.setDraftCustomTitle(title[1]);
           session.setCustomOptions(option1[1], option2[1], option3[1]);
           return (draftCustom = `
             This is your draft message
@@ -286,7 +284,7 @@ Your Options:
 3: ${option3[1]}
             `);
         } else if (option1 && option2 && option3 && option4) {
-          session.setDraftCustomTitle(title);
+          session.setDraftCustomTitle(title[1]);
           session.setCustomOptions(
             option1[1],
             option2[1],
@@ -307,14 +305,14 @@ Your Options:
         }
       } else if (draftCustomImage) {
         if (option1 && !option2 && !option3 && !option4) {
-          session.setDraftCustomTitle(title);
+          session.setDraftCustomTitle(title[1]);
           session.setCustomOptions(option1[1]);
           return (draftCustom = `
 Your Options:
 1: ${option1[1]}
             `);
         } else if (option1 && option2 && !option3 && !option4) {
-          session.setDraftCustomTitle(title);
+          session.setDraftCustomTitle(title[1]);
           session.setCustomOptions(option1[1], option2[1]);
           return (draftCustom = `
 Your Options:
@@ -322,7 +320,7 @@ Your Options:
 2: ${option2[1]}
             `);
         } else if (option1 && option2 && option3 && !option4) {
-          session.setDraftCustomTitle(title);
+          session.setDraftCustomTitle(title[1]);
           session.setCustomOptions(option1[1], option2[1], option3[1]);
           return (draftCustom = `
 Your Options:
@@ -331,7 +329,7 @@ Your Options:
 3: ${option3[1]}
             `);
         } else if (option1 && option2 && option3 && option4) {
-          session.setDraftCustomTitle(title);
+          session.setDraftCustomTitle(title[1]);
           session.setCustomOptions(
             option1[1],
             option2[1],
