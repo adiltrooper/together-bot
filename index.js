@@ -550,16 +550,16 @@ bot.on("callback_query", async callbackQuery => {
   pollOption3 = runningPollOptions[0][2];
   pollOption4 = runningPollOptions[0][3];
 
-  const pollOption1replies = await session.getPollReplyOption1().catch(err => {
+  const pollOption1Replies = await session.getPollReplyOption1().catch(err => {
     console.log(err.message);
   });
-  const pollOption2replies = await session.getPollReplyOption2().catch(err => {
+  const pollOption2Replies = await session.getPollReplyOption2().catch(err => {
     console.log(err.message);
   });
-  const pollOption3replies = await session.getPollReplyOption3().catch(err => {
+  const pollOption3Replies = await session.getPollReplyOption3().catch(err => {
     console.log(err.message);
   });
-  const pollOption4replies = await session.getPollReplyOption4().catch(err => {
+  const pollOption4Replies = await session.getPollReplyOption4().catch(err => {
     console.log(err.message);
   });
 
