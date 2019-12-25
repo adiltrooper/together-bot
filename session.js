@@ -160,25 +160,18 @@ class Session {
     });
   }
 
+  delCustomOptions() {
+    return redis.ltrim("customOptions", 0, -1);
+  }
+
   setCustomOptions(option1, option2, option3, option4) {
     if (option1 && !option2 && !option3 && !option4) {
-      return redis
-        .multi()
-        .ltrim("customOptions", 0, 3)
-        .RPUSH("customOptions", option1)
-        .execAsync()
-        .then(function(res) {
-          console.log(res);
-          return res;
-        });
+      return redis.RPUSH("customOptions", option1);
     } else if (option1 && option2 && !option3 && !option4) {
-      return redis.ltrim("customOptions", 0, -1);
       return redis.RPUSH("customOptions", [option1, option2]);
     } else if (option1 && option2 && option3 && !option4) {
-      return redis.ltrim("customOptions", 0, -1);
       return redis.RPUSH("customOptions", [option1, option2, option3]);
     } else if (option1 && option2 && option3 && option4) {
-      return redis.ltrim("customOptions", 0, -1);
       return redis.RPUSH("customOptions", [option1, option2, option3, option4]);
     }
   }
