@@ -245,8 +245,8 @@ bot.on("message", async msg => {
         console.log(err.message);
       });
 
-    const customFormatfn = () => {
-      session.delCustomOptions();
+    const customFormatfn = async () => {
+      await session.delCustomOptions();
       if (draftCustomMessage) {
         if (option1 && !option2 && !option3 && !option4) {
           session.setDraftCustomTitle(title[1]);
