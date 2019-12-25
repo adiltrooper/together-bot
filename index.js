@@ -569,6 +569,8 @@ bot.on("callback_query", async callbackQuery => {
     console.log(err.message);
   });
 
+  console.log(pollOption1Replies[0]);
+  console.log(pollOption1Replies[0].count);
   if (callbackQuery.data == pollOption1) {
     console.log("STARTING PART 1");
     if (pollOption1Replies[0].count >= 1) {
