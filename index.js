@@ -551,7 +551,7 @@ bot.on("callback_query", async callbackQuery => {
   pollOption4 = runningPollOptions[0][3];
 
   if (callbackQuery.data == pollOption1) {
-    session.setPollReplyOption1();
+    session.setPollReplyOption1(callbackQuery.chat.id);
     bot.sendMessage(callbackQuery.chat.id, "Thank you for participating");
   }
 });
