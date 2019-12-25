@@ -231,6 +231,8 @@ bot.on("message", async msg => {
     var option3 = msg.text.match(new RegExp(three + "(.[\\s\\S]*)" + four));
     var option4 = msg.text.match(new RegExp(four + "(.[\\s\\S]*)" + end));
 
+    console.log(title);
+
     const draftCustomImage = await session.getDraftCustomImage().catch(err => {
       console.log(err.message);
     });
