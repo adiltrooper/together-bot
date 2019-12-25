@@ -537,6 +537,24 @@ bot.onText(/Send Post/, async msg => {
   }
 });
 
+bot.on("callback_query", async callbackQuery => {
+  console.log(callbackQuery);
+  const callback = callbackQuery.message;
+  const runningPollOptions = await session.getCustomOptions()[0].catch(err => {
+    console.log(err.message);
+  });
+  console.log(runningPollOptions);
+  pollOption1 = runningPollOptions[0];
+  pollOption2 = runningPollOptions[1];
+  pollOption3 = runningPollOptions[2];
+  pollOption4 = runningPollOptions[3];
+
+  if ((callback = pollOption1)) {
+    session.setPollReplyOption1();
+    bot.sendMessage(callbackQuery.chat.id, "Thank you for participating");
+  }
+});
+
 bot.onText(/New Post/, async msg => {
   const adminState = await session.getAdminState().catch(err => {
     console.log(err.message);

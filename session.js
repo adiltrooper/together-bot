@@ -183,6 +183,19 @@ class Session {
       });
   }
 
+  setPollReplyOption1(userId) {
+    redis.LPUSH("option1voter", userId);
+  }
+  setPollReplyOption2(userId) {
+    redis.LPUSH("option2voter", userId);
+  }
+  setPollReplyOption3(userId) {
+    redis.LPUSH("option3voter", userId);
+  }
+  setPollReplyOption4(userId) {
+    redis.LPUSH("option4voter", userId);
+  }
+
   setCachedListings(
     cat_id,
     activity,
