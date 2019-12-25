@@ -550,6 +550,8 @@ bot.on("callback_query", async callbackQuery => {
   pollOption3 = runningPollOptions[0][2];
   pollOption4 = runningPollOptions[0][3];
 
+  console.log(pollOption1);
+
   const pollOption1Replies = await session.getPollReplyOption1().catch(err => {
     console.log(err.message);
   });
