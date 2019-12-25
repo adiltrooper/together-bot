@@ -161,7 +161,7 @@ class Session {
   }
 
   delCustomOptions() {
-    return redis.ltrim("customOptions", 0, -1);
+    return redis.del("customOptions");
   }
 
   setCustomOptions(option1, option2, option3, option4) {
