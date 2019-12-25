@@ -564,11 +564,12 @@ bot.on("callback_query", async callbackQuery => {
   });
 
   if (callbackQuery.data == pollOption1) {
-    if (pollOptionReplies[0].count == 5) {
+    if (pollOptionReplies[0].count == 1) {
+      session.delPollReplyOption1();
       pool.getConnection(function(err, connection) {
         if (err) console.log(err);
         connection.query(
-          "UPDATE bot_custom_posts SET option1 = option1 + 5",
+          "UPDATE bot_custom_posts SET option1 = option1 + 1",
           function(err, results, fields) {
             if (err) console.log(err.message);
           }

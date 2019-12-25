@@ -199,6 +199,20 @@ class Session {
   setPollReplyOption4(userId) {
     redis.LPUSH("option4voter", userId);
   }
+  getPollReplyOption1() {
+    return redis
+      .multi()
+      .LRANGE("option1voter", 0, -1)
+      .execAsync()
+      .then(function(res) {
+        console.log(res);
+        return res;
+      });
+  }
+
+  delPollReplyOption1() {
+    return redis.del("option1voter");
+  }
 
   setCachedListings(
     cat_id,
