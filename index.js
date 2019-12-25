@@ -564,7 +564,7 @@ bot.on("callback_query", async callbackQuery => {
   });
 
   if (callbackQuery.data == pollOption1) {
-    if (pollOptionReplies[0].count == 1) {
+    if (pollOption1Replies[0].count == 1) {
       session.delPollReplyOption1();
       pool.getConnection(function(err, connection) {
         if (err) console.log(err);
