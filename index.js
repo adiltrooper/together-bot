@@ -467,6 +467,7 @@ bot.onText(/Send Post/, async msg => {
           const postMessages = () => {
             subUserSendList.map(userId => {
               if (!draftCustomImage) {
+                bot.sendPoll(userId, "What is up?", ["test", "who", "what"]);
                 bot
                   .sendMessage(
                     userId,
