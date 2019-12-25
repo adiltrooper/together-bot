@@ -218,14 +218,14 @@ bot.on("message", async msg => {
     msg.text !== "/admin" &&
     msg.text !== "/start"
   ) {
-    var title = "/title/";
+    var zero = "/title/";
     var one = "/1/";
     var two = "/2/";
     var three = "/3/";
     var four = "/4/";
     var end = "/end/";
 
-    var title = msg.text.match(new RegExp(title + "(.[\\s\\S]*)" + one));
+    var title = msg.text.match(new RegExp(zero + "(.[\\s\\S]*)" + one));
     var option1 = msg.text.match(new RegExp(one + "(.[\\s\\S]*)" + two));
     var option2 = msg.text.match(new RegExp(two + "(.[\\s\\S]*)" + three));
     var option3 = msg.text.match(new RegExp(three + "(.[\\s\\S]*)" + four));
@@ -468,13 +468,11 @@ bot.onText(/Send Post/, async msg => {
             subUserSendList.map(userId => {
               if (!draftCustomImage) {
                 bot
-                  .sendPoll(userId, "What is up?", ["test", "who", "what"])
-                  // bot
-                  //   .sendMessage(
-                  //     userId,
-                  //     draftCustomMessage,
-                  //     customMessageFn(option1, option2, option3, option4)
-                  //   )
+                  .sendMessage(
+                    userId,
+                    draftCustomMessage,
+                    customMessageFn(option1, option2, option3, option4)
+                  )
                   .catch(err => {
                     console.log(err);
                     if (err.statusCode == 403) {

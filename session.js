@@ -138,7 +138,7 @@ class Session {
 
   setDraftCustomTitle(title) {
     redis.setAsync("draftCustomTitle", title).then(function(res) {
-      return;
+      return rest;
     });
   }
 
