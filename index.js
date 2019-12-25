@@ -540,11 +540,7 @@ bot.onText(/Send Post/, async msg => {
 
 bot.on("callback_query", async callbackQuery => {
   console.log(callbackQuery);
-  const callback = callbackQuery.message;
-  console.log(callbackQuery.message.data);
-  callbackQuery.data;
   console.log(callbackQuery.data);
-  console.log(callbackQuery.message.data);
   const runningPollOptions = await session.getCustomOptions().catch(err => {
     console.log(err.message);
   });
@@ -554,7 +550,7 @@ bot.on("callback_query", async callbackQuery => {
   pollOption3 = runningPollOptions[0][2];
   pollOption4 = runningPollOptions[0][3];
 
-  if (callback == pollOption1) {
+  if (callbackQuery.data == pollOption1) {
     session.setPollReplyOption1();
     bot.sendMessage(callbackQuery.chat.id, "Thank you for participating");
   }
