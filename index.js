@@ -218,12 +218,14 @@ bot.on("message", async msg => {
     msg.text !== "/admin" &&
     msg.text !== "/start"
   ) {
+    var title = "/title/";
     var one = "/1/";
     var two = "/2/";
     var three = "/3/";
     var four = "/4/";
     var end = "/end/";
 
+    var title = msg.text.match(new RegExp(title + "(.[\\s\\S]*)" + one));
     var option1 = msg.text.match(new RegExp(one + "(.[\\s\\S]*)" + two));
     var option2 = msg.text.match(new RegExp(two + "(.[\\s\\S]*)" + three));
     var option3 = msg.text.match(new RegExp(three + "(.[\\s\\S]*)" + four));
@@ -246,6 +248,7 @@ bot.on("message", async msg => {
     const customFormatfn = () => {
       if (draftCustomMessage) {
         if (option1 && !option2 && !option3 && !option4) {
+          session.setDraftCustomTitle(title);
           session.setCustomOptions(option1[1]);
           return (draftCustom = `
             This is your draft message
@@ -256,6 +259,7 @@ Your Options:
 1: ${option1[1]}
             `);
         } else if (option1 && option2 && !option3 && !option4) {
+          session.setDraftCustomTitle(title);
           session.setCustomOptions(option1[1], option2[1]);
           return (draftCustom = `
             This is your draft message
@@ -267,6 +271,7 @@ Your Options:
 2: ${option2[1]}
             `);
         } else if (option1 && option2 && option3 && !option4) {
+          session.setDraftCustomTitle(title);
           session.setCustomOptions(option1[1], option2[1], option3[1]);
           return (draftCustom = `
             This is your draft message
@@ -279,6 +284,7 @@ Your Options:
 3: ${option3[1]}
             `);
         } else if (option1 && option2 && option3 && option4) {
+          session.setDraftCustomTitle(title);
           session.setCustomOptions(
             option1[1],
             option2[1],
@@ -299,12 +305,14 @@ Your Options:
         }
       } else if (draftCustomImage) {
         if (option1 && !option2 && !option3 && !option4) {
+          session.setDraftCustomTitle(title);
           session.setCustomOptions(option1[1]);
           return (draftCustom = `
 Your Options:
 1: ${option1[1]}
             `);
         } else if (option1 && option2 && !option3 && !option4) {
+          session.setDraftCustomTitle(title);
           session.setCustomOptions(option1[1], option2[1]);
           return (draftCustom = `
 Your Options:
@@ -312,6 +320,7 @@ Your Options:
 2: ${option2[1]}
             `);
         } else if (option1 && option2 && option3 && !option4) {
+          session.setDraftCustomTitle(title);
           session.setCustomOptions(option1[1], option2[1], option3[1]);
           return (draftCustom = `
 Your Options:
@@ -320,6 +329,7 @@ Your Options:
 3: ${option3[1]}
             `);
         } else if (option1 && option2 && option3 && option4) {
+          session.setDraftCustomTitle(title);
           session.setCustomOptions(
             option1[1],
             option2[1],
@@ -377,6 +387,10 @@ bot.onText(/Send Post/, async msg => {
       console.log(err.message);
     });
 
+  const draftCustomTitle = await session.getDraftCustomTitle().catch(err => {
+    console.log(err.message);
+  });
+
   const customOptions = await session.getCustomOptions().catch(err => {
     console.log(err.message);
   });
@@ -391,6 +405,20 @@ bot.onText(/Send Post/, async msg => {
 
   console.log(adminState);
   if (adminState == "admin5") {
+    pool.getConnection(function(err, connection) {
+      connection.query(
+        "INSERT INTO bot_custom_posts (title, created_by) VALUES (?, ?)",
+        [draftCustomTitle, msg.chat.id],
+        function(err, results, fields) {
+          if (err) {
+            console.log(err.message);
+          }
+        }
+      );
+      connection.release();
+      if (err) console.log(err);
+    });
+
     const getUsersAndSend = async () => {
       await pool.getConnection(function(err, connection) {
         if (err) console.log(err);
@@ -468,7 +496,6 @@ bot.onText(/Send Post/, async msg => {
                     }
                   });
               } else {
-                console.log(userId);
                 bot
                   .sendPhoto(
                     userId,
