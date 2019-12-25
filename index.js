@@ -563,13 +563,18 @@ bot.on("callback_query", async callbackQuery => {
     console.log(err.message);
   });
 
+  const pollTitle = await session.getDraftCustomTitle().catch(err => {
+    console.log(err.message);
+  });
+
   if (callbackQuery.data == pollOption1) {
     if (pollOption1Replies[0].count == 1) {
       session.delPollReplyOption1();
       pool.getConnection(function(err, connection) {
         if (err) console.log(err);
         connection.query(
-          "UPDATE bot_custom_posts SET option1 = option1 + 1",
+          "UPDATE bot_custom_posts SET option1 = option1 + 1 WHERE title = ?",
+          pollTitle,
           function(err, results, fields) {
             if (err) console.log(err.message);
           }
