@@ -467,13 +467,14 @@ bot.onText(/Send Post/, async msg => {
           const postMessages = () => {
             subUserSendList.map(userId => {
               if (!draftCustomImage) {
-                bot.sendPoll(userId, "What is up?", ["test", "who", "what"]);
                 bot
-                  .sendMessage(
-                    userId,
-                    draftCustomMessage,
-                    customMessageFn(option1, option2, option3, option4)
-                  )
+                  .sendPoll(userId, "What is up?", ["test", "who", "what"])
+                  // bot
+                  //   .sendMessage(
+                  //     userId,
+                  //     draftCustomMessage,
+                  //     customMessageFn(option1, option2, option3, option4)
+                  //   )
                   .catch(err => {
                     console.log(err);
                     if (err.statusCode == 403) {
