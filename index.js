@@ -570,9 +570,10 @@ bot.on("callback_query", async callbackQuery => {
   });
 
   if (callbackQuery.data == pollOption1) {
+    console.log("STARTING PART 1");
     if (pollOption1Replies[0].count == 1) {
-      console.log("STARTING THIS PROCESS");
       session.delPollReplyOption1();
+      console.log("STARTING THIS PROCESS");
       pool.getConnection(function(err, connection) {
         if (err) console.log(err);
         connection.query(
@@ -586,6 +587,7 @@ bot.on("callback_query", async callbackQuery => {
         if (err) console.log(err);
       });
     }
+
     session.setPollReplyOption1(callbackQuery.from.id);
     bot.sendMessage(callbackQuery.from.id, "Thank you for participating");
   } else if (callbackQuery.data == pollOption2) {
