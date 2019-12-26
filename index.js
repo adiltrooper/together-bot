@@ -590,7 +590,7 @@ bot.on("callback_query", async callbackQuery => {
     } else if (pollOption1Replies[0].length <= 5) {
       session.setPollReplyOption1(callbackQuery.from.id);
       bot.sendMessage(callbackQuery.from.id, "Thank you for participating");
-      bot.answerCallbackQuery(callbackQuery.id, "Helloooooo");
+      bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
     }
   } else if (callbackQuery.data == pollOption2) {
     if (pollOption2Replies[0].length >= 5) {
