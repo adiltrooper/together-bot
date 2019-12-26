@@ -571,6 +571,7 @@ bot.on("callback_query", async callbackQuery => {
 
   if (callbackQuery.data == pollOption1) {
     if (pollOption1Replies[0].length >= 5) {
+      bot.sendMessage(callbackQuery.from.id, "Thank you for participating");
       session.delPollReplyOption1();
       pool.getConnection(function(err, connection) {
         if (err) console.log(err);
