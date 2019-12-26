@@ -572,14 +572,12 @@ bot.on("callback_query", async callbackQuery => {
   console.log(pollOption1Replies[0]);
   console.log(pollOption1Replies[0].length);
   if (callbackQuery.data == pollOption1) {
-    console.log("STARTING PART 1");
-    if (pollOption1Replies[0].length >= 1) {
+    if (pollOption1Replies[0].length >= 5) {
       session.delPollReplyOption1();
-      console.log("STARTING THIS PROCESS");
       pool.getConnection(function(err, connection) {
         if (err) console.log(err);
         connection.query(
-          "UPDATE bot_custom_posts SET option1_ans = option1_ans + 1 WHERE title = ?",
+          "UPDATE bot_custom_posts SET option1_ans = option1_ans + 5 WHERE title = ?",
           pollTitle,
           function(err, results, fields) {
             if (err) console.log(err.message);
@@ -589,19 +587,70 @@ bot.on("callback_query", async callbackQuery => {
         connection.release();
         if (err) console.log(err);
       });
+    } else if (pollOption1Replies[0].length <= 5) {
+      session.setPollReplyOption1(callbackQuery.from.id);
+      bot.sendMessage(callbackQuery.from.id, "Thank you for participating");
     }
-
-    session.setPollReplyOption1(callbackQuery.from.id);
-    bot.sendMessage(callbackQuery.from.id, "Thank you for participating");
   } else if (callbackQuery.data == pollOption2) {
-    session.setPollReplyOption2(callbackQuery.from.id);
-    bot.sendMessage(callbackQuery.from.id, "Thank you for participating");
+    if (pollOption2Replies[0].length >= 5) {
+      session.delPollReplyOption2();
+      pool.getConnection(function(err, connection) {
+        if (err) console.log(err);
+        connection.query(
+          "UPDATE bot_custom_posts SET option2_ans = option2_ans + 5 WHERE title = ?",
+          pollTitle,
+          function(err, results, fields) {
+            if (err) console.log(err.message);
+            console.log("inserted");
+          }
+        );
+        connection.release();
+        if (err) console.log(err);
+      });
+    } else if (pollOption2Replies[0].length <= 5) {
+      session.setPollReplyOption2(callbackQuery.from.id);
+      bot.sendMessage(callbackQuery.from.id, "Thank you for participating");
+    }
   } else if (callbackQuery.data == pollOption3) {
-    session.setPollReplyOption3(callbackQuery.from.id);
-    bot.sendMessage(callbackQuery.from.id, "Thank you for participating");
+    if (pollOption3Replies[0].length >= 5) {
+      session.delPollReplyOption3();
+      pool.getConnection(function(err, connection) {
+        if (err) console.log(err);
+        connection.query(
+          "UPDATE bot_custom_posts SET option3_ans = option3_ans + 5 WHERE title = ?",
+          pollTitle,
+          function(err, results, fields) {
+            if (err) console.log(err.message);
+            console.log("inserted");
+          }
+        );
+        connection.release();
+        if (err) console.log(err);
+      });
+    } else if (pollOption1Replies[0].length <= 5) {
+      session.setPollReplyOption3(callbackQuery.from.id);
+      bot.sendMessage(callbackQuery.from.id, "Thank you for participating");
+    }
   } else if (callbackQuery.data == pollOption4) {
-    session.setPollReplyOption4(callbackQuery.from.id);
-    bot.sendMessage(callbackQuery.from.id, "Thank you for participating");
+    if (pollOption4Replies[0].length >= 5) {
+      session.delPollReplyOption4();
+      pool.getConnection(function(err, connection) {
+        if (err) console.log(err);
+        connection.query(
+          "UPDATE bot_custom_posts SET option4_ans = option4_ans + 5 WHERE title = ?",
+          pollTitle,
+          function(err, results, fields) {
+            if (err) console.log(err.message);
+            console.log("inserted");
+          }
+        );
+        connection.release();
+        if (err) console.log(err);
+      });
+    } else if (pollOption4Replies[0].length <= 5) {
+      session.setPollReplyOption4(callbackQuery.from.id);
+      bot.sendMessage(callbackQuery.from.id, "Thank you for participating");
+    }
   }
 });
 
