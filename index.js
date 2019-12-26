@@ -572,6 +572,7 @@ bot.on("callback_query", async callbackQuery => {
   if (callbackQuery.data == pollOption1) {
     if (pollOption1Replies[0].length >= 5) {
       bot.sendMessage(callbackQuery.from.id, "Thank you for participating");
+      bot.answerCallbackQuery(callbackQuery.id, "Helloooooo");
       session.delPollReplyOption1();
       pool.getConnection(function(err, connection) {
         if (err) console.log(err);
@@ -589,6 +590,7 @@ bot.on("callback_query", async callbackQuery => {
     } else if (pollOption1Replies[0].length <= 5) {
       session.setPollReplyOption1(callbackQuery.from.id);
       bot.sendMessage(callbackQuery.from.id, "Thank you for participating");
+      bot.answerCallbackQuery(callbackQuery.id, "Helloooooo");
     }
   } else if (callbackQuery.data == pollOption2) {
     if (pollOption2Replies[0].length >= 5) {
