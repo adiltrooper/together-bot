@@ -409,7 +409,7 @@ bot.onText(/Send Post/, async msg => {
     var option4 = inlineKeyboardOptions[3];
     pool.getConnection(function(err, connection) {
       connection.query(
-        "INSERT INTO bot_custom_posts (title, created_by, option1, option2, option3, option4) VALUES (?, ?, ?, ?, ?, ?)",
+        "INSERT INTO bot_poll (title, created_by, option1, option2, option3, option4) VALUES (?, ?, ?, ?, ?, ?)",
         [draftCustomTitle, msg.chat.id, option1, option2, option3, option4],
         function(err, results, fields) {
           if (err) {
@@ -569,15 +569,13 @@ bot.on("callback_query", async callbackQuery => {
     console.log(err.message);
   });
 
-  console.log(pollOption1Replies[0]);
-  console.log(pollOption1Replies[0].length);
   if (callbackQuery.data == pollOption1) {
     if (pollOption1Replies[0].length >= 5) {
       session.delPollReplyOption1();
       pool.getConnection(function(err, connection) {
         if (err) console.log(err);
         connection.query(
-          "UPDATE bot_custom_posts SET option1_ans = option1_ans + 5 WHERE title = ?",
+          "UPDATE bot_poll SET option1_ans = option1_ans + 5 WHERE title = ?",
           pollTitle,
           function(err, results, fields) {
             if (err) console.log(err.message);
@@ -597,7 +595,7 @@ bot.on("callback_query", async callbackQuery => {
       pool.getConnection(function(err, connection) {
         if (err) console.log(err);
         connection.query(
-          "UPDATE bot_custom_posts SET option2_ans = option2_ans + 5 WHERE title = ?",
+          "UPDATE bot_poll SET option2_ans = option2_ans + 5 WHERE title = ?",
           pollTitle,
           function(err, results, fields) {
             if (err) console.log(err.message);
@@ -617,7 +615,7 @@ bot.on("callback_query", async callbackQuery => {
       pool.getConnection(function(err, connection) {
         if (err) console.log(err);
         connection.query(
-          "UPDATE bot_custom_posts SET option3_ans = option3_ans + 5 WHERE title = ?",
+          "UPDATE bot_poll SET option3_ans = option3_ans + 5 WHERE title = ?",
           pollTitle,
           function(err, results, fields) {
             if (err) console.log(err.message);
@@ -627,7 +625,7 @@ bot.on("callback_query", async callbackQuery => {
         connection.release();
         if (err) console.log(err);
       });
-    } else if (pollOption1Replies[0].length <= 5) {
+    } else if (pollOption3Replies[0].length <= 5) {
       session.setPollReplyOption3(callbackQuery.from.id);
       bot.sendMessage(callbackQuery.from.id, "Thank you for participating");
     }
@@ -637,7 +635,7 @@ bot.on("callback_query", async callbackQuery => {
       pool.getConnection(function(err, connection) {
         if (err) console.log(err);
         connection.query(
-          "UPDATE bot_custom_posts SET option4_ans = option4_ans + 5 WHERE title = ?",
+          "UPDATE bot_poll SET option4_ans = option4_ans + 5 WHERE title = ?",
           pollTitle,
           function(err, results, fields) {
             if (err) console.log(err.message);
