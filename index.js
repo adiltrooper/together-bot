@@ -315,6 +315,11 @@ bot.onText(/Custom Post/, async msg => {
       }
     }
     getResult();
+    bot.sendMessage(msg.chat.id, "Choose an Option or Exit", {
+      reply_markup: {
+        keyboard: [["Exit Admin Session"]]
+      }
+    });
   } else if (adminState == "admin1" && !pollExists) {
     session.delPollData();
 
