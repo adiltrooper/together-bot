@@ -144,11 +144,11 @@ class Session {
   setPollData(title, option1, option2, option3, option4) {
     switch ((option1, option2, option3, option4)) {
       case (option1, !option2, !option3, !option4):
-        redis.hset("Poll:currentPoll", "title", title, "option1", option1);
+        redis.hmset("Poll:currentPoll", "title", title, "option1", option1);
         console.log("poll:currentPoll data set");
         break;
       case (option1, option2, !option3, !option4):
-        redis.hset(
+        redis.hmset(
           "Poll:currentPoll",
           "title",
           title,
@@ -160,7 +160,7 @@ class Session {
         console.log("poll:currentPoll data set");
         break;
       case (option1, option2, option3, !option4):
-        return redis.hset(
+        return redis.hmset(
           "Poll:currentPoll",
           "title",
           title,
@@ -174,7 +174,7 @@ class Session {
         console.log("poll:currentPoll data set");
         break;
       case (option1, option2, option3, option4):
-        return redis.hset(
+        return redis.hmset(
           "Poll:currentPoll",
           "title",
           title,
@@ -190,7 +190,7 @@ class Session {
         console.log("poll:currentPoll data set");
         break;
       default:
-        return redis.hset(
+        return redis.hmset(
           "Poll:currentPoll",
           "title",
           title,
