@@ -584,11 +584,11 @@ Thanks for participating! 🥳🥳🥳
 
       bot.sendMessage(
         callbackQuery.from.id,
-        `<b>Responses Thus Far:               </b>
+        `<b>Responses Thus Far:</b>
 
-${pollOption1}\ : ${option1Result}%
-${pollOption2}\ : ${option2Result}%
-${pollOption3}\ : ${option3Result}%
+${pollOption1} : ${option1Result}%
+${pollOption2} : ${option2Result}%
+${pollOption3} : ${option3Result}%
 
 Thanks for participating! 🥳🥳🥳
         `,
