@@ -761,7 +761,7 @@ bot.onText(/Send Post/, async msg => {
     getUsersAndSend();
     bot.sendMessage(msg.chat.id, "Message Sending!", {
       reply_markup: {
-        keyboard: [["Exit Admin State"]],
+        keyboard: [["Exit Admin Session"]],
         resize_keyboard: true
       }
     });
