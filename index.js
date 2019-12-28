@@ -169,7 +169,7 @@ bot.onText(/Custom Post/, async msg => {
     console.log(err.message);
   });
 
-  if (pollExists) {
+  if (adminState == "admin3" && pollExists) {
     const pollOptions = await session.getPollOptions().catch(err => {
       console.log(err.message);
     });
@@ -310,6 +310,17 @@ bot.onText(/Custom Post/, async msg => {
         );
       }
     }
+  } else if (adminState == "admin3" && !pollExists) {
+    session.delPollData();
+
+    session.setAdminState5();
+
+    bot.sendMessage(msg.chat.id, "Draft your main message:", {
+      reply_markup: {
+        keyboard: [["Back", "Exit Admin Session"]],
+        resize_keyboard: true
+      }
+    });
   }
 });
 
