@@ -131,7 +131,7 @@ class Session {
   }
 
   setPollMessage(message) {
-    redis.hset("currentPoll", "message", message, function(err, res) {
+    redis.hset("poll:currentPoll", "message", message, function(err, res) {
       if (err) {
         console.log(err);
       } else {
