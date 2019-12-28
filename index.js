@@ -383,7 +383,7 @@ bot.on("callback_query", async callbackQuery => {
 
     session.setAdminState5();
 
-    bot.sendMessage(msg.chat.id, "Draft your main message:", {
+    bot.sendMessage(callbackQuery.id, "Draft your main message:", {
       reply_markup: {
         keyboard: [["Back", "Exit Admin Session"]],
         resize_keyboard: true
@@ -769,7 +769,10 @@ bot.onText(/Send Post/, async msg => {
 });
 
 bot.on("callback_query", async callbackQuery => {
-  if (callbackQuery.data !== "Keep Poll") {
+  if (
+    callbackQuery.data !== "Keep Poll" ||
+    callbackQuery.data !== "Stop Poll & Create New"
+  ) {
     userPollSelection = callbackQuery.data;
     console.log(callbackQuery);
 
