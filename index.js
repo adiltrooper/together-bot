@@ -540,6 +540,8 @@ bot.on("callback_query", async callbackQuery => {
     option4Result = (pollCount4 / totalCount) * 100;
 
     console.log(pollCount);
+    console.log(pollCount1);
+    console.log(typeof pollCount1);
     console.log(option1Result);
   }
 });
