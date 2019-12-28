@@ -317,7 +317,8 @@ bot.onText(/Custom Post/, async msg => {
     getResult();
     bot.sendMessage(msg.chat.id, "Choose an Option or Exit", {
       reply_markup: {
-        keyboard: [["Exit Admin Session"]]
+        keyboard: [["Exit Admin Session"]],
+        resize_keyboard: true
       }
     });
   } else if (adminState == "admin1" && !pollExists) {
@@ -400,7 +401,7 @@ bot.on("callback_query", async callbackQuery => {
   } else if (adminState == "admin4" && callbackQuery.data == "Keep Poll") {
     bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
     session.setAdminState();
-    bot.sendMessage(msg.chat.id, `Please Select an Option:`, {
+    bot.sendMessage(callbackQiery.from.id, `Please Select an Option:`, {
       reply_markup: {
         keyboard: [
           ["New Post", "Custom Post"],
