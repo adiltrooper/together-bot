@@ -131,7 +131,7 @@ class Session {
   }
 
   setPollMessage(message) {
-    return redis.hset("currentPoll", "message", message);
+    redis.hset("currentPoll", "message", message);
     console.log("currentPoll message set");
   }
 
