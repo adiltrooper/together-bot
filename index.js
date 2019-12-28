@@ -195,11 +195,7 @@ bot.on("message", async msg => {
       `
 <b>Send Your Options in the Format:</b>
 /title/ My Poll Title
-/1/ Option 1
-/2/ Option 2
-/3/ Option 3
-/4/ Option 4
-/end/
+/1/ Option 1 /2/ Option 2 /3/ Option 3 /4/ Option 4 /end/
 `,
       {
         parse_mode: "HTML"
@@ -563,10 +559,10 @@ bot.on("callback_query", async callbackQuery => {
 
       bot.sendMessage(
         callbackQuery.from.id,
-        `<b>Responses Thus Far:               </b>
+        `<b>Responses Thus Far:</b>
 
-${pollOption1}: <b>${option1Result}%</b>
-${pollOption2}: <b>${option2Result}%</b>
+1️⃣${pollOption1}: <b>${option1Result}%</b>
+2️⃣${pollOption2}: <b>${option2Result}%</b>
 
 Thanks for participating! 🥳🥳🥳
         `,
@@ -586,9 +582,9 @@ Thanks for participating! 🥳🥳🥳
         callbackQuery.from.id,
         `<b>Responses Thus Far:</b>
 
-${pollOption1} : ${option1Result}%
-${pollOption2} : ${option2Result}%
-${pollOption3} : ${option3Result}%
+1️⃣${pollOption1}: <b>${option1Result}%<b>
+2️⃣${pollOption2}: <b>${option2Result}%<b>
+3️⃣${pollOption3}: <b>${option3Result}%<b>
 
 Thanks for participating! 🥳🥳🥳
         `,
@@ -606,12 +602,12 @@ Thanks for participating! 🥳🥳🥳
 
       bot.sendMessage(
         callbackQuery.from.id,
-        `<b>Responses Thus Far:               </b>
+        `<b>Responses Thus Far:</b>
 
-${pollOption1}: <b>${option1Result}%</b>
-${pollOption2}: <b>${option2Result}%</b>
-${pollOption3}: <b>${option3Result}%</b>
-${pollOption4}: <b>${option4Result}%</b>
+1️⃣${pollOption1}: <b>${option1Result}%</b>
+2️⃣${pollOption2}: <b>${option2Result}%</b>
+3️⃣${pollOption3}: <b>${option3Result}%</b>
+4️⃣${pollOption4}: <b>${option4Result}%</b>
 
 Thanks for participating! 🥳🥳🥳
         `,

@@ -9,7 +9,8 @@ module.exports = function(option1, option2, option3, option4) {
               callback_data: option1
             }
           ]
-        ]
+        ],
+        keyboard: [["Exit Admin Session"]]
       }
     };
   } else if (option1 && option2 && !option3 && !option4) {
@@ -28,7 +29,8 @@ module.exports = function(option1, option2, option3, option4) {
               callback_data: option2
             }
           ]
-        ]
+        ],
+        keyboard: [["Exit Admin Session"]]
       }
     };
   } else if (option1 && option2 && option3 && !option4) {
@@ -53,7 +55,8 @@ module.exports = function(option1, option2, option3, option4) {
               callback_data: option3
             }
           ]
-        ]
+        ],
+        keyboard: [["Exit Admin Session"]]
       }
     };
   } else if (option1 && option2 && option3 && option4) {
@@ -84,7 +87,8 @@ module.exports = function(option1, option2, option3, option4) {
               callback_data: option4
             }
           ]
-        ]
+        ],
+        keyboard: [["Exit Admin Session"]]
       }
     };
   }
