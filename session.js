@@ -131,77 +131,61 @@ class Session {
   }
 
   setPollMessage(message) {
-    redis.hset("currentPoll", "message", message).then(function(res) {
-      return res;
-    });
+    return redis.hset("currentPoll", "message", message);
+    console.log("currentPoll message set");
   }
 
   setPollData(title, option1, option2, option3, option4) {
     switch ((option1, option2, option3, option4)) {
       case (option1, !option2, !option3, !option4):
-        redis
-          .hset("currentPoll", "title", title, "option1", option1)
-          .then(function(res) {
-            return res;
-          });
+        return redis.hset("currentPoll", "title", title, "option1", option1);
+        console.log("currentPoll data set");
         break;
       case (option1, option2, !option3, !option4):
-        redis
-          .hset(
-            "currentPoll",
-            "title",
-            title,
-            "option1",
-            option1,
-            "option2",
-            option2
-          )
-          .then(function(res) {
-            return res;
-          });
+        return redis.hset(
+          "currentPoll",
+          "title",
+          title,
+          "option1",
+          option1,
+          "option2",
+          option2
+        );
+        console.log("currentPoll data set");
         break;
       case (option1, option2, option3, !option4):
-        redis
-          .hset(
-            "currentPoll",
-            "title",
-            title,
-            "option1",
-            option1,
-            "option2",
-            option2,
-            "option3",
-            option3
-          )
-          .then(function(res) {
-            return res;
-          });
+        return redis.hset(
+          "currentPoll",
+          "title",
+          title,
+          "option1",
+          option1,
+          "option2",
+          option2,
+          "option3",
+          option3
+        );
+        console.log("currentPoll data set");
         break;
       case (option1, option2, option3, option4):
-        redis
-          .hset(
-            "currentPoll",
-            "title",
-            title,
-            "option1",
-            option1,
-            "option2",
-            option2,
-            "option3",
-            option3,
-            "option4",
-            option4
-          )
-          .then(function(res) {
-            return res;
-          });
+        return redis.hset(
+          "currentPoll",
+          "title",
+          title,
+          "option1",
+          option1,
+          "option2",
+          option2,
+          "option3",
+          option3,
+          "option4",
+          option4
+        );
+        console.log("currentPoll data set");
         break;
       default:
-        redis
-          .hset("currentPoll", "title", title, "option1", option1)
-          .then(function(res) {
-            return res;
-          });
+        return redis.hset("currentPoll", "title", title, "option1", option1);
+        console.log("currentPoll data set");
     }
   }
 
