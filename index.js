@@ -160,18 +160,236 @@ bot.onText(/Subscriber Count/, async msg => {
     });
   }
 });
-
 bot.onText(/Custom Post/, async msg => {
   const adminState = await session.getAdminState().catch(err => {
     console.log(err.message);
   });
   session.setAdminState4();
-  bot.sendMessage(msg.chat.id, "Draft your main message:", {
-    reply_markup: {
-      keyboard: [["Back", "Exit Admin Session"]],
-      resize_keyboard: true
-    }
+  const pollExists = session.getPollTitle().catch(err => {
+    console.log(err.message);
   });
+
+  if (pollExists) {
+    const pollOptions = await session.getPollOptions().catch(err => {
+      console.log(err.message);
+    });
+
+    pollOption1 = pollOptions[0];
+    pollOption2 = pollOptions[1];
+    pollOption3 = pollOptions[2];
+    pollOption4 = pollOptions[3];
+
+    async function getResult() {
+      const pollCount = await session.getPollCount().catch(err => {
+        console.log(err.message);
+      });
+      pollCount1 = parseInt(pollCount[0]);
+      pollCount2 = parseInt(pollCount[1]);
+      pollCount3 = parseInt(pollCount[2]);
+      pollCount4 = parseInt(pollCount[3]);
+
+      console.log(pollCount1);
+
+      if (pollOption1 && pollOption2 && !pollOption3 && !pollOption4) {
+        totalCount = pollCount1 + pollCount2;
+        console.log(totalCount);
+        option1Result = (pollCount1 / totalCount) * 100;
+        option2Result = (pollCount2 / totalCount) * 100;
+
+        bot.sendMessage(
+          callbackQuery.from.id,
+          `<b>You have an Existing Poll!</b>
+
+  1️⃣${pollOption1}: <b>${option1Result}%</b>
+  2️⃣${pollOption2}: <b>${option2Result}%</b>
+
+  <b>Would you like to End it?</b>
+          `,
+          {
+            reply_markup: {
+              inline_keyboard: [
+                [
+                  {
+                    text: "Keep Poll",
+                    callback_data: "Keep Poll"
+                  }
+                ],
+                [
+                  {
+                    text: "Stop Poll",
+                    callback_data: "Stop Poll"
+                  }
+                ]
+              ]
+            }
+          },
+          {
+            parse_mode: "HTML"
+          }
+        );
+      } else if (pollOption1 && pollOption2 && pollOption3 && !pollOption4) {
+        totalCount = pollCount1 + pollCount2 + pollCount3;
+        console.log(pollCount1);
+        console.log(totalCount);
+        option1Result = (pollCount1 / totalCount) * 100;
+        option2Result = (pollCount2 / totalCount) * 100;
+        option3Result = (pollCount3 / totalCount) * 100;
+
+        bot.sendMessage(
+          callbackQuery.from.id,
+          `<b>You have an Existing Poll!</b>
+
+  1️⃣${pollOption1}: <b>${option1Result}%<b>
+  2️⃣${pollOption2}: <b>${option2Result}%<b>
+  3️⃣${pollOption3}: <b>${option3Result}%<b>
+
+<b>Would you like to End it?</b>
+          `,
+          {
+            reply_markup: {
+              inline_keyboard: [
+                [
+                  {
+                    text: "Keep Poll",
+                    callback_data: "Keep Poll"
+                  }
+                ],
+                [
+                  {
+                    text: "Stop Poll",
+                    callback_data: "Stop Poll"
+                  }
+                ]
+              ]
+            }
+          },
+          {
+            parse_mode: "HTML"
+          }
+        );
+      } else if (pollOption1 && pollOption2 && pollOption3 && pollOption4) {
+        totalCount = pollCount1 + pollCount2 + pollCount3 + pollCount4;
+        console.log(totalCount);
+        option1Result = (pollCount1 / totalCount) * 100;
+        option2Result = (pollCount2 / totalCount) * 100;
+        option3Result = (pollCount3 / totalCount) * 100;
+        option4Result = (pollCount4 / totalCount) * 100;
+
+        bot.sendMessage(
+          callbackQuery.from.id,
+          `<b>You have an Existing Poll!</b>
+
+  1️⃣${pollOption1}: <b>${option1Result}%</b>
+  2️⃣${pollOption2}: <b>${option2Result}%</b>
+  3️⃣${pollOption3}: <b>${option3Result}%</b>
+  4️⃣${pollOption4}: <b>${option4Result}%</b>
+
+  <b>Would you like to End it?</b>
+          `,
+          {
+            reply_markup: {
+              inline_keyboard: [
+                [
+                  {
+                    text: "Keep Poll",
+                    callback_data: "Keep Poll"
+                  }
+                ],
+                [
+                  {
+                    text: "Stop Poll & Create New",
+                    callback_data: "Stop Poll & Create New"
+                  }
+                ]
+              ]
+            }
+          },
+          {
+            parse_mode: "HTML"
+          }
+        );
+      }
+    }
+  }
+});
+
+bot.on("callback_query", async callbackQuery => {
+  const adminState = await session.getAdminState().catch(err => {
+    console.log(err.message);
+  });
+  if (
+    adminState == "admin4" &&
+    callbackQuery.data == "Stop Poll & Create New"
+  ) {
+    bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
+    const pollOptions = await session.getPollOptions().catch(err => {
+      console.log(err.message);
+    });
+
+    pollOption1 = pollOptions[0];
+    pollOption2 = pollOptions[1];
+    pollOption3 = pollOptions[2];
+    pollOption4 = pollOptions[3];
+
+    const pollCount = await session.getPollCount().catch(err => {
+      console.log(err.message);
+    });
+    pollCount1 = parseInt(pollCount[0]);
+    pollCount2 = parseInt(pollCount[1]);
+    pollCount3 = parseInt(pollCount[2]);
+    pollCount4 = parseInt(pollCount[3]);
+
+    const pollTitle = await session.getPollTitle().catch(err => {
+      console.log(err.message);
+    });
+
+    pool.getConnection(function(err, connection) {
+      connection.query(
+        "INSERT INTO bot_poll (title, option1, option1_count, option2, option2_count, option3, option3_count, option4, option4_count) VALUES (?, ?, ?, ?, ?, ?)",
+        [
+          pollTitle,
+          pollOption1,
+          pollCount1,
+          pollOption2,
+          pollCount2,
+          pollOption3,
+          pollCount3,
+          pollOption4,
+          pollCount4
+        ],
+        function(err, results, fields) {
+          if (err) {
+            console.log(err.message);
+          }
+        }
+      );
+      connection.release();
+      if (err) console.log(err);
+    });
+    session.delPollData();
+
+    session.setAdminState5();
+
+    bot.sendMessage(msg.chat.id, "Draft your main message:", {
+      reply_markup: {
+        keyboard: [["Back", "Exit Admin Session"]],
+        resize_keyboard: true
+      }
+    });
+  } else if (adminState == "admin4" && callbackQuery.data == "Keep Poll") {
+    bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
+    session.setAdminState();
+    bot.sendMessage(msg.chat.id, `Please Select an Option:`, {
+      reply_markup: {
+        keyboard: [
+          ["New Post", "Custom Post"],
+          ["Subscriber Count"],
+          ["Exit Admin Session"]
+        ],
+        resize_keyboard: true
+      }
+    });
+  }
 });
 
 bot.on("message", async msg => {
@@ -179,7 +397,7 @@ bot.on("message", async msg => {
     console.log(err.message);
   });
   if (
-    adminState == "admin4" &&
+    adminState == "admin5" &&
     msg.text !== "Back" &&
     msg.text !== "Exit Admin Session" &&
     msg.text !== "☀️Feelin' Adventurous" &&
@@ -208,7 +426,7 @@ bot.on("message", async msg => {
     } else {
       session.setPollMessage(msg.text);
     }
-    session.setAdminState5();
+    session.setAdminState6();
     session.delPollData();
   }
 });
@@ -218,7 +436,7 @@ bot.on("message", async msg => {
     console.log(err.message);
   });
   if (
-    adminState == "admin5" &&
+    adminState == "admin6" &&
     msg.text !== "Back" &&
     msg.text !== "Exit Admin Session" &&
     msg.text !== "☀️Feelin' Adventurous" &&
@@ -525,7 +743,7 @@ bot.onText(/Send Post/, async msg => {
       retrieveUserList();
     };
     getUsersAndSend();
-    bot.sendMessage(msg.chat.id, "Message Sent! You May Exit Now", {
+    bot.sendMessage(msg.chat.id, "Message Sending!", {
       reply_markup: {
         keyboard: [["Exit Admin State"]]
       }
