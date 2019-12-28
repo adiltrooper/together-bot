@@ -527,10 +527,10 @@ bot.on("callback_query", async callbackQuery => {
     const pollCount = await session.getPollCount().catch(err => {
       console.log(err.message);
     });
-    pollCount1 = pollCount[0];
-    pollCount2 = pollCount[1];
-    pollCount3 = pollCount[2];
-    pollCount4 = pollCount[3];
+    pollCount1 = parseInt(pollCount[0]);
+    pollCount2 = parseInt(pollCount[1]);
+    pollCount3 = parseInt(pollCount[2]);
+    pollCount4 = parseInt(pollCount[3]);
 
     totalCount = pollCount1 + pollCount2 + pollCount3 + pollCount4;
 
