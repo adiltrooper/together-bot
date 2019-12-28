@@ -391,12 +391,11 @@ bot.onText(/Send Post/, async msg => {
 
     console.log(pollOptions);
     console.log(draftCustomTitle);
-    const inlineKeyboardOptions = polloptions[0];
     console.log(inlineKeyboardOptions);
-    var option1 = inlineKeyboardOptions[0];
-    var option2 = inlineKeyboardOptions[1];
-    var option3 = inlineKeyboardOptions[2];
-    var option4 = inlineKeyboardOptions[3];
+    var option1 = pollOptions[0];
+    var option2 = pollOptions[1];
+    var option3 = pollOptions[2];
+    var option4 = pollOptions[3];
     pool.getConnection(function(err, connection) {
       connection.query(
         "INSERT INTO bot_poll (title, created_by, option1, option2, option3, option4) VALUES (?, ?, ?, ?, ?, ?)",
