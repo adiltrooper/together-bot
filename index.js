@@ -268,7 +268,7 @@ ${pollMessage}
 Your Options:
 1: ${option1[1]}
 
-⬇️<b>Select what you want to do with it</b> ⬇️
+⬇️<b>Select what you want to do with it</b>
 `);
         } else if (option1 && option2 && !option3 && !option4) {
           session.setPollData(title[1], option1[1], option2[1]);
@@ -281,7 +281,7 @@ Your Options:
 1: ${option1[1]}
 2: ${option2[1]}
 
-⬇️<b>Select what you want to do with it</b> ⬇️
+⬇️<b>Select what you want to do with it</b>
 `);
         } else if (option1 && option2 && option3 && !option4) {
           session.setPollData(title[1], option1[1], option2[1], option3[1]);
@@ -295,7 +295,7 @@ Your Options:
 2: ${option2[1]}
 3: ${option3[1]}
 
-⬇️<b>Select what you want to do with it</b> ⬇️
+⬇️<b>Select what you want to do with it</b>
 `);
         } else if (option1 && option2 && option3 && option4) {
           session.setPollData(
@@ -316,7 +316,7 @@ Your Options:
 3: ${option3[1]}
 4: ${option4[1]}
 
-⬇️<b>Select what you want to do with it</b> ⬇️
+⬇️<b>Select what you want to do with it</b>
 `);
         }
       } else if (pollImage) {
@@ -586,9 +586,9 @@ Thanks for participating! 🥳🥳🥳
         callbackQuery.from.id,
         `<b>Responses Thus Far:               </b>
 
-${pollOption1}: ${option1Result}%
-${pollOption2}: ${option2Result}%
-${pollOption3}: ${option3Result}%
+${pollOption1}\ : ${option1Result}%
+${pollOption2}\ : ${option2Result}%
+${pollOption3}\ : ${option3Result}%
 
 Thanks for participating! 🥳🥳🥳
         `,
