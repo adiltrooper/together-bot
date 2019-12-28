@@ -620,7 +620,7 @@ bot.onText(/Send Post/, async msg => {
   });
 
   console.log(adminState);
-  if (adminState == "admin5") {
+  if (adminState == "admin6") {
     const pollImage = await session.getPollImage().catch(err => {
       console.log(err.message);
     });
