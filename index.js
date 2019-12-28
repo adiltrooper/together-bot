@@ -563,7 +563,7 @@ bot.on("callback_query", async callbackQuery => {
 
       bot.sendMessage(
         callbackQuery.from.id,
-        `<b>Results so far:</b>
+        `<b>Responses Thus Far:               </b>
 
 1️⃣${pollOption1}: <b>${option1Result}%</b>
 2️⃣${pollOption2}: <b>${option2Result}%</b>
@@ -584,7 +584,7 @@ Thanks for participating! 🥳🥳🥳
 
       bot.sendMessage(
         callbackQuery.from.id,
-        `<b>Results so far:</b>
+        `<b>Responses Thus Far:               </b>
 
 1️⃣${pollOption1}: <b>${option1Result}%</b>
 2️⃣${pollOption2}: <b>${option2Result}%</b>
@@ -606,7 +606,7 @@ Thanks for participating! 🥳🥳🥳
 
       bot.sendMessage(
         callbackQuery.from.id,
-        `<b>Results so far:</b>
+        `<b>Responses Thus Far:               </b>
 
 1️⃣${pollOption1}: <b>${option1Result}%</b>
 2️⃣${pollOption2}: <b>${option2Result}%</b>
