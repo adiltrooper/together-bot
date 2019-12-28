@@ -232,14 +232,12 @@ bot.on("message", async msg => {
     var option3 = msg.text.match(new RegExp(three + "(.[\\s\\S]*)" + four));
     var option4 = msg.text.match(new RegExp(four + "(.[\\s\\S]*)" + end));
 
-    const draftCustomImage = await session.getDraftCustomImage().catch(err => {
+    const pollImage = await session.getPollImage().catch(err => {
       console.log(err.message);
     });
-    const draftCustomCaption = await session
-      .getDraftCustomCaption()
-      .catch(err => {
-        console.log(err.message);
-      });
+    const pollCaption = await session.getPollCaption().catch(err => {
+      console.log(err.message);
+    });
     const pollMessage = await session.getPollMessage().catch(err => {
       console.log(err.message);
     });
@@ -299,7 +297,7 @@ Your Options:
 4: ${option4[1]}
             `);
         }
-      } else if (draftCustomImage) {
+      } else if (pollImage) {
         if (option1 && !option2 && !option3 && !option4) {
           session.setPollData(title[1], option1[1]);
           return (draftCustom = `
@@ -348,9 +346,9 @@ Your Options:
         },
         resize_keyboard: true
       });
-    } else if (draftCustomImage) {
-      bot.sendPhoto(msg.chat.id, draftCustomImage, {
-        caption: draftCustomCaption
+    } else if (pollImage) {
+      bot.sendPhoto(msg.chat.id, pollImage, {
+        caption: pollCaption
       });
       bot.sendMessage(msg.chat.id, draftCustom, {
         reply_markup: {
@@ -369,14 +367,12 @@ bot.onText(/Send Post/, async msg => {
 
   console.log(adminState);
   if (adminState == "admin5") {
-    const draftCustomImage = await session.getDraftCustomImage().catch(err => {
+    const pollImage = await session.getPollImage().catch(err => {
       console.log(err.message);
     });
-    const draftCustomCaption = await session
-      .getDraftCustomCaption()
-      .catch(err => {
-        console.log(err.message);
-      });
+    const pollCaption = await session.getPollCaption().catch(err => {
+      console.log(err.message);
+    });
     const pollMessage = await session.getPollMessage().catch(err => {
       console.log(err.message);
     });
@@ -394,19 +390,6 @@ bot.onText(/Send Post/, async msg => {
     var option3 = pollOptions[2];
     var option4 = pollOptions[3];
     console.log(option1);
-    pool.getConnection(function(err, connection) {
-      connection.query(
-        "INSERT INTO bot_poll (title, created_by, option1, option2, option3, option4) VALUES (?, ?, ?, ?, ?, ?)",
-        [pollTitle, msg.chat.id, option1, option2, option3, option4],
-        function(err, results, fields) {
-          if (err) {
-            console.log(err.message);
-          }
-        }
-      );
-      connection.release();
-      if (err) console.log(err);
-    });
 
     const getUsersAndSend = async () => {
       await pool.getConnection(function(err, connection) {
@@ -455,7 +438,7 @@ bot.onText(/Send Post/, async msg => {
         userSendList.map(subUserSendList => {
           const postMessages = () => {
             subUserSendList.map(userId => {
-              if (!draftCustomImage) {
+              if (!pollImage) {
                 bot
                   .sendMessage(
                     userId,
@@ -488,7 +471,7 @@ bot.onText(/Send Post/, async msg => {
                 bot
                   .sendPhoto(
                     userId,
-                    draftCustomImage,
+                    pollImage,
                     customImageFn(option1, option2, option3, option4)
                   )
                   .catch(err => {
@@ -528,117 +511,36 @@ bot.onText(/Send Post/, async msg => {
 bot.on("callback_query", async callbackQuery => {
   console.log(callbackQuery);
   console.log(callbackQuery.data);
-  const runningPollOptions = await session.getCustomOptions().catch(err => {
+  const pollOptions = await session.getPollOptions().catch(err => {
     console.log(err.message);
   });
-  console.log(runningPollOptions[0]);
-  pollOption1 = runningPollOptions[0][0];
-  pollOption2 = runningPollOptions[0][1];
-  pollOption3 = runningPollOptions[0][2];
-  pollOption4 = runningPollOptions[0][3];
+  pollOption1 = pollOptions[0];
+  pollOption2 = pollOptions[1];
+  pollOption3 = pollOptions[2];
+  pollOption4 = pollOptions[3];
 
   console.log(pollOption1);
 
-  const pollOption1Replies = await session.getPollReplyOption1().catch(err => {
-    console.log(err.message);
-  });
-  const pollOption2Replies = await session.getPollReplyOption2().catch(err => {
-    console.log(err.message);
-  });
-  const pollOption3Replies = await session.getPollReplyOption3().catch(err => {
-    console.log(err.message);
-  });
-  const pollOption4Replies = await session.getPollReplyOption4().catch(err => {
-    console.log(err.message);
-  });
-
-  const pollTitle = await session.getDraftCustomTitle().catch(err => {
-    console.log(err.message);
-  });
-
   if (callbackQuery.data == pollOption1) {
-    if (pollOption1Replies[0].length >= 5) {
-      bot.sendMessage(callbackQuery.from.id, "Thank you for participating");
-      bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
-      session.delPollReplyOption1();
-      pool.getConnection(function(err, connection) {
-        if (err) console.log(err);
-        connection.query(
-          "UPDATE bot_poll SET option1_ans = option1_ans + 5 WHERE title = ?",
-          pollTitle,
-          function(err, results, fields) {
-            if (err) console.log(err.message);
-            console.log("inserted");
-          }
-        );
-        connection.release();
-        if (err) console.log(err);
-      });
-    } else if (pollOption1Replies[0].length <= 5) {
-      session.setPollReplyOption1(callbackQuery.from.id);
-      bot.sendMessage(callbackQuery.from.id, "Thank you for participating");
-      bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
-    }
-  } else if (callbackQuery.data == pollOption2) {
-    if (pollOption2Replies[0].length >= 5) {
-      session.delPollReplyOption2();
-      pool.getConnection(function(err, connection) {
-        if (err) console.log(err);
-        connection.query(
-          "UPDATE bot_poll SET option2_ans = option2_ans + 5 WHERE title = ?",
-          pollTitle,
-          function(err, results, fields) {
-            if (err) console.log(err.message);
-            console.log("inserted");
-          }
-        );
-        connection.release();
-        if (err) console.log(err);
-      });
-    } else if (pollOption2Replies[0].length <= 5) {
-      session.setPollReplyOption2(callbackQuery.from.id);
-      bot.sendMessage(callbackQuery.from.id, "Thank you for participating");
-    }
-  } else if (callbackQuery.data == pollOption3) {
-    if (pollOption3Replies[0].length >= 5) {
-      session.delPollReplyOption3();
-      pool.getConnection(function(err, connection) {
-        if (err) console.log(err);
-        connection.query(
-          "UPDATE bot_poll SET option3_ans = option3_ans + 5 WHERE title = ?",
-          pollTitle,
-          function(err, results, fields) {
-            if (err) console.log(err.message);
-            console.log("inserted");
-          }
-        );
-        connection.release();
-        if (err) console.log(err);
-      });
-    } else if (pollOption3Replies[0].length <= 5) {
-      session.setPollReplyOption3(callbackQuery.from.id);
-      bot.sendMessage(callbackQuery.from.id, "Thank you for participating");
-    }
-  } else if (callbackQuery.data == pollOption4) {
-    if (pollOption4Replies[0].length >= 5) {
-      session.delPollReplyOption4();
-      pool.getConnection(function(err, connection) {
-        if (err) console.log(err);
-        connection.query(
-          "UPDATE bot_poll SET option4_ans = option4_ans + 5 WHERE title = ?",
-          pollTitle,
-          function(err, results, fields) {
-            if (err) console.log(err.message);
-            console.log("inserted");
-          }
-        );
-        connection.release();
-        if (err) console.log(err);
-      });
-    } else if (pollOption4Replies[0].length <= 5) {
-      session.setPollReplyOption4(callbackQuery.from.id);
-      bot.sendMessage(callbackQuery.from.id, "Thank you for participating");
-    }
+    bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
+    session.incrPollVote(1);
+    const pollCount = await session.getPollCount().catch(err => {
+      console.log(err.message);
+    });
+    pollCount1 = pollCount[0];
+    pollCount2 = pollCount[1];
+    pollCount3 = pollCount[2];
+    pollCount4 = pollCount[3];
+
+    totalCount = pollCount1 + pollCount2 + pollCount3 + pollCount4;
+
+    option1Result = (pollCount1 / totalCount) * 100;
+    option2Result = (pollCount2 / totalCount) * 100;
+    option3Result = (pollCount3 / totalCount) * 100;
+    option4Result = (pollCount4 / totalCount) * 100;
+
+    console.log(pollCount);
+    console.log(option1Result);
   }
 });
 
@@ -1170,3 +1072,17 @@ ${short_desc}
     }
   }
 });
+
+// pool.getConnection(function(err, connection) {
+//   connection.query(
+//     "INSERT INTO bot_poll (title, created_by, option1, option2, option3, option4) VALUES (?, ?, ?, ?, ?, ?)",
+//     [pollTitle, msg.chat.id, option1, option2, option3, option4],
+//     function(err, results, fields) {
+//       if (err) {
+//         console.log(err.message);
+//       }
+//     }
+//   );
+//   connection.release();
+//   if (err) console.log(err);
+// });

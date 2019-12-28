@@ -126,7 +126,7 @@ class Session {
 
   setDraftMessage(message) {
     redis.setAsync("draftMessage", message).then(function(res) {
-      console.log("DRAFT MESSAGE IN");
+      console.log("Poll Message In");
     });
   }
 
@@ -136,9 +136,41 @@ class Session {
     });
   }
 
+  setPollImage(imageId) {
+    redis.hset("Poll:currentPoll", "image", imageId).then(function(res) {
+      console.log("Poll Image In");
+    });
+  }
+
+  getPollImage() {
+    return redis.hgetAsync("Poll:currentPoll", "image").then(function(res) {
+      return res;
+    });
+  }
+
+  setPollCaption(caption) {
+    redis.hset("Poll:currentPoll", "caption", caption).then(function(res) {
+      console.log("Poll Caption In");
+    });
+  }
+
+  getPollCaption() {
+    return redis.hgetAsync("Poll:currentPoll", "caption").then(function(res) {
+      return res;
+    });
+  }
+
   setPollData(title, option1, option2, option3, option4) {
     if (option1 && !option2 && !option3 && !option4) {
-      redis.hmset("Poll:currentPoll", "title", title, "option1", option1);
+      redis.hmset(
+        "Poll:currentPoll",
+        "title",
+        title,
+        "option1",
+        option1,
+        "option1_count",
+        0
+      );
     } else if (option1 && option2 && !option3 && !option4) {
       redis.hmset(
         "Poll:currentPoll",
@@ -147,7 +179,11 @@ class Session {
         "option1",
         option1,
         "option2",
-        option2
+        option2,
+        "option1_count",
+        0,
+        "option2_count",
+        0
       );
     } else if (option1 && option2 && option3 && !option4) {
       redis.hmset(
@@ -159,7 +195,13 @@ class Session {
         "option2",
         option2,
         "option3",
-        option3
+        option3,
+        "option1_count",
+        0,
+        "option2_count",
+        0,
+        "option3_count",
+        0
       );
     } else if (option1 && option2 && option3 && option4) {
       redis.hmset(
@@ -173,7 +215,15 @@ class Session {
         "option3",
         option3,
         "option4",
-        option4
+        option4,
+        "option1_count",
+        0,
+        "option2_count",
+        0,
+        "option3_count",
+        0,
+        "option4_count",
+        0
       );
     }
   }
@@ -203,6 +253,25 @@ class Session {
     return redis.hgetAsync("Poll:currentPoll", "title").then(function(res) {
       return res;
     });
+  }
+
+  incrPollVote(count) {
+    redis.hincrby("Poll:currentPoll", `option${option}_count`);
+  }
+
+  getPollCount() {
+    return redis
+      .hmgetAsync(
+        "Poll:currentPoll",
+        "option1_count",
+        "option2_count",
+        "option3_count",
+        "option4_count"
+      )
+      .then(function(res) {
+        return res;
+        console.log(res);
+      });
   }
 
   setDraftCustomMessage(message) {
