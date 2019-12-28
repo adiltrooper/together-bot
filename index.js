@@ -183,7 +183,7 @@ bot.onText(/Custom Post/, async msg => {
     pollOption3 = pollOptions[2];
     pollOption4 = pollOptions[3];
 
-    async function getResult() {
+    async function showExistingPoll() {
       const pollCount = await session.getPollCount().catch(err => {
         console.log(err.message);
       });
@@ -314,7 +314,7 @@ bot.onText(/Custom Post/, async msg => {
         );
       }
     }
-    getResult();
+    showExistingPoll();
     bot.sendMessage(msg.chat.id, "Choose an Option or Exit", {
       reply_markup: {
         keyboard: [["Exit Admin Session"]],
@@ -831,9 +831,9 @@ Thanks for participating! 🥳🥳🥳
         callbackQuery.from.id,
         `<b>Responses Thus Far:</b>
 
-1️⃣${pollOption1}: <b>${option1Result}%<b>
-2️⃣${pollOption2}: <b>${option2Result}%<b>
-3️⃣${pollOption3}: <b>${option3Result}%<b>
+1️⃣${pollOption1}: <b>${option1Result}%</b>
+2️⃣${pollOption2}: <b>${option2Result}%</b>
+3️⃣${pollOption3}: <b>${option3Result}%</b>
 
 Thanks for participating! 🥳🥳🥳
         `,
