@@ -308,7 +308,7 @@ class Session {
   }
 
   delPollData() {
-    return redis.del("poll:currentPoll");
+    return redis.del("Poll:currentPoll");
   }
 
   setCustomOptions(option1, option2, option3, option4) {

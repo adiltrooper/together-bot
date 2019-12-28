@@ -217,8 +217,8 @@ bot.onText(/Custom Post/, async msg => {
                 ],
                 [
                   {
-                    text: "Stop Poll",
-                    callback_data: "Stop Poll"
+                    text: "Stop Poll & Create New",
+                    callback_data: "Stop Poll & Create New"
                   }
                 ]
               ]
@@ -255,8 +255,8 @@ bot.onText(/Custom Post/, async msg => {
                 ],
                 [
                   {
-                    text: "Stop Poll",
-                    callback_data: "Stop Poll"
+                    text: "Stop Poll & Create New",
+                    callback_data: "Stop Poll & Create New"
                   }
                 ]
               ]
@@ -389,7 +389,7 @@ bot.on("callback_query", async callbackQuery => {
         resize_keyboard: true
       }
     });
-  } else if (callbackQuery.data == "Keep Poll") {
+  } else if (callbackQuery.data == "Keep Poll" && adminState == "admin4") {
     bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
     session.setAdminState();
     bot.sendMessage(
