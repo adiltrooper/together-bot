@@ -196,10 +196,10 @@ bot.on("message", async msg => {
       session.setDraftCustomImage(msg.photo[0].file_id);
       session.setDraftCustomCaption(msg.caption);
     } else {
-      session.setDraftCustomMessage(msg.text);
+      session.setPollMessage(msg.text);
     }
     session.setAdminState5();
-    session.delCustomOptions();
+    session.delPollData();
   }
 });
 
@@ -240,44 +240,39 @@ bot.on("message", async msg => {
       .catch(err => {
         console.log(err.message);
       });
-    const draftCustomMessage = await session
-      .getDraftCustomMessage()
-      .catch(err => {
-        console.log(err.message);
-      });
+    const draftPollMessage = await session.getPollMessage().catch(err => {
+      console.log(err.message);
+    });
 
     const customFormatfn = () => {
-      if (draftCustomMessage) {
+      if (draftPollMessage) {
         if (option1 && !option2 && !option3 && !option4) {
-          session.setDraftCustomTitle(title[1]);
-          session.setCustomOptions(option1[1]);
+          session.setPollData(title[1], option1[1]);
           return (draftCustom = `
             This is your draft message
 
-${draftCustomMessage}
+${draftPollMessage}
 
 Your Options:
 1: ${option1[1]}
             `);
         } else if (option1 && option2 && !option3 && !option4) {
-          session.setDraftCustomTitle(title[1]);
-          session.setCustomOptions(option1[1], option2[1]);
+          session.setPollData(title[1], option1[1], option2[1]);
           return (draftCustom = `
             This is your draft message
 
-${draftCustomMessage}
+${draftPollMessage}
 
 Your Options:
 1: ${option1[1]}
 2: ${option2[1]}
             `);
         } else if (option1 && option2 && option3 && !option4) {
-          session.setDraftCustomTitle(title[1]);
-          session.setCustomOptions(option1[1], option2[1], option3[1]);
+          session.setPollData(title[1], option1[1], option2[1], option3[1]);
           return (draftCustom = `
             This is your draft message
 
-${draftCustomMessage}
+${draftPollMessage}
 
 Your Options:
 1: ${option1[1]}
@@ -285,8 +280,8 @@ Your Options:
 3: ${option3[1]}
             `);
         } else if (option1 && option2 && option3 && option4) {
-          session.setDraftCustomTitle(title[1]);
-          session.setCustomOptions(
+          session.setPollData(
+            title[1],
             option1[1],
             option2[1],
             option3[1],
@@ -295,7 +290,7 @@ Your Options:
           return (draftCustom = `
             This is your draft message
 
-${draftCustomMessage}
+${draftPollMessage}
 
 Your Options:
 1: ${option1[1]}
@@ -306,23 +301,20 @@ Your Options:
         }
       } else if (draftCustomImage) {
         if (option1 && !option2 && !option3 && !option4) {
-          session.setDraftCustomTitle(title[1]);
-          session.setCustomOptions(option1[1]);
+          session.setPollData(title[1], option1[1]);
           return (draftCustom = `
 Your Options:
 1: ${option1[1]}
             `);
         } else if (option1 && option2 && !option3 && !option4) {
-          session.setDraftCustomTitle(title[1]);
-          session.setCustomOptions(option1[1], option2[1]);
+          session.setPollData(title[1], option1[1], option2[1]);
           return (draftCustom = `
 Your Options:
 1: ${option1[1]}
 2: ${option2[1]}
             `);
         } else if (option1 && option2 && option3 && !option4) {
-          session.setDraftCustomTitle(title[1]);
-          session.setCustomOptions(option1[1], option2[1], option3[1]);
+          session.setPollData(title[1], option1[1], option2[1], option3[1]);
           return (draftCustom = `
 Your Options:
 1: ${option1[1]}
@@ -330,8 +322,8 @@ Your Options:
 3: ${option3[1]}
             `);
         } else if (option1 && option2 && option3 && option4) {
-          session.setDraftCustomTitle(title[1]);
-          session.setCustomOptions(
+          session.setPollData(
+            title[1],
             option1[1],
             option2[1],
             option3[1],
@@ -349,7 +341,7 @@ Your Options:
     };
     customFormatfn();
 
-    if (draftCustomMessage) {
+    if (draftPollMessage) {
       bot.sendMessage(msg.chat.id, draftCustom, {
         reply_markup: {
           keyboard: [["Back", "Send Post"]]
@@ -385,7 +377,7 @@ bot.onText(/Send Post/, async msg => {
       .catch(err => {
         console.log(err.message);
       });
-    const draftCustomMessage = await session
+    const draftPollMessage = await session
       .getDraftCustomMessage()
       .catch(err => {
         console.log(err.message);
@@ -472,7 +464,7 @@ bot.onText(/Send Post/, async msg => {
                 bot
                   .sendMessage(
                     userId,
-                    draftCustomMessage,
+                    draftPollMessage,
                     customMessageFn(option1, option2, option3, option4)
                   )
                   .catch(err => {

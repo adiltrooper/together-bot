@@ -130,6 +130,87 @@ class Session {
     });
   }
 
+  setPollMessage(message) {
+    redis.hsetAsync("currentPoll", "message", message).then(function(res) {
+      return res;
+    });
+  }
+
+  setPollData(title, option1, option2, option3, option4) {
+    switch ((option1, option2, option3, option4)) {
+      case (option1, !option2, !option3, !option4):
+        redis
+          .hsetAsync("currentPoll", "title", title, "option1", option1)
+          .then(function(res) {
+            return res;
+          });
+        break;
+      case (option1, option2, !option3, !option4):
+        redis
+          .hsetAsync(
+            "currentPoll",
+            "title",
+            title,
+            "option1",
+            option1,
+            "option2",
+            option2
+          )
+          .then(function(res) {
+            return res;
+          });
+        break;
+      case (option1, option2, option3, !option4):
+        redis
+          .hsetAsync(
+            "currentPoll",
+            "title",
+            title,
+            "option1",
+            option1,
+            "option2",
+            option2,
+            "option3",
+            option3
+          )
+          .then(function(res) {
+            return res;
+          });
+        break;
+      case (option1, option2, option3, option4):
+        redis
+          .hsetAsync(
+            "currentPoll",
+            "title",
+            title,
+            "option1",
+            option1,
+            "option2",
+            option2,
+            "option3",
+            option3,
+            "option4",
+            option4
+          )
+          .then(function(res) {
+            return res;
+          });
+        break;
+      default:
+        redis
+          .hsetAsync("currentPoll", "title", title, "option1", option1)
+          .then(function(res) {
+            return res;
+          });
+    }
+  }
+
+  getPollMessage() {
+    return redis.hgetAsync("currentPoll", "message").then(function(res) {
+      return res;
+    });
+  }
+
   setDraftCustomMessage(message) {
     redis.setAsync("draftCustomMessage", message).then(function(res) {
       console.log("DRAFT MESSAGE IN");
@@ -160,8 +241,8 @@ class Session {
     });
   }
 
-  delCustomOptions() {
-    return redis.del("customOptions");
+  delPollData() {
+    return redis.del("currentPoll");
   }
 
   setCustomOptions(option1, option2, option3, option4) {
