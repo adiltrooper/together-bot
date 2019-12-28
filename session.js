@@ -243,6 +243,7 @@ class Session {
   getPollTitle() {
     return redis.hgetAsync("Poll:currentPoll", "title").then(function(res) {
       return res;
+      console.log(res);
     });
   }
 
