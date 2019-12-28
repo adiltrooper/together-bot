@@ -377,23 +377,21 @@ bot.onText(/Send Post/, async msg => {
       .catch(err => {
         console.log(err.message);
       });
-    const draftPollMessage = await session
-      .getDraftCustomMessage()
-      .catch(err => {
-        console.log(err.message);
-      });
+    const pollMessage = await session.getPollMessage().catch(err => {
+      console.log(err.message);
+    });
 
     const draftCustomTitle = await session.getDraftCustomTitle().catch(err => {
       console.log(err.message);
     });
 
-    const customOptions = await session.getCustomOptions().catch(err => {
+    const pollOptions = await session.getPollData().catch(err => {
       console.log(err.message);
     });
 
-    console.log(customOptions);
+    console.log(pollOptions);
     console.log(draftCustomTitle);
-    const inlineKeyboardOptions = customOptions[0];
+    const inlineKeyboardOptions = polloptions[0];
     console.log(inlineKeyboardOptions);
     var option1 = inlineKeyboardOptions[0];
     var option2 = inlineKeyboardOptions[1];

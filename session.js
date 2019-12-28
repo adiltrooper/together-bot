@@ -132,19 +132,13 @@ class Session {
 
   setPollMessage(message) {
     redis.hset("Poll:currentPoll", "message", message, function(err, res) {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log(message);
-        console.log("poll:currentPoll message set");
-      }
+      if (err) console.log(err);
     });
   }
 
   setPollData(title, option1, option2, option3, option4) {
     if (option1 && !option2 && !option3 && !option4) {
       redis.hmset("Poll:currentPoll", "title", title, "option1", option1);
-      console.log("poll:currentPoll data set");
     } else if (option1 && option2 && !option3 && !option4) {
       redis.hmset(
         "Poll:currentPoll",
@@ -155,7 +149,6 @@ class Session {
         "option2",
         option2
       );
-      console.log("poll:currentPoll data set");
     } else if (option1 && option2 && option3 && !option4) {
       redis.hmset(
         "Poll:currentPoll",
@@ -168,7 +161,6 @@ class Session {
         "option3",
         option3
       );
-      console.log("poll:currentPoll data set");
     } else if (option1 && option2 && option3 && option4) {
       redis.hmset(
         "Poll:currentPoll",
@@ -183,7 +175,6 @@ class Session {
         "option4",
         option4
       );
-      console.log("poll:currentPoll data set");
     }
   }
 
@@ -191,6 +182,20 @@ class Session {
     return redis.hgetAsync("Poll:currentPoll", "message").then(function(res) {
       return res;
     });
+  }
+
+  getPollData() {
+    return redis
+      .hmgetAsync(
+        "Poll:currentPoll",
+        "option1",
+        "option2",
+        "option3",
+        "option4"
+      )
+      .then(function(res) {
+        console.log(res);
+      });
   }
 
   setDraftCustomMessage(message) {
