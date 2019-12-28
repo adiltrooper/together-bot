@@ -256,7 +256,7 @@ class Session {
   }
 
   incrPollVote(option) {
-    redis.hincrby("Poll:currentPoll", `option${option}_count`);
+    redis.hincrby("Poll:currentPoll", `option${option}_count`, 1);
   }
 
   getPollCount() {
