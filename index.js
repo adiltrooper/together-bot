@@ -171,7 +171,7 @@ bot.onText(/Custom Post/, async msg => {
 
   console.log("I AM HERE");
 
-  if (adminState == "admin3" && pollExists) {
+  if (adminState == "admin1" && pollExists) {
     console.log("I AM HERE AGAIN");
     session.setAdminState4();
     const pollOptions = await session.getPollOptions().catch(err => {
@@ -315,7 +315,7 @@ bot.onText(/Custom Post/, async msg => {
       }
     }
     getResult();
-  } else if (adminState == "admin3" && !pollExists) {
+  } else if (adminState == "admin1" && !pollExists) {
     session.delPollData();
 
     session.setAdminState5();
