@@ -165,7 +165,7 @@ bot.onText(/Custom Post/, async msg => {
   const adminState = await session.getAdminState().catch(err => {
     console.log(err.message);
   });
-  const pollExists = session.getPollTitle().catch(err => {
+  const pollExists = await session.getPollTitle().catch(err => {
     console.log(err.message);
   });
 
