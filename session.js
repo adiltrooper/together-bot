@@ -255,7 +255,7 @@ class Session {
     });
   }
 
-  incrPollVote(count) {
+  incrPollVote(option) {
     redis.hincrby("Poll:currentPoll", `option${option}_count`);
   }
 
