@@ -544,14 +544,17 @@ bot.on("callback_query", async callbackQuery => {
   pollOption3 = pollOptions[2];
   pollOption4 = pollOptions[3];
 
-  pollCount1 = parseInt(pollCount[0]);
-  pollCount2 = parseInt(pollCount[1]);
-  pollCount3 = parseInt(pollCount[2]);
-  pollCount4 = parseInt(pollCount[3]);
+  async function getResult() {
+    const pollCount = await session.getPollCount().catch(err => {
+      console.log(err.message);
+    });
+    pollCount1 = parseInt(pollCount[0]);
+    pollCount2 = parseInt(pollCount[1]);
+    pollCount3 = parseInt(pollCount[2]);
+    pollCount4 = parseInt(pollCount[3]);
 
-  console.log(pollCount2);
+    console.log(pollCount1);
 
-  function getResult() {
     if (pollOption1 && pollOption2 && !pollOption3 && !pollOption4) {
       totalCount = pollCount1 + pollCount2;
       console.log(totalCount);
@@ -623,9 +626,6 @@ Thanks for participating! 🥳🥳🥳
     case userPollSelection == pollOption1:
       bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
       session.incrPollVote(1);
-      const pollCount = await session.getPollCount().catch(err => {
-        console.log(err.message);
-      });
 
       getResult();
 
@@ -633,9 +633,6 @@ Thanks for participating! 🥳🥳🥳
     case userPollSelection == pollOption2:
       bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
       session.incrPollVote(2);
-      const pollCount = await session.getPollCount().catch(err => {
-        console.log(err.message);
-      });
 
       getResult();
 
@@ -643,9 +640,6 @@ Thanks for participating! 🥳🥳🥳
     case userPollSelection == pollOption3:
       bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
       session.incrPollVote(3);
-      const pollCount = await session.getPollCount().catch(err => {
-        console.log(err.message);
-      });
 
       getResult();
 
@@ -653,9 +647,6 @@ Thanks for participating! 🥳🥳🥳
     case userPollSelection == pollOption4:
       bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
       session.incrPollVote(4);
-      const pollCount = await session.getPollCount().catch(err => {
-        console.log(err.message);
-      });
 
       getResult();
 
@@ -664,9 +655,6 @@ Thanks for participating! 🥳🥳🥳
     default:
       bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
       session.incrPollVote(1);
-      const pollCount = await session.getPollCount().catch(err => {
-        console.log(err.message);
-      });
 
       getResult();
   }
