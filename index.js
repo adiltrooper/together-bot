@@ -565,8 +565,8 @@ bot.on("callback_query", async callbackQuery => {
         callbackQuery.from.id,
         `<b>Responses Thus Far:               </b>
 
-1️⃣${pollOption1}: <b>${option1Result}%</b>
-2️⃣${pollOption2}: <b>${option2Result}%</b>
+${pollOption1}: <b>${option1Result}%</b>
+${pollOption2}: <b>${option2Result}%</b>
 
 Thanks for participating! 🥳🥳🥳
         `,
@@ -586,9 +586,9 @@ Thanks for participating! 🥳🥳🥳
         callbackQuery.from.id,
         `<b>Responses Thus Far:               </b>
 
-1️⃣${pollOption1}: <b>${option1Result}%</b>
-2️⃣${pollOption2}: <b>${option2Result}%</b>
-3⃣${pollOption3}: <b>${option3Result}%</b>
+${pollOption1}: <b>${option1Result}%</b>
+${pollOption2}: <b>${option2Result}%</b>
+${pollOption3}: <b>${option3Result}%</b>
 
 Thanks for participating! 🥳🥳🥳
         `,
@@ -608,10 +608,10 @@ Thanks for participating! 🥳🥳🥳
         callbackQuery.from.id,
         `<b>Responses Thus Far:               </b>
 
-1️⃣${pollOption1}: <b>${option1Result}%</b>
-2️⃣${pollOption2}: <b>${option2Result}%</b>
-3⃣${pollOption3}: <b>${option3Result}%</b>
-4️⃣${pollOption4}: <b>${option4Result}%</b>
+${pollOption1}: <b>${option1Result}%</b>
+${pollOption2}: <b>${option2Result}%</b>
+${pollOption3}: <b>${option3Result}%</b>
+${pollOption4}: <b>${option4Result}%</b>
 
 Thanks for participating! 🥳🥳🥳
         `,
