@@ -397,7 +397,7 @@ bot.onText(/Send Post/, async msg => {
     pool.getConnection(function(err, connection) {
       connection.query(
         "INSERT INTO bot_poll (title, created_by, option1, option2, option3, option4) VALUES (?, ?, ?, ?, ?, ?)",
-        [draftCustomTitle, msg.chat.id, option1, option2, option3, option4],
+        [pollTitle, msg.chat.id, option1, option2, option3, option4],
         function(err, results, fields) {
           if (err) {
             console.log(err.message);
