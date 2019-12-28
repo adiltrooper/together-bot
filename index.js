@@ -586,9 +586,9 @@ Thanks for participating! 🥳🥳🥳
         callbackQuery.from.id,
         `<b>Responses Thus Far:               </b>
 
-${pollOption1}: <b>${option1Result}%</b>
-${pollOption2}: <b>${option2Result}%</b>
-${pollOption3}: <b>${option3Result}%</b>
+${pollOption1}: ${option1Result}%
+${pollOption2}: ${option2Result}%
+${pollOption3}: ${option3Result}%
 
 Thanks for participating! 🥳🥳🥳
         `,
