@@ -532,7 +532,7 @@ bot.on("callback_query", async callbackQuery => {
     pollCount3 = parseInt(pollCount[2]);
     pollCount4 = parseInt(pollCount[3]);
 
-    totalCount = pollCount1 + pollCount2 + pollCount3 + pollCount4;
+    totalCount = pollCount1 + pollCount2;
 
     option1Result = (pollCount1 / totalCount) * 100;
     option2Result = (pollCount2 / totalCount) * 100;
@@ -541,6 +541,7 @@ bot.on("callback_query", async callbackQuery => {
 
     console.log(pollCount);
     console.log(pollCount1);
+    console.log(totalCount);
     console.log(typeof pollCount1);
     console.log(option1Result);
   }
