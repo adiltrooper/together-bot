@@ -542,6 +542,7 @@ bot.on("callback_query", async callbackQuery => {
   const pollCount = await session.getPollCount().catch(err => {
     console.log(err.message);
   });
+
   pollOption1 = pollOptions[0];
   pollOption2 = pollOptions[1];
   pollOption3 = pollOptions[2];
@@ -564,7 +565,7 @@ bot.on("callback_query", async callbackQuery => {
 <b>Results so far:</b>
 
 1️⃣${pollOption1}: <b>${option1Result}%</b>
-2️⃣${pollOption2}: </b>${option2Result}%</b>
+2️⃣${pollOption2}: <b>${option2Result}%</b>
 
 Thanks for participating! 🥳🥳🥳
         `,
@@ -584,8 +585,8 @@ Thanks for participating! 🥳🥳🥳
 <b>Results so far:</b>
 
 1️⃣${pollOption1}: <b>${option1Result}%</b>
-2️⃣${pollOption2}: </b>${option2Result}%</b>
-3⃣${pollOption3}: </b>${option3Result}%</b>
+2️⃣${pollOption2}: <b>${option2Result}%</b>
+3⃣${pollOption3}: <b>${option3Result}%</b>
 
 Thanks for participating! 🥳🥳🥳
         `,
@@ -594,7 +595,7 @@ Thanks for participating! 🥳🥳🥳
         }
       );
     } else if (pollOption1 && pollOption2 && pollOption3 && pollOption4) {
-      totalCount = pollCount1 + pollCount2 + pollCount3;
+      totalCount = pollCount1 + pollCount2 + pollCount3 + pollCount4;
       option1Result = (pollCount1 / totalCount) * 100;
       option2Result = (pollCount2 / totalCount) * 100;
       option3Result = (pollCount3 / totalCount) * 100;
@@ -606,9 +607,9 @@ Thanks for participating! 🥳🥳🥳
 <b>Results so far:</b>
 
 1️⃣${pollOption1}: <b>${option1Result}%</b>
-2️⃣${pollOption2}: </b>${option2Result}%</b>
-3⃣${pollOption3}: </b>${option3Result}%</b>
-4️⃣${pollOption4}: </b>${option4Result}%</b>
+2️⃣${pollOption2}: <b>${option2Result}%</b>
+3⃣${pollOption3}: <b>${option3Result}%</b>
+4️⃣${pollOption4}: <b>${option4Result}%</b>
 
 Thanks for participating! 🥳🥳🥳
         `,
