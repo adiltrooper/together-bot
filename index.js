@@ -243,9 +243,9 @@ bot.onText(/Custom Post/, async msg => {
           msg.chat.id,
           `<b>You have an Existing Poll!</b>
 
-  1️⃣${pollOption1}: <b>${option1Result}%<b>
-  2️⃣${pollOption2}: <b>${option2Result}%<b>
-  3️⃣${pollOption3}: <b>${option3Result}%<b>
+  1️⃣${pollOption1}: <b>${option1Result}%</b>
+  2️⃣${pollOption2}: <b>${option2Result}%</b>
+  3️⃣${pollOption3}: <b>${option3Result}%</b>
 
 <b>Would you like to End it?</b>
           `,
@@ -401,16 +401,20 @@ bot.on("callback_query", async callbackQuery => {
   } else if (adminState == "admin4" && callbackQuery.data == "Keep Poll") {
     bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
     session.setAdminState();
-    bot.sendMessage(callbackQuery.from.id, `Please Select an Option:`, {
-      reply_markup: {
-        keyboard: [
-          ["New Post", "Custom Post"],
-          ["Subscriber Count"],
-          ["Exit Admin Session"]
-        ],
-        resize_keyboard: true
+    bot.sendMessage(
+      callbackQuery.from.id,
+      `Welcome Back to the admin menu! Please select an Option:`,
+      {
+        reply_markup: {
+          keyboard: [
+            ["New Post", "Custom Post"],
+            ["Subscriber Count"],
+            ["Exit Admin Session"]
+          ],
+          resize_keyboard: true
+        }
       }
-    });
+    );
   }
 });
 
