@@ -142,62 +142,48 @@ class Session {
   }
 
   setPollData(title, option1, option2, option3, option4) {
-    switch ((option1, option2, option3, option4)) {
-      case (option1, !option2, !option3, !option4):
-        redis.hmset("Poll:currentPoll", "title", title, "option1", option1);
-        console.log("poll:currentPoll data set");
-        break;
-      case (option1, option2, !option3, !option4):
-        redis.hmset(
-          "Poll:currentPoll",
-          "title",
-          title,
-          "option1",
-          option1,
-          "option2",
-          option2
-        );
-        console.log("poll:currentPoll data set");
-        break;
-      case (option1, option2, option3, !option4):
-        return redis.hmset(
-          "Poll:currentPoll",
-          "title",
-          title,
-          "option1",
-          option1,
-          "option2",
-          option2,
-          "option3",
-          option3
-        );
-        console.log("poll:currentPoll data set");
-        break;
-      case (option1, option2, option3, option4):
-        return redis.hmset(
-          "Poll:currentPoll",
-          "title",
-          title,
-          "option1",
-          option1,
-          "option2",
-          option2,
-          "option3",
-          option3,
-          "option4",
-          option4
-        );
-        console.log("poll:currentPoll data set");
-        break;
-      default:
-        return redis.hmset(
-          "Poll:currentPoll",
-          "title",
-          title,
-          "option1",
-          option1
-        );
-        console.log("poll:currentPoll data set");
+    if (option1 && !option2 && !option3 && !option4) {
+      redis.hmset("Poll:currentPoll", "title", title, "option1", option1);
+      console.log("poll:currentPoll data set");
+    } else if (option1 && option2 && !option3 && !option4) {
+      redis.hmset(
+        "Poll:currentPoll",
+        "title",
+        title,
+        "option1",
+        option1,
+        "option2",
+        option2
+      );
+      console.log("poll:currentPoll data set");
+    } else if (option1 && option2 && option3 && !option4) {
+      redis.hmset(
+        "Poll:currentPoll",
+        "title",
+        title,
+        "option1",
+        option1,
+        "option2",
+        option2,
+        "option3",
+        option3
+      );
+      console.log("poll:currentPoll data set");
+    } else if (option1 && option2 && option3 && option4) {
+      redis.hmset(
+        "Poll:currentPoll",
+        "title",
+        title,
+        "option1",
+        option1,
+        "option2",
+        option2,
+        "option3",
+        option3,
+        "option4",
+        option4
+      );
+      console.log("poll:currentPoll data set");
     }
   }
 
