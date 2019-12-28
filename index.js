@@ -171,7 +171,7 @@ bot.onText(/Custom Post/, async msg => {
 
   console.log(pollExists);
 
-  if (adminState == "admin1" && pollExists[0]) {
+  if (adminState == "admin1" && pollExists) {
     session.setAdminState4();
     const pollOptions = await session.getPollOptions().catch(err => {
       console.log(err.message);
@@ -314,7 +314,7 @@ bot.onText(/Custom Post/, async msg => {
         resize_keyboard: true
       }
     });
-  } else if (adminState == "admin1" && !pollExists[0]) {
+  } else if (adminState == "admin1" && !pollExists) {
     session.delPollData();
 
     session.setAdminState5();
