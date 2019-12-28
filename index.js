@@ -310,6 +310,7 @@ bot.onText(/Custom Post/, async msg => {
         );
       }
     }
+    getResult();
   } else if (adminState == "admin3" && !pollExists) {
     session.delPollData();
 
