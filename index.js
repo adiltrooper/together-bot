@@ -358,7 +358,7 @@ bot.on("callback_query", async callbackQuery => {
 
     pool.getConnection(function(err, connection) {
       connection.query(
-        "INSERT INTO bot_poll (title, option1, option1_count, option2, option2_count, option3, option3_count, option4, option4_count) VALUES (?, ?, ?, ?, ?, ?)",
+        "INSERT INTO bot_poll (title, option1, option1_count, option2, option2_count, option3, option3_count, option4, option4_count) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
         [
           pollTitle,
           pollOption1,
