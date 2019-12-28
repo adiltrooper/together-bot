@@ -131,7 +131,7 @@ class Session {
   }
 
   setPollMessage(message) {
-    redis.hsetAsync("currentPoll", "message", message).then(function(res) {
+    redis.hset("currentPoll", "message", message).then(function(res) {
       return res;
     });
   }
@@ -140,14 +140,14 @@ class Session {
     switch ((option1, option2, option3, option4)) {
       case (option1, !option2, !option3, !option4):
         redis
-          .hsetAsync("currentPoll", "title", title, "option1", option1)
+          .hset("currentPoll", "title", title, "option1", option1)
           .then(function(res) {
             return res;
           });
         break;
       case (option1, option2, !option3, !option4):
         redis
-          .hsetAsync(
+          .hset(
             "currentPoll",
             "title",
             title,
@@ -162,7 +162,7 @@ class Session {
         break;
       case (option1, option2, option3, !option4):
         redis
-          .hsetAsync(
+          .hset(
             "currentPoll",
             "title",
             title,
@@ -179,7 +179,7 @@ class Session {
         break;
       case (option1, option2, option3, option4):
         redis
-          .hsetAsync(
+          .hset(
             "currentPoll",
             "title",
             title,
@@ -198,7 +198,7 @@ class Session {
         break;
       default:
         redis
-          .hsetAsync("currentPoll", "title", title, "option1", option1)
+          .hset("currentPoll", "title", title, "option1", option1)
           .then(function(res) {
             return res;
           });
