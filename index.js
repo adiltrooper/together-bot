@@ -240,18 +240,18 @@ bot.on("message", async msg => {
       .catch(err => {
         console.log(err.message);
       });
-    const draftPollMessage = await session.getPollMessage().catch(err => {
+    const pollMessage = await session.getPollMessage().catch(err => {
       console.log(err.message);
     });
 
     const customFormatfn = () => {
-      if (draftPollMessage) {
+      if (pollMessage) {
         if (option1 && !option2 && !option3 && !option4) {
           session.setPollData(title[1], option1[1]);
           return (draftCustom = `
             This is your draft message
 
-${draftPollMessage}
+${pollMessage}
 
 Your Options:
 1: ${option1[1]}
@@ -261,7 +261,7 @@ Your Options:
           return (draftCustom = `
             This is your draft message
 
-${draftPollMessage}
+${pollMessage}
 
 Your Options:
 1: ${option1[1]}
@@ -272,7 +272,7 @@ Your Options:
           return (draftCustom = `
             This is your draft message
 
-${draftPollMessage}
+${pollMessage}
 
 Your Options:
 1: ${option1[1]}
@@ -290,7 +290,7 @@ Your Options:
           return (draftCustom = `
             This is your draft message
 
-${draftPollMessage}
+${pollMessage}
 
 Your Options:
 1: ${option1[1]}
@@ -341,7 +341,7 @@ Your Options:
     };
     customFormatfn();
 
-    if (draftPollMessage) {
+    if (pollMessage) {
       bot.sendMessage(msg.chat.id, draftCustom, {
         reply_markup: {
           keyboard: [["Back", "Send Post"]]
@@ -459,7 +459,7 @@ bot.onText(/Send Post/, async msg => {
                 bot
                   .sendMessage(
                     userId,
-                    draftPollMessage,
+                    pollMessage,
                     customMessageFn(option1, option2, option3, option4)
                   )
                   .catch(err => {
