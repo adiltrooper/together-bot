@@ -379,7 +379,7 @@ bot.onText(/Send Post/, async msg => {
     const pollTitle = await session.getPollTitle().catch(err => {
       console.log(err.message);
     });
-    const pollOptions = await session.getPollData().catch(err => {
+    const pollOptions = await session.getPollOptions().catch(err => {
       console.log(err.message);
     });
 

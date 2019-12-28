@@ -234,7 +234,7 @@ class Session {
     });
   }
 
-  getPollData() {
+  getPollOptions() {
     return redis
       .hmgetAsync(
         "Poll:currentPoll",
