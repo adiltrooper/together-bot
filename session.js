@@ -131,12 +131,12 @@ class Session {
   }
 
   setPollMessage(message) {
-    redis.hset("poll:currentPoll", "message", message, function(err, res) {
+    redis.hset("poll:poll:currentPoll", "message", message, function(err, res) {
       if (err) {
         console.log(err);
       } else {
         console.log(message);
-        console.log("currentPoll message set");
+        console.log("poll:currentPoll message set");
       }
     });
   }
@@ -144,12 +144,12 @@ class Session {
   setPollData(title, option1, option2, option3, option4) {
     switch ((option1, option2, option3, option4)) {
       case (option1, !option2, !option3, !option4):
-        redis.hset("currentPoll", "title", title, "option1", option1);
-        console.log("currentPoll data set");
+        redis.hset("poll:currentPoll", "title", title, "option1", option1);
+        console.log("poll:currentPoll data set");
         break;
       case (option1, option2, !option3, !option4):
         redis.hset(
-          "currentPoll",
+          "poll:currentPoll",
           "title",
           title,
           "option1",
@@ -157,11 +157,11 @@ class Session {
           "option2",
           option2
         );
-        console.log("currentPoll data set");
+        console.log("poll:currentPoll data set");
         break;
       case (option1, option2, option3, !option4):
         return redis.hset(
-          "currentPoll",
+          "poll:currentPoll",
           "title",
           title,
           "option1",
@@ -171,11 +171,11 @@ class Session {
           "option3",
           option3
         );
-        console.log("currentPoll data set");
+        console.log("poll:currentPoll data set");
         break;
       case (option1, option2, option3, option4):
         return redis.hset(
-          "currentPoll",
+          "poll:currentPoll",
           "title",
           title,
           "option1",
@@ -187,16 +187,22 @@ class Session {
           "option4",
           option4
         );
-        console.log("currentPoll data set");
+        console.log("poll:currentPoll data set");
         break;
       default:
-        return redis.hset("currentPoll", "title", title, "option1", option1);
-        console.log("currentPoll data set");
+        return redis.hset(
+          "poll:currentPoll",
+          "title",
+          title,
+          "option1",
+          option1
+        );
+        console.log("poll:currentPoll data set");
     }
   }
 
   getPollMessage() {
-    return redis.hgetAsync("currentPoll", "message").then(function(res) {
+    return redis.hgetAsync("poll:currentPoll", "message").then(function(res) {
       return res;
     });
   }
@@ -232,7 +238,7 @@ class Session {
   }
 
   delPollData() {
-    return redis.del("currentPoll");
+    return redis.del("poll:currentPoll");
   }
 
   setCustomOptions(option1, option2, option3, option4) {
