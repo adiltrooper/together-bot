@@ -868,28 +868,28 @@ Thanks for participating! 🥳🥳🥳
     switch (userPollSelection) {
       case userPollSelection == pollOption1:
         bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
-        session.incrPollVote(1);
+        session.incrPollVote("1");
 
         getResult();
 
         break;
       case userPollSelection == pollOption2:
         bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
-        session.incrPollVote(2);
+        session.incrPollVote("2");
 
         getResult();
 
         break;
       case userPollSelection == pollOption3:
         bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
-        session.incrPollVote(3);
+        session.incrPollVote("3");
 
         getResult();
 
         break;
       case userPollSelection == pollOption4:
         bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
-        session.incrPollVote(4);
+        session.incrPollVote("4");
 
         getResult();
 
@@ -897,7 +897,7 @@ Thanks for participating! 🥳🥳🥳
 
       default:
         bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
-        session.incrPollVote(1);
+        session.incrPollVote("1");
 
         getResult();
     }
