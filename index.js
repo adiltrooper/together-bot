@@ -169,6 +169,8 @@ bot.onText(/Custom Post/, async msg => {
     console.log(err.message);
   });
 
+  console.log(pollExists);
+
   if (adminState == "admin1" && pollExists[0]) {
     session.setAdminState4();
     const pollOptions = await session.getPollOptions().catch(err => {
