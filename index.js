@@ -160,6 +160,7 @@ bot.onText(/Subscriber Count/, async msg => {
     });
   }
 });
+
 bot.onText(/Custom Post/, async msg => {
   const adminState = await session.getAdminState().catch(err => {
     console.log(err.message);
@@ -168,7 +169,10 @@ bot.onText(/Custom Post/, async msg => {
     console.log(err.message);
   });
 
+  console.log("I AM HERE");
+
   if (adminState == "admin3" && pollExists) {
+    console.log("I AM HERE AGAIN");
     session.setAdminState4();
     const pollOptions = await session.getPollOptions().catch(err => {
       console.log(err.message);
