@@ -190,11 +190,25 @@ bot.on("message", async msg => {
     msg.text !== "/admin" &&
     msg.text !== "/start"
   ) {
-    await bot.sendMessage(msg.chat.id, "Send your options in the form of");
+    await bot.sendMessage(
+      msg.chat.id,
+      `
+<b>Send Your Options in the Format:</b>
+/title/ My Poll Title
+/1/ Option 1
+/2/ Option 2
+/3/ Option 3
+/4/ Option 4
+/end/
+`,
+      {
+        parse_mode: "HTML"
+      }
+    );
     console.log(msg);
     if (msg.photo) {
-      session.setDraftCustomImage(msg.photo[0].file_id);
-      session.setDraftCustomCaption(msg.caption);
+      session.setPollImage(msg.photo[0].file_id);
+      session.setPollCaption(msg.caption);
     } else {
       session.setPollMessage(msg.text);
     }
@@ -246,29 +260,44 @@ bot.on("message", async msg => {
       if (pollMessage) {
         if (option1 && !option2 && !option3 && !option4) {
           session.setPollData(title[1], option1[1]);
-          return (draftCustom = `
-            This is your draft message
+          return (
+            (draftCustom = `
+            <b>This is your Draft Message:</b>
 
 ${pollMessage}
 
 Your Options:
 1: ${option1[1]}
-            `);
+
+⬇️<b>Select what you want to do with it</b> ⬇️
+`),
+            {
+              parse_mode: "HTML"
+            }
+          );
         } else if (option1 && option2 && !option3 && !option4) {
           session.setPollData(title[1], option1[1], option2[1]);
-          return (draftCustom = `
-            This is your draft message
+          return (
+            (draftCustom = `
+            <b>This is your Draft Message:</b>
 
 ${pollMessage}
 
 Your Options:
 1: ${option1[1]}
 2: ${option2[1]}
-            `);
+
+⬇️<b>Select what you want to do with it</b> ⬇️
+`),
+            {
+              parse_mode: "HTML"
+            }
+          );
         } else if (option1 && option2 && option3 && !option4) {
           session.setPollData(title[1], option1[1], option2[1], option3[1]);
-          return (draftCustom = `
-            This is your draft message
+          return (
+            (draftCustom = `
+            <b>This is your Draft Message:</b>
 
 ${pollMessage}
 
@@ -276,7 +305,13 @@ Your Options:
 1: ${option1[1]}
 2: ${option2[1]}
 3: ${option3[1]}
-            `);
+
+⬇️<b>Select what you want to do with it</b> ⬇️
+`),
+            {
+              parse_mode: "HTML"
+            }
+          );
         } else if (option1 && option2 && option3 && option4) {
           session.setPollData(
             title[1],
@@ -285,8 +320,9 @@ Your Options:
             option3[1],
             option4[1]
           );
-          return (draftCustom = `
-            This is your draft message
+          return (
+            (draftCustom = `
+            <b>This is your Draft Message:</b>
 
 ${pollMessage}
 
@@ -295,7 +331,13 @@ Your Options:
 2: ${option2[1]}
 3: ${option3[1]}
 4: ${option4[1]}
-            `);
+
+⬇️<b>Select what you want to do with it</b> ⬇️
+`),
+            {
+              parse_mode: "HTML"
+            }
+          );
         }
       } else if (pollImage) {
         if (option1 && !option2 && !option3 && !option4) {
@@ -543,7 +585,10 @@ bot.on("callback_query", async callbackQuery => {
 2️⃣${pollOption2}: </b>${option2Result}%</b>
 
 Thanks for participating! 🥳🥳🥳
-        `
+        `,
+        {
+          parse_mode: "HTML"
+        }
       );
     } else if (pollOption1 && pollOption2 && pollOption3 && !pollOption4) {
       totalCount = pollCount1 + pollCount2 + pollCount3;
@@ -561,7 +606,10 @@ Thanks for participating! 🥳🥳🥳
 3⃣${pollOption3}: </b>${option3Result}%</b>
 
 Thanks for participating! 🥳🥳🥳
-        `
+        `,
+        {
+          parse_mode: "HTML"
+        }
       );
     } else if (pollOption1 && pollOption2 && pollOption3 && pollOption4) {
       totalCount = pollCount1 + pollCount2 + pollCount3;
@@ -581,7 +629,10 @@ Thanks for participating! 🥳🥳🥳
 4️⃣${pollOption4}: </b>${option4Result}%</b>
 
 Thanks for participating! 🥳🥳🥳
-        `
+        `,
+        {
+          parse_mode: "HTML"
+        }
       );
     }
   }
