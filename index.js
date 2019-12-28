@@ -525,7 +525,7 @@ bot.onText(/Send Post/, async msg => {
       retrieveUserList();
     };
     getUsersAndSend();
-    bot.sendMessage(msg.chat.id, {
+    bot.sendMessage(msg.chat.id, "", {
       reply_markup: {
         keyboard: [["Exit Admin State"]]
       }
