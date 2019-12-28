@@ -528,24 +528,14 @@ bot.on("callback_query", async callbackQuery => {
   pollCount3 = parseInt(pollCount[2]);
   pollCount4 = parseInt(pollCount[3]);
 
-  function getResult(
-    id,
-    pollOption1,
-    pollOption2,
-    pollOption3,
-    pollOption4,
-    pollCount1,
-    pollCount2,
-    pollCount3,
-    pollCount4
-  ) {
+  function getResult() {
     if (pollOption1 && pollOption2 && !pollOption3 && !pollOption4) {
       totalCount = pollCount1 + pollCount2;
       option1Result = (pollCount1 / totalCount) * 100;
       option2Result = (pollCount2 / totalCount) * 100;
 
       bot.sendMessage(
-        callbackQuery.id,
+        callbackQuery.from.id,
         `
 <b>Results so far:</b>
 
@@ -562,7 +552,7 @@ Thanks for participating! 🥳🥳🥳
       option3Result = (pollCount3 / totalCount) * 100;
 
       bot.sendMessage(
-        callbackQuery.id,
+        callbackQuery.from.id,
         `
 <b>Results so far:</b>
 
@@ -581,7 +571,7 @@ Thanks for participating! 🥳🥳🥳
       option4Result = (pollCount4 / totalCount) * 100;
 
       bot.sendMessage(
-        callbackQuery.id,
+        callbackQuery.from.id,
         `
 <b>Results so far:</b>
 
@@ -601,68 +591,28 @@ Thanks for participating! 🥳🥳🥳
       bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
       session.incrPollVote(1);
 
-      getResult(
-        callbackQuery.id,
-        pollOption1,
-        pollOption2,
-        pollOption3,
-        pollOption4,
-        pollCount1,
-        pollCount2,
-        pollCount3,
-        pollCount4
-      );
+      getResult();
 
       break;
     case userPollSelection == pollOption2:
       bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
       session.incrPollVote(2);
 
-      getResult(
-        callbackQuery.id,
-        pollOption1,
-        pollOption2,
-        pollOption3,
-        pollOption4,
-        pollCount1,
-        pollCount2,
-        pollCount3,
-        pollCount4
-      );
+      getResult();
 
       break;
     case userPollSelection == pollOption3:
       bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
       session.incrPollVote(3);
 
-      getResult(
-        callbackQuery.id,
-        pollOption1,
-        pollOption2,
-        pollOption3,
-        pollOption4,
-        pollCount1,
-        pollCount2,
-        pollCount3,
-        pollCount4
-      );
+      getResult();
 
       break;
     case userPollSelection == pollOption4:
       bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
       session.incrPollVote(4);
 
-      getResult(
-        callbackQuery.id,
-        pollOption1,
-        pollOption2,
-        pollOption3,
-        pollOption4,
-        pollCount1,
-        pollCount2,
-        pollCount3,
-        pollCount4
-      );
+      getResult();
 
       break;
 
@@ -670,17 +620,7 @@ Thanks for participating! 🥳🥳🥳
       bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
       session.incrPollVote(1);
 
-      getResult(
-        callbackQuery.id,
-        pollOption1,
-        pollOption2,
-        pollOption3,
-        pollOption4,
-        pollCount1,
-        pollCount2,
-        pollCount3,
-        pollCount4
-      );
+      getResult();
   }
 });
 
