@@ -260,8 +260,7 @@ bot.on("message", async msg => {
       if (pollMessage) {
         if (option1 && !option2 && !option3 && !option4) {
           session.setPollData(title[1], option1[1]);
-          return (
-            (draftCustom = `
+          return (draftCustom = `
             <b>This is your Draft Message:</b>
 
 ${pollMessage}
@@ -270,15 +269,10 @@ Your Options:
 1: ${option1[1]}
 
 ⬇️<b>Select what you want to do with it</b> ⬇️
-`),
-            {
-              parse_mode: "HTML"
-            }
-          );
+`);
         } else if (option1 && option2 && !option3 && !option4) {
           session.setPollData(title[1], option1[1], option2[1]);
-          return (
-            (draftCustom = `
+          return (draftCustom = `
             <b>This is your Draft Message:</b>
 
 ${pollMessage}
@@ -288,15 +282,10 @@ Your Options:
 2: ${option2[1]}
 
 ⬇️<b>Select what you want to do with it</b> ⬇️
-`),
-            {
-              parse_mode: "HTML"
-            }
-          );
+`);
         } else if (option1 && option2 && option3 && !option4) {
           session.setPollData(title[1], option1[1], option2[1], option3[1]);
-          return (
-            (draftCustom = `
+          return (draftCustom = `
             <b>This is your Draft Message:</b>
 
 ${pollMessage}
@@ -307,11 +296,7 @@ Your Options:
 3: ${option3[1]}
 
 ⬇️<b>Select what you want to do with it</b> ⬇️
-`),
-            {
-              parse_mode: "HTML"
-            }
-          );
+`);
         } else if (option1 && option2 && option3 && option4) {
           session.setPollData(
             title[1],
@@ -320,8 +305,7 @@ Your Options:
             option3[1],
             option4[1]
           );
-          return (
-            (draftCustom = `
+          return (draftCustom = `
             <b>This is your Draft Message:</b>
 
 ${pollMessage}
@@ -333,11 +317,7 @@ Your Options:
 4: ${option4[1]}
 
 ⬇️<b>Select what you want to do with it</b> ⬇️
-`),
-            {
-              parse_mode: "HTML"
-            }
-          );
+`);
         }
       } else if (pollImage) {
         if (option1 && !option2 && !option3 && !option4) {
@@ -384,9 +364,10 @@ Your Options:
     if (pollMessage) {
       bot.sendMessage(msg.chat.id, draftCustom, {
         reply_markup: {
-          keyboard: [["Back", "Send Post"]]
+          keyboard: [["Back", "Send Post"]],
+          resize_keyboard: true
         },
-        resize_keyboard: true
+        parse_mode: "HTML"
       });
     } else if (pollImage) {
       bot.sendPhoto(msg.chat.id, pollImage, {
@@ -394,9 +375,10 @@ Your Options:
       });
       bot.sendMessage(msg.chat.id, draftCustom, {
         reply_markup: {
-          keyboard: [["Back", "Send Post"]]
+          keyboard: [["Back", "Send Post"]],
+          resize_keyboard: true
         },
-        resize_keyboard: true
+        parse_mode: "HTML"
       });
     }
   }
