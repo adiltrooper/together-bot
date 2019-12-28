@@ -444,7 +444,6 @@ bot.on("message", async msg => {
       session.setPollMessage(msg.text);
     }
     session.setAdminState6();
-    session.delPollData();
   }
 });
 

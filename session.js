@@ -83,18 +83,6 @@ class Session {
     });
   }
 
-  setDraftCustomImage(imageId) {
-    redis.setAsync("draftCustomImage", imageId).then(function(res) {
-      console.log("DRAFT IMAGE IN");
-    });
-  }
-
-  setDraftCustomCaption(caption) {
-    redis.setAsync("draftCustomCaption", caption).then(function(res) {
-      console.log("DRAFT CAPTION IN");
-    });
-  }
-
   getDraftImage() {
     return redis.getAsync("draftImage").then(function(res) {
       return res;
