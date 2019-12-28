@@ -380,22 +380,20 @@ bot.onText(/Send Post/, async msg => {
     const pollMessage = await session.getPollMessage().catch(err => {
       console.log(err.message);
     });
-
-    const draftCustomTitle = await session.getDraftCustomTitle().catch(err => {
+    const pollTitle = await session.getDraftCustomTitle().catch(err => {
       console.log(err.message);
     });
-
     const pollOptions = await session.getPollData().catch(err => {
       console.log(err.message);
     });
 
     console.log(pollOptions);
-    console.log(draftCustomTitle);
-    console.log(inlineKeyboardOptions);
+    console.log(pollTitle);
     var option1 = pollOptions[0];
     var option2 = pollOptions[1];
     var option3 = pollOptions[2];
     var option4 = pollOptions[3];
+    console.log(option1);
     pool.getConnection(function(err, connection) {
       connection.query(
         "INSERT INTO bot_poll (title, created_by, option1, option2, option3, option4) VALUES (?, ?, ?, ?, ?, ?)",
