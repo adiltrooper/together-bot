@@ -401,7 +401,7 @@ bot.on("callback_query", async callbackQuery => {
   } else if (adminState == "admin4" && callbackQuery.data == "Keep Poll") {
     bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
     session.setAdminState();
-    bot.sendMessage(callbackQiery.from.id, `Please Select an Option:`, {
+    bot.sendMessage(callbackQuery.from.id, `Please Select an Option:`, {
       reply_markup: {
         keyboard: [
           ["New Post", "Custom Post"],
