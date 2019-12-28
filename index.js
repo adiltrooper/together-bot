@@ -577,6 +577,7 @@ Thanks for participating! 🥳🥳🥳
       );
     } else if (pollOption1 && pollOption2 && pollOption3 && !pollOption4) {
       totalCount = pollCount1 + pollCount2 + pollCount3;
+      console.log(pollCount1);
       console.log(totalCount);
       option1Result = (pollCount1 / totalCount) * 100;
       option2Result = (pollCount2 / totalCount) * 100;
