@@ -553,16 +553,18 @@ bot.on("callback_query", async callbackQuery => {
   pollCount3 = parseInt(pollCount[2]);
   pollCount4 = parseInt(pollCount[3]);
 
+  console.log(pollCount2);
+
   function getResult() {
     if (pollOption1 && pollOption2 && !pollOption3 && !pollOption4) {
       totalCount = pollCount1 + pollCount2;
+      console.log(totalCount);
       option1Result = (pollCount1 / totalCount) * 100;
       option2Result = (pollCount2 / totalCount) * 100;
 
       bot.sendMessage(
         callbackQuery.from.id,
-        `
-<b>Results so far:</b>
+        `<b>Results so far:</b>
 
 1️⃣${pollOption1}: <b>${option1Result}%</b>
 2️⃣${pollOption2}: <b>${option2Result}%</b>
@@ -575,14 +577,14 @@ Thanks for participating! 🥳🥳🥳
       );
     } else if (pollOption1 && pollOption2 && pollOption3 && !pollOption4) {
       totalCount = pollCount1 + pollCount2 + pollCount3;
+      console.log(totalCount);
       option1Result = (pollCount1 / totalCount) * 100;
       option2Result = (pollCount2 / totalCount) * 100;
       option3Result = (pollCount3 / totalCount) * 100;
 
       bot.sendMessage(
         callbackQuery.from.id,
-        `
-<b>Results so far:</b>
+        `<b>Results so far:</b>
 
 1️⃣${pollOption1}: <b>${option1Result}%</b>
 2️⃣${pollOption2}: <b>${option2Result}%</b>
@@ -596,6 +598,7 @@ Thanks for participating! 🥳🥳🥳
       );
     } else if (pollOption1 && pollOption2 && pollOption3 && pollOption4) {
       totalCount = pollCount1 + pollCount2 + pollCount3 + pollCount4;
+      console.log(totalCount);
       option1Result = (pollCount1 / totalCount) * 100;
       option2Result = (pollCount2 / totalCount) * 100;
       option3Result = (pollCount3 / totalCount) * 100;
@@ -603,8 +606,7 @@ Thanks for participating! 🥳🥳🥳
 
       bot.sendMessage(
         callbackQuery.from.id,
-        `
-<b>Results so far:</b>
+        `<b>Results so far:</b>
 
 1️⃣${pollOption1}: <b>${option1Result}%</b>
 2️⃣${pollOption2}: <b>${option2Result}%</b>
