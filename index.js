@@ -197,7 +197,7 @@ bot.onText(/Custom Post/, async msg => {
         option2Result = (pollCount2 / totalCount) * 100;
 
         bot.sendMessage(
-          callbackQuery.from.id,
+          msg.chat.id,
           `<b>You have an Existing Poll!</b>
 
   1️⃣${pollOption1}: <b>${option1Result}%</b>
@@ -236,7 +236,7 @@ bot.onText(/Custom Post/, async msg => {
         option3Result = (pollCount3 / totalCount) * 100;
 
         bot.sendMessage(
-          callbackQuery.from.id,
+          msg.chat.id,
           `<b>You have an Existing Poll!</b>
 
   1️⃣${pollOption1}: <b>${option1Result}%<b>
@@ -276,7 +276,7 @@ bot.onText(/Custom Post/, async msg => {
         option4Result = (pollCount4 / totalCount) * 100;
 
         bot.sendMessage(
-          callbackQuery.from.id,
+          msg.chat.id,
           `<b>You have an Existing Poll!</b>
 
   1️⃣${pollOption1}: <b>${option1Result}%</b>
@@ -310,7 +310,7 @@ bot.onText(/Custom Post/, async msg => {
         );
       }
     }
-    getResult();
+    getResult(msg);
   } else if (adminState == "admin3" && !pollExists) {
     session.delPollData();
 
