@@ -710,7 +710,13 @@ bot.onText(/Send Post/, async msg => {
                   .sendPhoto(
                     userId,
                     pollImage,
-                    customImageFn(option1, option2, option3, option4)
+                    customImageFn(
+                      option1,
+                      option2,
+                      option3,
+                      option4,
+                      pollMessage
+                    )
                   )
                   .catch(err => {
                     console.log(err);

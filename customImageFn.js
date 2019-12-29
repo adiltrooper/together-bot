@@ -1,6 +1,7 @@
-module.exports = function(option1, option2, option3, option4) {
+module.exports = function(option1, option2, option3, option4, caption) {
   if (option1 && !option2 && !option3 && !option4) {
     return {
+      caption: { caption },
       reply_markup: {
         inline_keyboard: [
           [
@@ -14,6 +15,7 @@ module.exports = function(option1, option2, option3, option4) {
     };
   } else if (option1 && option2 && !option3 && !option4) {
     return {
+      caption: { caption },
       reply_markup: {
         inline_keyboard: [
           [
@@ -33,6 +35,7 @@ module.exports = function(option1, option2, option3, option4) {
     };
   } else if (option1 && option2 && option3 && !option4) {
     return {
+      caption: { caption },
       reply_markup: {
         inline_keyboard: [
           [
@@ -58,6 +61,7 @@ module.exports = function(option1, option2, option3, option4) {
     };
   } else if (option1 && option2 && option3 && option4) {
     return {
+      caption: { caption },
       reply_markup: {
         inline_keyboard: [
           [
