@@ -980,32 +980,32 @@ bot.onText(/Send Post/, async msg => {
     console.log(err.message);
   });
   console.log(adminState);
+
+  async function getUsers() {
+    pool.getConnection(function(err, connection) {
+      if (err) console.log(err);
+      connection.query("SELECT chat_id FROM bot_user_db", function(
+        err,
+        results,
+        fields
+      ) {
+        if (err) {
+          console.log(err.message);
+        } else {
+          var userArray = [];
+          userArray = results.map(userData => {
+            return userData.chat_id;
+          });
+          session.setUserSendList(JSON.stringify(userArray));
+        }
+      });
+      connection.release();
+      if (err) console.log(err);
+    });
+  }
   if (adminState == "admin3") {
     const getUsersAndSend = async () => {
-      async function getUsers() {
-        await pool.getConnection(function(err, connection) {
-          if (err) console.log(err);
-          connection.query("SELECT chat_id FROM bot_user_db", function(
-            err,
-            results,
-            fields
-          ) {
-            if (err) {
-              console.log(err.message);
-            } else {
-              var userArray = [];
-              userArray = results.map(userData => {
-                return userData.chat_id;
-              });
-              session.setUserSendList(JSON.stringify(userArray));
-            }
-          });
-          connection.release();
-          if (err) console.log(err);
-        });
-      }
-      await getUsers();
-
+      const getUsers = await getUsers();
       const retrieveUserList = async () => {
         var userSendList = await session.getUserSendList().catch(err => {
           console.log(err.message);
