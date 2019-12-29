@@ -463,7 +463,7 @@ bot.on("message", async msg => {
     console.log(msg);
     if (msg.photo) {
       session.setPollImage(msg.photo[0].file_id);
-      session.setPollCaption(msg.caption);
+      session.setPollMessage(msg.caption);
     } else {
       session.setPollMessage(msg.text);
     }
@@ -503,18 +503,15 @@ bot.on("message", async msg => {
     const pollImage = await session.getPollImage().catch(err => {
       console.log(err.message);
     });
-    const pollCaption = await session.getPollCaption().catch(err => {
-      console.log(err.message);
-    });
+
     const pollMessage = await session.getPollMessage().catch(err => {
       console.log(err.message);
     });
 
     const customFormatfn = () => {
-      if (pollMessage) {
-        if (option1 && !option2 && !option3 && !option4) {
-          session.setPollData(title[1], option1[1]);
-          return (draftCustom = `
+      if (option1 && !option2 && !option3 && !option4) {
+        session.setPollData(title[1], option1[1]);
+        return (draftCustom = `
             <b>This is your Draft Message:</b>
 
 ${pollMessage}
@@ -524,22 +521,9 @@ Your Options:
 
 ⬇️<b>Select what you want to do with it</b>
 `);
-        } else if (option1 && option2 && !option3 && !option4) {
-          session.setPollData(title[1], option1[1], option2[1]);
-          return (draftCustom = `
-            <b>This is your Draft Message:</b>
-
-${pollMessage}
-
-Your Options:
-1: ${option1[1]}
-2: ${option2[1]}
-
-⬇️<b>Select what you want to do with it</b>
-`);
-        } else if (option1 && option2 && option3 && !option4) {
-          session.setPollData(title[1], option1[1], option2[1], option3[1]);
-          return (draftCustom = `
+      } else if (option1 && option2 && !option3 && !option4) {
+        session.setPollData(title[1], option1[1], option2[1]);
+        return (draftCustom = `
             <b>This is your Draft Message:</b>
 
 ${pollMessage}
@@ -547,19 +531,12 @@ ${pollMessage}
 Your Options:
 1: ${option1[1]}
 2: ${option2[1]}
-3: ${option3[1]}
 
 ⬇️<b>Select what you want to do with it</b>
 `);
-        } else if (option1 && option2 && option3 && option4) {
-          session.setPollData(
-            title[1],
-            option1[1],
-            option2[1],
-            option3[1],
-            option4[1]
-          );
-          return (draftCustom = `
+      } else if (option1 && option2 && option3 && !option4) {
+        session.setPollData(title[1], option1[1], option2[1], option3[1]);
+        return (draftCustom = `
             <b>This is your Draft Message:</b>
 
 ${pollMessage}
@@ -568,54 +545,35 @@ Your Options:
 1: ${option1[1]}
 2: ${option2[1]}
 3: ${option3[1]}
-4: ${option4[1]}
 
 ⬇️<b>Select what you want to do with it</b>
 `);
-        }
-      } else if (pollImage) {
-        if (option1 && !option2 && !option3 && !option4) {
-          session.setPollData(title[1], option1[1]);
-          return (draftCustom = `
-Your Options:
-1: ${option1[1]}
-            `);
-        } else if (option1 && option2 && !option3 && !option4) {
-          session.setPollData(title[1], option1[1], option2[1]);
-          return (draftCustom = `
-Your Options:
-1: ${option1[1]}
-2: ${option2[1]}
-            `);
-        } else if (option1 && option2 && option3 && !option4) {
-          session.setPollData(title[1], option1[1], option2[1], option3[1]);
-          return (draftCustom = `
-Your Options:
-1: ${option1[1]}
-2: ${option2[1]}
-3: ${option3[1]}
-            `);
-        } else if (option1 && option2 && option3 && option4) {
-          session.setPollData(
-            title[1],
-            option1[1],
-            option2[1],
-            option3[1],
-            option4[1]
-          );
-          return (draftCustom = `
+      } else if (option1 && option2 && option3 && option4) {
+        session.setPollData(
+          title[1],
+          option1[1],
+          option2[1],
+          option3[1],
+          option4[1]
+        );
+        return (draftCustom = `
+            <b>This is your Draft Message:</b>
+
+${pollMessage}
+
 Your Options:
 1: ${option1[1]}
 2: ${option2[1]}
 3: ${option3[1]}
 4: ${option4[1]}
-            `);
-        }
+
+⬇️<b>Select what you want to do with it</b>
+`);
       }
     };
     customFormatfn();
 
-    if (pollMessage) {
+    if (pollMessage && !pollImage) {
       bot.sendMessage(msg.chat.id, draftCustom, {
         reply_markup: {
           keyboard: [["Back", "Send Post"]],
@@ -625,15 +583,20 @@ Your Options:
       });
     } else if (pollImage) {
       bot.sendPhoto(msg.chat.id, pollImage, {
-        caption: pollCaption
-      });
-      bot.sendMessage(msg.chat.id, draftCustom, {
+        caption: draftCustom,
         reply_markup: {
           keyboard: [["Back", "Send Post"]],
           resize_keyboard: true
         },
         parse_mode: "HTML"
       });
+      // bot.sendMessage(msg.chat.id, draftCustom, {
+      //   reply_markup: {
+      //     keyboard: [["Back", "Send Post"]],
+      //     resize_keyboard: true
+      //   },
+      //   parse_mode: "HTML"
+      // });
     }
   }
 });
@@ -648,7 +611,7 @@ bot.onText(/Send Post/, async msg => {
     const pollImage = await session.getPollImage().catch(err => {
       console.log(err.message);
     });
-    const pollCaption = await session.getPollCaption().catch(err => {
+    const pollMessage = await session.getPollCaption().catch(err => {
       console.log(err.message);
     });
     const pollMessage = await session.getPollMessage().catch(err => {
