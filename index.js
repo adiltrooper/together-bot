@@ -982,7 +982,7 @@ bot.onText(/Send Post/, async msg => {
   console.log(adminState);
 
   function getUsers() {
-    pool.getConnection(function(err, connection) {
+    return pool.getConnection(function(err, connection) {
       if (err) console.log(err);
       connection.query("SELECT chat_id FROM bot_user_db", function(
         err,
@@ -995,8 +995,8 @@ bot.onText(/Send Post/, async msg => {
           var userArray = [];
           userArray = results.map(userData => {
             return userData.chat_id;
-            console.log("Retreived user List from DB");
           });
+          console.log("Retreived user List from DB");
           session.setUserSendList(JSON.stringify(userArray));
         }
       });
