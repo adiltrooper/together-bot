@@ -234,6 +234,10 @@ class Session {
       });
   }
 
+  delPollVoter() {
+    return redis.del("Poll:voter");
+  }
+
   getPollMessage() {
     return redis.hgetAsync("Poll:currentPoll", "message").then(function(res) {
       return res;

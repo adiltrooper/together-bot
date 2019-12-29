@@ -387,6 +387,7 @@ bot.on("callback_query", async callbackQuery => {
           } else {
             console.log(`${pollTitle} poll has been inserted into database`);
             session.delPollData();
+            session.delPollVoter();
           }
         }
       );
