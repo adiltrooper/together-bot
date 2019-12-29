@@ -869,6 +869,7 @@ Thanks for participating! 🥳🥳🥳
       case userPollSelection == pollOption1:
         bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
         session.incrPollVote("1");
+        console.log("Voting for 1");
 
         getResult();
 
@@ -876,14 +877,14 @@ Thanks for participating! 🥳🥳🥳
       case userPollSelection == pollOption2:
         bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
         session.incrPollVote("2");
-
+        console.log("Voting for 2");
         getResult();
 
         break;
       case userPollSelection == pollOption3:
         bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
         session.incrPollVote("3");
-
+        console.log("Voting for 3");
         getResult();
 
         break;
