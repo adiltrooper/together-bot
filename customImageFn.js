@@ -1,7 +1,7 @@
 module.exports = function(option1, option2, option3, option4, caption) {
   if (option1 && !option2 && !option3 && !option4) {
     return {
-      caption: { caption },
+      caption: caption,
       reply_markup: {
         inline_keyboard: [
           [
@@ -15,7 +15,7 @@ module.exports = function(option1, option2, option3, option4, caption) {
     };
   } else if (option1 && option2 && !option3 && !option4) {
     return {
-      caption: { caption },
+      caption: caption,
       reply_markup: {
         inline_keyboard: [
           [
@@ -35,7 +35,7 @@ module.exports = function(option1, option2, option3, option4, caption) {
     };
   } else if (option1 && option2 && option3 && !option4) {
     return {
-      caption: { caption },
+      caption: caption,
       reply_markup: {
         inline_keyboard: [
           [
@@ -61,7 +61,7 @@ module.exports = function(option1, option2, option3, option4, caption) {
     };
   } else if (option1 && option2 && option3 && option4) {
     return {
-      caption: { caption },
+      caption: caption,
       reply_markup: {
         inline_keyboard: [
           [
