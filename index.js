@@ -772,7 +772,7 @@ bot.onText(/Send Post/, async msg => {
 
 bot.on("callback_query", async callbackQuery => {
   if (
-    callbackQuery.data !== "Keep Poll" ||
+    callbackQuery.data !== "Keep Poll" &&
     callbackQuery.data !== "Stop Poll & Create New"
   ) {
     userPollSelection = callbackQuery.data;
@@ -849,10 +849,10 @@ Thanks for participating! 🥳🥳🥳
       } else if (pollOption1 && pollOption2 && pollOption3 && pollOption4) {
         totalCount = pollCount1 + pollCount2 + pollCount3 + pollCount4;
         console.log(totalCount);
-        option1Result = (pollCount1 / totalCount) * 100;
-        option2Result = (pollCount2 / totalCount) * 100;
-        option3Result = (pollCount3 / totalCount) * 100;
-        option4Result = (pollCount4 / totalCount) * 100;
+        option1Result = ((pollCount1 / totalCount) * 100).toFixed(1);
+        option2Result = ((pollCount2 / totalCount) * 100).toFixed(1);
+        option3Result = ((pollCount3 / totalCount) * 100).toFixed(1);
+        option4Result = ((pollCount4 / totalCount) * 100).toFixed(1);
 
         bot.sendMessage(
           callbackQuery.from.id,
@@ -882,6 +882,7 @@ Thanks for participating! 🥳🥳🥳
         bot.sendMessage(voter, "You have already voted!");
       } else {
         console.log("DOWN THIS PATH, voting for" + vote);
+        session.setPollVoter(voter);
         session.incrPollVote(vote);
         getResult();
       }
