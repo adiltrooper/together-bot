@@ -21,7 +21,7 @@ const axios = require("axios");
 const mysql = require("mysql");
 const db = require("./config_db/db");
 const pool = mysql.createPool(db);
-bluebird.promisifyAll(mysql);
+bluebird.promisifyAll(pool);
 const bodyParser = require("body-parser");
 
 cloudinary.config({
