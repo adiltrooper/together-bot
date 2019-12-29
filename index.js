@@ -1026,7 +1026,7 @@ bot.onText(/Send Post/, async msg => {
       }
     );
     await connection.release();
-    return userArray;
+    return theArray;
   }
 
   await getUsers();
