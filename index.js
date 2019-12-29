@@ -1009,7 +1009,7 @@ bot.onText(/Send Post/, async msg => {
 
   async function getUsers() {
     const connection = await pool.getConnectionAsync();
-    await connection.query("SELECT chat_id FROM bot_user_db", function(
+    return await connection.query("SELECT chat_id FROM bot_user_db", function(
       err,
       results,
       fields
@@ -1022,14 +1022,14 @@ bot.onText(/Send Post/, async msg => {
           return userData.chat_id;
         });
         return userArray;
-        return console.log("Retreived user List from DB");
-        return session.setUserSendList(JSON.stringify(userArray));
+        console.log("Retreived user List from DB");
+        session.setUserSendList(JSON.stringify(userArray));
       }
     });
     await connection.release();
   }
 
-  const getUserFn = await getUsers();
+  await getUsers();
 
   if (adminState == "admin3") {
     const retrieveUserList = async () => {
