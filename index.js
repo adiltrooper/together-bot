@@ -992,21 +992,21 @@ bot.onText(/Send Post/, async msg => {
           console.log(err.message);
         } else {
           var userArray = [];
-          userArray = results.map(userData => {
+          return (userArray = results.map(userData => {
             return userData.chat_id;
-          });
+          }));
           console.log("Retreived user List from DB");
           session.setUserSendList(JSON.stringify(userArray));
         }
       });
-      await connection.release();
+      connection.release();
       if (err) console.log(err);
     });
   }
+  console.log(getUsers());
 
   if (adminState == "admin3") {
     const retrieveUserList = async () => {
-      const getUserFn = await getUsers();
       var userSendList = await session.getUserSendList().catch(err => {
         console.log(err.message);
       });
