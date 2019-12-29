@@ -4,6 +4,7 @@ const _ = require("lodash/array");
 const messagePollFn = require("./messagePollFn");
 const imagePollFn = require("./imagePollFn");
 var cloudinary = require("cloudinary");
+const bluebird = require("bluebird");
 
 const TelegramBot = require("node-telegram-bot-api"),
   host = process.env.HOST || "localhost", // probably this change is not required
@@ -20,6 +21,7 @@ const axios = require("axios");
 const mysql = require("mysql");
 const db = require("./config_db/db");
 const pool = mysql.createPool(db);
+bluebird.promisifyAll(mysql);
 const bodyParser = require("body-parser");
 
 cloudinary.config({
@@ -1006,7 +1008,7 @@ bot.onText(/Send Post/, async msg => {
   // }
 
   async function getUsers() {
-    const connection = await pool.getConnection();
+    const connection = await pool.getConnectionAsync();
     const getArray = await connection.query(
       "SELECT chat_id FROM bot_user_db",
       function(err, results, fields) {
