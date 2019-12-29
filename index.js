@@ -614,9 +614,6 @@ bot.onText(/Send Post/, async msg => {
     const pollMessage = await session.getPollCaption().catch(err => {
       console.log(err.message);
     });
-    const pollMessage = await session.getPollMessage().catch(err => {
-      console.log(err.message);
-    });
     const pollTitle = await session.getPollTitle().catch(err => {
       console.log(err.message);
     });
