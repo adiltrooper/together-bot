@@ -899,7 +899,7 @@ Thanks for participating! 🥳🥳🥳
       default:
         bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
         session.incrPollVote("1");
-
+        console.log("Voting for 1");
         getResult();
     }
   }
