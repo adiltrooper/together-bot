@@ -1,8 +1,8 @@
 const keys = require("./config_keys/keys");
 const express = require("express");
 const _ = require("lodash/array");
-const customMessageFn = require("./customMessageFn");
-const customImageFn = require("./customImageFn");
+const messagePollFn = require("./messagePollFn");
+const imagePollFn = require("./imagePollFn");
 var cloudinary = require("cloudinary");
 
 const TelegramBot = require("node-telegram-bot-api"),
@@ -681,7 +681,7 @@ bot.onText(/Send Post/, async msg => {
                   .sendMessage(
                     userId,
                     pollMessage,
-                    customMessageFn(option1, option2, option3, option4)
+                    messagePollFn(option1, option2, option3, option4)
                   )
                   .catch(err => {
                     console.log(err);
@@ -710,13 +710,7 @@ bot.onText(/Send Post/, async msg => {
                   .sendPhoto(
                     userId,
                     pollImage,
-                    customImageFn(
-                      option1,
-                      option2,
-                      option3,
-                      option4,
-                      pollMessage
-                    )
+                    imagePollFn(option1, option2, option3, option4, pollMessage)
                   )
                   .catch(err => {
                     console.log(err);
@@ -988,31 +982,36 @@ bot.onText(/Send Post/, async msg => {
   console.log(adminState);
   if (adminState == "admin3") {
     const getUsersAndSend = async () => {
-      await pool.getConnection(function(err, connection) {
-        if (err) console.log(err);
-        connection.query("SELECT chat_id FROM bot_user_db", function(
-          err,
-          results,
-          fields
-        ) {
-          if (err) {
-            console.log(err.message);
-          } else {
-            var userArray = [];
-            userArray = results.map(userData => {
-              return userData.chat_id;
-            });
-            session.setUserSendList(JSON.stringify(userArray));
-          }
+      async function getUsers() {
+        await pool.getConnection(function(err, connection) {
+          if (err) console.log(err);
+          connection.query("SELECT chat_id FROM bot_user_db", function(
+            err,
+            results,
+            fields
+          ) {
+            if (err) {
+              console.log(err.message);
+            } else {
+              var userArray = [];
+              userArray = results.map(userData => {
+                return userData.chat_id;
+              });
+              session.setUserSendList(JSON.stringify(userArray));
+            }
+          });
+          connection.release();
+          if (err) console.log(err);
         });
-        connection.release();
-        if (err) console.log(err);
-      });
+      }
+      getUsers();
+
       const retrieveUserList = async () => {
         var userSendList = await session.getUserSendList().catch(err => {
           console.log(err.message);
         });
         console.log(`This is the after ${userSendList}`);
+
         if (userSendList.includes(",")) {
           var userSendList = userSendList
             .slice(1, userSendList.length - 1)
