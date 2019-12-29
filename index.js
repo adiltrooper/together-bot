@@ -979,7 +979,6 @@ bot.onText(/Send Post/, async msg => {
   const draftMessage = await session.getDraftMessage().catch(err => {
     console.log(err.message);
   });
-  console.log(adminState);
 
   function getUsers() {
     pool.getConnection(async function(err, connection) {
@@ -1004,9 +1003,10 @@ bot.onText(/Send Post/, async msg => {
       if (err) console.log(err);
     });
   }
-  const getUserFn = await getUsers();
+
   if (adminState == "admin3") {
     const retrieveUserList = async () => {
+      const getUserFn = await getUsers();
       var userSendList = await session.getUserSendList().catch(err => {
         console.log(err.message);
       });
