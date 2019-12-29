@@ -878,13 +878,9 @@ Thanks for participating! 🥳🥳🥳
           console.log(err);
         }
       });
-      console.log("This is the votedusers " + votedUsers);
-      console.log(votedUsers.includes(voter.toString()));
-      if (votedUsers.includes(voter)) {
-        console.log("VOTED PATH");
+      if (votedUsers.includes(voter.toString())) {
         bot.sendMessage(voter, "You have already voted!");
       } else {
-        console.log("DOWN THIS PATH, voting for" + vote);
         session.setPollVoter(voter);
         session.incrPollVote(vote);
         getResult();
