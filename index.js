@@ -873,7 +873,7 @@ Thanks for participating! 🥳🥳🥳
     }
 
     switch (userPollSelection) {
-      case userPollSelection == pollOption1:
+      case pollOption1:
         bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
         session.incrPollVote("1");
         console.log("Voting for 1");
@@ -881,21 +881,21 @@ Thanks for participating! 🥳🥳🥳
         getResult();
 
         break;
-      case userPollSelection == pollOption2:
+      case pollOption2:
         bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
         session.incrPollVote("2");
         console.log("Voting for 2");
         getResult();
 
         break;
-      case userPollSelection == pollOption3:
+      case pollOption3:
         bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
         session.incrPollVote("3");
         console.log("Voting for 3");
         getResult();
 
         break;
-      case userPollSelection == pollOption4:
+      case pollOption4:
         bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
         session.incrPollVote("4");
 
@@ -906,7 +906,7 @@ Thanks for participating! 🥳🥳🥳
       default:
         bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
         session.incrPollVote("1");
-        console.log("Voting for 1");
+        console.log("Voting for Default");
         getResult();
     }
   }
