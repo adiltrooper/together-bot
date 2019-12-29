@@ -772,7 +772,7 @@ bot.onText(/Send Post/, async msg => {
 
 bot.on("callback_query", async callbackQuery => {
   if (
-    callbackQuery.data !== "Keep Poll" ||
+    callbackQuery.data !== "Keep Poll" &&
     callbackQuery.data !== "Stop Poll & Create New"
   ) {
     userPollSelection = callbackQuery.data;
@@ -786,6 +786,13 @@ bot.on("callback_query", async callbackQuery => {
     pollOption2 = pollOptions[1];
     pollOption3 = pollOptions[2];
     pollOption4 = pollOptions[3];
+
+    console.log(userPollSelection);
+
+    console.log(pollOption1);
+    console.log(pollOption2);
+    console.log(pollOption3);
+    console.log(pollOption4);
 
     async function getResult() {
       const pollCount = await session.getPollCount().catch(err => {
@@ -801,8 +808,8 @@ bot.on("callback_query", async callbackQuery => {
       if (pollOption1 && pollOption2 && !pollOption3 && !pollOption4) {
         totalCount = pollCount1 + pollCount2;
         console.log(totalCount);
-        option1Result = (pollCount1 / totalCount) * 100;
-        option2Result = (pollCount2 / totalCount) * 100;
+        option1Result = ((pollCount1 / totalCount) * 100).toFixed(1);
+        option2Result = ((pollCount2 / totalCount) * 100).toFixed(1);
 
         bot.sendMessage(
           callbackQuery.from.id,
@@ -821,9 +828,9 @@ Thanks for participating! 🥳🥳🥳
         totalCount = pollCount1 + pollCount2 + pollCount3;
         console.log(pollCount1);
         console.log(totalCount);
-        option1Result = (pollCount1 / totalCount) * 100;
-        option2Result = (pollCount2 / totalCount) * 100;
-        option3Result = (pollCount3 / totalCount) * 100;
+        option1Result = ((pollCount1 / totalCount) * 100).toFixed(1);
+        option2Result = ((pollCount2 / totalCount) * 100).toFixed(1);
+        option3Result = ((pollCount3 / totalCount) * 100).toFixed(1);
 
         bot.sendMessage(
           callbackQuery.from.id,
@@ -842,10 +849,10 @@ Thanks for participating! 🥳🥳🥳
       } else if (pollOption1 && pollOption2 && pollOption3 && pollOption4) {
         totalCount = pollCount1 + pollCount2 + pollCount3 + pollCount4;
         console.log(totalCount);
-        option1Result = (pollCount1 / totalCount) * 100;
-        option2Result = (pollCount2 / totalCount) * 100;
-        option3Result = (pollCount3 / totalCount) * 100;
-        option4Result = (pollCount4 / totalCount) * 100;
+        option1Result = ((pollCount1 / totalCount) * 100).toFixed(1);
+        option2Result = ((pollCount2 / totalCount) * 100).toFixed(1);
+        option3Result = ((pollCount3 / totalCount) * 100).toFixed(1);
+        option4Result = ((pollCount4 / totalCount) * 100).toFixed(1);
 
         bot.sendMessage(
           callbackQuery.from.id,
@@ -865,41 +872,44 @@ Thanks for participating! 🥳🥳🥳
       }
     }
 
+    async function voteOrHasVoted(voter, vote) {
+      votedUsers = await session.getPollVoter().catch(err => {
+        if (err) {
+          console.log(err);
+        }
+      });
+      console.log("This is the votedusers " + votedUser);
+      if (votedUsers.includes(voter)) {
+        console.log("VOTED PATH");
+        bot.sendMessage(voter, "You have already voted!");
+      } else {
+        console.log("DOWN THIS PATH, voting for" + vote);
+        session.setPollVoter(voter);
+        session.incrPollVote(vote);
+        getResult();
+      }
+    }
+
     switch (userPollSelection) {
-      case userPollSelection == pollOption1:
+      case pollOption1:
         bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
-        session.incrPollVote("1");
-
-        getResult();
-
+        voteOrHasVoted(callbackQuery.form.id, "1");
         break;
-      case userPollSelection == pollOption2:
+      case pollOption2:
         bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
-        session.incrPollVote("2");
-
-        getResult();
-
+        voteOrHasVoted(callbackQuery.from.id, "2");
         break;
-      case userPollSelection == pollOption3:
+      case pollOption3:
         bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
-        session.incrPollVote("3");
-
-        getResult();
-
+        voteOrHasVoted(callbackQuery.from.id, "3");
         break;
-      case userPollSelection == pollOption4:
+      case pollOption4:
         bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
-        session.incrPollVote("4");
-
-        getResult();
-
+        voteOrHasVoted(callbackQuery.from.id, "4");
         break;
-
       default:
         bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
-        session.incrPollVote("1");
-
-        getResult();
+        voteOrHasVoted(callbackQuery.from.id, "1");
     }
   }
 });
