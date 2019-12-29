@@ -982,9 +982,9 @@ bot.onText(/Send Post/, async msg => {
   console.log(adminState);
 
   function getUsers() {
-    return pool.getConnection(function(err, connection) {
+    return pool.getConnection(async function(err, connection) {
       if (err) console.log(err);
-      connection.query("SELECT chat_id FROM bot_user_db", function(
+      await connection.query("SELECT chat_id FROM bot_user_db", function(
         err,
         results,
         fields
