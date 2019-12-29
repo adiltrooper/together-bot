@@ -1009,7 +1009,7 @@ bot.onText(/Send Post/, async msg => {
 
   async function getUsers() {
     const connection = await pool.getConnectionAsync();
-    const thearray = await connection.query(
+    const thearray = await connection.queryAsync(
       "SELECT chat_id FROM bot_user_db",
       function(err, results, fields) {
         if (err) {
