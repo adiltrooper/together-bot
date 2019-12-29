@@ -879,7 +879,7 @@ Thanks for participating! 🥳🥳🥳
         }
       });
       console.log("This is the votedusers " + votedUsers);
-      console.log(votedUsers.includes(voter));
+      console.log(votedUsers.includes(voter.toString()));
       if (votedUsers.includes(voter)) {
         console.log("VOTED PATH");
         bot.sendMessage(voter, "You have already voted!");
