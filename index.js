@@ -219,8 +219,8 @@ bot.onText(/Custom Post/, async msg => {
                 ],
                 [
                   {
-                    text: "Stop Poll & Create New",
-                    callback_data: "Stop Poll & Create New"
+                    text: "🛑Stop Poll & Create New 🛑",
+                    callback_data: "🛑Stop Poll & Create New 🛑"
                   }
                 ]
               ]
@@ -257,8 +257,8 @@ bot.onText(/Custom Post/, async msg => {
                 ],
                 [
                   {
-                    text: "Stop Poll & Create New",
-                    callback_data: "Stop Poll & Create New"
+                    text: "🛑Stop Poll & Create New 🛑",
+                    callback_data: "🛑Stop Poll & Create New 🛑"
                   }
                 ]
               ]
@@ -296,8 +296,8 @@ bot.onText(/Custom Post/, async msg => {
                 ],
                 [
                   {
-                    text: "Stop Poll & Create New",
-                    callback_data: "Stop Poll & Create New"
+                    text: "🛑Stop Poll & Create New 🛑",
+                    callback_data: "🛑Stop Poll & Create New 🛑"
                   }
                 ]
               ]
@@ -334,7 +334,7 @@ bot.on("callback_query", async callbackQuery => {
   });
   if (
     adminState == "admin4" &&
-    callbackQuery.data == "Stop Poll & Create New"
+    callbackQuery.data == "🛑Stop Poll & Create New 🛑"
   ) {
     bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
     const pollOptions = await session.getPollOptions().catch(err => {
@@ -394,12 +394,22 @@ bot.on("callback_query", async callbackQuery => {
       if (err) console.log(err);
     });
     session.setAdminState5();
-    bot.sendMessage(callbackQuery.from.id, "Draft your main message:", {
-      reply_markup: {
-        keyboard: [["Back", "Exit Admin Session"]],
-        resize_keyboard: true
+    bot.sendMessage(
+      callbackQuery.from.id,
+      `
+      Current Poll has been Stopped and Saved
+
+<b>Create your New Poll Below 👇🏻
+Draft your main message:</b>
+      `,
+      {
+        reply_markup: {
+          keyboard: [["Back", "Exit Admin Session"]],
+          resize_keyboard: true
+        },
+        parse_mode: "HTML"
       }
-    });
+    );
   } else if (callbackQuery.data == "Keep Poll" && adminState == "admin4") {
     bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
     session.setAdminState();
@@ -782,7 +792,7 @@ bot.onText(/Send Post/, async msg => {
 bot.on("callback_query", async callbackQuery => {
   if (
     callbackQuery.data !== "Keep Poll" &&
-    callbackQuery.data !== "Stop Poll & Create New"
+    callbackQuery.data !== "🛑Stop Poll & Create New 🛑"
   ) {
     userPollSelection = callbackQuery.data;
     console.log(callbackQuery);
