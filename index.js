@@ -1006,7 +1006,7 @@ bot.onText(/Send Post/, async msg => {
   // }
 
   async function getUsers() {
-    const getConnect = await pool.getConnection();
+    const connection = await pool.getConnection();
     await connection.query("SELECT chat_id FROM bot_user_db", function(
       err,
       results,
@@ -1027,7 +1027,7 @@ bot.onText(/Send Post/, async msg => {
     await connection.release();
   }
 
-  getUsers();
+  const getUserFn() = await getUsers();
 
   if (adminState == "admin3") {
     const retrieveUserList = async () => {
