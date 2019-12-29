@@ -1009,22 +1009,23 @@ bot.onText(/Send Post/, async msg => {
 
   async function getUsers() {
     const connection = await pool.getConnectionAsync();
-    const getArray = await connection.query(
-      "SELECT chat_id FROM bot_user_db",
-      function(err, results, fields) {
-        if (err) {
-          console.log(err.message);
-        } else {
-          var userArray = [];
-          userArray = results.map(userData => {
-            return userData.chat_id;
-          });
-          return userArray;
-          console.log("Retreived user List from DB");
-          session.setUserSendList(JSON.stringify(userArray));
-        }
+    await connection.query("SELECT chat_id FROM bot_user_db", function(
+      err,
+      results,
+      fields
+    ) {
+      if (err) {
+        console.log(err.message);
+      } else {
+        var userArray = [];
+        userArray = results.map(userData => {
+          return userData.chat_id;
+        });
+        return userArray;
+        return console.log("Retreived user List from DB");
+        return session.setUserSendList(JSON.stringify(userArray));
       }
-    );
+    });
     await connection.release();
   }
 
