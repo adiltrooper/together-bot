@@ -1029,7 +1029,7 @@ bot.onText(/Send Post/, async msg => {
     return thearray;
   }
 
-  await getUsers();
+  const getArray = await getUsers();
 
   if (adminState == "admin3") {
     const retrieveUserList = async () => {
