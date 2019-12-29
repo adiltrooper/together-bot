@@ -219,6 +219,21 @@ class Session {
     }
   }
 
+  setPollVoter(voter) {
+    return redis.RPUSH("Poll:voter", voter);
+  }
+
+  getPollVoter() {
+    return redis
+      .multi()
+      .LRANGE("Poll:voter", 0, -1)
+      .execAsync()
+      .then(function(res) {
+        console.log(res);
+        return res[0];
+      });
+  }
+
   getPollMessage() {
     return redis.hgetAsync("Poll:currentPoll", "message").then(function(res) {
       return res;
@@ -265,12 +280,6 @@ class Session {
       });
   }
 
-  setDraftCustomMessage(message) {
-    redis.setAsync("draftCustomMessage", message).then(function(res) {
-      console.log("DRAFT MESSAGE IN");
-    });
-  }
-
   setDraftCustomTitle(title) {
     redis.setAsync("draftCustomTitle", title).then(function(res) {
       return res;
@@ -297,18 +306,6 @@ class Session {
 
   delPollData() {
     return redis.del("Poll:currentPoll");
-  }
-
-  setCustomOptions(option1, option2, option3, option4) {
-    if (option1 && !option2 && !option3 && !option4) {
-      return redis.RPUSH("customOptions", option1);
-    } else if (option1 && option2 && !option3 && !option4) {
-      return redis.RPUSH("customOptions", [option1, option2]);
-    } else if (option1 && option2 && option3 && !option4) {
-      return redis.RPUSH("customOptions", [option1, option2, option3]);
-    } else if (option1 && option2 && option3 && option4) {
-      return redis.RPUSH("customOptions", [option1, option2, option3, option4]);
-    }
   }
 
   getCustomOptions() {

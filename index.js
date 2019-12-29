@@ -872,41 +872,43 @@ Thanks for participating! 🥳🥳🥳
       }
     }
 
+    async function voteOrHasVoted(voter, vote) {
+      votedUsers = await session.getPollVoter().catch(err => {
+        if (err) {
+          console.log(err);
+        }
+      });
+      if (votedUsers.includes(voter)) {
+        bot.sendMessage(voter, "You have already voted!");
+      } else {
+        session.incrPollVote(vote);
+      }
+    }
+
     switch (userPollSelection) {
       case pollOption1:
         bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
-        session.incrPollVote("1");
-        console.log("Voting for 1");
-
+        voteOrHasVoted(callbackQuery.id, "1");
         getResult();
-
         break;
       case pollOption2:
         bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
-        session.incrPollVote("2");
-        console.log("Voting for 2");
+        voteOrHasVoted(callbackQuery.id, "2");
         getResult();
-
         break;
       case pollOption3:
         bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
-        session.incrPollVote("3");
-        console.log("Voting for 3");
+        voteOrHasVoted(callbackQuery.id, "3");
         getResult();
-
         break;
       case pollOption4:
         bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
-        session.incrPollVote("4");
-
+        voteOrHasVoted(callbackQuery.id, "4");
         getResult();
-
         break;
-
       default:
         bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
-        session.incrPollVote("1");
-        console.log("Voting for Default");
+        voteOrHasVoted(callbackQuery.id, "1");
         getResult();
     }
   }
