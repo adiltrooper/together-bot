@@ -1027,6 +1027,7 @@ bot.onText(/Send Post/, async msg => {
       }
     );
     return thearray;
+    console.log(thearray);
     connection.release();
   }
 
