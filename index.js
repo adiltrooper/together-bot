@@ -1027,7 +1027,7 @@ bot.onText(/Send Post/, async msg => {
     await connection.release();
   }
 
-  const getUserFn() = await getUsers();
+  const getUserFn = await getUsers();
 
   if (adminState == "admin3") {
     const retrieveUserList = async () => {
