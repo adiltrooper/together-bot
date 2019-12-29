@@ -1030,6 +1030,7 @@ bot.onText(/Send Post/, async msg => {
   }
 
   const getArray = await getUsers();
+  console.log(getArray);
 
   if (adminState == "admin3") {
     const retrieveUserList = async () => {
