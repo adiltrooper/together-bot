@@ -990,7 +990,7 @@ bot.on("message", async msg => {
       "What do you want to do with your draft:",
       {
         reply_markup: {
-          keyboard: [["Send Post", "Back"]],
+          keyboard: [["Back", "Send Post"]],
           resize_keyboard: true
         }
       }

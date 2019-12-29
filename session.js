@@ -284,18 +284,6 @@ class Session {
       });
   }
 
-  setDraftCustomTitle(title) {
-    redis.setAsync("draftCustomTitle", title).then(function(res) {
-      return res;
-    });
-  }
-
-  getDraftCustomTitle() {
-    return redis.getAsync("draftCustomTitle").then(function(res) {
-      return res;
-    });
-  }
-
   getDraftMessage() {
     return redis.getAsync("draftMessage").then(function(res) {
       return res;
