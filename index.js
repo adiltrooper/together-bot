@@ -1006,7 +1006,7 @@ bot.onText(/Send Post/, async msg => {
   // }
 
   async function getUsers() {
-    const connection = await pool.getConnection();
+    const getConnect = await pool.getConnection();
     await connection.query("SELECT chat_id FROM bot_user_db", function(
       err,
       results,
