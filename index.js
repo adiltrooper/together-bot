@@ -375,16 +375,16 @@ bot.on("callback_query", async callbackQuery => {
         function(err, results, fields) {
           if (err) {
             console.log(err.message);
+          } else {
+            console.log(`${pollTitle} poll has been inserted into database`);
+            session.delPollData();
           }
         }
       );
       connection.release();
       if (err) console.log(err);
     });
-    session.delPollData();
-
     session.setAdminState5();
-
     bot.sendMessage(callbackQuery.id, "Draft your main message:", {
       reply_markup: {
         keyboard: [["Back", "Exit Admin Session"]],
