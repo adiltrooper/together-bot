@@ -349,10 +349,18 @@ bot.on("callback_query", async callbackQuery => {
     const pollCount = await session.getPollCount().catch(err => {
       console.log(err.message);
     });
-    pollCount1 = parseInt(pollCount[0]);
-    pollCount2 = parseInt(pollCount[1]);
-    pollCount3 = parseInt(pollCount[2]);
-    pollCount4 = parseInt(pollCount[3]);
+    parseInt(pollCount[0])
+      ? (pollCount1 = parseInt(pollCount[0]))
+      : (pollCount1 = 0);
+    parseInt(pollCount[1])
+      ? (pollCount2 = parseInt(pollCount[1]))
+      : (pollCount2 = 0);
+    parseInt(pollCount[2])
+      ? (pollCount3 = parseInt(pollCount[2]))
+      : (pollCount3 = 0);
+    parseInt(pollCount[3])
+      ? (pollCount4 = parseInt(pollCount[3]))
+      : (pollCount4 = 0);
 
     const pollTitle = await session.getPollTitle().catch(err => {
       console.log(err.message);
@@ -385,7 +393,7 @@ bot.on("callback_query", async callbackQuery => {
       if (err) console.log(err);
     });
     session.setAdminState5();
-    bot.sendMessage(callbackQuery.id, "Draft your main message:", {
+    bot.sendMessage(callbackQuery.from.id, "Draft your main message:", {
       reply_markup: {
         keyboard: [["Back", "Exit Admin Session"]],
         resize_keyboard: true
