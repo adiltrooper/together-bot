@@ -980,29 +980,51 @@ bot.onText(/Send Post/, async msg => {
     console.log(err.message);
   });
 
+  // async function getUsers() {
+  //   return await pool.getConnection(async function(err, connection) {
+  //     if (err) console.log(err);
+  //     connection.query("SELECT chat_id FROM bot_user_db", function(
+  //       err,
+  //       results,
+  //       fields
+  //     ) {
+  //       if (err) {
+  //         console.log(err.message);
+  //       } else {
+  //         var userArray = [];
+  //         userArray = results.map(userData => {
+  //           return userData.chat_id;
+  //         });
+  //         return userArray;
+  //         console.log("Retreived user List from DB");
+  //         session.setUserSendList(JSON.stringify(userArray));
+  //       }
+  //     });
+  //     connection.release();
+  //     if (err) console.log(err);
+  //   });
+  // }
+
   async function getUsers() {
-    await pool.getConnection(async function(err, connection) {
-      if (err) console.log(err);
-      await connection.query("SELECT chat_id FROM bot_user_db", function(
-        err,
-        results,
-        fields
-      ) {
-        if (err) {
-          console.log(err.message);
-        } else {
-          var userArray = [];
-          userArray = results.map(userData => {
-            return userData.chat_id;
-          });
-          return userArray;
-          console.log("Retreived user List from DB");
-          session.setUserSendList(JSON.stringify(userArray));
-        }
-      });
-      connection.release();
-      if (err) console.log(err);
+    const connection = await pool.getConnection();
+    await connection.query("SELECT chat_id FROM bot_user_db", function(
+      err,
+      results,
+      fields
+    ) {
+      if (err) {
+        console.log(err.message);
+      } else {
+        var userArray = [];
+        userArray = results.map(userData => {
+          return userData.chat_id;
+        });
+        return userArray;
+        console.log("Retreived user List from DB");
+        session.setUserSendList(JSON.stringify(userArray));
+      }
     });
+    await connection.release();
   }
 
   getUsers();
