@@ -893,7 +893,7 @@ Thanks for participating! 🥳🥳🥳
     switch (userPollSelection) {
       case pollOption1:
         bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
-        voteOrHasVoted(callbackQuery.form.id, "1");
+        voteOrHasVoted(callbackQuery.from.id, "1");
         break;
       case pollOption2:
         bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
