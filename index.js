@@ -47,11 +47,13 @@ bot.onText(/\/start/, msg => {
   );
   bot.sendMessage(
     chat_id,
-    `<b>Hi ${first_name}! Welcome to the Together Community!</b>
+    `<b>Hi ${first_name}!
 
-So what can this bot do for you?
+Welcome to the Together Community!</b>
+
+What can this bot do for you?
 💡Get an outing idea with a single click below!
-💡Stay tuned for specially curated ideas from the together team posted <b>3 times weekly</b>!
+💡Get specially curated ideas from the together team posted <b>3 Times Weekly</b>!
   `,
     {
       reply_markup: {
@@ -120,7 +122,7 @@ Please Select an Option:`,
       {
         reply_markup: {
           keyboard: [
-            ["New Post", "Custom Post"],
+            ["New Post", "Poll Post"],
             ["Subscriber Count"],
             ["Exit Admin Session"]
           ],
@@ -161,7 +163,7 @@ bot.onText(/Subscriber Count/, async msg => {
   }
 });
 
-bot.onText(/Custom Post/, async msg => {
+bot.onText(/Poll Post/, async msg => {
   const adminState = await session.getAdminState().catch(err => {
     console.log(err.message);
   });
@@ -420,7 +422,7 @@ Draft your main message:</b>
       {
         reply_markup: {
           keyboard: [
-            ["New Post", "Custom Post"],
+            ["New Post", "Poll Post"],
             ["Subscriber Count"],
             ["Exit Admin Session"]
           ],
@@ -1152,7 +1154,7 @@ bot.onText(/Back/, async msg => {
       bot.sendMessage(msg.chat.id, `Please Select an Option:`, {
         reply_markup: {
           keyboard: [
-            ["New Post", "Custom Post"],
+            ["New Post", "Poll Post"],
             ["Subscriber Count"],
             ["Exit Admin Session"]
           ],
@@ -1176,7 +1178,7 @@ bot.onText(/Back/, async msg => {
       bot.sendMessage(msg.chat.id, `Please Select an Option:`, {
         reply_markup: {
           keyboard: [
-            ["New Post", "Custom Post"],
+            ["New Post", "Poll Post"],
             ["Subscriber Count"],
             ["Exit Admin Session"]
           ],
@@ -1464,17 +1466,3 @@ ${short_desc}
     }
   }
 });
-
-// pool.getConnection(function(err, connection) {
-//   connection.query(
-//     "INSERT INTO bot_poll (title, created_by, option1, option2, option3, option4) VALUES (?, ?, ?, ?, ?, ?)",
-//     [pollTitle, msg.chat.id, option1, option2, option3, option4],
-//     function(err, results, fields) {
-//       if (err) {
-//         console.log(err.message);
-//       }
-//     }
-//   );
-//   connection.release();
-//   if (err) console.log(err);
-// });
