@@ -818,6 +818,11 @@ bot.on("callback_query", async callbackQuery => {
       const pollCount = await session.getPollCount().catch(err => {
         console.log(err.message);
       });
+
+      const pollMessage = await session.getPollMessage().catch(err => {
+        console.log(err.message);
+      });
+
       pollCount1 = parseInt(pollCount[0]);
       pollCount2 = parseInt(pollCount[1]);
       pollCount3 = parseInt(pollCount[2]);
@@ -833,12 +838,12 @@ bot.on("callback_query", async callbackQuery => {
 
         bot.sendMessage(
           callbackQuery.from.id,
-          `<b>Responses Thus Far:</b>
+          `${pollMessage}
 
 1️⃣${pollOption1}: <b>${option1Result}%</b>
 2️⃣${pollOption2}: <b>${option2Result}%</b>
 
-Thanks for participating! 🥳🥳🥳
+Thanks for voting! 🥳🥳🥳
         `,
           {
             parse_mode: "HTML"
@@ -854,13 +859,13 @@ Thanks for participating! 🥳🥳🥳
 
         bot.sendMessage(
           callbackQuery.from.id,
-          `<b>Responses Thus Far:</b>
+          `${pollMessage}
 
 1️⃣${pollOption1}: <b>${option1Result}%</b>
 2️⃣${pollOption2}: <b>${option2Result}%</b>
 3️⃣${pollOption3}: <b>${option3Result}%</b>
 
-Thanks for participating! 🥳🥳🥳
+Thanks for voting! 🥳🥳🥳
         `,
           {
             parse_mode: "HTML"
@@ -876,7 +881,7 @@ Thanks for participating! 🥳🥳🥳
 
         bot.sendMessage(
           callbackQuery.from.id,
-          `<b>Responses Thus Far:</b>
+          `${pollMessage}
 
 1️⃣${pollOption1}: <b>${option1Result}%</b>
 2️⃣${pollOption2}: <b>${option2Result}%</b>
