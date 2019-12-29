@@ -808,8 +808,8 @@ bot.on("callback_query", async callbackQuery => {
       if (pollOption1 && pollOption2 && !pollOption3 && !pollOption4) {
         totalCount = pollCount1 + pollCount2;
         console.log(totalCount);
-        option1Result = (pollCount1 / totalCount) * 100;
-        option2Result = (pollCount2 / totalCount) * 100;
+        option1Result = ((pollCount1 / totalCount) * 100).toFixed(1);
+        option2Result = ((pollCount2 / totalCount) * 100).toFixed(1);
 
         bot.sendMessage(
           callbackQuery.from.id,
@@ -828,9 +828,9 @@ Thanks for participating! 🥳🥳🥳
         totalCount = pollCount1 + pollCount2 + pollCount3;
         console.log(pollCount1);
         console.log(totalCount);
-        option1Result = (pollCount1 / totalCount) * 100;
-        option2Result = (pollCount2 / totalCount) * 100;
-        option3Result = (pollCount3 / totalCount) * 100;
+        option1Result = ((pollCount1 / totalCount) * 100).toFixed(1);
+        option2Result = ((pollCount2 / totalCount) * 100).toFixed(1);
+        option3Result = ((pollCount3 / totalCount) * 100).toFixed(1);
 
         bot.sendMessage(
           callbackQuery.from.id,
@@ -891,23 +891,23 @@ Thanks for participating! 🥳🥳🥳
     switch (userPollSelection) {
       case pollOption1:
         bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
-        voteOrHasVoted(callbackQuery.id, "1");
+        voteOrHasVoted(callbackQuery.form.id, "1");
         break;
       case pollOption2:
         bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
-        voteOrHasVoted(callbackQuery.id, "2");
+        voteOrHasVoted(callbackQuery.from.id, "2");
         break;
       case pollOption3:
         bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
-        voteOrHasVoted(callbackQuery.id, "3");
+        voteOrHasVoted(callbackQuery.from.id, "3");
         break;
       case pollOption4:
         bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
-        voteOrHasVoted(callbackQuery.id, "4");
+        voteOrHasVoted(callbackQuery.from.id, "4");
         break;
       default:
         bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
-        voteOrHasVoted(callbackQuery.id, "1");
+        voteOrHasVoted(callbackQuery.from.id, "1");
     }
   }
 });
