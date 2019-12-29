@@ -447,7 +447,8 @@ bot.on("message", async msg => {
     msg.text !== "/start" &&
     msg.text !== "New Post" &&
     msg.text !== "/admin" &&
-    msg.text !== "/start"
+    msg.text !== "/start" &&
+    !msg.photo[0]
   ) {
     await bot.sendMessage(
       msg.chat.id,
