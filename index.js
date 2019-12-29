@@ -1004,8 +1004,8 @@ bot.onText(/Send Post/, async msg => {
       if (err) console.log(err);
     });
   }
+  const getUsersItem = await getUsers();
   if (adminState == "admin3") {
-    const getUsersItem = await getUsers();
     const retrieveUserList = async () => {
       var userSendList = await session.getUserSendList().catch(err => {
         console.log(err.message);
