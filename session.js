@@ -128,25 +128,18 @@ class Session {
   }
 
   setPollImage(imageId) {
-    redis.hset("Poll:currentPoll", "image", imageId).then(function(res) {
-      console.log("Poll Image In");
-    });
+    redis.hset("Poll:currentPoll", "image", imageId),
+      function(err, res) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("Poll Image In");
+        }
+      };
   }
 
   getPollImage() {
     return redis.hgetAsync("Poll:currentPoll", "image").then(function(res) {
-      return res;
-    });
-  }
-
-  setPollCaption(caption) {
-    redis.hset("Poll:currentPoll", "caption", caption).then(function(res) {
-      console.log("Poll Caption In");
-    });
-  }
-
-  getPollCaption() {
-    return redis.hgetAsync("Poll:currentPoll", "caption").then(function(res) {
       return res;
     });
   }
