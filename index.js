@@ -1004,7 +1004,7 @@ bot.onText(/Send Post/, async msg => {
           if (err) console.log(err);
         });
       }
-      getUsers();
+      await getUsers();
 
       const retrieveUserList = async () => {
         var userSendList = await session.getUserSendList().catch(err => {
