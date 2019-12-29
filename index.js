@@ -980,10 +980,10 @@ bot.onText(/Send Post/, async msg => {
     console.log(err.message);
   });
 
-  function getUsers() {
-    pool.getConnection(async function(err, connection) {
+  async function getUsers() {
+    await pool.getConnection(async function(err, connection) {
       if (err) console.log(err);
-      connection.query("SELECT chat_id FROM bot_user_db", function(
+      await connection.query("SELECT chat_id FROM bot_user_db", function(
         err,
         results,
         fields
@@ -992,9 +992,10 @@ bot.onText(/Send Post/, async msg => {
           console.log(err.message);
         } else {
           var userArray = [];
-          return (userArray = results.map(userData => {
+          userArray = results.map(userData => {
             return userData.chat_id;
-          }));
+          });
+          return userArray;
           console.log("Retreived user List from DB");
           session.setUserSendList(JSON.stringify(userArray));
         }
@@ -1003,7 +1004,8 @@ bot.onText(/Send Post/, async msg => {
       if (err) console.log(err);
     });
   }
-  console.log(getUsers());
+
+  getUsers();
 
   if (adminState == "admin3") {
     const retrieveUserList = async () => {
