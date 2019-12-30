@@ -3,7 +3,7 @@ const express = require("express");
 const _ = require("lodash/array");
 const messagePollFn = require("./messagePollFn");
 const imagePollFn = require("./imagePollFn");
-const showPollExisting = require("showPollExisting");
+const showPollExisting = require("./showPollExisting");
 var cloudinary = require("cloudinary");
 const bluebird = require("bluebird");
 
