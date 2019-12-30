@@ -737,9 +737,6 @@ bot.onText(/Send Post/, async msg => {
         };
         setTimeout(postMessages, 3000);
       });
-      session.delDraftImage();
-      session.delDraftCaption();
-      session.delDraftMessage();
     };
     retrieveUserList();
     bot.sendMessage(msg.chat.id, "Message Sending!", {
@@ -1086,6 +1083,9 @@ bot.onText(/Send Post/, async msg => {
         };
         setTimeout(postMessages, 3000);
       });
+      session.delDraftImage();
+      session.delDraftCaption();
+      session.delDraftMessage();
     };
     retrieveUserList();
   }
