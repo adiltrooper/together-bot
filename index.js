@@ -1041,11 +1041,11 @@ bot.onText(/Send Post/, async msg => {
         if (err) {
           console.log(err.message);
         } else {
-          // var userArray = [];
-          // userArray = results.map(userData => {
-          //   return userData.chat_id;
-          // });
-          // return userArray;
+          var userArray = [];
+          userArray = results.map(userData => {
+            return userData.chat_id;
+          });
+          return userArray;
           console.log("Retreived user List from DB");
           session.setUserSendList(JSON.stringify(userArray));
           console.log(results);
