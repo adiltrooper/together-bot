@@ -26,8 +26,8 @@ class Session {
     return redis.del("adminsState");
   }
 
-  setAdminState() {
-    return redis.setex("adminState", 1200, "admin1");
+  setAdminState(state) {
+    return redis.setex("adminState", 1200, `admin${state}`);
   }
 
   setAdminState2() {

@@ -99,7 +99,7 @@ const adminsOnly = async msg => {
     var reply = keys.adminsId;
   }
   if (reply.includes(member.user.id)) {
-    session.setAdminState();
+    session.setAdminState("1");
     return true;
   } else {
     bot.sendMessage(
@@ -116,7 +116,7 @@ bot.onText(/\/admin/, async msg => {
     console.log(err.message);
   });
   if (adminCheck) {
-    session.setAdminState();
+    session.setAdminState("1");
     bot.sendMessage(
       msg.chat.id,
       `Hi <b>${msg.chat.first_name}</b>! Welcome to the admin menu!
@@ -176,7 +176,7 @@ bot.onText(/Poll Post/, async msg => {
   console.log(pollExists);
 
   if (adminState == "admin1" && pollExists) {
-    session.setAdminState4();
+    session.setAdminState("4");
     const pollOptions = await session.getPollOptions().catch(err => {
       console.log(err.message);
     });
@@ -321,7 +321,7 @@ bot.onText(/Poll Post/, async msg => {
   } else if (adminState == "admin1" && !pollExists) {
     session.delPollData();
 
-    session.setAdminState5();
+    session.setAdminState("5");
 
     bot.sendMessage(msg.chat.id, "Draft your main message:", {
       reply_markup: {
@@ -398,7 +398,7 @@ bot.on("callback_query", async callbackQuery => {
       connection.release();
       if (err) console.log(err);
     });
-    session.setAdminState5();
+    session.setAdminState("5");
     bot.sendMessage(
       callbackQuery.from.id,
       `
@@ -417,7 +417,7 @@ Draft your main message:</b>
     );
   } else if (callbackQuery.data == "Keep Poll" && adminState == "admin4") {
     bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
-    session.setAdminState();
+    session.setAdminState("1");
     bot.sendMessage(
       callbackQuery.from.id,
       `Welcome Back to the admin menu! Please select an Option:`,
@@ -469,7 +469,7 @@ bot.on("message", async msg => {
     } else {
       session.setPollMessage(msg.text);
     }
-    session.setAdminState6();
+    session.setAdminState("6");
   }
 });
 
@@ -631,9 +631,9 @@ bot.onText(/Send Post/, async msg => {
     var option4 = pollOptions[3];
     console.log(option1);
 
-    const getUsersAndSend = async () => {
-      await pool.getConnection(function(err, connection) {
-        if (err) console.log(err);
+    async function getUsersFromDB() {
+      const connection = await pool.getConnectionAsync();
+      const query = new Promise((resolve, reject) => {
         connection.query("SELECT chat_id FROM bot_user_db", function(
           err,
           results,
@@ -647,104 +647,106 @@ bot.onText(/Send Post/, async msg => {
               return userData.chat_id;
             });
             session.setUserSendList(JSON.stringify(userArray));
+            resolve();
           }
         });
-        connection.release();
-        if (err) console.log(err);
       });
-      const retrieveUserList = async () => {
-        var userSendList = await session.getUserSendList().catch(err => {
-          console.log(err.message);
-        });
-        console.log(`This is the after ${userSendList}`);
-        if (userSendList.includes(",")) {
-          var userSendList = userSendList
-            .slice(1, userSendList.length - 1)
-            .split(",")
-            .map(numberString => {
-              return Number(numberString);
-            });
-          console.log(userSendList);
-        } else {
-          var userSendList = userSendList.slice(1, userSendList.length - 1);
-          var userSendList = Number(userSendList);
-          var userSendListTemp = [];
-          userSendListTemp.push(userSendList);
-          userSendList = userSendListTemp;
-        }
+      await query;
+      connection.release();
+    }
 
-        var userSendList = _.chunk(userSendList, 2);
+    const retrieveUserList = async () => {
+      await getUsersFromDB();
+      var userSendList = await session.getUserSendList().catch(err => {
+        console.log(err.message);
+      });
+      console.log(`This is the after ${userSendList}`);
+      if (userSendList.includes(",")) {
+        var userSendList = userSendList
+          .slice(1, userSendList.length - 1)
+          .split(",")
+          .map(numberString => {
+            return Number(numberString);
+          });
         console.log(userSendList);
-        userSendList.map(subUserSendList => {
-          const postMessages = () => {
-            subUserSendList.map(userId => {
-              if (!pollImage) {
-                bot
-                  .sendMessage(
-                    userId,
-                    pollMessage,
-                    messagePollFn(option1, option2, option3, option4)
-                  )
-                  .catch(err => {
-                    console.log(err);
-                    if (err.statusCode == 403) {
-                      const blocked_id = err.body.substring(
-                        err.body.lastIndexOf("=") + 1,
-                        err.body.lastIndexOf("&")
-                      );
+      } else {
+        var userSendList = userSendList.slice(1, userSendList.length - 1);
+        var userSendList = Number(userSendList);
+        var userSendListTemp = [];
+        userSendListTemp.push(userSendList);
+        userSendList = userSendListTemp;
+      }
 
-                      pool.getConnection(function(err, connection) {
-                        if (err) console.log(err);
-                        connection.query(
-                          "INSERT INTO bot_user_db (status) WHERE chat_id = ?",
-                          [blocked_id],
-                          function(err, results, fields) {
-                            if (err) console.log(err.message);
-                          }
-                        );
-                        connection.release();
-                        if (err) console.log(err);
-                      });
-                    }
-                  });
-              } else {
-                bot
-                  .sendPhoto(
-                    userId,
-                    pollImage,
-                    imagePollFn(option1, option2, option3, option4, pollMessage)
-                  )
-                  .catch(err => {
-                    console.log(err);
-                    if (err.statusCode == 403) {
-                      const blocked_id = err.body.substring(
-                        err.body.lastIndexOf("=") + 1,
-                        err.body.lastIndexOf("&")
-                      );
+      var userSendList = _.chunk(userSendList, 2);
+      console.log(userSendList);
+      userSendList.map(subUserSendList => {
+        const postMessages = () => {
+          subUserSendList.map(userId => {
+            if (!pollImage) {
+              bot
+                .sendMessage(
+                  userId,
+                  pollMessage,
+                  messagePollFn(option1, option2, option3, option4)
+                )
+                .catch(err => {
+                  console.log(err);
+                  if (err.statusCode == 403) {
+                    const blocked_id = err.body.substring(
+                      err.body.lastIndexOf("=") + 1,
+                      err.body.lastIndexOf("&")
+                    );
 
-                      pool.getConnection(function(err, connection) {
-                        if (err) console.log(err);
-                        connection.query(
-                          "INSERT INTO bot_user_db (status) WHERE chat_id = ?",
-                          [blocked_id],
-                          function(err, results, fields) {
-                            if (err) console.log(err.message);
-                          }
-                        );
-                        connection.release();
-                        if (err) console.log(err);
-                      });
-                    }
-                  });
-              }
-            });
-          };
-          setTimeout(postMessages, 3000);
-        });
-      };
-      retrieveUserList();
+                    pool.getConnection(function(err, connection) {
+                      if (err) console.log(err);
+                      connection.query(
+                        "INSERT INTO bot_user_db (status) WHERE chat_id = ?",
+                        [blocked_id],
+                        function(err, results, fields) {
+                          if (err) console.log(err.message);
+                        }
+                      );
+                      connection.release();
+                      if (err) console.log(err);
+                    });
+                  }
+                });
+            } else {
+              bot
+                .sendPhoto(
+                  userId,
+                  pollImage,
+                  imagePollFn(option1, option2, option3, option4, pollMessage)
+                )
+                .catch(err => {
+                  console.log(err);
+                  if (err.statusCode == 403) {
+                    const blocked_id = err.body.substring(
+                      err.body.lastIndexOf("=") + 1,
+                      err.body.lastIndexOf("&")
+                    );
+
+                    pool.getConnection(function(err, connection) {
+                      if (err) console.log(err);
+                      connection.query(
+                        "INSERT INTO bot_user_db (status) WHERE chat_id = ?",
+                        [blocked_id],
+                        function(err, results, fields) {
+                          if (err) console.log(err.message);
+                        }
+                      );
+                      connection.release();
+                      if (err) console.log(err);
+                    });
+                  }
+                });
+            }
+          });
+        };
+        setTimeout(postMessages, 3000);
+      });
     };
-    getUsersAndSend();
+    retrieveUserList();
     bot.sendMessage(msg.chat.id, "Message Sending!", {
       reply_markup: {
         keyboard: [["Exit Admin Session"]],
@@ -906,7 +908,7 @@ bot.onText(/New Post/, async msg => {
   });
   console.log(adminState);
   if (adminState == "admin1") {
-    session.setAdminState2();
+    session.setAdminState("2");
     bot.sendMessage(msg.chat.id, "Draft your message here:", {
       reply_markup: {
         keyboard: [["Back", "Exit Admin Session"]],
@@ -964,7 +966,7 @@ bot.on("message", async msg => {
     } else {
       session.setDraftMessage(msg.text);
     }
-    session.setAdminState3();
+    session.setAdminState("3");
   }
 });
 
@@ -981,54 +983,6 @@ bot.onText(/Send Post/, async msg => {
   const draftMessage = await session.getDraftMessage().catch(err => {
     console.log(err.message);
   });
-
-  // async function getUsers() {
-  //   return await pool.getConnection(async function(err, connection) {
-  //     if (err) console.log(err);
-  //     connection.query("SELECT chat_id FROM bot_user_db", function(
-  //       err,
-  //       results,
-  //       fields
-  //     ) {
-  //       if (err) {
-  //         console.log(err.message);
-  //       } else {
-  //         var userArray = [];
-  //         userArray = results.map(userData => {
-  //           return userData.chat_id;
-  //         });
-  //         return userArray;
-  //         console.log("Retreived user List from DB");
-  //         session.setUserSendList(JSON.stringify(userArray));
-  //       }
-  //     });
-  //     connection.release();
-  //     if (err) console.log(err);
-  //   });
-  // }
-
-  // async function getUsers() {
-  //   const connection = await pool.getConnectionAsync();
-  //   await connection.query("SELECT chat_id FROM bot_user_db", function(
-  //     err,
-  //     results,
-  //     fields
-  //   ) {
-  //     if (err) {
-  //       console.log(err.message);
-  //     } else {
-  //       // var userArray = [];
-  //       // userArray = results.map(userData => {
-  //       //   return userData.chat_id;
-  //       // });
-  //       // return userArray;
-  //       // console.log("Retreived user List from DB");
-  //       // session.setUserSendList(JSON.stringify(userArray));
-  //       return results;
-  //     }
-  //   });
-  //   connection.release();
-  // }
 
   async function getUsersFromDB() {
     const connection = await pool.getConnectionAsync();
@@ -1163,7 +1117,7 @@ bot.onText(/Back/, async msg => {
   });
   switch (adminState) {
     case "admin2":
-      session.setAdminState();
+      session.setAdminState("1");
       bot.sendMessage(msg.chat.id, `Please Select an Option:`, {
         reply_markup: {
           keyboard: [
@@ -1176,7 +1130,7 @@ bot.onText(/Back/, async msg => {
       });
       break;
     case "admin3":
-      session.setAdminState2();
+      session.setAdminState("2");
       session.delDraftImage();
       session.delDraftCaption();
       bot.sendMessage(msg.chat.id, "Draft your message here:", {
@@ -1187,7 +1141,7 @@ bot.onText(/Back/, async msg => {
       });
       break;
     default:
-      session.setAdminState();
+      session.setAdminState("1");
       bot.sendMessage(msg.chat.id, `Please Select an Option:`, {
         reply_markup: {
           keyboard: [
