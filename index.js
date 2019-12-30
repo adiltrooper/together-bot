@@ -1007,26 +1007,53 @@ bot.onText(/Send Post/, async msg => {
   //   });
   // }
 
+  // async function getUsers() {
+  //   const connection = await pool.getConnectionAsync();
+  //   await connection.query("SELECT chat_id FROM bot_user_db", function(
+  //     err,
+  //     results,
+  //     fields
+  //   ) {
+  //     if (err) {
+  //       console.log(err.message);
+  //     } else {
+  //       // var userArray = [];
+  //       // userArray = results.map(userData => {
+  //       //   return userData.chat_id;
+  //       // });
+  //       // return userArray;
+  //       // console.log("Retreived user List from DB");
+  //       // session.setUserSendList(JSON.stringify(userArray));
+  //       return results;
+  //     }
+  //   });
+  //   connection.release();
+  // }
+
   async function getUsers() {
     const connection = await pool.getConnectionAsync();
-    await connection.query("SELECT chat_id FROM bot_user_db", function(
-      err,
-      results,
-      fields
-    ) {
-      if (err) {
-        console.log(err.message);
-      } else {
-        // var userArray = [];
-        // userArray = results.map(userData => {
-        //   return userData.chat_id;
-        // });
-        // return userArray;
-        // console.log("Retreived user List from DB");
-        // session.setUserSendList(JSON.stringify(userArray));
-        return results;
-      }
+    const query = new Promise((resolve, reject) => {
+      connection.query("SELECT chat_id FROM bot_user_db", function(
+        err,
+        results,
+        fields
+      ) {
+        if (err) {
+          console.log(err.message);
+        } else {
+          // var userArray = [];
+          // userArray = results.map(userData => {
+          //   return userData.chat_id;
+          // });
+          // return userArray;
+          console.log("Retreived user List from DB");
+          // session.setUserSendList(JSON.stringify(userArray));
+          return results;
+          resolve();
+        }
+      });
     });
+    await query;
     connection.release();
   }
 
