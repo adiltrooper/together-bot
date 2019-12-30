@@ -295,7 +295,7 @@ bot.onText(/Poll Post/, async msg => {
     //         );
     //       }
     //     }
-    showPollExisting();
+    // showPollExisting();
     bot.sendMessage(msg.chat.id, "Choose an Option or Exit", {
       reply_markup: {
         keyboard: [["Exit Admin Session"]],
