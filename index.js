@@ -1030,7 +1030,7 @@ bot.onText(/Send Post/, async msg => {
   //   connection.release();
   // }
 
-  async function getUsers() {
+  async function getUsersFn() {
     const connection = await pool.getConnectionAsync();
     const query = new Promise((resolve, reject) => {
       connection.query("SELECT chat_id FROM bot_user_db", function(
@@ -1045,9 +1045,7 @@ bot.onText(/Send Post/, async msg => {
           userArray = results.map(userData => {
             return userData.chat_id;
           });
-          console.log("Retreived user List from DB");
           session.setUserSendList(JSON.stringify(userArray));
-          console.log(results);
           resolve();
         }
       });
@@ -1056,12 +1054,9 @@ bot.onText(/Send Post/, async msg => {
     connection.release();
   }
 
-  const getUserFn = await getUsers();
-  console.log("DONE");
-  console.log(getUserFn);
-
   if (adminState == "admin3") {
     const retrieveUserList = async () => {
+      await getUsers();
       var userSendList = await session.getUserSendList().catch(err => {
         console.log(err.message);
       });
