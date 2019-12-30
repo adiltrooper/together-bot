@@ -3,6 +3,7 @@ const express = require("express");
 const _ = require("lodash/array");
 const messagePollFn = require("./messagePollFn");
 const imagePollFn = require("./imagePollFn");
+const showExistingPoll = require("./showExistingPoll");
 var cloudinary = require("cloudinary");
 const bluebird = require("bluebird");
 
@@ -205,32 +206,16 @@ bot.onText(/Poll Post/, async msg => {
 
         bot.sendMessage(
           msg.chat.id,
-          `<b>You have an Existing Poll!</b>
-
-  1️⃣${pollOption1}: <b>${option1Result}%</b>
-  2️⃣${pollOption2}: <b>${option2Result}%</b>
-
-  <b>Would you like to End it?</b>
-          `,
-          {
-            reply_markup: {
-              inline_keyboard: [
-                [
-                  {
-                    text: "Keep Poll",
-                    callback_data: "Keep Poll"
-                  }
-                ],
-                [
-                  {
-                    text: "🛑Stop Poll & Create New 🛑",
-                    callback_data: "🛑Stop Poll & Create New 🛑"
-                  }
-                ]
-              ]
-            },
-            parse_mode: "HTML"
-          }
+          showExistingPoll(
+            pollOption1,
+            pollOption2,
+            pollOption3,
+            pollOption4,
+            pollCount1,
+            pollCount2,
+            pollOption3,
+            pollOption4
+          )
         );
       } else if (pollOption1 && pollOption2 && pollOption3 && !pollOption4) {
         totalCount = pollCount1 + pollCount2 + pollCount3;
@@ -592,13 +577,6 @@ Your Options:
         },
         parse_mode: "HTML"
       });
-      // bot.sendMessage(msg.chat.id, draftCustom, {
-      //   reply_markup: {
-      //     keyboard: [["Back", "Send Post"]],
-      //     resize_keyboard: true
-      //   },
-      //   parse_mode: "HTML"
-      // });
     }
   }
 });
@@ -745,6 +723,9 @@ bot.onText(/Send Post/, async msg => {
         };
         setTimeout(postMessages, 3000);
       });
+      session.delDraftImage();
+      session.delDraftCaption();
+      session.delDraftMessage();
     };
     retrieveUserList();
     bot.sendMessage(msg.chat.id, "Message Sending!", {

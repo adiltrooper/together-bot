@@ -30,23 +30,6 @@ class Session {
     return redis.setex("adminState", 1200, `admin${state}`);
   }
 
-  setAdminState2() {
-    return redis.setex("adminState", 1200, "admin2");
-  }
-
-  setAdminState3() {
-    return redis.setex("adminState", 1200, "admin3");
-  }
-  setAdminState4() {
-    return redis.setex("adminState", 1200, "admin4");
-  }
-  setAdminState5() {
-    return redis.setex("adminState", 1200, "admin5");
-  }
-  setAdminState6() {
-    return redis.setex("adminState", 1200, "admin6");
-  }
-
   getAdminState() {
     return redis.getAsync("adminState").then(function(res) {
       return res;
@@ -103,27 +86,31 @@ class Session {
     redis.del("draftCaption");
   }
 
-  getDraftCustomImage() {
-    return redis.getAsync("draftCustomImage").then(function(res) {
-      return res;
-    });
-  }
-
-  getDraftCustomCaption() {
-    return redis.getAsync("draftCustomCaption").then(function(res) {
-      return res;
-    });
-  }
-
   setDraftMessage(message) {
     redis.setAsync("draftMessage", message).then(function(res) {
       console.log("Poll Message In");
     });
   }
 
+  getDraftMessage() {
+    return redis.getAsync("draftMessage").then(function(res) {
+      return res;
+    });
+  }
+
+  delDraftMessage() {
+    redis.del("draftMessage");
+  }
+
   setPollMessage(message) {
     redis.hset("Poll:currentPoll", "message", message, function(err, res) {
       if (err) console.log(err);
+    });
+  }
+
+  getPollMessage() {
+    return redis.hgetAsync("Poll:currentPoll", "message").then(function(res) {
+      return res;
     });
   }
 
@@ -212,31 +199,6 @@ class Session {
     }
   }
 
-  setPollVoter(voter) {
-    return redis.RPUSH("Poll:voter", voter);
-  }
-
-  getPollVoter() {
-    return redis
-      .multi()
-      .LRANGE("Poll:voter", 0, -1)
-      .execAsync()
-      .then(function(res) {
-        console.log(res[0]);
-        return res[0];
-      });
-  }
-
-  delPollVoter() {
-    return redis.del("Poll:voter");
-  }
-
-  getPollMessage() {
-    return redis.hgetAsync("Poll:currentPoll", "message").then(function(res) {
-      return res;
-    });
-  }
-
   getPollOptions() {
     return redis
       .hmgetAsync(
@@ -258,6 +220,25 @@ class Session {
     });
   }
 
+  setPollVoter(voter) {
+    return redis.RPUSH("Poll:voter", voter);
+  }
+
+  getPollVoter() {
+    return redis
+      .multi()
+      .LRANGE("Poll:voter", 0, -1)
+      .execAsync()
+      .then(function(res) {
+        console.log(res[0]);
+        return res[0];
+      });
+  }
+
+  delPollVoter() {
+    return redis.del("Poll:voter");
+  }
+
   incrPollVote(option) {
     redis.hincrby("Poll:currentPoll", `option${option}_count`, 1);
   }
@@ -275,18 +256,6 @@ class Session {
         return res;
         console.log(res);
       });
-  }
-
-  getDraftMessage() {
-    return redis.getAsync("draftMessage").then(function(res) {
-      return res;
-    });
-  }
-
-  getDraftCustomMessage() {
-    return redis.getAsync("draftCustomMessage").then(function(res) {
-      return res;
-    });
   }
 
   delPollData() {
@@ -410,5 +379,3 @@ class Session {
   }
 }
 module.exports = Session;
-
-//redis://redistogo:8ea37dd6493bf8b88c4f18ed0247240a@hammerjaw.redistogo.com:10191/
