@@ -1047,9 +1047,8 @@ bot.onText(/Send Post/, async msg => {
           // });
           // return userArray;
           console.log("Retreived user List from DB");
-          // session.setUserSendList(JSON.stringify(userArray));
+          session.setUserSendList(JSON.stringify(userArray));
           console.log(results);
-          return results;
           resolve();
         }
       });
