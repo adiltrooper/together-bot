@@ -1,5 +1,5 @@
-const Session = require("./session");
-const session = new Session();
+// const Session = require("./session");
+// const session = new Session();
 
 module.exports = async function showPollExisting() {
   const pollOptions = await session.getPollOptions().catch(err => {
