@@ -1048,6 +1048,7 @@ bot.onText(/Send Post/, async msg => {
           // return userArray;
           console.log("Retreived user List from DB");
           // session.setUserSendList(JSON.stringify(userArray));
+          console.log(results);
           return results;
           resolve();
         }
@@ -1058,6 +1059,7 @@ bot.onText(/Send Post/, async msg => {
   }
 
   const getUserFn = await getUsers();
+  console.log("DONE");
   console.log(getUserFn);
 
   if (adminState == "admin3") {
