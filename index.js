@@ -179,6 +179,10 @@ bot.onText(/Poll Post/, async msg => {
     session.setAdminState("4");
 
     async function showPollExisting() {
+      const pollVoterLength = await session.lengthPollVoter().catch(err => {
+        console.log(err.message);
+      });
+
       const pollOptions = await session.getPollOptions().catch(err => {
         console.log(err.message);
       });
@@ -196,7 +200,36 @@ bot.onText(/Poll Post/, async msg => {
       pollCount3 = parseInt(pollCount[2]);
       pollCount4 = parseInt(pollCount[3]);
 
-      if (pollOption1 && pollOption2 && !pollOption3 && !pollOption4) {
+      if (pollOption1 && !pollOption2 && !pollOption3 && !pollOption4) {
+        bot.sendMessage(
+          msg.chat.id,
+          `<b>You have an Existing Poll!</b>
+
+    ${pollVoterLength} people have participated!
+
+    <b>Would you like to End it?</b>
+          `,
+          {
+            reply_markup: {
+              inline_keyboard: [
+                [
+                  {
+                    text: "Keep Poll",
+                    callback_data: "Keep Poll"
+                  }
+                ],
+                [
+                  {
+                    text: "🛑Stop Poll & Create New 🛑",
+                    callback_data: "🛑Stop Poll & Create New 🛑"
+                  }
+                ]
+              ]
+            },
+            parse_mode: "HTML"
+          }
+        );
+      } else if (pollOption1 && pollOption2 && !pollOption3 && !pollOption4) {
         totalCount = pollCount1 + pollCount2;
         console.log(totalCount);
         option1Result = (pollCount1 / totalCount) * 100;
@@ -208,6 +241,8 @@ bot.onText(/Poll Post/, async msg => {
 
     1️⃣${pollOption1}: <b>${option1Result}%</b>
     2️⃣${pollOption2}: <b>${option2Result}%</b>
+
+    ${pollVoterLength} people have participated!
 
     <b>Would you like to End it?</b>
           `,
@@ -247,6 +282,7 @@ bot.onText(/Poll Post/, async msg => {
       2️⃣${pollOption2}: <b>${option2Result}%</b>
       3️⃣${pollOption3}: <b>${option3Result}%</b>
 
+      ${pollVoterLength} people have participated!
     <b>Would you like to End it?</b>
               `,
           {
@@ -285,6 +321,8 @@ bot.onText(/Poll Post/, async msg => {
       2️⃣${pollOption2}: <b>${option2Result}%</b>
       3️⃣${pollOption3}: <b>${option3Result}%</b>
       4️⃣${pollOption4}: <b>${option4Result}%</b>
+
+      ${pollVoterLength} people have participated!
 
       <b>Would you like to End it?</b>
               `,
@@ -788,7 +826,11 @@ bot.on("callback_query", async callbackQuery => {
 
       console.log(pollCount1);
 
-      if (pollOption1 && pollOption2 && !pollOption3 && !pollOption4) {
+      if (pollOption1 && !pollOption2 && !pollOption3 && !pollOption4) {
+        bot.sendMessage(callbackQuery.from.id, `Thanks for voting! 🥳🥳🥳`, {
+          parse_mode: "HTML"
+        });
+      } else if (pollOption1 && pollOption2 && !pollOption3 && !pollOption4) {
         totalCount = pollCount1 + pollCount2;
         console.log(totalCount);
         option1Result = ((pollCount1 / totalCount) * 100).toFixed(1);

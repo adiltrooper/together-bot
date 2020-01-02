@@ -235,6 +235,12 @@ class Session {
       });
   }
 
+  lengthPollVoter() {
+    return redis.llenAsync("Poll:voter").then(function(res) {
+      return res;
+    });
+  }
+
   delPollVoter() {
     return redis.del("Poll:voter");
   }
