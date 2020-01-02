@@ -755,7 +755,7 @@ bot.on("callback_query", async callbackQuery => {
       if (pollOption1 && !pollOption2 && !pollOption3 && !pollOption4) {
         bot.sendMessage(
           callbackQuery.from.id,
-          answerCallbackQuery(
+          answerPollReplyConfig(
             pollMessage,
             pollOption1,
             pollOption2,
@@ -770,7 +770,7 @@ bot.on("callback_query", async callbackQuery => {
       } else if (pollOption1 && pollOption2 && !pollOption3 && !pollOption4) {
         bot.sendMessage(
           callbackQuery.from.id,
-          answerCallbackQuery(
+          answerPollReplyConfig(
             pollMessage,
             pollOption1,
             pollOption2,
@@ -785,7 +785,7 @@ bot.on("callback_query", async callbackQuery => {
       } else if (pollOption1 && pollOption2 && pollOption3 && !pollOption4) {
         bot.sendMessage(
           callbackQuery.from.id,
-          answerCallbackQuery(
+          answerPollReplyConfig(
             pollMessage,
             pollOption1,
             pollOption2,
@@ -800,7 +800,7 @@ bot.on("callback_query", async callbackQuery => {
       } else if (pollOption1 && pollOption2 && pollOption3 && pollOption4) {
         bot.sendMessage(
           callbackQuery.from.id,
-          answerCallbackQuery(
+          answerPollReplyConfig(
             pollMessage,
             pollOption1,
             pollOption2,
