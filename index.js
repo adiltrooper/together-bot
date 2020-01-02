@@ -293,6 +293,7 @@ bot.onText(/Poll Post/, async msg => {
     });
   } else if (adminState == "admin1" && !pollExists) {
     session.delPollData();
+    session.delPollVoter();
 
     session.setAdminState("5");
 
