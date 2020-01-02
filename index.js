@@ -1,12 +1,14 @@
 const keys = require("./config_keys/keys");
 const express = require("express");
 const _ = require("lodash/array");
+
 const messagePollFn = require("./messagePollFn");
 const imagePollFn = require("./imagePollFn");
 const existPollReplyConfig = require("./existPollReplyConfig");
 const existPollReplyMarkup = require("./existPollReplyMarkup");
 const answerPollReplyConfig = require("./answerPollReplyConfig");
 const answerPollReplyMarkup = require("./answerPollReplyMarkup");
+
 var cloudinary = require("cloudinary");
 const bluebird = require("bluebird");
 
@@ -361,14 +363,14 @@ bot.on("callback_query", async callbackQuery => {
             console.log(err.message);
           } else {
             console.log(`${pollTitle} poll has been inserted into database`);
-            session.delPollData();
-            session.delPollVoter();
           }
         }
       );
       connection.release();
       if (err) console.log(err);
     });
+    session.delPollData();
+    session.delPollVoter();
     session.setAdminState("5");
     bot.sendMessage(
       callbackQuery.from.id,
