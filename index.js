@@ -203,31 +203,17 @@ bot.onText(/Poll Post/, async msg => {
       if (pollOption1 && !pollOption2 && !pollOption3 && !pollOption4) {
         bot.sendMessage(
           msg.chat.id,
-          `<b>You have an Existing Poll!</b>
-
-    ${pollVoterLength} people have participated!
-
-    <b>Would you like to End it?</b>
-          `,
-          {
-            reply_markup: {
-              inline_keyboard: [
-                [
-                  {
-                    text: "Keep Poll",
-                    callback_data: "Keep Poll"
-                  }
-                ],
-                [
-                  {
-                    text: "🛑Stop Poll & Create New 🛑",
-                    callback_data: "🛑Stop Poll & Create New 🛑"
-                  }
-                ]
-              ]
-            },
-            parse_mode: "HTML"
-          }
+          existPollReplyConfig(
+            pollOption1,
+            pollOption2,
+            pollOption3,
+            pollOption4,
+            pollVoterLength,
+            option1Result,
+            option2Result,
+            option3Result,
+            option4Result
+          )
         );
       } else if (pollOption1 && pollOption2 && !pollOption3 && !pollOption4) {
         totalCount = pollCount1 + pollCount2;
@@ -237,34 +223,17 @@ bot.onText(/Poll Post/, async msg => {
 
         bot.sendMessage(
           msg.chat.id,
-          `<b>You have an Existing Poll!</b>
-
-    1️⃣${pollOption1}: <b>${option1Result}%</b>
-    2️⃣${pollOption2}: <b>${option2Result}%</b>
-
-    ${pollVoterLength} people have participated!
-
-    <b>Would you like to End it?</b>
-          `,
-          {
-            reply_markup: {
-              inline_keyboard: [
-                [
-                  {
-                    text: "Keep Poll",
-                    callback_data: "Keep Poll"
-                  }
-                ],
-                [
-                  {
-                    text: "🛑Stop Poll & Create New 🛑",
-                    callback_data: "🛑Stop Poll & Create New 🛑"
-                  }
-                ]
-              ]
-            },
-            parse_mode: "HTML"
-          }
+          existPollReplyConfig(
+            pollOption1,
+            pollOption2,
+            pollOption3,
+            pollOption4,
+            pollVoterLength,
+            option1Result,
+            option2Result,
+            option3Result,
+            option4Result
+          )
         );
       } else if (pollOption1 && pollOption2 && pollOption3 && !pollOption4) {
         totalCount = pollCount1 + pollCount2 + pollCount3;
@@ -276,34 +245,17 @@ bot.onText(/Poll Post/, async msg => {
 
         bot.sendMessage(
           msg.chat.id,
-          `<b>You have an Existing Poll!</b>
-
-      1️⃣${pollOption1}: <b>${option1Result}%</b>
-      2️⃣${pollOption2}: <b>${option2Result}%</b>
-      3️⃣${pollOption3}: <b>${option3Result}%</b>
-
-      ${pollVoterLength} people have participated!
-    <b>Would you like to End it?</b>
-              `,
-          {
-            reply_markup: {
-              inline_keyboard: [
-                [
-                  {
-                    text: "Keep Poll",
-                    callback_data: "Keep Poll"
-                  }
-                ],
-                [
-                  {
-                    text: "🛑Stop Poll & Create New 🛑",
-                    callback_data: "🛑Stop Poll & Create New 🛑"
-                  }
-                ]
-              ]
-            },
-            parse_mode: "HTML"
-          }
+          existPollReplyConfig(
+            pollOption1,
+            pollOption2,
+            pollOption3,
+            pollOption4,
+            pollVoterLength,
+            option1Result,
+            option2Result,
+            option3Result,
+            option4Result
+          )
         );
       } else if (pollOption1 && pollOption2 && pollOption3 && pollOption4) {
         totalCount = pollCount1 + pollCount2 + pollCount3 + pollCount4;
@@ -315,36 +267,17 @@ bot.onText(/Poll Post/, async msg => {
 
         bot.sendMessage(
           msg.chat.id,
-          `<b>You have an Existing Poll!</b>
-
-      1️⃣${pollOption1}: <b>${option1Result}%</b>
-      2️⃣${pollOption2}: <b>${option2Result}%</b>
-      3️⃣${pollOption3}: <b>${option3Result}%</b>
-      4️⃣${pollOption4}: <b>${option4Result}%</b>
-
-      ${pollVoterLength} people have participated!
-
-      <b>Would you like to End it?</b>
-              `,
-          {
-            reply_markup: {
-              inline_keyboard: [
-                [
-                  {
-                    text: "Keep Poll",
-                    callback_data: "Keep Poll"
-                  }
-                ],
-                [
-                  {
-                    text: "🛑Stop Poll & Create New 🛑",
-                    callback_data: "🛑Stop Poll & Create New 🛑"
-                  }
-                ]
-              ]
-            },
-            parse_mode: "HTML"
-          }
+          existPollReplyConfig(
+            pollOption1,
+            pollOption2,
+            pollOption3,
+            pollOption4,
+            pollVoterLength,
+            option1Result,
+            option2Result,
+            option3Result,
+            option4Result
+          )
         );
       }
     }
@@ -803,13 +736,6 @@ bot.on("callback_query", async callbackQuery => {
     pollOption3 = pollOptions[2];
     pollOption4 = pollOptions[3];
 
-    console.log(userPollSelection);
-
-    console.log(pollOption1);
-    console.log(pollOption2);
-    console.log(pollOption3);
-    console.log(pollOption4);
-
     async function getResult() {
       const pollCount = await session.getPollCount().catch(err => {
         console.log(err.message);
@@ -827,72 +753,64 @@ bot.on("callback_query", async callbackQuery => {
       console.log(pollCount1);
 
       if (pollOption1 && !pollOption2 && !pollOption3 && !pollOption4) {
-        bot.sendMessage(callbackQuery.from.id, `Thanks for voting! 🥳🥳🥳`, {
-          parse_mode: "HTML"
-        });
-      } else if (pollOption1 && pollOption2 && !pollOption3 && !pollOption4) {
-        totalCount = pollCount1 + pollCount2;
-        console.log(totalCount);
-        option1Result = ((pollCount1 / totalCount) * 100).toFixed(1);
-        option2Result = ((pollCount2 / totalCount) * 100).toFixed(1);
-
         bot.sendMessage(
           callbackQuery.from.id,
-          `${pollMessage}
-
-1️⃣${pollOption1}: <b>${option1Result}%</b>
-2️⃣${pollOption2}: <b>${option2Result}%</b>
-
-Thanks for voting! 🥳🥳🥳
-        `,
-          {
-            parse_mode: "HTML"
-          }
+          answerCallbackQuery(
+            pollMessage,
+            pollOption1,
+            pollOption2,
+            pollOption3,
+            pollOption4,
+            pollCount1,
+            pollCount2,
+            pollCount3,
+            pollCount4
+          )
+        );
+      } else if (pollOption1 && pollOption2 && !pollOption3 && !pollOption4) {
+        bot.sendMessage(
+          callbackQuery.from.id,
+          answerCallbackQuery(
+            pollMessage,
+            pollOption1,
+            pollOption2,
+            pollOption3,
+            pollOption4,
+            pollCount1,
+            pollCount2,
+            pollCount3,
+            pollCount4
+          )
         );
       } else if (pollOption1 && pollOption2 && pollOption3 && !pollOption4) {
-        totalCount = pollCount1 + pollCount2 + pollCount3;
-        console.log(pollCount1);
-        console.log(totalCount);
-        option1Result = ((pollCount1 / totalCount) * 100).toFixed(1);
-        option2Result = ((pollCount2 / totalCount) * 100).toFixed(1);
-        option3Result = ((pollCount3 / totalCount) * 100).toFixed(1);
-
         bot.sendMessage(
           callbackQuery.from.id,
-          `${pollMessage}
-
-1️⃣${pollOption1}: <b>${option1Result}%</b>
-2️⃣${pollOption2}: <b>${option2Result}%</b>
-3️⃣${pollOption3}: <b>${option3Result}%</b>
-
-Thanks for voting! 🥳🥳🥳
-        `,
-          {
-            parse_mode: "HTML"
-          }
+          answerCallbackQuery(
+            pollMessage,
+            pollOption1,
+            pollOption2,
+            pollOption3,
+            pollOption4,
+            pollCount1,
+            pollCount2,
+            pollCount3,
+            pollCount4
+          )
         );
       } else if (pollOption1 && pollOption2 && pollOption3 && pollOption4) {
-        totalCount = pollCount1 + pollCount2 + pollCount3 + pollCount4;
-        console.log(totalCount);
-        option1Result = ((pollCount1 / totalCount) * 100).toFixed(1);
-        option2Result = ((pollCount2 / totalCount) * 100).toFixed(1);
-        option3Result = ((pollCount3 / totalCount) * 100).toFixed(1);
-        option4Result = ((pollCount4 / totalCount) * 100).toFixed(1);
-
         bot.sendMessage(
           callbackQuery.from.id,
-          `${pollMessage}
-
-1️⃣${pollOption1}: <b>${option1Result}%</b>
-2️⃣${pollOption2}: <b>${option2Result}%</b>
-3️⃣${pollOption3}: <b>${option3Result}%</b>
-4️⃣${pollOption4}: <b>${option4Result}%</b>
-
-Thanks for participating! 🥳🥳🥳
-        `,
-          {
-            parse_mode: "HTML"
-          }
+          answerCallbackQuery(
+            pollMessage,
+            pollOption1,
+            pollOption2,
+            pollOption3,
+            pollOption4,
+            pollCount1,
+            pollCount2,
+            pollCount3,
+            pollCount4
+          )
         );
       }
     }
