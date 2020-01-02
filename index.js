@@ -210,11 +210,7 @@ bot.onText(/Poll Post/, async msg => {
             pollOption2,
             pollOption3,
             pollOption4,
-            pollVoterLength,
-            option1Result,
-            option2Result,
-            option3Result,
-            option4Result
+            pollVoterLength
           )
         );
       } else if (pollOption1 && pollOption2 && !pollOption3 && !pollOption4) {
@@ -232,9 +228,7 @@ bot.onText(/Poll Post/, async msg => {
             pollOption4,
             pollVoterLength,
             option1Result,
-            option2Result,
-            option3Result,
-            option4Result
+            option2Result
           )
         );
       } else if (pollOption1 && pollOption2 && pollOption3 && !pollOption4) {
@@ -255,8 +249,7 @@ bot.onText(/Poll Post/, async msg => {
             pollVoterLength,
             option1Result,
             option2Result,
-            option3Result,
-            option4Result
+            option3Result
           )
         );
       } else if (pollOption1 && pollOption2 && pollOption3 && pollOption4) {
