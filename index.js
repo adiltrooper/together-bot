@@ -4,7 +4,9 @@ const _ = require("lodash/array");
 const messagePollFn = require("./messagePollFn");
 const imagePollFn = require("./imagePollFn");
 const existPollReplyConfig = require("./existPollReplyConfig");
+const existPollReplyMarkup = require("./existPollReplyMarkup");
 const answerPollReplyConfig = require("./answerPollReplyConfig");
+const answerPollReplyMarkup = require("./answerPollReplyMarkup");
 var cloudinary = require("cloudinary");
 const bluebird = require("bluebird");
 
@@ -211,7 +213,8 @@ bot.onText(/Poll Post/, async msg => {
             pollOption3,
             pollOption4,
             pollVoterLength
-          )
+          ),
+          existPollReplyMarkup()
         );
       } else if (pollOption1 && pollOption2 && !pollOption3 && !pollOption4) {
         totalCount = pollCount1 + pollCount2;
@@ -229,7 +232,8 @@ bot.onText(/Poll Post/, async msg => {
             pollVoterLength,
             option1Result,
             option2Result
-          )
+          ),
+          existPollReplyMarkup()
         );
       } else if (pollOption1 && pollOption2 && pollOption3 && !pollOption4) {
         totalCount = pollCount1 + pollCount2 + pollCount3;
@@ -250,7 +254,8 @@ bot.onText(/Poll Post/, async msg => {
             option1Result,
             option2Result,
             option3Result
-          )
+          ),
+          existPollReplyMarkup()
         );
       } else if (pollOption1 && pollOption2 && pollOption3 && pollOption4) {
         totalCount = pollCount1 + pollCount2 + pollCount3 + pollCount4;
@@ -272,7 +277,8 @@ bot.onText(/Poll Post/, async msg => {
             option2Result,
             option3Result,
             option4Result
-          )
+          ),
+          existPollReplyMarkup()
         );
       }
     }
@@ -760,7 +766,8 @@ bot.on("callback_query", async callbackQuery => {
             pollCount2,
             pollCount3,
             pollCount4
-          )
+          ),
+          answerPollReplyMarkup()
         );
       } else if (pollOption1 && pollOption2 && !pollOption3 && !pollOption4) {
         bot.sendMessage(
@@ -775,7 +782,8 @@ bot.on("callback_query", async callbackQuery => {
             pollCount2,
             pollCount3,
             pollCount4
-          )
+          ),
+          answerPollReplyMarkup()
         );
       } else if (pollOption1 && pollOption2 && pollOption3 && !pollOption4) {
         bot.sendMessage(
@@ -790,7 +798,8 @@ bot.on("callback_query", async callbackQuery => {
             pollCount2,
             pollCount3,
             pollCount4
-          )
+          ),
+          answerPollReplyMarkup()
         );
       } else if (pollOption1 && pollOption2 && pollOption3 && pollOption4) {
         bot.sendMessage(
@@ -805,7 +814,8 @@ bot.on("callback_query", async callbackQuery => {
             pollCount2,
             pollCount3,
             pollCount4
-          )
+          ),
+          answerPollReplyMarkup()
         );
       }
     }

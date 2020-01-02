@@ -10,36 +10,14 @@ module.exports = function(
   option4Result
 ) {
   if (pollOption1 && !pollOption2 && !pollOption3 && !pollOption4) {
-    return (
-      `<b>You have an Existing Poll!</b>
+    return `<b>You have an Existing Poll!</b>
 
 ${pollVoterLength} people have participated!
 
 <b>Would you like to End it?</b>
-      `,
-      {
-        reply_markup: {
-          inline_keyboard: [
-            [
-              {
-                text: "Keep Poll",
-                callback_data: "Keep Poll"
-              }
-            ],
-            [
-              {
-                text: "🛑Stop Poll & Create New 🛑",
-                callback_data: "🛑Stop Poll & Create New 🛑"
-              }
-            ]
-          ]
-        },
-        parse_mode: "HTML"
-      }
-    );
+      `;
   } else if (pollOption1 && pollOption2 && !pollOption3 && !pollOption4) {
-    return (
-      `<b>You have an Existing Poll!</b>
+    return `<b>You have an Existing Poll!</b>
 
 1️⃣${pollOption1}: <b>${option1Result}%</b>
 2️⃣${pollOption2}: <b>${option2Result}%</b>
@@ -47,27 +25,7 @@ ${pollVoterLength} people have participated!
 ${pollVoterLength} people have participated!
 
 <b>Would you like to End it?</b>
-      `,
-      {
-        reply_markup: {
-          inline_keyboard: [
-            [
-              {
-                text: "Keep Poll",
-                callback_data: "Keep Poll"
-              }
-            ],
-            [
-              {
-                text: "🛑Stop Poll & Create New 🛑",
-                callback_data: "🛑Stop Poll & Create New 🛑"
-              }
-            ]
-          ]
-        },
-        parse_mode: "HTML"
-      }
-    );
+      `;
   } else if (pollOption1 && pollOption2 && pollOption3 && !pollOption4) {
     return `<b>You have an Existing Poll!</b>
 
@@ -78,29 +36,8 @@ ${pollVoterLength} people have participated!
 ${pollVoterLength} people have participated!
 <b>Would you like to End it?</b>
           `;
-    //     ,
-    // {
-    //   reply_markup: {
-    //     inline_keyboard: [
-    //       [
-    //         {
-    //           text: "Keep Poll",
-    //           callback_data: "Keep Poll"
-    //         }
-    //       ],
-    //       [
-    //         {
-    //           text: "🛑Stop Poll & Create New 🛑",
-    //           callback_data: "🛑Stop Poll & Create New 🛑"
-    //         }
-    //       ]
-    //     ]
-    //   },
-    //   parse_mode: "HTML"
-    // }
   } else if (pollOption1 && pollOption2 && pollOption3 && pollOption4) {
-    return (
-      `<b>You have an Existing Poll!</b>
+    return `<b>You have an Existing Poll!</b>
 
 1️⃣${pollOption1}: <b>${option1Result}%</b>
 2️⃣${pollOption2}: <b>${option2Result}%</b>
@@ -110,26 +47,6 @@ ${pollVoterLength} people have participated!
 ${pollVoterLength} people have participated!
 
 <b>Would you like to End it?</b>
-          `,
-      {
-        reply_markup: {
-          inline_keyboard: [
-            [
-              {
-                text: "Keep Poll",
-                callback_data: "Keep Poll"
-              }
-            ],
-            [
-              {
-                text: "🛑Stop Poll & Create New 🛑",
-                callback_data: "🛑Stop Poll & Create New 🛑"
-              }
-            ]
-          ]
-        },
-        parse_mode: "HTML"
-      }
-    );
+          `;
   }
 };
