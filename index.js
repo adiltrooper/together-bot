@@ -995,6 +995,7 @@ bot.onText(/Send Post/, async msg => {
           subUserSendList.map(userId => {
             if (!draftImage) {
               bot.sendMessage(userId, draftMessage).catch(err => {
+                console.log("HELLO WORLD");
                 console.log(err);
                 if (err.statusCode == 403) {
                   console.log("SOMEONE BLOCKED");
