@@ -997,7 +997,9 @@ bot.onText(/Send Post/, async msg => {
               bot.sendMessage(userId, draftMessage).catch(err => {
                 console.log("HELLO WORLD");
                 console.log(err);
+
                 console.log(err.statusCode);
+                console.log(err.code);
                 console.log("BODY BELOW");
                 console.log(err.body);
                 if (err.statusCode == 403) {
