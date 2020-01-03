@@ -1001,6 +1001,7 @@ bot.onText(/Send Post/, async msg => {
                     err.response.request.body.lastIndexOf("=") + 1,
                     err.response.request.body.lastIndexOf("&")
                   );
+                  console.log(blocked_id);
 
                   pool.getConnection(function(err, connection) {
                     if (err) console.log(err);
