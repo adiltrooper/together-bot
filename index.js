@@ -658,10 +658,10 @@ bot.onText(/Send Post/, async msg => {
                 )
                 .catch(err => {
                   console.log(err);
-                  if (err.statusCode == 403) {
-                    const blocked_id = err.body.substring(
-                      err.body.lastIndexOf("=") + 1,
-                      err.body.lastIndexOf("&")
+                  if (err.response.statusCode == 403) {
+                    const blocked_id = err.response.request.body.substring(
+                      err.response.request.body.lastIndexOf("=") + 1,
+                      err.response.request.body.lastIndexOf("&")
                     );
 
                     pool.getConnection(function(err, connection) {
@@ -687,10 +687,10 @@ bot.onText(/Send Post/, async msg => {
                 )
                 .catch(err => {
                   console.log(err);
-                  if (err.statusCode == 403) {
-                    const blocked_id = err.body.substring(
-                      err.body.lastIndexOf("=") + 1,
-                      err.body.lastIndexOf("&")
+                  if (err.response.statusCode == 403) {
+                    const blocked_id = err.response.request.body.substring(
+                      err.response.request.body.lastIndexOf("=") + 1,
+                      err.response.request.body.lastIndexOf("&")
                     );
 
                     pool.getConnection(function(err, connection) {
@@ -996,12 +996,10 @@ bot.onText(/Send Post/, async msg => {
             if (!draftImage) {
               bot.sendMessage(userId, draftMessage).catch(err => {
                 console.log(err);
-                console.log(err.response.statusCode);
-                console.log(err.response.request.body);
                 if (err.response.statusCode == 403) {
-                  const blocked_id = err.body.substring(
-                    err.body.lastIndexOf("=") + 1,
-                    err.body.lastIndexOf("&")
+                  const blocked_id = err.response.request.body.substring(
+                    err.response.request.body.lastIndexOf("=") + 1,
+                    err.response.request.body.lastIndexOf("&")
                   );
 
                   pool.getConnection(function(err, connection) {
@@ -1024,13 +1022,10 @@ bot.onText(/Send Post/, async msg => {
                 .sendPhoto(userId, draftImage, { caption: draftMessage })
                 .catch(err => {
                   console.log(err);
-                  if (err.statusCode == 403) {
-                    console.log("SOMEONE BLOCKED");
-                    console.log(err);
-                    console.log(err.body);
-                    const blocked_id = err.body.substring(
-                      err.body.lastIndexOf("=") + 1,
-                      err.body.lastIndexOf("&")
+                  if (err.response.statusCode == 403) {
+                    const blocked_id = err.response.request.body.substring(
+                      err.response.request.body.lastIndexOf("=") + 1,
+                      err.response.request.body.lastIndexOf("&")
                     );
 
                     pool.getConnection(function(err, connection) {
