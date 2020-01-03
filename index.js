@@ -995,20 +995,10 @@ bot.onText(/Send Post/, async msg => {
           subUserSendList.map(userId => {
             if (!draftImage) {
               bot.sendMessage(userId, draftMessage).catch(err => {
-                console.log("HELLO WORLD");
                 console.log(err);
-
-                console.log(err.statusCode);
-                console.log(err.code);
-                console.log(err.response);
                 console.log(err.response.statusCode);
-                console.log("BODY BELOW");
-                console.log(err.body);
-                if (err.statusCode == 403) {
-                  console.log("SOMEONE BLOCKED");
-                  console.log(err);
-                  console.log(split);
-                  console.log(err.body);
+                console.log(err.response.body);
+                if (err.response.statusCode == 403) {
                   const blocked_id = err.body.substring(
                     err.body.lastIndexOf("=") + 1,
                     err.body.lastIndexOf("&")
