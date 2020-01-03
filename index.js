@@ -1000,6 +1000,8 @@ bot.onText(/Send Post/, async msg => {
 
                 console.log(err.statusCode);
                 console.log(err.code);
+                console.log(err.response);
+                console.log(err.response.statusCode);
                 console.log("BODY BELOW");
                 console.log(err.body);
                 if (err.statusCode == 403) {
