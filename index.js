@@ -997,6 +997,9 @@ bot.onText(/Send Post/, async msg => {
               bot.sendMessage(userId, draftMessage).catch(err => {
                 console.log("HELLO WORLD");
                 console.log(err);
+                console.log(err.statusCode);
+                console.log("BODY BELOW");
+                console.log(err.body);
                 if (err.statusCode == 403) {
                   console.log("SOMEONE BLOCKED");
                   console.log(err);
@@ -1030,7 +1033,6 @@ bot.onText(/Send Post/, async msg => {
                   if (err.statusCode == 403) {
                     console.log("SOMEONE BLOCKED");
                     console.log(err);
-                    console.log(split);
                     console.log(err.body);
                     const blocked_id = err.body.substring(
                       err.body.lastIndexOf("=") + 1,
