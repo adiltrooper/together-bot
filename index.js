@@ -997,7 +997,7 @@ bot.onText(/Send Post/, async msg => {
               bot.sendMessage(userId, draftMessage).catch(err => {
                 console.log(err);
                 console.log(err.response.statusCode);
-                console.log(err.response.body);
+                console.log(err.response.request.body);
                 if (err.response.statusCode == 403) {
                   const blocked_id = err.body.substring(
                     err.body.lastIndexOf("=") + 1,
