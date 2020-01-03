@@ -929,7 +929,6 @@ bot.on("message", async msg => {
     session.setAdminState("3");
   }
 });
-
 bot.onText(/Send Post/, async msg => {
   const adminState = await session.getAdminState().catch(err => {
     console.log(err.message);
