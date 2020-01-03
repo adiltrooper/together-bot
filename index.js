@@ -922,7 +922,7 @@ bot.on("message", async msg => {
     console.log(msg);
     if (msg.photo) {
       session.setDraftImage(msg.photo[0].file_id);
-      session.setDraftCaption(msg.caption);
+      session.setDraftMessage(msg.caption);
     } else {
       session.setDraftMessage(msg.text);
     }
@@ -934,9 +934,6 @@ bot.onText(/Send Post/, async msg => {
     console.log(err.message);
   });
   const draftImage = await session.getDraftImage().catch(err => {
-    console.log(err.message);
-  });
-  const draftCaption = await session.getDraftCaption().catch(err => {
     console.log(err.message);
   });
   const draftMessage = await session.getDraftMessage().catch(err => {
@@ -1022,7 +1019,7 @@ bot.onText(/Send Post/, async msg => {
             } else {
               console.log(userId);
               bot
-                .sendPhoto(userId, draftImage, { caption: draftCaption })
+                .sendPhoto(userId, draftImage, { caption: draftMessage })
                 .catch(err => {
                   console.log(err);
                   if (err.statusCode == 403) {
@@ -1051,7 +1048,6 @@ bot.onText(/Send Post/, async msg => {
         setTimeout(postMessages, 3000);
       });
       session.delDraftImage();
-      session.delDraftCaption();
       session.delDraftMessage();
     };
     retrieveUserList();

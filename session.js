@@ -80,6 +80,7 @@ class Session {
 
   delDraftImage() {
     redis.del("draftImage");
+    return console.log("DELETED IMAGE");
   }
 
   delDraftCaption() {
@@ -88,7 +89,7 @@ class Session {
 
   setDraftMessage(message) {
     redis.setAsync("draftMessage", message).then(function(res) {
-      console.log("Poll Message In");
+      console.log("DRAFT MESSAGE IN");
     });
   }
 
@@ -100,6 +101,7 @@ class Session {
 
   delDraftMessage() {
     redis.del("draftMessage");
+    return console.log("DELETED MESSAGE");
   }
 
   setPollMessage(message) {
