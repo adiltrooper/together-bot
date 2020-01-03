@@ -660,7 +660,7 @@ bot.onText(/Send Post/, async msg => {
                   console.log(err);
                   if (err.response.statusCode == 403) {
                     const blocked_id = err.response.request.body.substring(
-                      err.response.request.body.lastIndexOf("=") + 1,
+                      err.response.request.body.indexOf("=") + 1,
                       err.response.request.body.lastIndexOf("&")
                     );
 
@@ -689,7 +689,7 @@ bot.onText(/Send Post/, async msg => {
                   console.log(err);
                   if (err.response.statusCode == 403) {
                     const blocked_id = err.response.request.body.substring(
-                      err.response.request.body.lastIndexOf("=") + 1,
+                      err.response.request.body.indexOf("=") + 1,
                       err.response.request.body.lastIndexOf("&")
                     );
 
@@ -1025,7 +1025,7 @@ bot.onText(/Send Post/, async msg => {
                   console.log(err);
                   if (err.response.statusCode == 403) {
                     const blocked_id = err.response.request.body.substring(
-                      err.response.request.body.lastIndexOf("=") + 1,
+                      err.response.request.body.indexOf("=") + 1,
                       err.response.request.body.lastIndexOf("&")
                     );
 
