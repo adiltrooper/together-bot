@@ -997,6 +997,10 @@ bot.onText(/Send Post/, async msg => {
               bot.sendMessage(userId, draftMessage).catch(err => {
                 console.log(err);
                 if (err.statusCode == 403) {
+                  console.log("SOMEONE BLOCKED");
+                  console.log(err);
+                  console.log(split);
+                  console.log(err.body);
                   const blocked_id = err.body.substring(
                     err.body.lastIndexOf("=") + 1,
                     err.body.lastIndexOf("&")
@@ -1023,6 +1027,10 @@ bot.onText(/Send Post/, async msg => {
                 .catch(err => {
                   console.log(err);
                   if (err.statusCode == 403) {
+                    console.log("SOMEONE BLOCKED");
+                    console.log(err);
+                    console.log(split);
+                    console.log(err.body);
                     const blocked_id = err.body.substring(
                       err.body.lastIndexOf("=") + 1,
                       err.body.lastIndexOf("&")
