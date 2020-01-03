@@ -1090,7 +1090,7 @@ bot.onText(/Back/, async msg => {
     case "admin3":
       session.setAdminState("2");
       session.delDraftImage();
-      session.delDraftCaption();
+      session.delDraftMessage();
       bot.sendMessage(msg.chat.id, "Draft your message here:", {
         reply_markup: {
           keyboard: [["Back", "Exit Admin Session"]],
