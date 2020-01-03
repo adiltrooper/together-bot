@@ -667,8 +667,8 @@ bot.onText(/Send Post/, async msg => {
                     pool.getConnection(function(err, connection) {
                       if (err) console.log(err);
                       connection.query(
-                        "INSERT INTO bot_user_db (status) WHERE chat_id = ?",
-                        [blocked_id],
+                        "UPDATE bot_user_db SET status = ? WHERE chat_id = ?",
+                        ["blocked", blocked_id],
                         function(err, results, fields) {
                           if (err) console.log(err.message);
                         }
@@ -696,8 +696,8 @@ bot.onText(/Send Post/, async msg => {
                     pool.getConnection(function(err, connection) {
                       if (err) console.log(err);
                       connection.query(
-                        "INSERT INTO bot_user_db (status) WHERE chat_id = ?",
-                        [blocked_id],
+                        "UPDATE bot_user_db SET status = ? WHERE chat_id = ?",
+                        ["blocked", blocked_id],
                         function(err, results, fields) {
                           if (err) console.log(err.message);
                         }

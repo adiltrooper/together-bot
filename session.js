@@ -60,20 +60,8 @@ class Session {
     });
   }
 
-  setDraftCaption(caption) {
-    redis.setAsync("draftCustomCaption", caption).then(function(res) {
-      console.log("DRAFT CAPTION IN");
-    });
-  }
-
   getDraftImage() {
     return redis.getAsync("draftImage").then(function(res) {
-      return res;
-    });
-  }
-
-  getDraftCaption() {
-    return redis.getAsync("draftCaption").then(function(res) {
       return res;
     });
   }
@@ -81,10 +69,6 @@ class Session {
   delDraftImage() {
     redis.del("draftImage");
     return console.log("DELETED IMAGE");
-  }
-
-  delDraftCaption() {
-    redis.del("draftCaption");
   }
 
   setDraftMessage(message) {
