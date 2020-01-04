@@ -1,4 +1,4 @@
-const keys = require("./config/config_keys/keys");
+const keys = require("./config_keys/keys");
 
 const TelegramBot = require("node-telegram-bot-api"),
   host = process.env.HOST || "localhost", // probably this change is not required
