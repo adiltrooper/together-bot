@@ -8,6 +8,7 @@ const _ = require("lodash/array");
 const messagePollFn = require("./messagePollFn");
 const imagePollFn = require("./imagePollFn");
 const { existPollReply } = require("./existPollReply");
+const { draftPollReply } = require("./draftPollReply");
 const answerPollReplyConfig = require("./answerPollReplyConfig");
 const answerPollReplyMarkup = require("./answerPollReplyMarkup");
 
