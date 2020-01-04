@@ -1,7 +1,7 @@
 const { bot } = require("./config/config_bot");
 const { session } = require("./session");
 
-exports.draftPollReply = function draftPollReply(pollMessage) {
+exports.draftPollReply = function draftPollReply(msg, pollMessage) {
   var zero = "/title/";
   var one = "/1/";
   var two = "/2/";

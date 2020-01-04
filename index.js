@@ -446,7 +446,7 @@ bot.on("message", async msg => {
     // `);
     //       }
     //     };
-    draftPollReply(pollMessage);
+    draftPollReply(msg, pollMessage);
 
     if (pollMessage && !pollImage) {
       bot.sendMessage(msg.chat.id, draftPoll, {
