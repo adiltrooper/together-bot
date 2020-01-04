@@ -88,4 +88,9 @@ ${pollVoterLength} people have participated!
   }
 };
 
-exports.existPollReply = existPollReply;
+exports.existPollReply = existPollReply(
+  userId,
+  pollOptions,
+  pollCount,
+  pollVoterLength
+);
