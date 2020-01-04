@@ -1,6 +1,6 @@
 const keys = require("./config_keys/keys");
 const mysql = require("mysql");
-const db = require("./config/config_db/db");
+const db = require("./config_db/db");
 var cloudinary = require("cloudinary");
 const bluebird = require("bluebird");
 
