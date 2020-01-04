@@ -1,4 +1,4 @@
-const keys = require("./config_keys/keys");
+const keys = require("./config/config_keys/keys");
 var redis = require("redis");
 const bluebird = require("bluebird");
 bluebird.promisifyAll(redis);
