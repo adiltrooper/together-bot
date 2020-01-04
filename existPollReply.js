@@ -1,7 +1,7 @@
 const { bot } = require("./config/config_bot");
 const existPollReplyMarkup = require("./existPollReplyMarkup");
 
-const existPollReply = function(
+export const existPollReply = function(
   userId,
   pollOptions,
   pollCount,
