@@ -173,7 +173,6 @@ bot.onText(/Poll Post/, async msg => {
 
   if (adminState == "admin1" && pollExists) {
     session.setAdminState("4");
-
     async function showPollExisting() {
       const pollOptions = await session.getPollOptions().catch(err => {
         console.log(err.message);
@@ -196,9 +195,7 @@ bot.onText(/Poll Post/, async msg => {
   } else if (adminState == "admin1" && !pollExists) {
     session.delPollData();
     session.delPollVoter();
-
     session.setAdminState("5");
-
     bot.sendMessage(msg.chat.id, "Draft your main message:", {
       reply_markup: {
         keyboard: [["Back", "Exit Admin Session"]],
@@ -324,8 +321,7 @@ bot.on("message", async msg => {
     msg.text !== "🏠I Wanna Stay Home" &&
     msg.text !== "/start" &&
     msg.text !== "New Post" &&
-    msg.text !== "/admin" &&
-    msg.text !== "/start"
+    msg.text !== "/admin"
   ) {
     await bot.sendMessage(
       msg.chat.id,
@@ -365,19 +361,6 @@ bot.on("message", async msg => {
     msg.text !== "/admin" &&
     msg.text !== "/start"
   ) {
-    var zero = "/title/";
-    var one = "/1/";
-    var two = "/2/";
-    var three = "/3/";
-    var four = "/4/";
-    var end = "/end/";
-
-    var title = msg.text.match(new RegExp(zero + "(.[\\s\\S]*)" + one));
-    var option1 = msg.text.match(new RegExp(one + "(.[\\s\\S]*)" + two));
-    var option2 = msg.text.match(new RegExp(two + "(.[\\s\\S]*)" + three));
-    var option3 = msg.text.match(new RegExp(three + "(.[\\s\\S]*)" + four));
-    var option4 = msg.text.match(new RegExp(four + "(.[\\s\\S]*)" + end));
-
     const pollImage = await session.getPollImage().catch(err => {
       console.log(err.message);
     });
@@ -386,73 +369,86 @@ bot.on("message", async msg => {
       console.log(err.message);
     });
 
-    const customFormatfn = () => {
-      if (option1 && !option2 && !option3 && !option4) {
-        session.setPollData(title[1], option1[1]);
-        return (draftCustom = `
-            <b>This is your Draft Message:</b>
+    // var zero = "/title/";
+    // var one = "/1/";
+    // var two = "/2/";
+    // var three = "/3/";
+    // var four = "/4/";
+    // var end = "/end/";
+    //
+    // var title = msg.text.match(new RegExp(zero + "(.[\\s\\S]*)" + one));
+    // var option1 = msg.text.match(new RegExp(one + "(.[\\s\\S]*)" + two));
+    // var option2 = msg.text.match(new RegExp(two + "(.[\\s\\S]*)" + three));
+    // var option3 = msg.text.match(new RegExp(three + "(.[\\s\\S]*)" + four));
+    // var option4 = msg.text.match(new RegExp(four + "(.[\\s\\S]*)" + end));
 
-${pollMessage}
-
-Your Options:
-1: ${option1[1]}
-
-⬇️<b>Select what you want to do with it</b>
-`);
-      } else if (option1 && option2 && !option3 && !option4) {
-        session.setPollData(title[1], option1[1], option2[1]);
-        return (draftCustom = `
-            <b>This is your Draft Message:</b>
-
-${pollMessage}
-
-Your Options:
-1: ${option1[1]}
-2: ${option2[1]}
-
-⬇️<b>Select what you want to do with it</b>
-`);
-      } else if (option1 && option2 && option3 && !option4) {
-        session.setPollData(title[1], option1[1], option2[1], option3[1]);
-        return (draftCustom = `
-            <b>This is your Draft Message:</b>
-
-${pollMessage}
-
-Your Options:
-1: ${option1[1]}
-2: ${option2[1]}
-3: ${option3[1]}
-
-⬇️<b>Select what you want to do with it</b>
-`);
-      } else if (option1 && option2 && option3 && option4) {
-        session.setPollData(
-          title[1],
-          option1[1],
-          option2[1],
-          option3[1],
-          option4[1]
-        );
-        return (draftCustom = `
-            <b>This is your Draft Message:</b>
-
-${pollMessage}
-
-Your Options:
-1: ${option1[1]}
-2: ${option2[1]}
-3: ${option3[1]}
-4: ${option4[1]}
-
-⬇️<b>Select what you want to do with it</b>
-`);
-      }
-    };
-    customFormatfn();
+    //     const customFormatfn = () => {
+    //       if (option1 && !option2 && !option3 && !option4) {
+    //         session.setPollData(title[1], option1[1]);
+    //         return (draftCustom = `
+    //             <b>This is your Draft Message:</b>
+    //
+    // ${pollMessage}
+    //
+    // Your Options:
+    // 1: ${option1[1]}
+    //
+    // ⬇️<b>Select what you want to do with it</b>
+    // `);
+    //       } else if (option1 && option2 && !option3 && !option4) {
+    //         session.setPollData(title[1], option1[1], option2[1]);
+    //         return (draftCustom = `
+    //             <b>This is your Draft Message:</b>
+    //
+    // ${pollMessage}
+    //
+    // Your Options:
+    // 1: ${option1[1]}
+    // 2: ${option2[1]}
+    //
+    // ⬇️<b>Select what you want to do with it</b>
+    // `);
+    //       } else if (option1 && option2 && option3 && !option4) {
+    //         session.setPollData(title[1], option1[1], option2[1], option3[1]);
+    //         return (draftCustom = `
+    //             <b>This is your Draft Message:</b>
+    //
+    // ${pollMessage}
+    //
+    // Your Options:
+    // 1: ${option1[1]}
+    // 2: ${option2[1]}
+    // 3: ${option3[1]}
+    //
+    // ⬇️<b>Select what you want to do with it</b>
+    // `);
+    //       } else if (option1 && option2 && option3 && option4) {
+    //         session.setPollData(
+    //           title[1],
+    //           option1[1],
+    //           option2[1],
+    //           option3[1],
+    //           option4[1]
+    //         );
+    //         return (draftCustom = `
+    //             <b>This is your Draft Message:</b>
+    //
+    // ${pollMessage}
+    //
+    // Your Options:
+    // 1: ${option1[1]}
+    // 2: ${option2[1]}
+    // 3: ${option3[1]}
+    // 4: ${option4[1]}
+    //
+    // ⬇️<b>Select what you want to do with it</b>
+    // `);
+    //       }
+    //     };
+    draftPollReply(pollMessage);
 
     if (pollMessage && !pollImage) {
-      bot.sendMessage(msg.chat.id, draftCustom, {
+      bot.sendMessage(msg.chat.id, draftPoll, {
         reply_markup: {
           keyboard: [["Back", "Send Post"]],
           resize_keyboard: true
@@ -461,7 +457,7 @@ Your Options:
       });
     } else if (pollImage) {
       bot.sendPhoto(msg.chat.id, pollImage, {
-        caption: draftCustom,
+        caption: draftPoll,
         reply_markup: {
           keyboard: [["Back", "Send Post"]],
           resize_keyboard: true
