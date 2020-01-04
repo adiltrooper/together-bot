@@ -30,7 +30,7 @@ exports.draftPollReplyMarkup = function draftPollReplyMarkup() {
   };
 };
 
-exports.answerPollReplyMarkyp = function answerPollReplyMarkup() {
+exports.answerPollReplyMarkup = function answerPollReplyMarkup() {
   return {
     parse_mode: "HTML"
   };
