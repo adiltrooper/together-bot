@@ -371,4 +371,4 @@ class Session {
   }
 }
 
-export let session = new Session();
+exports.session = new Session();
