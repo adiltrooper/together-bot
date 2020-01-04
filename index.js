@@ -471,8 +471,8 @@ bot.onText(/Send Post/, async msg => {
               bot
                 .sendMessage(
                   userId,
-                  "HELOOOOOO",
-                  messagePollFn(option1, option2, option3, option4)
+                  "HELOOOOOO"
+                  // messagePollFn(option1, option2, option3, option4)
                 )
                 .catch(err => {
                   console.log(err);
