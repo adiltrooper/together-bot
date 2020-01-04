@@ -475,6 +475,7 @@ bot.onText(/Send Post/, async msg => {
                   // messagePollFn(option1, option2, option3, option4)
                 )
                 .catch(err => {
+                  console.log("Error Happening Here");
                   console.log(err);
                   if (err.response.statusCode == 403) {
                     const blocked_id = err.response.request.body.substring(
