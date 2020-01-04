@@ -8,3 +8,5 @@ const TelegramBot = require("node-telegram-bot-api"),
 exports.bot = new TelegramBot(token, {
   webHook: { port: process.env.PORT, host: host }
 });
+
+bot.setWebHook(externalUrl + `:443/bot` + token);

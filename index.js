@@ -15,8 +15,6 @@ const answerPollReplyMarkup = require("./answerPollReplyMarkup");
 var cloudinary = require("cloudinary");
 const bluebird = require("bluebird");
 
-bot.setWebHook(externalUrl + `:443/bot` + token);
-
 const axios = require("axios");
 const mysql = require("mysql");
 const db = require("./config/config_db/db");
