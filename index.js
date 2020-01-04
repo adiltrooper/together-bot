@@ -1,4 +1,4 @@
-const { bot } = require("./config/config_bot");
+const { bot, pool } = require("./config/config_bot");
 const { session } = require("./session");
 
 const keys = require("./config/config_keys/keys");
@@ -11,23 +11,23 @@ const { existPollReply } = require("./existPollReply");
 const { draftPollReply } = require("./draftPollReply");
 const { answerPollReplyConfig } = require("./answerPollReplyConfig");
 
-var cloudinary = require("cloudinary");
-const bluebird = require("bluebird");
+// var cloudinary = require("cloudinary");
+// const bluebird = require("bluebird");
 
 const axios = require("axios");
-const mysql = require("mysql");
-const db = require("./config/config_db/db");
-const pool = mysql.createPool(db);
-bluebird.promisifyAll(pool);
 const bodyParser = require("body-parser");
+// const mysql = require("mysql");
+// const db = require("./config/config_db/db");
+// const pool = mysql.createPool(db);
+// bluebird.promisifyAll(pool);
 
-bot.setWebHook(keys.externalUrl + `:443/bot` + keys.botToken);
+// bot.setWebHook(keys.externalUrl + `:443/bot` + keys.botToken);
 
-cloudinary.config({
-  cloud_name: db.cloudinary_cloudname,
-  api_key: db.cloudinary_apikey,
-  api_secret: db.cloudinary_secret
-});
+// cloudinary.config({
+//   cloud_name: db.cloudinary_cloudname,
+//   api_key: db.cloudinary_apikey,
+//   api_secret: db.cloudinary_secret
+// });
 
 const app = express();
 
@@ -553,94 +553,6 @@ bot.on("callback_query", async callbackQuery => {
       console.log(err.message);
     });
 
-    // pollOption1 = pollOptions[0];
-    // pollOption2 = pollOptions[1];
-    // pollOption3 = pollOptions[2];
-    // pollOption4 = pollOptions[3];
-
-    // async function getResult() {
-    // const pollCount = await session.getPollCount().catch(err => {
-    //   console.log(err.message);
-    // });
-    //
-    // const pollMessage = await session.getPollMessage().catch(err => {
-    //   console.log(err.message);
-    // });
-    //
-    // pollCount1 = parseInt(pollCount[0]);
-    // pollCount2 = parseInt(pollCount[1]);
-    // pollCount3 = parseInt(pollCount[2]);
-    // pollCount4 = parseInt(pollCount[3]);
-
-    // console.log(pollCount1);
-    //
-    // if (pollOption1 && !pollOption2 && !pollOption3 && !pollOption4) {
-    //   bot.sendMessage(
-    //     callbackQuery.from.id,
-    //     answerPollReplyConfig(
-    //       pollMessage,
-    //       pollOption1,
-    //       pollOption2,
-    //       pollOption3,
-    //       pollOption4,
-    //       pollCount1,
-    //       pollCount2,
-    //       pollCount3,
-    //       pollCount4
-    //     ),
-    //     answerPollReplyMarkup()
-    //   );
-    // } else if (pollOption1 && pollOption2 && !pollOption3 && !pollOption4) {
-    //   bot.sendMessage(
-    //     callbackQuery.from.id,
-    //     answerPollReplyConfig(
-    //       pollMessage,
-    //       pollOption1,
-    //       pollOption2,
-    //       pollOption3,
-    //       pollOption4,
-    //       pollCount1,
-    //       pollCount2,
-    //       pollCount3,
-    //       pollCount4
-    //     ),
-    //     answerPollReplyMarkup()
-    //   );
-    // } else if (pollOption1 && pollOption2 && pollOption3 && !pollOption4) {
-    //   bot.sendMessage(
-    //     callbackQuery.from.id,
-    //     answerPollReplyConfig(
-    //       pollMessage,
-    //       pollOption1,
-    //       pollOption2,
-    //       pollOption3,
-    //       pollOption4,
-    //       pollCount1,
-    //       pollCount2,
-    //       pollCount3,
-    //       pollCount4
-    //     ),
-    //     answerPollReplyMarkup()
-    //   );
-    // } else if (pollOption1 && pollOption2 && pollOption3 && pollOption4) {
-    //   bot.sendMessage(
-    //     callbackQuery.from.id,
-    //     answerPollReplyConfig(
-    //       pollMessage,
-    //       pollOption1,
-    //       pollOption2,
-    //       pollOption3,
-    //       pollOption4,
-    //       pollCount1,
-    //       pollCount2,
-    //       pollCount3,
-    //       pollCount4
-    //     ),
-    //     answerPollReplyMarkup()
-    //   );
-    // }
-    // }
-
     async function voteOrHasVoted(voter, vote) {
       votedUsers = await session.getPollVoter().catch(err => {
         if (err) {
@@ -652,7 +564,6 @@ bot.on("callback_query", async callbackQuery => {
       } else {
         session.setPollVoter(voter);
         session.incrPollVote(vote);
-        // getResult();
         answerPollReplyConfig(callbackQuery, pollOptions);
       }
     }
