@@ -1,4 +1,7 @@
-const keys = require("./config_keys/keys");
+const { bot } = require("./config/config_bot");
+const { session } = require("./session");
+
+const keys = require("./config/config_keys/keys");
 const express = require("express");
 const _ = require("lodash/array");
 
@@ -12,20 +15,11 @@ const answerPollReplyMarkup = require("./answerPollReplyMarkup");
 var cloudinary = require("cloudinary");
 const bluebird = require("bluebird");
 
-const TelegramBot = require("node-telegram-bot-api"),
-  host = process.env.HOST || "localhost", // probably this change is not required
-  externalUrl = process.env.externalURL,
-  token = keys.botToken,
-  bot = new TelegramBot(token, {
-    webHook: { port: process.env.PORT, host: host }
-  });
 bot.setWebHook(externalUrl + `:443/bot` + token);
-
-const { session } = require("./session");
 
 const axios = require("axios");
 const mysql = require("mysql");
-const db = require("./config_db/db");
+const db = require("./config/config_db/db");
 const pool = mysql.createPool(db);
 bluebird.promisifyAll(pool);
 const bodyParser = require("body-parser");
