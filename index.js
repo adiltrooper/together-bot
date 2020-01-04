@@ -7,8 +7,7 @@ const _ = require("lodash/array");
 
 const messagePollFn = require("./messagePollFn");
 const imagePollFn = require("./imagePollFn");
-const existPollReplyConfig = require("./existPollReplyConfig");
-const existPollReplyMarkup = require("./existPollReplyMarkup");
+const existPollReply = require("./existPollReply");
 const answerPollReplyConfig = require("./answerPollReplyConfig");
 const answerPollReplyMarkup = require("./answerPollReplyMarkup");
 
@@ -176,43 +175,16 @@ bot.onText(/Poll Post/, async msg => {
     session.setAdminState("4");
 
     async function showPollExisting() {
-      const pollVoterLength = await session.lengthPollVoter().catch(err => {
-        console.log(err.message);
-      });
-
       const pollOptions = await session.getPollOptions().catch(err => {
         console.log(err.message);
       });
-
       const pollCount = await session.getPollCount().catch(err => {
         console.log(err.message);
       });
-
-      if (pollOption1 && !pollOption2 && !pollOption3 && !pollOption4) {
-        bot.sendMessage(
-          msg.chat.id,
-          existPollReplyConfig(pollOptions, pollCount, pollVoterLength),
-          existPollReplyMarkup()
-        );
-      } else if (pollOption1 && pollOption2 && !pollOption3 && !pollOption4) {
-        bot.sendMessage(
-          msg.chat.id,
-          existPollReplyConfig(pollOptions, pollCount, pollVoterLength),
-          existPollReplyMarkup()
-        );
-      } else if (pollOption1 && pollOption2 && pollOption3 && !pollOption4) {
-        bot.sendMessage(
-          msg.chat.id,
-          existPollReplyConfig(pollOptions, pollCount, pollVoterLength),
-          existPollReplyMarkup()
-        );
-      } else if (pollOption1 && pollOption2 && pollOption3 && pollOption4) {
-        bot.sendMessage(
-          msg.chat.id,
-          existPollReplyConfig(pollOptions, pollCount, pollVoterLength),
-          existPollReplyMarkup()
-        );
-      }
+      const pollVoterLength = await session.lengthPollVoter().catch(err => {
+        console.log(err.message);
+      });
+      existPollReply(msg.chat.id, pollOptions, pollCount, pollVoterLength);
     }
     showPollExisting();
     bot.sendMessage(msg.chat.id, "Choose an Option or Exit", {

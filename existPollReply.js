@@ -1,4 +1,12 @@
-module.exports = async function(pollVoterLength, pollOptions, pollCount) {
+const { bot } = require("./config/config_bot");
+const existPollReplyMarkup = require("./existPollReplyMarkup");
+
+const existPollReply = function(
+  userId,
+  pollOptions,
+  pollCount,
+  pollVoterLength
+) {
   pollOption1 = pollOptions[0];
   pollOption2 = pollOptions[1];
   pollOption3 = pollOptions[2];
@@ -10,17 +18,23 @@ module.exports = async function(pollVoterLength, pollOptions, pollCount) {
   pollCount4 = parseInt(pollCount[3]);
 
   if (pollOption1 && !pollOption2 && !pollOption3 && !pollOption4) {
-    return `<b>You have an Existing Poll!</b>
+    bot.sendMessage(
+      userId,
+      `<b>You have an Existing Poll!</b>
 
 ${pollVoterLength} people have participated!
 
 <b>Would you like to End it?</b>
-      `;
+        `,
+      existPollReplyMarkup()
+    );
   } else if (pollOption1 && pollOption2 && !pollOption3 && !pollOption4) {
     totalCount = pollCount1 + pollCount2;
     option1Result = (pollCount1 / totalCount) * 100;
     option2Result = (pollCount2 / totalCount) * 100;
-    return `<b>You have an Existing Poll!</b>
+    bot.sendMessage(
+      userId,
+      `<b>You have an Existing Poll!</b>
 
 1️⃣${pollOption1}: <b>${option1Result}%</b>
 2️⃣${pollOption2}: <b>${option2Result}%</b>
@@ -28,14 +42,18 @@ ${pollVoterLength} people have participated!
 ${pollVoterLength} people have participated!
 
 <b>Would you like to End it?</b>
-      `;
+        `,
+      existPollReplyMarkup()
+    );
   } else if (pollOption1 && pollOption2 && pollOption3 && !pollOption4) {
     totalCount = pollCount1 + pollCount2 + pollCount3;
     option1Result = (pollCount1 / totalCount) * 100;
     option2Result = (pollCount2 / totalCount) * 100;
     option3Result = (pollCount3 / totalCount) * 100;
 
-    return `<b>You have an Existing Poll!</b>
+    bot.sendMessage(
+      userId,
+      `<b>You have an Existing Poll!</b>
 
 1️⃣${pollOption1}: <b>${option1Result}%</b>
 2️⃣${pollOption2}: <b>${option2Result}%</b>
@@ -43,14 +61,18 @@ ${pollVoterLength} people have participated!
 
 ${pollVoterLength} people have participated!
 <b>Would you like to End it?</b>
-          `;
+            `,
+      existPollReplyMarkup()
+    );
   } else if (pollOption1 && pollOption2 && pollOption3 && pollOption4) {
     totalCount = pollCount1 + pollCount2 + pollCount3 + pollCount4;
     option1Result = (pollCount1 / totalCount) * 100;
     option2Result = (pollCount2 / totalCount) * 100;
     option3Result = (pollCount3 / totalCount) * 100;
     option4Result = (pollCount4 / totalCount) * 100;
-    return `<b>You have an Existing Poll!</b>
+    bot.sendMessage(
+      userId,
+      `<b>You have an Existing Poll!</b>
 
 1️⃣${pollOption1}: <b>${option1Result}%</b>
 2️⃣${pollOption2}: <b>${option2Result}%</b>
@@ -60,6 +82,8 @@ ${pollVoterLength} people have participated!
 ${pollVoterLength} people have participated!
 
 <b>Would you like to End it?</b>
-          `;
+            `,
+      existPollReplyMarkup()
+    );
   }
 };
