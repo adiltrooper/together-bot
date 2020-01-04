@@ -370,83 +370,7 @@ bot.on("message", async msg => {
       console.log(err.message);
     });
 
-    // var zero = "/title/";
-    // var one = "/1/";
-    // var two = "/2/";
-    // var three = "/3/";
-    // var four = "/4/";
-    // var end = "/end/";
-    //
-    // var title = msg.text.match(new RegExp(zero + "(.[\\s\\S]*)" + one));
-    // var option1 = msg.text.match(new RegExp(one + "(.[\\s\\S]*)" + two));
-    // var option2 = msg.text.match(new RegExp(two + "(.[\\s\\S]*)" + three));
-    // var option3 = msg.text.match(new RegExp(three + "(.[\\s\\S]*)" + four));
-    // var option4 = msg.text.match(new RegExp(four + "(.[\\s\\S]*)" + end));
-
-    //     const customFormatfn = () => {
-    //       if (option1 && !option2 && !option3 && !option4) {
-    //         session.setPollData(title[1], option1[1]);
-    //         return (draftCustom = `
-    //             <b>This is your Draft Message:</b>
-    //
-    // ${pollMessage}
-    //
-    // Your Options:
-    // 1: ${option1[1]}
-    //
-    // ⬇️<b>Select what you want to do with it</b>
-    // `);
-    //       } else if (option1 && option2 && !option3 && !option4) {
-    //         session.setPollData(title[1], option1[1], option2[1]);
-    //         return (draftCustom = `
-    //             <b>This is your Draft Message:</b>
-    //
-    // ${pollMessage}
-    //
-    // Your Options:
-    // 1: ${option1[1]}
-    // 2: ${option2[1]}
-    //
-    // ⬇️<b>Select what you want to do with it</b>
-    // `);
-    //       } else if (option1 && option2 && option3 && !option4) {
-    //         session.setPollData(title[1], option1[1], option2[1], option3[1]);
-    //         return (draftCustom = `
-    //             <b>This is your Draft Message:</b>
-    //
-    // ${pollMessage}
-    //
-    // Your Options:
-    // 1: ${option1[1]}
-    // 2: ${option2[1]}
-    // 3: ${option3[1]}
-    //
-    // ⬇️<b>Select what you want to do with it</b>
-    // `);
-    //       } else if (option1 && option2 && option3 && option4) {
-    //         session.setPollData(
-    //           title[1],
-    //           option1[1],
-    //           option2[1],
-    //           option3[1],
-    //           option4[1]
-    //         );
-    //         return (draftCustom = `
-    //             <b>This is your Draft Message:</b>
-    //
-    // ${pollMessage}
-    //
-    // Your Options:
-    // 1: ${option1[1]}
-    // 2: ${option2[1]}
-    // 3: ${option3[1]}
-    // 4: ${option4[1]}
-    //
-    // ⬇️<b>Select what you want to do with it</b>
-    // `);
-    //       }
-    //     };
-    draftPollReply(msg, pollMessage);
+    var draftPoll = draftPollReply(msg, pollMessage);
 
     if (pollMessage && !pollImage) {
       bot.sendMessage(msg.chat.id, draftPoll, {
@@ -473,8 +397,6 @@ bot.onText(/Send Post/, async msg => {
   const adminState = await session.getAdminState().catch(err => {
     console.log(err.message);
   });
-
-  console.log(adminState);
   if (adminState == "admin6") {
     const pollImage = await session.getPollImage().catch(err => {
       console.log(err.message);
@@ -489,13 +411,10 @@ bot.onText(/Send Post/, async msg => {
       console.log(err.message);
     });
 
-    console.log(pollOptions);
-    console.log(pollTitle);
     var option1 = pollOptions[0];
     var option2 = pollOptions[1];
     var option3 = pollOptions[2];
     var option4 = pollOptions[3];
-    console.log(option1);
 
     async function getUsersFromDB() {
       const connection = await pool.getConnectionAsync();
@@ -628,99 +547,98 @@ bot.on("callback_query", async callbackQuery => {
     callbackQuery.data !== "🛑Stop Poll & Create New 🛑"
   ) {
     userPollSelection = callbackQuery.data;
-    console.log(callbackQuery);
 
     const pollOptions = await session.getPollOptions().catch(err => {
       console.log(err.message);
     });
 
-    pollOption1 = pollOptions[0];
-    pollOption2 = pollOptions[1];
-    pollOption3 = pollOptions[2];
-    pollOption4 = pollOptions[3];
+    // pollOption1 = pollOptions[0];
+    // pollOption2 = pollOptions[1];
+    // pollOption3 = pollOptions[2];
+    // pollOption4 = pollOptions[3];
 
-    async function getResult() {
-      const pollCount = await session.getPollCount().catch(err => {
-        console.log(err.message);
-      });
+    // async function getResult() {
+    const pollCount = await session.getPollCount().catch(err => {
+      console.log(err.message);
+    });
 
-      const pollMessage = await session.getPollMessage().catch(err => {
-        console.log(err.message);
-      });
+    const pollMessage = await session.getPollMessage().catch(err => {
+      console.log(err.message);
+    });
+    //
+    // pollCount1 = parseInt(pollCount[0]);
+    // pollCount2 = parseInt(pollCount[1]);
+    // pollCount3 = parseInt(pollCount[2]);
+    // pollCount4 = parseInt(pollCount[3]);
 
-      pollCount1 = parseInt(pollCount[0]);
-      pollCount2 = parseInt(pollCount[1]);
-      pollCount3 = parseInt(pollCount[2]);
-      pollCount4 = parseInt(pollCount[3]);
-
-      console.log(pollCount1);
-
-      if (pollOption1 && !pollOption2 && !pollOption3 && !pollOption4) {
-        bot.sendMessage(
-          callbackQuery.from.id,
-          answerPollReplyConfig(
-            pollMessage,
-            pollOption1,
-            pollOption2,
-            pollOption3,
-            pollOption4,
-            pollCount1,
-            pollCount2,
-            pollCount3,
-            pollCount4
-          ),
-          answerPollReplyMarkup()
-        );
-      } else if (pollOption1 && pollOption2 && !pollOption3 && !pollOption4) {
-        bot.sendMessage(
-          callbackQuery.from.id,
-          answerPollReplyConfig(
-            pollMessage,
-            pollOption1,
-            pollOption2,
-            pollOption3,
-            pollOption4,
-            pollCount1,
-            pollCount2,
-            pollCount3,
-            pollCount4
-          ),
-          answerPollReplyMarkup()
-        );
-      } else if (pollOption1 && pollOption2 && pollOption3 && !pollOption4) {
-        bot.sendMessage(
-          callbackQuery.from.id,
-          answerPollReplyConfig(
-            pollMessage,
-            pollOption1,
-            pollOption2,
-            pollOption3,
-            pollOption4,
-            pollCount1,
-            pollCount2,
-            pollCount3,
-            pollCount4
-          ),
-          answerPollReplyMarkup()
-        );
-      } else if (pollOption1 && pollOption2 && pollOption3 && pollOption4) {
-        bot.sendMessage(
-          callbackQuery.from.id,
-          answerPollReplyConfig(
-            pollMessage,
-            pollOption1,
-            pollOption2,
-            pollOption3,
-            pollOption4,
-            pollCount1,
-            pollCount2,
-            pollCount3,
-            pollCount4
-          ),
-          answerPollReplyMarkup()
-        );
-      }
-    }
+    // console.log(pollCount1);
+    //
+    // if (pollOption1 && !pollOption2 && !pollOption3 && !pollOption4) {
+    //   bot.sendMessage(
+    //     callbackQuery.from.id,
+    //     answerPollReplyConfig(
+    //       pollMessage,
+    //       pollOption1,
+    //       pollOption2,
+    //       pollOption3,
+    //       pollOption4,
+    //       pollCount1,
+    //       pollCount2,
+    //       pollCount3,
+    //       pollCount4
+    //     ),
+    //     answerPollReplyMarkup()
+    //   );
+    // } else if (pollOption1 && pollOption2 && !pollOption3 && !pollOption4) {
+    //   bot.sendMessage(
+    //     callbackQuery.from.id,
+    //     answerPollReplyConfig(
+    //       pollMessage,
+    //       pollOption1,
+    //       pollOption2,
+    //       pollOption3,
+    //       pollOption4,
+    //       pollCount1,
+    //       pollCount2,
+    //       pollCount3,
+    //       pollCount4
+    //     ),
+    //     answerPollReplyMarkup()
+    //   );
+    // } else if (pollOption1 && pollOption2 && pollOption3 && !pollOption4) {
+    //   bot.sendMessage(
+    //     callbackQuery.from.id,
+    //     answerPollReplyConfig(
+    //       pollMessage,
+    //       pollOption1,
+    //       pollOption2,
+    //       pollOption3,
+    //       pollOption4,
+    //       pollCount1,
+    //       pollCount2,
+    //       pollCount3,
+    //       pollCount4
+    //     ),
+    //     answerPollReplyMarkup()
+    //   );
+    // } else if (pollOption1 && pollOption2 && pollOption3 && pollOption4) {
+    //   bot.sendMessage(
+    //     callbackQuery.from.id,
+    //     answerPollReplyConfig(
+    //       pollMessage,
+    //       pollOption1,
+    //       pollOption2,
+    //       pollOption3,
+    //       pollOption4,
+    //       pollCount1,
+    //       pollCount2,
+    //       pollCount3,
+    //       pollCount4
+    //     ),
+    //     answerPollReplyMarkup()
+    //   );
+    // }
+    // }
 
     async function voteOrHasVoted(voter, vote) {
       votedUsers = await session.getPollVoter().catch(err => {
@@ -733,7 +651,8 @@ bot.on("callback_query", async callbackQuery => {
       } else {
         session.setPollVoter(voter);
         session.incrPollVote(vote);
-        getResult();
+        // getResult();
+        answerPollReplyConfig(pollOptions, pollMessage, pollCount);
       }
     }
 

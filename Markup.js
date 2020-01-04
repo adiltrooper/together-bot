@@ -1,4 +1,4 @@
-module.exports = function() {
+exports.existPollReplyMarkup = function existPollReplyMarkup() {
   return {
     reply_markup: {
       inline_keyboard: [
@@ -18,4 +18,18 @@ module.exports = function() {
     },
     parse_mode: "HTML"
   };
+};
+
+exports.draftPollReplyMarkup = function draftPollReplyMarkup() {
+  return {
+    reply_markup: {
+      keyboard: [["Back", "Send Post"]],
+      resize_keyboard: true
+    },
+    parse_mode: "HTML"
+  };
+};
+
+exports.answerPollReplyMarkyp = {
+  parse_mode: "HTML"
 };
