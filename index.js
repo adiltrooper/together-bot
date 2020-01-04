@@ -463,6 +463,7 @@ bot.onText(/Send Post/, async msg => {
 
       var userSendList = _.chunk(userSendList, 2);
       console.log(userSendList);
+      console.log(pollMessage);
       userSendList.map(subUserSendList => {
         const postMessages = () => {
           subUserSendList.map(userId => {
