@@ -21,7 +21,7 @@ const TelegramBot = require("node-telegram-bot-api"),
   });
 bot.setWebHook(externalUrl + `:443/bot` + token);
 
-import { session } from "./session";
+import { session } from "./session.js";
 
 const axios = require("axios");
 const mysql = require("mysql");
