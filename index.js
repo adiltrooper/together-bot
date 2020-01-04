@@ -22,6 +22,8 @@ const pool = mysql.createPool(db);
 bluebird.promisifyAll(pool);
 const bodyParser = require("body-parser");
 
+bot.setWebHook(externalUrl + `:443/bot` + token);
+
 cloudinary.config({
   cloud_name: db.cloudinary_cloudname,
   api_key: db.cloudinary_apikey,

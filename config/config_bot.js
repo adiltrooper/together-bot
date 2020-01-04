@@ -1,12 +1,7 @@
 const keys = require("./config_keys/keys");
 
-const TelegramBot = require("node-telegram-bot-api"),
-  host = process.env.HOST || "localhost", // probably this change is not required
-  externalUrl = process.env.externalURL,
-  token = keys.botToken;
+const TelegramBot = require("node-telegram-bot-api");
 
-exports.bot = new TelegramBot(token, {
+exports.bot = new TelegramBot(botToken, {
   webHook: { port: process.env.PORT, host: host }
 });
-
-bot.setWebHook(externalUrl + `:443/bot` + token);
