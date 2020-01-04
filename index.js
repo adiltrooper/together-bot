@@ -651,7 +651,12 @@ bot.on("callback_query", async callbackQuery => {
         session.setPollVoter(voter);
         session.incrPollVote(vote);
         // getResult();
-        answerPollReplyConfig(pollOptions, pollMessage, pollCount);
+        answerPollReplyConfig(
+          callbackQuery,
+          pollOptions,
+          pollMessage,
+          pollCount
+        );
       }
     }
 
