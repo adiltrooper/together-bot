@@ -9,8 +9,7 @@ const messagePollFn = require("./messagePollFn");
 const imagePollFn = require("./imagePollFn");
 const { existPollReply } = require("./existPollReply");
 const { draftPollReply } = require("./draftPollReply");
-const answerPollReplyConfig = require("./answerPollReplyConfig");
-const answerPollReplyMarkup = require("./answerPollReplyMarkup");
+const { answerPollReplyConfig } = require("./answerPollReplyConfig");
 
 var cloudinary = require("cloudinary");
 const bluebird = require("bluebird");
