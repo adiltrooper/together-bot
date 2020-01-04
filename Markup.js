@@ -1,21 +1,23 @@
-exports.existPollReplyMarkup = {
-  reply_markup: {
-    inline_keyboard: [
-      [
-        {
-          text: "Keep Poll",
-          callback_data: "Keep Poll"
-        }
-      ],
-      [
-        {
-          text: "🛑Stop Poll & Create New 🛑",
-          callback_data: "🛑Stop Poll & Create New 🛑"
-        }
+exports.existPollReplyMarkup = function existPollReplyMarkup() {
+  return {
+    reply_markup: {
+      inline_keyboard: [
+        [
+          {
+            text: "Keep Poll",
+            callback_data: "Keep Poll"
+          }
+        ],
+        [
+          {
+            text: "🛑Stop Poll & Create New 🛑",
+            callback_data: "🛑Stop Poll & Create New 🛑"
+          }
+        ]
       ]
-    ]
-  },
-  parse_mode: "HTML"
+    },
+    parse_mode: "HTML"
+  };
 };
 
 exports.draftPollReplyMarkup = function draftPollReplyMarkup() {
@@ -28,6 +30,8 @@ exports.draftPollReplyMarkup = function draftPollReplyMarkup() {
   };
 };
 
-exports.answerPollReplyMarkyp = {
-  parse_mode: "HTML"
+exports.answerPollReplyMarkyp = function answerPollReplyMarkup() {
+  return {
+    parse_mode: "HTML"
+  };
 };

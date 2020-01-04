@@ -1,5 +1,5 @@
 const { bot } = require("./config/config_bot");
-const answerPollReplyMarkup = require("./Markup");
+const { answerPollReplyMarkup } = require("./Markup");
 
 exports.answerPollReplyConfig = function answerPollReplyConfig(
   pollOptions,

@@ -1,5 +1,5 @@
 const { bot } = require("./config/config_bot");
-const existPollReplyMarkup = require("./Markup");
+const { existPollReplyMarkup } = require("./Markup");
 
 exports.existPollReply = function existPollReply(
   userId,
@@ -26,7 +26,7 @@ ${pollVoterLength} people have participated!
 
 <b>Would you like to End it?</b>
         `,
-      existPollReplyMarkup
+      existPollReplyMarkup()
     );
   } else if (pollOption1 && pollOption2 && !pollOption3 && !pollOption4) {
     totalCount = pollCount1 + pollCount2;
@@ -43,7 +43,7 @@ ${pollVoterLength} people have participated!
 
 <b>Would you like to End it?</b>
         `,
-      existPollReplyMarkup
+      existPollReplyMarkup()
     );
   } else if (pollOption1 && pollOption2 && pollOption3 && !pollOption4) {
     totalCount = pollCount1 + pollCount2 + pollCount3;
@@ -62,7 +62,7 @@ ${pollVoterLength} people have participated!
 ${pollVoterLength} people have participated!
 <b>Would you like to End it?</b>
             `,
-      existPollReplyMarkup
+      existPollReplyMarkup()
     );
   } else if (pollOption1 && pollOption2 && pollOption3 && pollOption4) {
     totalCount = pollCount1 + pollCount2 + pollCount3 + pollCount4;
@@ -83,7 +83,7 @@ ${pollVoterLength} people have participated!
 
 <b>Would you like to End it?</b>
             `,
-      existPollReplyMarkup
+      existPollReplyMarkup()
     );
   }
 };
