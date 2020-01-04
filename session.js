@@ -370,4 +370,5 @@ class Session {
       });
   }
 }
-module.exports = Session;
+
+export let session = new Session();

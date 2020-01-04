@@ -21,7 +21,7 @@ const TelegramBot = require("node-telegram-bot-api"),
   });
 bot.setWebHook(externalUrl + `:443/bot` + token);
 
-const Session = require("./session");
+const session = require("./session");
 
 const axios = require("axios");
 const mysql = require("mysql");
@@ -37,7 +37,6 @@ cloudinary.config({
 });
 
 const app = express();
-const session = new Session();
 
 ////////////// JOIN BOT //////////////////
 
