@@ -12,8 +12,6 @@ exports.bot = new TelegramBot(keys.botToken, {
 
 exports.pool = bluebird.promisifyAll(mysql.createPool(db));
 
-bot.setWebHook(keys.externalUrl + `:443/bot` + keys.botToken);
-
 cloudinary.config({
   cloud_name: db.cloudinary_cloudname,
   api_key: db.cloudinary_apikey,
