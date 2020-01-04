@@ -467,11 +467,11 @@ bot.onText(/Send Post/, async msg => {
       userSendList.map(subUserSendList => {
         const postMessages = () => {
           subUserSendList.map(userId => {
-            if (!pollImage) {
+            if (!pollImage && pollMessage) {
               bot
                 .sendMessage(
                   userId,
-                  pollMessage,
+                  "HELOOOOOO",
                   messagePollFn(option1, option2, option3, option4)
                 )
                 .catch(err => {
