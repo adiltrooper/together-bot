@@ -559,13 +559,13 @@ bot.on("callback_query", async callbackQuery => {
     // pollOption4 = pollOptions[3];
 
     // async function getResult() {
-    const pollCount = await session.getPollCount().catch(err => {
-      console.log(err.message);
-    });
-
-    const pollMessage = await session.getPollMessage().catch(err => {
-      console.log(err.message);
-    });
+    // const pollCount = await session.getPollCount().catch(err => {
+    //   console.log(err.message);
+    // });
+    //
+    // const pollMessage = await session.getPollMessage().catch(err => {
+    //   console.log(err.message);
+    // });
     //
     // pollCount1 = parseInt(pollCount[0]);
     // pollCount2 = parseInt(pollCount[1]);
@@ -653,12 +653,7 @@ bot.on("callback_query", async callbackQuery => {
         session.setPollVoter(voter);
         session.incrPollVote(vote);
         // getResult();
-        answerPollReplyConfig(
-          callbackQuery,
-          pollOptions,
-          pollMessage,
-          pollCount
-        );
+        answerPollReplyConfig(callbackQuery, pollOptions);
       }
     }
 

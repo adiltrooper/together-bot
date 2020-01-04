@@ -1,12 +1,18 @@
 const { bot } = require("./config/config_bot");
 const { answerPollReplyMarkup } = require("./Markup");
 
-exports.answerPollReplyConfig = function answerPollReplyConfig(
+exports.answerPollReplyConfig = async function answerPollReplyConfig(
   callbackQuery,
-  pollOptions,
-  pollMessage,
-  pollCount
+  pollOptions
 ) {
+  const pollCount = await session.getPollCount().catch(err => {
+    console.log(err.message);
+  });
+
+  const pollMessage = await session.getPollMessage().catch(err => {
+    console.log(err.message);
+  });
+
   pollOption1 = pollOptions[0];
   pollOption2 = pollOptions[1];
   pollOption3 = pollOptions[2];
