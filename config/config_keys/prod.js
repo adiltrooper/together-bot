@@ -3,5 +3,6 @@ module.exports = {
   botToken: process.env.botToken,
   redisPort: process.env.redisPort,
   adminsId: process.env.adminsId,
-  externalUrl: process.env.externalURL
+  externalUrl: process.env.externalURL,
+  port: process.env.PORT
 };
