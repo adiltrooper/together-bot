@@ -35,3 +35,16 @@ exports.answerPollReplyMarkup = function answerPollReplyMarkup() {
     parse_mode: "HTML"
   };
 };
+
+exports.userStateMarkup = function userStateMarkup() {
+  return {
+    reply_markup: {
+      keyboard: [
+        ["☀️Feelin' Adventurous", "🧘🏼‍Feelin' Chill"],
+        ["🏠I Wanna Stay Home"]
+      ],
+      resize_keyboard: true
+    },
+    parse_mode: "HTML"
+  };
+};

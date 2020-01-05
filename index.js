@@ -1,6 +1,7 @@
 const { bot, pool } = require("./config/config_bot");
 const { session } = require("./session");
 const { storeNewUser, getSubsCount } = require("./storage");
+const { userStateMarkup } = require("./Markup");
 
 const keys = require("./config/config_keys/keys");
 const _ = require("lodash/array");
@@ -37,16 +38,7 @@ What can this bot do for you?
 💡Get an outing idea with a single click below!
 💡Get specially curated ideas from the together team posted <b>3 Times Weekly</b>!
   `,
-    {
-      reply_markup: {
-        keyboard: [
-          ["☀️Feelin' Adventurous", "🧘🏼‍Feelin' Chill"],
-          ["🏠I Wanna Stay Home"]
-        ],
-        resize_keyboard: true
-      },
-      parse_mode: "HTML"
-    }
+    userStateMarkup()
   );
   storeNewUser(chat_id, first_name, username, user_type, status);
 });
@@ -549,15 +541,7 @@ bot.onText(/New Post/, async msg => {
     bot.sendMessage(
       msg.chat.id,
       "Something went wrong, Please inform Adil. You can try again if you want to.",
-      {
-        reply_markup: {
-          keyboard: [
-            ["☀️Feelin' Adventurous", "🧘🏼‍Feelin' Chill"],
-            ["🏠I Wanna Stay Home"]
-          ],
-          resize_keyboard: true
-        }
-      }
+      userStateMarkup()
     );
   }
 });
@@ -728,15 +712,7 @@ bot.onText(/Send Post/, async msg => {
 
 bot.onText(/Exit Admin Session/, async msg => {
   await session.setAdminStateNull();
-  bot.sendMessage(msg.chat.id, "Back to User Mode", {
-    reply_markup: {
-      keyboard: [
-        ["☀️Feelin' Adventurous", "🧘🏼‍Feelin' Chill"],
-        ["🏠I Wanna Stay Home"]
-      ],
-      resize_keyboard: true
-    }
-  });
+  bot.sendMessage(msg.chat.id, "Back to User Mode", userStateMarkup());
 });
 
 bot.onText(/Back/, async msg => {
