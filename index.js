@@ -764,30 +764,38 @@ bot.on("message", async msg => {
         });
     }
 
-    var clickedUser = msg.chat.id;
-    var clickedDateTime = new Date();
-    var date =
-      clickedDateTime.getFullYear() +
-      "-" +
-      (clickedDateTime.getMonth() + 1) +
-      "-" +
-      clickedDateTime.getDate();
-    var time =
-      clickedDateTime.getHours() +
-      ":" +
-      clickedDateTime.getMinutes() +
-      ":" +
-      clickedDateTime.getSeconds();
-    var clickedDateTime = date + " " + time;
-
-    session.setClickedUser(cat_id, clickedUser, clickedDateTime);
-    const arrayOfClickedUsers = await session.getClickedUser().catch(err => {
-      if (err) console.log(err);
-    });
-
-    if (arrayOfClickedUsers[0].length == 10) {
-      storeUserClickedCount(clickedUser, clickedDateTime, cat_id);
-    }
+    // var clickedUser = msg.chat.id;
+    // var clickedDateTime = new Date();
+    // var date =
+    //   clickedDateTime.getFullYear() +
+    //   "-" +
+    //   (clickedDateTime.getMonth() + 1) +
+    //   "-" +
+    //   clickedDateTime.getDate();
+    // var time =
+    //   clickedDateTime.getHours() +
+    //   ":" +
+    //   clickedDateTime.getMinutes() +
+    //   ":" +
+    //   clickedDateTime.getSeconds();
+    // var clickedDateTime = date + " " + time;
+    //
+    // session.setClickedUser(cat_id, clickedUser, clickedDateTime);
+    // const clickedUserArray = await session.getClickedUser().catch(err => {
+    //   if (err) console.log(err);
+    // });
+    //
+    // const clickedDateTimeArray = await session.getClickedDataTime().catch(err => {
+    //   if (err) console.log(err);
+    // });
+    //
+    // const clickedCatArray = await session.getClickedCat().catch(err => {
+    //   if (err) console.log(err);
+    // });
+    //
+    // if (clickedUserArray.length == 10) {
+    //
+    // }
 
     var activity = cachedListing[0][0];
     var location = cachedListing[1][0];

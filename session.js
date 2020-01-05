@@ -298,36 +298,48 @@ class Session {
     });
   }
 
-  setClickedUser(cat_id, clickedUser, clickedDateTime) {
-    redis
-      .multi()
-      .LPUSH(`clickedUser`, clickedUser)
-      .LPUSH(`clickedDateTime`, clickedDateTime)
-      .LPUSH(`clickedCat`, cat_id)
-      .execAsync()
-      .then(function(err, res) {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log(res);
-        }
-      });
-  }
-
-  getClickedUser() {
-    return redis
-      .multi()
-      .lrange("clickedUser", 0, -1)
-      .lrange("clickedDateTime", 0, -1)
-      .lrange("clickedCat", 0, -1)
-      .execAsync()
-      .then(function(res) {
-        console.log("HERE");
-        console.log(res);
-        console.log("HERE");
-        return res;
-      });
-  }
+  // setClickedUser(cat_id, clickedUser, clickedDateTime) {
+  //   redis
+  //     .multi()
+  //     .LPUSH(`clickedUser`, clickedUser)
+  //     .LPUSH(`clickedDateTime`, clickedDateTime)
+  //     .LPUSH(`clickedCat`, cat_id)
+  //     .execAsync()
+  //     .then(function(err, res) {
+  //       if (err) {
+  //         console.log(err);
+  //       } else {
+  //         console.log(res);
+  //       }
+  //     });
+  // }
+  //
+  // getClickedUser() {
+  //   return redis.lrange("clickedUser", 0, -1).then(function(res) {
+  //     console.log("HERE");
+  //     console.log(res[0]);
+  //     console.log("HERE");
+  //     return res[0];
+  //   });
+  // }
+  //
+  // getClickedDataTime() {
+  //   return redis.lrange("clickedDateTime", 0, -1).then(function(res) {
+  //     console.log("HERE");
+  //     console.log(res[0]);
+  //     console.log("HERE");
+  //     return res[0];
+  //   });
+  // }
+  //
+  // getClickedCat() {
+  //   return redis.lrange("clickedCat", 0, -1).then(function(res) {
+  //     console.log("HERE");
+  //     console.log(res[0]);
+  //     console.log("HERE");
+  //     return res[0];
+  //   });
+  // }
 
   getCachedAdventurous() {
     return redis
