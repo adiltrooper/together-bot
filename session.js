@@ -315,7 +315,7 @@ class Session {
   }
 
   getClickedUser() {
-    redis
+    return redis
       .multi()
       .lrange("clickedUser", 0, -1)
       .lrange("clickedDateTime", 0, -1)
