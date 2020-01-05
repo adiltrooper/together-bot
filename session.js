@@ -314,6 +314,19 @@ class Session {
       });
   }
 
+  getClickedUser() {
+    redis
+      .multi()
+      .lrange("clickedUser", 0, -1)
+      .lrange("clickedDateTime", 0, -1)
+      .lrange("clickedCat", 0, -1)
+      .execAsync()
+      .then(function(res) {
+        console.log(res);
+        return res;
+      });
+  }
+
   getCachedAdventurous() {
     return redis
       .multi()

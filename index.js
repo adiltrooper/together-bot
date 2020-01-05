@@ -784,6 +784,7 @@ bot.on("message", async msg => {
     const arrayOfClickedUsers = await session.getClickedUser().catch(err => {
       if (err) console.log(err);
     });
+    console.log(arrayOfClickedUsers);
 
     if (arrayOfClickedUsers[0].length == 10) {
       storeUserClickedCount(clickedUser, clickedDateTime, cat_id);
