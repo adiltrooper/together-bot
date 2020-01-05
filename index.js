@@ -873,6 +873,16 @@ ${short_desc}`);
 ${short_desc}
 
 📍: ${poi}`);
+      } else if (
+        (price == "null" || price == "0") &&
+        poi !== "null" &&
+        website == "null"
+      ) {
+        return (caption = `<b>☀️${activity} @ ${location}☀️</>
+
+${short_desc}
+
+📍: ${poi}`);
       }
     }
 
@@ -986,6 +996,16 @@ ${short_desc}
   ${short_desc}
 
   📍: ${poi}`);
+                  } else if (
+                    (price == null || price == 0) &&
+                    poi !== null &&
+                    website == null
+                  ) {
+                    return (caption2 = `<b>☀️${activity} @ ${location}☀️</>
+
+            ${short_desc}
+
+            📍: ${poi}`);
                   } else {
                     console.log("FAILUREEEE");
                   }
