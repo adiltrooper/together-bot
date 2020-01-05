@@ -1,7 +1,7 @@
 const { bot, pool } = require("./config/config_bot");
 const { session } = require("./session");
 const { storeNewUser, getSubsCount } = require("./storage");
-const { userStateMarkup } = require("./Markup");
+const { userStateMarkup, adminStateMarkup } = require("./Markup");
 
 const keys = require("./config/config_keys/keys");
 const _ = require("lodash/array");
@@ -81,17 +81,7 @@ bot.onText(/\/admin/, async msg => {
       msg.chat.id,
       `Hi <b>${msg.chat.first_name}</b>! Welcome to the admin menu!
 Please Select an Option:`,
-      {
-        reply_markup: {
-          keyboard: [
-            ["New Post", "Poll Post"],
-            ["Subscriber Count"],
-            ["Exit Admin Session"]
-          ],
-          resize_keyboard: true
-        },
-        parse_mode: "HTML"
-      }
+      adminStateMarkup()
     );
   } else {
     console.log("Sorry you are not an admin");
@@ -225,16 +215,7 @@ Draft your main message:</b>
     bot.sendMessage(
       callbackQuery.from.id,
       `Welcome Back to the admin menu! Please select an Option:`,
-      {
-        reply_markup: {
-          keyboard: [
-            ["New Post", "Poll Post"],
-            ["Subscriber Count"],
-            ["Exit Admin Session"]
-          ],
-          resize_keyboard: true
-        }
-      }
+      adminStateMarkup()
     );
   }
 });
@@ -722,16 +703,11 @@ bot.onText(/Back/, async msg => {
   switch (adminState) {
     case "admin2":
       session.setAdminState("1");
-      bot.sendMessage(msg.chat.id, `Please Select an Option:`, {
-        reply_markup: {
-          keyboard: [
-            ["New Post", "Poll Post"],
-            ["Subscriber Count"],
-            ["Exit Admin Session"]
-          ],
-          resize_keyboard: true
-        }
-      });
+      bot.sendMessage(
+        msg.chat.id,
+        `Please Select an Option:`,
+        adminStateMarkup()
+      );
       break;
     case "admin3":
       session.setAdminState("2");
@@ -746,16 +722,11 @@ bot.onText(/Back/, async msg => {
       break;
     default:
       session.setAdminState("1");
-      bot.sendMessage(msg.chat.id, `Please Select an Option:`, {
-        reply_markup: {
-          keyboard: [
-            ["New Post", "Poll Post"],
-            ["Subscriber Count"],
-            ["Exit Admin Session"]
-          ],
-          resize_keyboard: true
-        }
-      });
+      bot.sendMessage(
+        msg.chat.id,
+        `Please Select an Option:`,
+        adminStateMarkup()
+      );
   }
 });
 

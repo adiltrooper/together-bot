@@ -48,3 +48,17 @@ exports.userStateMarkup = function userStateMarkup() {
     parse_mode: "HTML"
   };
 };
+
+exports.adminStateMarkup = function adminStateMarkup() {
+  return {
+    reply_markup: {
+      keyboard: [
+        ["New Post", "Poll Post"],
+        ["Subscriber Count"],
+        ["Exit Admin Session"]
+      ],
+      resize_keyboard: true
+    },
+    parse_mode: "HTML"
+  };
+};
