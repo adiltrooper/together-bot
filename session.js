@@ -301,7 +301,7 @@ class Session {
   setClickedUser(cat_id, clickedUser, clickedDateTime) {
     redis
       .multi()
-      .LPUSH(`clickedUser`, user)
+      .LPUSH(`clickedUser`, clickedUser)
       .LPUSH(`clickedDateTime`, clickedDateTime)
       .LPUSH(`clickedCat`, cat_id)
       .execAsync()
