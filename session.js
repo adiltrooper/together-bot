@@ -322,7 +322,9 @@ class Session {
       .lrange("clickedCat", 0, -1)
       .execAsync()
       .then(function(res) {
+        console.log("HERE");
         console.log(res);
+        console.log("HERE");
         return res;
       });
   }
