@@ -1,8 +1,8 @@
 const { bot, pool } = require("./config/config_bot");
 const { session } = require("./session");
+const { storeNewUser } = require("./storage");
 
 const keys = require("./config/config_keys/keys");
-const express = require("express");
 const _ = require("lodash/array");
 
 const messagePollFn = require("./messagePollFn");
@@ -11,25 +11,7 @@ const { existPollReply } = require("./existPollReply");
 const { draftPollReply } = require("./draftPollReply");
 const { answerPollReplyConfig } = require("./answerPollReplyConfig");
 
-// var cloudinary = require("cloudinary");
-// const bluebird = require("bluebird");
-
-const axios = require("axios");
-const bodyParser = require("body-parser");
-// const mysql = require("mysql");
-// const db = require("./config/config_db/db");
-// const pool = mysql.createPool(db);
-// bluebird.promisifyAll(pool);
-
 bot.setWebHook(keys.externalUrl + `:443/bot` + keys.botToken);
-
-// cloudinary.config({
-//   cloud_name: db.cloudinary_cloudname,
-//   api_key: db.cloudinary_apikey,
-//   api_secret: db.cloudinary_secret
-// });
-
-const app = express();
 
 ////////////// JOIN BOT //////////////////
 
@@ -67,18 +49,20 @@ What can this bot do for you?
     }
   );
 
-  pool.getConnection(function(err, connection) {
-    if (err) console.log(err);
-    connection.query(
-      "INSERT INTO bot_user_db (chat_id, first_name, username, user_type, status) VALUES (?, ?, ?, ?, ?)",
-      [chat_id, first_name, username, user_type, status],
-      function(err, results, fields) {
-        if (err) console.log(err.message);
-      }
-    );
-    connection.release();
-    if (err) console.log(err);
-  });
+  storeNewUser(chat_id, first_name, username, user_type, status);
+
+  // pool.getConnection(function(err, connection) {
+  //   if (err) console.log(err);
+  //   connection.query(
+  //     "INSERT INTO bot_user_db (chat_id, first_name, username, user_type, status) VALUES (?, ?, ?, ?, ?)",
+  //     [chat_id, first_name, username, user_type, status],
+  //     function(err, results, fields) {
+  //       if (err) console.log(err.message);
+  //     }
+  //   );
+  //   connection.release();
+  //   if (err) console.log(err);
+  // });
 });
 
 /////////////// ADMIN CHECK FUNCTION ///////////////////
