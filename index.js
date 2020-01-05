@@ -1,6 +1,6 @@
 const { bot, pool } = require("./config/config_bot");
 const { session } = require("./session");
-const { storeNewUser, getSubsCount } = require("./storage");
+const { storeNewUser, getSubsCount, storeCompletePoll } = require("./storage");
 const { userStateMarkup, adminStateMarkup } = require("./Markup");
 
 const keys = require("./config/config_keys/keys");
