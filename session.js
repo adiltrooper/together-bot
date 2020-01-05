@@ -298,6 +298,22 @@ class Session {
     });
   }
 
+  setClickedUser(cat_id, clickedUser, clickedDateTime) {
+    redis
+      .multi()
+      .LPUSH(`clickedUser`, user)
+      .LPUSH(`clickedDateTime`, clickedDateTime)
+      .LPUSH(`clickedCat`, cat_id)
+      .execAsync()
+      .then(function(err, res) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(res);
+        }
+      });
+  }
+
   getCachedAdventurous() {
     return redis
       .multi()

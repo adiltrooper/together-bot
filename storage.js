@@ -83,3 +83,22 @@ exports.getSubsCount = function getSubsCount() {
     if (err) console.log(err);
   });
 };
+
+exports.storeUserClickedCount = function storeUserClickedCount(
+  cat_id,
+  clickedUser,
+  clickedDateTime
+) {
+  pool.getConnection(function(err, connection) {
+    if (err) console.log(err);
+    connection.query(
+      "INSERT INTO bot_click_tracking (clickedUser, clickedDateTime, category) VALUES (?, ?, ?)",
+      [clickedUser, clickedDateTime, cat_id],
+      function(err, results, fields) {
+        if (err) console.log(err.message);
+      }
+    );
+    connection.release();
+    if (err) console.log(err);
+  });
+};
