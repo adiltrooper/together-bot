@@ -811,12 +811,13 @@ bot.on("message", async msg => {
     if (clickedUserArray.length == 10) {
       let clickedArray = [];
       for (i = 0; i < clickedUserArray.length + 1; i++) {
-        return clickedArray.push([
+        clickedArray.push([
           clickedUserArray[i],
           clickedDateTimeArray[i],
           clickedCatArray[i]
         ]);
       }
+      return clickedArray;
     }
     console.log(clickedArray);
 
