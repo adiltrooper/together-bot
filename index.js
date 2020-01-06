@@ -23,7 +23,7 @@ bot.setWebHook(keys.externalUrl + `:443/bot` + keys.botToken);
 bot.onText(/\/start/, msg => {
   const { first_name, username, id: chat_id } = msg.chat;
   var status = "normal";
-  var user_type;
+  var user_type, botAddressUser;
   {
     keys.adminsId.includes(chat_id)
       ? (user_type = "admin")
@@ -42,7 +42,7 @@ bot.onText(/\/start/, msg => {
   );
   bot.sendMessage(
     chat_id,
-    `<b>Hi ${bot_AddressUser}!
+    `<b>Hi ${botAddressUser}!
 
 Welcome to the Together Community!</b>
 
