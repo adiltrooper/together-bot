@@ -810,6 +810,7 @@ bot.on("message", async msg => {
 
     if (clickedUserArray.length == 10) {
       let clickedArray = [];
+      console.log("Empty Array");
       for (i = 0; i < clickedUserArray.length + 1; i++) {
         clickedArray.push([
           clickedUserArray[i],
@@ -818,6 +819,7 @@ bot.on("message", async msg => {
         ]);
       }
       return clickedArray;
+      console.log("Array is here");
       console.log(clickedArray);
     }
 
