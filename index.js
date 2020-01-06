@@ -793,6 +793,7 @@ bot.on("message", async msg => {
     var clickedDateTime = date + " " + time;
 
     session.setClickedUser(cat_id, clickedUser, clickedDateTime);
+
     const clickedUserArray = await session.getClickedUser().catch(err => {
       if (err) console.log(err);
     });
