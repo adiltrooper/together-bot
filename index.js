@@ -818,8 +818,8 @@ bot.on("message", async msg => {
         ]);
       }
       return clickedArray;
+      console.log(clickedArray);
     }
-    console.log(clickedArray);
 
     var activity = cachedListing[0][0];
     var location = cachedListing[1][0];

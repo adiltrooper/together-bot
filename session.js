@@ -317,27 +317,27 @@ class Session {
   getClickedUser() {
     return redis.lrangeAsync("clickedUser", 0, -1).then(function(res) {
       console.log("HERE");
-      console.log(res[0]);
+      console.log(res);
       console.log("HERE");
-      return res[0];
+      return res;
     });
   }
 
   getClickedDateTime() {
     return redis.lrangeAsync("clickedDateTime", 0, -1).then(function(res) {
       console.log("HERE");
-      console.log(res[0]);
+      console.log(res);
       console.log("HERE");
-      return res[0];
+      return res;
     });
   }
 
   getClickedCat() {
     return redis.lrangeAsync("clickedCat", 0, -1).then(function(res) {
       console.log("HERE");
-      console.log(res[0]);
+      console.log(res);
       console.log("HERE");
-      return res[0];
+      return res;
     });
   }
 
