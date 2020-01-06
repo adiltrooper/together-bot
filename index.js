@@ -6,7 +6,8 @@ const { session } = require("./session");
 const {
   dbStoreNewUser,
   getSubsCount,
-  storeCompletePoll
+  storeCompletePoll,
+  storeUserClickedCount
 } = require("./storage");
 const { inUserStateMarkup, adminStateMarkup } = require("./Markup");
 
