@@ -36,7 +36,7 @@ exports.answerPollReplyMarkup = function answerPollReplyMarkup() {
   };
 };
 
-exports.userStateMarkup = function userStateMarkup() {
+exports.inUserStateMarkup = function inUserStateMarkup() {
   return {
     reply_markup: {
       keyboard: [

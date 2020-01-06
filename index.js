@@ -1,10 +1,14 @@
-const { bot, pool } = require("./config/config_bot");
-const { session } = require("./session");
-const { storeNewUser, getSubsCount, storeCompletePoll } = require("./storage");
-const { userStateMarkup, adminStateMarkup } = require("./Markup");
-
 const keys = require("./config/config_keys/keys");
 const _ = require("lodash/array");
+
+const { bot, pool } = require("./config/config_bot");
+const { session } = require("./session");
+const {
+  dbStoreNewUser,
+  getSubsCount,
+  storeCompletePoll
+} = require("./storage");
+const { inUserStateMarkup, adminStateMarkup } = require("./Markup");
 
 const messagePollFn = require("./messagePollFn");
 const imagePollFn = require("./imagePollFn");
@@ -17,12 +21,20 @@ bot.setWebHook(keys.externalUrl + `:443/bot` + keys.botToken);
 ////////////// JOIN BOT //////////////////
 
 bot.onText(/\/start/, msg => {
-  const { first_name, username } = msg.chat;
-  const chat_id = msg.chat.id;
+  const { first_name, username, id: chat_id } = msg.chat;
   var status = "normal";
-  if (keys.adminsId.includes(chat_id)) {
-    var user_type = "admin";
-  } else var user_type = "normal";
+  var user_type;
+  {
+    keys.adminsId.includes(chat_id)
+      ? (user_type = "admin")
+      : (user_type = "normal");
+  }
+
+  {
+    first_name !== null
+      ? (botAddressUser = first_name)
+      : (botAddressUser = "There");
+  }
 
   bot.sendPhoto(
     chat_id,
@@ -30,7 +42,7 @@ bot.onText(/\/start/, msg => {
   );
   bot.sendMessage(
     chat_id,
-    `<b>Hi ${first_name}!
+    `<b>Hi ${bot_AddressUser}!
 
 Welcome to the Together Community!</b>
 
@@ -38,9 +50,9 @@ What can this bot do for you?
 💡Get an outing idea with a single click below!
 💡Get specially curated ideas from the together team posted <b>3 Times Weekly</b>!
   `,
-    userStateMarkup()
+    inUserStateMarkup()
   );
-  storeNewUser(chat_id, first_name, username, user_type, status);
+  dbStoreNewUser(chat_id, first_name, username, user_type, status);
 });
 
 /////////////// ADMIN CHECK FUNCTION ///////////////////
@@ -522,7 +534,7 @@ bot.onText(/New Post/, async msg => {
     bot.sendMessage(
       msg.chat.id,
       "Something went wrong, Please inform Adil. You can try again if you want to.",
-      userStateMarkup()
+      inUserStateMarkup()
     );
   }
 });
@@ -693,7 +705,7 @@ bot.onText(/Send Post/, async msg => {
 
 bot.onText(/Exit Admin Session/, async msg => {
   await session.setAdminStateNull();
-  bot.sendMessage(msg.chat.id, "Back to User Mode", userStateMarkup());
+  bot.sendMessage(msg.chat.id, "Back to User Mode", inUserStateMarkup());
 });
 
 bot.onText(/Back/, async msg => {

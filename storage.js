@@ -1,6 +1,6 @@
 const { pool } = require("./config/config_bot");
 
-exports.storeNewUser = function storeNewUser(
+exports.dbStoreNewUser = function dbStoreNewUser(
   chat_id,
   first_name,
   username,
