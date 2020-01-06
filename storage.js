@@ -85,9 +85,9 @@ exports.getSubsCount = function getSubsCount() {
 };
 
 exports.storeUserClickedCount = function storeUserClickedCount(
-  cat_Id,
   clickedUser,
-  clickedDateTime
+  clickedDateTime,
+  cat_Id
 ) {
   pool.getConnection(function(err, connection) {
     if (err) console.log(err);
