@@ -323,7 +323,7 @@ class Session {
     });
   }
 
-  getClickedDataTime() {
+  getClickedDateTime() {
     return redis.lrangeAsync("clickedDateTime", 0, -1).then(function(res) {
       console.log("HERE");
       console.log(res[0]);
