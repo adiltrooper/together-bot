@@ -810,16 +810,21 @@ bot.on("message", async msg => {
 
     if (clickedUserArray.length == 10) {
       let clickedArray = [];
-      console.log("Empty Array");
-      for (i = 0; i < clickedUserArray.length + 1; i++) {
+      for (i = 0; i < clickedUserArray.length; i++) {
         clickedArray.push([
           clickedUserArray[i],
           clickedDateTimeArray[i],
           clickedCatArray[i]
         ]);
       }
-      console.log("Array is here");
       console.log(clickedArray);
+      clickedArray.forEach(result => {
+        let clickedUser = result[0];
+        let clickedDateTime = result[1];
+        let cat_Id = result[2];
+
+        storeUserClickedCount(clickedUser, clickedDateTime, cat_Id);
+      });
     }
 
     var activity = cachedListing[0][0];

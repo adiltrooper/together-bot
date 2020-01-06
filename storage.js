@@ -85,7 +85,7 @@ exports.getSubsCount = function getSubsCount() {
 };
 
 exports.storeUserClickedCount = function storeUserClickedCount(
-  cat_id,
+  cat_Id,
   clickedUser,
   clickedDateTime
 ) {
@@ -93,9 +93,13 @@ exports.storeUserClickedCount = function storeUserClickedCount(
     if (err) console.log(err);
     connection.query(
       "INSERT INTO bot_click_tracking (clickedUser, clickedDateTime, category) VALUES (?, ?, ?)",
-      [clickedUser, clickedDateTime, cat_id],
+      [clickedUser, clickedDateTime, cat_Id],
       function(err, results, fields) {
-        if (err) console.log(err.message);
+        if (err) {
+          console.log(err.message);
+        } else {
+          console.log("STORED");
+        }
       }
     );
     connection.release();
