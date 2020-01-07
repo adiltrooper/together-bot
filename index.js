@@ -106,7 +106,8 @@ bot.onText(/Subscriber Count/, async msg => {
     console.log(err.message);
   });
   if (adminState == "admin1") {
-    const subsCount = await getSubsCount().catch(err => {
+    console.log("TRYING");
+    let subsCount = await getSubsCount().catch(err => {
       console.log(err.message);
     });
     console.log(subsCount + "HELLO");
