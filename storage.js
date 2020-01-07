@@ -61,25 +61,24 @@ exports.storeCompletePoll = function storeCompletePoll(
   });
 };
 
-exports.getSubsCount = async function getSubsCount() {
-  return new Promise((resolve, reject) => {
+exports.getSubsCount = function getSubsCount() {
+  return new Promise(async (resolve, reject) => {
     const connection = await pool.getConnectionAsync();
-    connection.query("SELECT COUNT(*) AS subsCount FROM bot_user_db", function(
-      err,
-      results,
-      fields
-    ) {
-      if (err) {
-        console.log(err.message);
-      } else {
-        console.log(results[0].subsCount);
-        var subsCount = results[0].subsCount;
-        return subsCount;
-        resolve(subsCount);
+    await connection.query(
+      "SELECT COUNT(*) AS subsCount FROM bot_user_db",
+      function(err, results, fields) {
+        if (err) {
+          console.log(err.message);
+        } else {
+          console.log(results[0].subsCount);
+          var subsCount = results[0].subsCount;
+          return subsCount;
+          resolve(subsCount);
+        }
       }
-    });
+    );
   });
-  await connection.release();
+  connection.release();
 };
 
 exports.storeUserClickedCount = function storeUserClickedCount(
