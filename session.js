@@ -276,24 +276,45 @@ class Session {
     }
 
     activity.forEach(act => {
+      if (act == null) {
+        act = "null";
+      }
       redis.LPUSH(`cachedActivity_${cat}`, act);
     });
     location.forEach(loc => {
+      if (loc == null) {
+        loc = "null";
+      }
       redis.LPUSH(`cachedLocation_${cat}`, loc);
     });
     short_desc.forEach(desc => {
+      if (desc == null) {
+        desc = "null";
+      }
       redis.LPUSH(`cachedShort_desc_${cat}`, desc);
     });
     price.forEach(pr => {
+      if (pr == null) {
+        pr = "null";
+      }
       redis.LPUSH(`cachedPrice_${cat}`, pr);
     });
     poi.forEach(p => {
+      if (p == null) {
+        p = "null";
+      }
       redis.LPUSH(`cachedPoi_${cat}`, p);
     });
     website.forEach(site => {
+      if (site == null) {
+        site = "null";
+      }
       redis.LPUSH(`cachedWebsite_${cat}`, site);
     });
     imageURL.forEach(url => {
+      if (url == null) {
+        url = "null";
+      }
       redis.LPUSH(`cachedImageURL_${cat}`, url);
     });
   }
