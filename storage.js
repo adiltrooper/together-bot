@@ -110,7 +110,7 @@ exports.storeUserClickedCount = function storeUserClickedCount(
         if (err) {
           console.log(err.message);
         } else {
-          console.log("STORED");
+          console.log("Click Data has been Stored");
         }
       }
     );

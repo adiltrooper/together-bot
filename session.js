@@ -316,29 +316,24 @@ class Session {
 
   getClickedUser() {
     return redis.lrangeAsync("clickedUser", 0, -1).then(function(res) {
-      console.log("HERE");
-      console.log(res);
-      console.log("HERE");
       return res;
     });
   }
 
   getClickedDateTime() {
     return redis.lrangeAsync("clickedDateTime", 0, -1).then(function(res) {
-      console.log("HERE");
-      console.log(res);
-      console.log("HERE");
       return res;
     });
   }
 
   getClickedCat() {
     return redis.lrangeAsync("clickedCat", 0, -1).then(function(res) {
-      console.log("HERE");
-      console.log(res);
-      console.log("HERE");
       return res;
     });
+  }
+
+  delClickedData() {
+    return redis.del("clickedUser", "clickedDateTime", "clickedCat");
   }
 
   getCachedAdventurous() {
