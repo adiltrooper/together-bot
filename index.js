@@ -106,7 +106,14 @@ bot.onText(/Subscriber Count/, async msg => {
     console.log(err.message);
   });
   if (adminState == "admin1") {
-    getSubsCount();
+    const subsCount = await getSubsCount().catch(err => {
+      console.log(err.message);
+    });
+    bot.sendMessage(
+      msg.chat.id,
+      `TogetherSG now has <b>${subsCount}</b> subsribers!`,
+      { parse_mode: "HTML" }
+    );
   }
 });
 
@@ -809,24 +816,26 @@ bot.on("message", async msg => {
       if (err) console.log(err);
     });
 
-    if (clickedUserArray.length == 5) {
-      let clickedArray = [];
-      for (i = 0; i < clickedUserArray.length; i++) {
-        clickedArray.push([
-          clickedUserArray[i],
-          clickedDateTimeArray[i],
-          clickedCatArray[i]
-        ]);
-      }
-      console.log(clickedArray);
-      clickedArray.forEach(result => {
-        let clickedUser = result[0];
-        let clickedDateTime = result[1];
-        let cat_Id = result[2];
+    // if (clickedUserArray.length == 5) {
+    //   let clickedArray = [];
+    //   for (i = 0; i < clickedUserArray.length; i++) {
+    //     clickedArray.push([
+    //       clickedUserArray[i],
+    //       clickedDateTimeArray[i],
+    //       clickedCatArray[i]
+    //     ]);
+    //   }
+    //   console.log(clickedArray);
+    //   clickedArray.forEach(result => {
+    //     let clickedUser = result[0];
+    //     let clickedDateTime = result[1];
+    //     let cat_Id = result[2];
+    //
+    //
+    //   });
+    // }
 
-        storeUserClickedCount(clickedUser, clickedDateTime, cat_Id);
-      });
-    }
+    storeUserClickedCount(clickedUser, clickedDateTime, cat_Id);
 
     var activity = cachedListing[0][0];
     var location = cachedListing[1][0];

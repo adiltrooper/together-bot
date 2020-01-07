@@ -73,11 +73,7 @@ exports.getSubsCount = function getSubsCount() {
       console.log(results[0].subsCount);
       var subsCount = results[0].subsCount;
 
-      bot.sendMessage(
-        msg.chat.id,
-        `TogetherSG now has <b>${subsCount}</b> subsribers!`,
-        { parse_mode: "HTML" }
-      );
+      return subsCount;
     });
     connection.release();
     if (err) console.log(err);
@@ -92,8 +88,24 @@ exports.storeUserClickedCount = function storeUserClickedCount(
   pool.getConnection(function(err, connection) {
     if (err) console.log(err);
     connection.query(
-      "INSERT INTO bot_click_tracking (clickedUser, clickedDateTime, category) VALUES (?, ?, ?)",
-      [clickedUser, clickedDateTime, cat_Id],
+      "INSERT INTO bot_click_tracking (clickedUser, clickedDateTime, category) VALUES (?, ?, ?), (?, ?, ?), (?, ?, ?), (?, ?, ?), (?, ?, ?)",
+      [
+        clickedUser[0],
+        clickedDateTime[0],
+        cat_Id[0],
+        clickedUser[1],
+        clickedDateTime[1],
+        cat_Id[1],
+        clickedUser[2],
+        clickedDateTime[2],
+        cat_Id[2],
+        clickedUser[3],
+        clickedDateTime[3],
+        cat_Id[3],
+        clickedUser[4],
+        clickedDateTime[4],
+        cat_Id[4]
+      ],
       function(err, results, fields) {
         if (err) {
           console.log(err.message);
