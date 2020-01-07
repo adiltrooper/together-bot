@@ -72,14 +72,12 @@ exports.getSubsCount = async function getSubsCount() {
       if (err) console.log(err.message);
       console.log(results[0].subsCount);
       var subsCount = results[0].subsCount;
-
       return subsCount;
-      console.log(subsCount);
+      resolve();
     });
   });
   await query;
   connection.release();
-  if (err) console.log(err);
 };
 
 exports.storeUserClickedCount = function storeUserClickedCount(
