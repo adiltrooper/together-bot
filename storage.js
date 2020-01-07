@@ -88,7 +88,7 @@ exports.storeUserClickedCount = function storeUserClickedCount(
   pool.getConnection(function(err, connection) {
     if (err) console.log(err);
     connection.query(
-      "INSERT INTO bot_click_tracking (clickedUser, clickedDateTime, category) VALUES (?, ?, ?), (?, ?, ?), (?, ?, ?), (?, ?, ?), (?, ?, ?)",
+      "INSERT INTO bot_click_tracking (clickedUser, clickedDateTime, category) VALUES (?, ?, ?), (?, ?, ?), (?, ?, ?), (?, ?, ?), (?, ?, ?), (?, ?, ?), (?, ?, ?), (?, ?, ?), (?, ?, ?), (?, ?, ?)",
       [
         clickedUser[0],
         clickedDateTime[0],
@@ -104,7 +104,22 @@ exports.storeUserClickedCount = function storeUserClickedCount(
         cat_Id[3],
         clickedUser[4],
         clickedDateTime[4],
-        cat_Id[4]
+        cat_Id[4],
+        clickedUser[5],
+        clickedDateTime[5],
+        cat_Id[5],
+        clickedUser[6],
+        clickedDateTime[6],
+        cat_Id[6],
+        clickedUser[7],
+        clickedDateTime[7],
+        cat_Id[7],
+        clickedUser[8],
+        clickedDateTime[8],
+        cat_Id[8],
+        clickedUser[9],
+        clickedDateTime[9],
+        cat_Id[9]
       ],
       function(err, results, fields) {
         if (err) {
