@@ -835,7 +835,11 @@ bot.on("message", async msg => {
     //   });
     // }
 
-    storeUserClickedCount(clickedUser, clickedDateTime, cat_Id);
+    storeUserClickedCount(
+      clickedUserArray,
+      clickedDateTimeArray,
+      clickedCatArray
+    );
 
     var activity = cachedListing[0][0];
     var location = cachedListing[1][0];
