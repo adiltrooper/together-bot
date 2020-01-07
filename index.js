@@ -834,12 +834,13 @@ bot.on("message", async msg => {
     //
     //   });
     // }
-
-    storeUserClickedCount(
-      clickedUserArray,
-      clickedDateTimeArray,
-      clickedCatArray
-    );
+    if (clickedUserArray.length == 5) {
+      storeUserClickedCount(
+        clickedUserArray,
+        clickedDateTimeArray,
+        clickedCatArray
+      );
+    }
 
     var activity = cachedListing[0][0];
     var location = cachedListing[1][0];
