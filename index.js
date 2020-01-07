@@ -106,12 +106,9 @@ bot.onText(/Subscriber Count/, async msg => {
     console.log(err.message);
   });
 
-  function to(promise) {
-    return promise.then(val => [null, val]).catch(err => [err]);
-  }
   if (adminState == "admin1") {
     console.log("TRYING");
-    let subsCount = await to(getSubsCount()).catch(err => {
+    let subsCount = await getSubsCount().catch(err => {
       console.log(err.message);
     });
     console.log(subsCount + "HELLO");
