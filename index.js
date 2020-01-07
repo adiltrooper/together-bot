@@ -109,6 +109,7 @@ bot.onText(/Subscriber Count/, async msg => {
     const subsCount = await getSubsCount().catch(err => {
       console.log(err.message);
     });
+    console.log(subsCount + "HELLO");
     bot.sendMessage(
       msg.chat.id,
       `TogetherSG now has <b>${subsCount}</b> subsribers!`,
