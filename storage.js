@@ -73,7 +73,7 @@ exports.getSubsCount = async function getSubsCount() {
       console.log(results[0].subsCount);
       var subsCount = results[0].subsCount;
       return subsCount;
-      resolve();
+      resolve(subsCount);
     });
   });
   await query;
