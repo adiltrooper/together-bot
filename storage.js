@@ -62,21 +62,24 @@ exports.storeCompletePoll = function storeCompletePoll(
 };
 
 exports.getSubsCount = async function getSubsCount() {
-  const connection = await pool.getConnectionAsync();
   return new Promise((resolve, reject) => {
+    const connection = await pool.getConnectionAsync();
     connection.query("SELECT COUNT(*) AS subsCount FROM bot_user_db", function(
       err,
       results,
       fields
     ) {
-      if (err) console.log(err.message);
-      console.log(results[0].subsCount);
-      var subsCount = results[0].subsCount;
-      return subsCount;
-      resolve(subsCount);
+      if (err) {
+        console.log(err.message);
+      } else {
+        console.log(results[0].subsCount);
+        var subsCount = results[0].subsCount;
+        return subsCount;
+        resolve(subsCount);
+      }
     });
   });
-  connection.release();
+  await connection.release();
 };
 
 exports.storeUserClickedCount = function storeUserClickedCount(
