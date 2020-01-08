@@ -738,7 +738,7 @@ If it is a 🐛bug do describe it in a couple of words so we can resolve it ASAP
 
   session.setAdminState("feedback");
 });
-bot.on("message", msg => {
+bot.on("message", async msg => {
   const adminState = await session.getAdminState().catch(err => {
     console.log(err.message);
   });
