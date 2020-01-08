@@ -774,7 +774,7 @@ bot.on("message", async msg => {
         `THANKS FOR YOUR FEEDBACK 🙏🏻`,
         inUserStateMarkup()
       );
-    } else {
+    } else if (msg.text) {
       dbStoreUserFeedbackText(msg.from.id, msg.text);
       session.setAdminStateNull();
       bot.sendMessage(
@@ -782,6 +782,8 @@ bot.on("message", async msg => {
         `THANKS FOR YOUR FEEDBACK 🙏🏻`,
         inUserStateMarkup()
       );
+    } else if (msg.text == "Bye") {
+      bot.sendMessage(msg.from.id, `Another time then!`, inUserStateMarkup());
     }
   }
 });
