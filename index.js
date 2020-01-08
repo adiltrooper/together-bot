@@ -744,7 +744,9 @@ bot.onText(/\/feedback/, msg => {
 👀 What you would like to see!
 And any other thoughts you have!
 
-If it is a 🐛<b>bug</b> do describe it in a couple of words so we can resolve it ASAP`,
+If it is a 🐛<b>bug</b> do describe it in a couple of words so we can resolve it ASAP
+
+(Just send "Bye" if you accidentally clicked)`,
     feedbackStateMarkup()
   );
 });
@@ -771,7 +773,9 @@ bot.on("message", async msg => {
       session.setAdminStateNull();
       bot.sendMessage(
         msg.from.id,
-        `THANKS FOR YOUR FEEDBACK 🙏🏻`,
+        `THANKS FOR YOUR FEEDBACK 🙏
+You're back in the normal bot mode!
+`,
         inUserStateMarkup()
       );
     } else if (msg.text) {
@@ -779,11 +783,18 @@ bot.on("message", async msg => {
       session.setAdminStateNull();
       bot.sendMessage(
         msg.from.id,
-        `THANKS FOR YOUR FEEDBACK 🙏🏻`,
+        `THANKS FOR YOUR FEEDBACK 🙏
+You're back in the normal bot mode!`,
         inUserStateMarkup()
       );
     } else if (msg.text == "Bye") {
-      bot.sendMessage(msg.from.id, `Another time then!`, inUserStateMarkup());
+      bot.sendMessage(
+        msg.from.id,
+        `Another time then!
+You're back in the normal bot mode!
+        `,
+        inUserStateMarkup()
+      );
     }
   }
 });
