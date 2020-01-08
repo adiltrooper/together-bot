@@ -64,7 +64,7 @@ exports.storeCompletePoll = function storeCompletePoll(
 exports.getSubsCount = function getSubsCount() {
   return new Promise(async (resolve, reject) => {
     let connection;
-    const connection = await pool.getConnectionAsync();
+    connection = await pool.getConnectionAsync();
     let subsCount = await connection.query(
       "SELECT COUNT(*) AS subsCount FROM bot_user_db",
       function(err, results, fields) {
