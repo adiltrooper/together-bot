@@ -734,6 +734,7 @@ bot.onText(/Send Post/, async msg => {
 /////////////////// FEEDBACK ////////////////////////
 
 bot.onText(/\/feedback/, msg => {
+  session.setAdminState("feedback");
   bot.sendMessage(
     msg.from.id,
     `We really appreciate any form of constructive feedback! Be honest and let us know:
@@ -745,9 +746,12 @@ And any other thoughts you have!
 
 If it is a 🐛<b>bug</b> do describe it in a couple of words so we can resolve it ASAP`
   ),
-    feedbackStateMarkup();
-
-  session.setAdminState("feedback");
+    {
+      reply_markup: {
+        remove_keyboard: true
+      },
+      parse_mode: "HTML"
+    };
 });
 bot.on("message", async msg => {
   const adminState = await session.getAdminState().catch(err => {
