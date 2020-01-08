@@ -260,7 +260,8 @@ bot.on("message", async msg => {
     msg.text !== "🏠I Wanna Stay Home" &&
     msg.text !== "/start" &&
     msg.text !== "New Post" &&
-    msg.text !== "/admin"
+    msg.text !== "/admin" &&
+    msg.text !== "/feedback"
   ) {
     await bot.sendMessage(
       msg.chat.id,
@@ -299,7 +300,8 @@ bot.on("message", async msg => {
     msg.text !== "New Post" &&
     msg.text !== "/admin" &&
     msg.text !== "/start" &&
-    msg.text !== "Send Post"
+    msg.text !== "Send Post" &&
+    msg.text !== "/feedback"
   ) {
     const pollImage = await session.getPollImage().catch(err => {
       console.log(err.message);
@@ -579,7 +581,9 @@ bot.on("message", async msg => {
     msg.text !== "/start" &&
     msg.text !== "New Post" &&
     msg.text !== "/admin" &&
-    msg.text !== "/start"
+    msg.text !== "/start" &&
+    msg.text !== "/feedback" &&
+    msg.text !== "Poll Post"
   ) {
     await bot.sendMessage(
       msg.chat.id,
