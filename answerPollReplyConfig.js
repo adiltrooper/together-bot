@@ -14,10 +14,10 @@ exports.answerPollReplyConfig = async function answerPollReplyConfig(
     console.log(err.message);
   });
 
-  pollOption1 = pollOptions[0];
-  pollOption2 = pollOptions[1];
-  pollOption3 = pollOptions[2];
-  pollOption4 = pollOptions[3];
+  return (pollOption1 = pollOptions[0]);
+  return (pollOption2 = pollOptions[1]);
+  return (pollOption3 = pollOptions[2]);
+  return (pollOption4 = pollOptions[3]);
 
   pollCount1 = parseInt(pollCount[0]);
   pollCount2 = parseInt(pollCount[1]);
