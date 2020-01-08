@@ -760,7 +760,8 @@ bot.on("message", async msg => {
     msg.text !== "New Post" &&
     msg.text !== "/admin" &&
     msg.text !== "Send Post" &&
-    msg.text !== "Poll Post"
+    msg.text !== "Poll Post" &&
+    msg.text !== "/feedback"
   ) {
     if (msg.photo) {
       dbStoreUserFeedbackPhoto(msg.from.id, msg.photo, msg.caption);

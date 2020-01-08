@@ -142,7 +142,7 @@ exports.dbStoreUserFeedbackText = function dbStoreUserFeedbackText(
   pool.getConnection(function(err, connection) {
     if (err) console.log(err);
     connection.query(
-      "INSERT INTO bot_user_feedback (user_id, text_feedback) VALUES (?)",
+      "INSERT INTO bot_user_feedback (user_id, text_feedback) VALUES (?,?)",
       [userGivingFeedback, textFeedback],
       function(err, results, fields) {
         if (err) console.log(err.message);
@@ -161,7 +161,7 @@ exports.dbStoreUserFeedbackPhoto = function dbStoreUserFeedbackPhoto(
   pool.getConnection(function(err, connection) {
     if (err) console.log(err);
     connection.query(
-      "INSERT INTO bot_user_feedback (user_id, photo_feedback, caption_feedback) VALUES (?, ?, ?)",
+      "INSERT INTO bot_user_feedback (user_id, photo_feedback, caption_feedback) VALUES (?, ?, ?, ?)",
       [userGivingFeedback, photoFeedback, captionFeedback],
       function(err, results, fields) {
         if (err) console.log(err.message);
