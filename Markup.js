@@ -62,3 +62,11 @@ exports.adminStateMarkup = function adminStateMarkup() {
     parse_mode: "HTML"
   };
 };
+
+exports.feedbackStateMarkup = function feedbackStateMarkup() {
+  return {
+    reply_markup: {
+      remove_keyboard: true
+    }
+  };
+};

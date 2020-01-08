@@ -7,9 +7,15 @@ const {
   dbStoreNewUser,
   getSubsCount,
   storeCompletePoll,
-  storeUserClickedCount
+  storeUserClickedCount,
+  dbStoreUserFeedbackText,
+  dbStoreUserFeedbackPhoto
 } = require("./storage");
-const { inUserStateMarkup, adminStateMarkup } = require("./Markup");
+const {
+  inUserStateMarkup,
+  adminStateMarkup,
+  feedbackStateMarkup
+} = require("./Markup");
 
 const messagePollFn = require("./messagePollFn");
 const imagePollFn = require("./imagePollFn");
@@ -734,7 +740,8 @@ bot.onText(/\/feedback/, msg => {
 And any other thoughts you have!
 
 If it is a 🐛bug do describe it in a couple of words so we can resolve it ASAP`
-  );
+  ),
+    feedbackStateMarkup();
 
   session.setAdminState("feedback");
 });
