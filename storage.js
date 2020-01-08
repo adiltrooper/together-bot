@@ -73,7 +73,6 @@ exports.getSubsCount = function getSubsCount() {
         } else {
           console.log(results[0].subsCount);
           var subsCount = results[0].subsCount;
-          return subsCount;
         }
       }
     );
