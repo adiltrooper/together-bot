@@ -721,6 +721,60 @@ bot.onText(/Send Post/, async msg => {
   }
 });
 
+/////////////////// FEEDBACK ////////////////////////
+
+bot.onText(/\/feedback/, msg => {
+  bot.sendMessage(
+    msg.from.id,
+    `We really appreciate any form of constructive feedback! Be honest and let us know:
+
+🤗 What you like?
+💩 What you don't like?
+👀 What you would like to see!
+And any other thoughts you have!
+
+If it is a 🐛bug do describe it in a couple of words so we can resolve it ASAP`
+  );
+
+  session.setAdminState("feedback");
+});
+bot.on("message", msg => {
+  const adminState = await session.getAdminState().catch(err => {
+    console.log(err.message);
+  });
+  if (
+    adminState == "adminfeedback" &&
+    msg.text !== "Back" &&
+    msg.text !== "Exit Admin Session" &&
+    msg.text !== "☀️Feelin' Adventurous" &&
+    msg.text !== "🧘🏼‍Feelin' Chill" &&
+    msg.text !== "🏠I Wanna Stay Home" &&
+    msg.text !== "/start" &&
+    msg.text !== "New Post" &&
+    msg.text !== "/admin" &&
+    msg.text !== "Send Post" &&
+    msg.text !== "Poll Post"
+  ) {
+    if (msg.photo) {
+      dbStoreUserFeedbackPhoto(msg.from.id, msg.photo, msg.caption);
+      session.setAdminStateNull();
+      bot.sendMessage(
+        msg.from.id,
+        `THANKS FOR YOUR FEEDBACK 🙏🏻`,
+        inUserStateMarkup()
+      );
+    } else {
+      dbStoreUserFeedbackText(msg.from.id, msg.text);
+      session.setAdminStateNull();
+      bot.sendMessage(
+        msg.from.id,
+        `THANKS FOR YOUR FEEDBACK 🙏🏻`,
+        inUserStateMarkup()
+      );
+    }
+  }
+});
+
 /////////////////// EXITING /////////////////////////
 
 bot.onText(/Exit Admin Session/, async msg => {

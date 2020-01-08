@@ -134,3 +134,40 @@ exports.storeUserClickedCount = function storeUserClickedCount(
     if (err) console.log(err);
   });
 };
+
+exports.dbStoreUserFeedbackText = function dbStoreUserFeedbackText(
+  userGivingfeedback,
+  textFeedback
+) {
+  pool.getConnection(function(err, connection) {
+    if (err) console.log(err);
+    connection.query(
+      "INSERT INTO bot_user_feedback (userId, text_feedback) VALUES (?)",
+      [userGivingFeedback, textFeedback],
+      function(err, results, fields) {
+        if (err) console.log(err.message);
+      }
+    );
+    connection.release();
+    if (err) console.log(err);
+  });
+};
+
+exports.dbStoreUserFeedbackPhoto = function dbStoreUserFeedbackPhoto(
+  userGivingfeedback,
+  photoFeedback,
+  captionFeedback
+) {
+  pool.getConnection(function(err, connection) {
+    if (err) console.log(err);
+    connection.query(
+      "INSERT INTO bot_user_feedback (userId, photo_feedback, caption_feedback) VALUES (?, ?, ?)",
+      [userGivingFeedback, photoFeedback, captionFeedback],
+      function(err, results, fields) {
+        if (err) console.log(err.message);
+      }
+    );
+    connection.release();
+    if (err) console.log(err);
+  });
+};
