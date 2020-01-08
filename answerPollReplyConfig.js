@@ -4,7 +4,10 @@ const { session } = require("./session");
 
 exports.answerPollReplyConfig = async function answerPollReplyConfig(
   callbackQuery,
-  pollOptions
+  pollOption1,
+  pollOption2,
+  pollOption3,
+  pollOption4
 ) {
   const pollCount = await session.getPollCount().catch(err => {
     console.log(err.message);
@@ -14,18 +17,18 @@ exports.answerPollReplyConfig = async function answerPollReplyConfig(
     console.log(err.message);
   });
 
-  return (pollOption1 = pollOptions[0]);
-  return (pollOption2 = pollOptions[1]);
-  return (pollOption3 = pollOptions[2]);
-  return (pollOption4 = pollOptions[3]);
-
   pollCount1 = parseInt(pollCount[0]);
   pollCount2 = parseInt(pollCount[1]);
   pollCount3 = parseInt(pollCount[2]);
   pollCount4 = parseInt(pollCount[3]);
 
   if (pollOption1 && !pollOption2 && !pollOption3 && !pollOption4) {
-    return `Thanks for voting! 🥳🥳🥳`;
+    bot.sendMessage(
+      callbackQuery.from.id,
+      `Thanks for voting! 🥳🥳🥳
+      `,
+      answerPollReplyMarkup()
+    );
   } else if (pollOption1 && pollOption2 && !pollOption3 && !pollOption4) {
     totalCount = pollCount1 + pollCount2;
     option1Result = ((pollCount1 / totalCount) * 100).toFixed(1);

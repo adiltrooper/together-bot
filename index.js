@@ -486,6 +486,11 @@ bot.on("callback_query", async callbackQuery => {
       console.log(err.message);
     });
 
+    pollOption1 = pollOptions[0];
+    pollOption2 = pollOptions[1];
+    pollOption3 = pollOptions[2];
+    pollOption4 = pollOptions[3];
+
     async function voteOrHasVoted(voter, vote) {
       votedUsers = await session.getPollVoter().catch(err => {
         if (err) {
@@ -497,7 +502,13 @@ bot.on("callback_query", async callbackQuery => {
       } else {
         session.setPollVoter(voter);
         session.incrPollVote(vote);
-        answerPollReplyConfig(callbackQuery, pollOptions);
+        answerPollReplyConfig(
+          callbackQuery,
+          pollOption1,
+          pollOption2,
+          pollOption3,
+          pollOption4
+        );
       }
     }
 
