@@ -737,7 +737,7 @@ bot.onText(/\/feedback/, msg => {
   session.setAdminState("feedback");
   bot.sendMessage(
     msg.from.id,
-    `We really appreciate any form of constructive feedback! Be honest and let us know:
+    `We really appreciate any form of constructive feedback! Be honest and let us know below:
 
 🤗 What you like?
 💩 What you don't like?
