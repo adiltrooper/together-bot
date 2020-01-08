@@ -77,7 +77,7 @@ exports.getSubsCount = function getSubsCount() {
         }
       }
     );
-    resolve(subsCount[0].subsCount);
+    resolve(subsCount);
   });
   connection.release();
 };
