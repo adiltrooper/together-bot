@@ -739,7 +739,7 @@ bot.onText(/\/feedback/, msg => {
 👀 What you would like to see!
 And any other thoughts you have!
 
-If it is a 🐛bug do describe it in a couple of words so we can resolve it ASAP`
+If it is a 🐛<b>bug</b> do describe it in a couple of words so we can resolve it ASAP`
   ),
     feedbackStateMarkup();
 

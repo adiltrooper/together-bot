@@ -67,6 +67,7 @@ exports.feedbackStateMarkup = function feedbackStateMarkup() {
   return {
     reply_markup: {
       remove_keyboard: true
-    }
+    },
+    parse_mode: "HTML"
   };
 };
