@@ -734,7 +734,7 @@ bot.onText(/Send Post/, async msg => {
 /////////////////// FEEDBACK ////////////////////////
 
 bot.onText(/\/feedback/, msg => {
-  session.setAdminState("feedback");
+  session.setUserState(msg.chat.id, "feedback");
   bot.sendMessage(
     msg.from.id,
     `We really appreciate any form of constructive feedback! Be honest and let us know below:
@@ -751,11 +751,11 @@ If it is a 🐛<b>bug</b> do describe it in a couple of words so we can resolve 
   );
 });
 bot.on("message", async msg => {
-  const adminState = await session.getAdminState().catch(err => {
+  const userState = await session.getUserState(msg.chat.id).catch(err => {
     console.log(err.message);
   });
   if (
-    adminState == "adminfeedback" &&
+    userState == "userfeedback" &&
     msg.text !== "Back" &&
     msg.text !== "Exit Admin Session" &&
     msg.text !== "☀️Feelin' Adventurous" &&
@@ -770,7 +770,7 @@ bot.on("message", async msg => {
   ) {
     if (msg.photo) {
       dbStoreUserFeedbackPhoto(msg.from.id, msg.photo, msg.caption);
-      session.setAdminStateNull();
+      session.delUserState(msg.from.id);
       bot.sendMessage(
         msg.from.id,
         `THANKS FOR YOUR FEEDBACK 🙏
@@ -780,7 +780,7 @@ You're back in the normal bot mode!
       );
     } else if (msg.text) {
       dbStoreUserFeedbackText(msg.from.id, msg.text);
-      session.setAdminStateNull();
+      session.delUserState(msg.from.id);
       bot.sendMessage(
         msg.from.id,
         `THANKS FOR YOUR FEEDBACK 🙏
@@ -788,6 +788,7 @@ You're back in the normal bot mode!`,
         inUserStateMarkup()
       );
     } else if (msg.text == "Bye") {
+      session.delUserState(msg.from.id);
       bot.sendMessage(
         msg.from.id,
         `Another time then!

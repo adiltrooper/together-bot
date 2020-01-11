@@ -17,6 +17,20 @@ class Session {
     }
   }
 
+  setUserState(userId, state) {
+    return redis.setex(`userState_${userId}`, 1200, `user${state}`);
+  }
+
+  getUserState(userId) {
+    return redis.getAsync(`userState_${userId}`).then(function(res) {
+      return res;
+    });
+  }
+
+  delUserState(userId) {
+    return redis.del(`userState_${userId}`);
+  }
+
   setAdminList() {
     const adminsId = keys.adminsId;
     return redis.setex("adminsId", 3600, adminsId);
