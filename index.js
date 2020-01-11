@@ -737,14 +737,14 @@ bot.onText(/\/feedback/, msg => {
   session.setUserState(msg.chat.id, "feedback");
   bot.sendMessage(
     msg.from.id,
-    `We really appreciate any form of constructive feedback! Be honest and let us know below:
+    `We really appreciate all constructive feedback! Be honest and let us know below:
 
 🤗 What you like?
 💩 What you don't like?
 👀 What you would like to see!
 And any other thoughts you have!
 
-If it is a 🐛<b>bug</b> do describe it in a couple of words so we can resolve it ASAP
+If it is a 🐛<b>bug</b> do describe it! We will resolve it ASAP!
 
 (Just send "Bye" if you accidentally clicked)`,
     feedbackStateMarkup()
