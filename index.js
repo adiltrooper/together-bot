@@ -741,20 +741,18 @@ bot.on("message", async msg => {
   });
 
   arrayOfHandleMsgs = [
-    `Sorry 😢 My Maker did not make me a conversational bot
-But if you’re feeling lonely, our team is always here to listen to your /feedback.`,
+    `Sorry 😢
+My Maker did not make me a conversational bot. But if you’re feeling lonely, our team is always here to listen to your /feedback.`,
     `Seems like you’re not sure how to use this bot. Get some /help`,
-    `Seems like you were trying to send us a /suggestion or /feedback.
-We are all EARS 👂🏼👂🏼👂🏼`,
-    `Beep Beep Im a Bot, I cant talk
-Talk to some humans at /feedback`
+    `I CAN'T SPEAK.
+Seems like you were trying to send us a /suggestion or /feedback. We are all EARS 👂🏼👂🏼👂🏼`,
+    `Beep Beep Im a Bot, I can't speak 🤐! Talk to some humans at /feedback. Or find an activity idea by clicking one of the buttons below!`
   ];
 
   if (userState == null && adminState == null) {
     let randomHandleMsg =
       arrayOfHandleMsgs[Math.floor(Math.random() * arrayOfHandleMsgs.length)];
 
-    console.log(randomHandleMsg);
     bot.sendMessage(msg.from.id, randomHandleMsg, handleMsgMarkup());
   }
 });
@@ -826,6 +824,30 @@ You're back in the normal bot mode!
       );
     }
   }
+});
+
+//////////////////// HELP ///////////////////////////
+
+bot.onText(/\/help/, msg => {
+  bot.sendMessage(
+    msg.from.id,
+    `WE POST IDEAS 3 TIMES WEEKLY, STAY TUNED
+
+Click the buttons below to <b>generate activity ideas</b> based on your mood
+If you can't find the buttons, tap the "box with foursquares" icon in the message bar.
+
+📨 Contribute Ideas
+/suggestion - share your fav outings with us and be featured!
+
+☎️ Feedback
+/feedback - let us know what you think and if there are any bugs
+
+🚑 Help Using the Bot
+/help - see how to use the bot
+
+Have any further thoughts or questions? Get in touch with us by sliding into our insta DMs @dotogether.io or email us at social@dotogether.io.
+    `
+  );
 });
 
 /////////////////// EXITING /////////////////////////
