@@ -76,9 +76,8 @@ exports.handleMsgMarkup = function handleMsgMarkup() {
   return {
     reply_markup: {
       keyboard: [
-        ["New Post", "Poll Post"],
-        ["Subscriber Count"],
-        ["Exit Admin Session"]
+        ["☀️Feelin' Adventurous", "🧘🏼‍Feelin' Chill"],
+        ["🏠I Wanna Stay Home"]
       ],
       resize_keyboard: true
     },
@@ -90,9 +89,8 @@ exports.helpMarkup = function helpMarkup() {
   return {
     reply_markup: {
       keyboard: [
-        ["New Post", "Poll Post"],
-        ["Subscriber Count"],
-        ["Exit Admin Session"]
+        ["☀️Feelin' Adventurous", "🧘🏼‍Feelin' Chill"],
+        ["🏠I Wanna Stay Home"]
       ],
       resize_keyboard: true
     },
