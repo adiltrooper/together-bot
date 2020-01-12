@@ -732,7 +732,7 @@ bot.onText(/Send Post/, async msg => {
   }
 });
 
-bot.on("message", msg => {
+bot.on("message", async msg => {
   const userState = await session.getUserState(msg.chat.id).catch(err => {
     console.log(err.message);
   });
