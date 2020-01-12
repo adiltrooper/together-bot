@@ -757,11 +757,16 @@ bot.on("message", async msg => {
 
     arrayOfHandleMsgs = [
       `Sorry 😢
+
 My Maker did not make me a conversational bot. But if you’re feeling lonely, our team is always here to listen to your /feedback.`,
       `Seems like you’re not sure how to use this bot. Get some /help`,
       `I CAN'T SPEAK.
-Seems like you were trying to send us a /suggestion or /feedback. We are all EARS 👂🏼👂🏼👂🏼`,
-      `Beep Beep Im a Bot, I can't speak 🤐! Talk to some humans at /feedback. Or find an activity idea by clicking one of the buttons below!`
+Seems like you were trying to send us a /suggestion or /feedback. We are all EARS
+
+👂🏼👂🏼👂🏼`,
+      `Beep Beep Im a Bot, I can't speak 🤐!
+
+      Talk to some humans at /feedback. Or find an activity idea by clicking one of the buttons below!`
     ];
 
     if (userState == null && adminState == null) {
@@ -847,7 +852,7 @@ You're back in the normal bot mode!
 bot.onText(/\/help/, msg => {
   bot.sendMessage(
     msg.from.id,
-    `WE POST IDEAS 3 TIMES WEEKLY, STAY TUNED
+    `WE POST IDEAS <b>4 TIMES WEEKLY</b>, STAY TUNED
 
 Click the buttons below to <b>Generate Activity Ideas</b> based on your mood!
 
