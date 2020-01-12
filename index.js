@@ -849,7 +849,8 @@ bot.onText(/\/help/, msg => {
     msg.from.id,
     `WE POST IDEAS 3 TIMES WEEKLY, STAY TUNED
 
-Click the buttons below to <b>generate activity ideas</b> based on your mood
+Click the buttons below to <b>Generate Activity Ideas</b> based on your mood!
+
 If you can't find the buttons, tap the "box with foursquares" icon in the message bar.
 
 📨 Contribute Ideas
