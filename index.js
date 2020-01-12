@@ -752,7 +752,7 @@ Talk to some humans at /feedback`
 
   if (userState == null && adminState == null) {
     let randomHandleMsg =
-      arrayOfHandleMsgs[Math.floor(Math.random() * arrayOfHandleMsgs.length())];
+      arrayOfHandleMsgs[Math.floor(Math.random() * arrayOfHandleMsgs.length)];
   }
 
   bot.sendMessage(msg.from.id, randomHandleMsg, handleMsgMarkup());
