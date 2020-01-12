@@ -74,12 +74,28 @@ exports.feedbackStateMarkup = function feedbackStateMarkup() {
 
 exports.handleMsgMarkup = function handleMsgMarkup() {
   return {
+    reply_markup: {
+      keyboard: [
+        ["New Post", "Poll Post"],
+        ["Subscriber Count"],
+        ["Exit Admin Session"]
+      ],
+      resize_keyboard: true
+    },
     parse_mode: "HTML"
   };
 };
 
 exports.helpMarkup = function helpMarkup() {
   return {
+    reply_markup: {
+      keyboard: [
+        ["New Post", "Poll Post"],
+        ["Subscriber Count"],
+        ["Exit Admin Session"]
+      ],
+      resize_keyboard: true
+    },
     parse_mode: "HTML"
   };
 };
