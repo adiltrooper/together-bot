@@ -875,8 +875,8 @@ Have any further thoughts or questions? Get in touch with us by sliding into our
 
 /////////////////// EXITING /////////////////////////
 
-bot.onText(/Exit Admin Session/, msg => {
-  session.setAdminStateNull();
+bot.onText(/Exit Admin Session/, async msg => {
+  await session.setAdminStateNull();
   bot.sendMessage(msg.chat.id, "Back to User Mode", inUserStateMarkup());
 });
 

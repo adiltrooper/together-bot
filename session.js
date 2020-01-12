@@ -37,7 +37,7 @@ class Session {
   }
 
   setAdminStateNull() {
-    return redis.del("adminsState");
+    return redis.del("adminState");
   }
 
   setAdminState(state) {
