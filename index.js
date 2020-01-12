@@ -14,7 +14,8 @@ const {
 const {
   inUserStateMarkup,
   adminStateMarkup,
-  feedbackStateMarkup
+  feedbackStateMarkup,
+  handleMsgMarkup
 } = require("./Markup");
 
 const messagePollFn = require("./messagePollFn");
@@ -729,6 +730,32 @@ bot.onText(/Send Post/, async msg => {
     };
     retrieveUserList();
   }
+});
+
+bot.on("message", msg => {
+  const userState = await session.getUserState(msg.chat.id).catch(err => {
+    console.log(err.message);
+  });
+  const adminState = await session.getAdminState().catch(err => {
+    console.log(err.message);
+  });
+
+  arrayOfHandleMsgs = [
+    `Sorry 😢 My Maker did not make me a conversational bot
+But if you’re feeling lonely, our team is always here to listen to your /feedback.`,
+    `Seems like you’re not sure how to use this bot. Get some /help`,
+    `Seems like you were trying to send us a /suggestion or /feedback.
+We are all EARS 👂🏼👂🏼👂🏼`,
+    `Beep Beep Im a Bot, I cant talk
+Talk to some humans at /feedback`
+  ];
+
+  if (userState == null && adminState == null) {
+    let randomHandleMsg =
+      arrayOfHandleMsgs[Math.floor(Math.random() * arrayOfHandleMsgs.length())];
+  }
+
+  bot.sendMessage(msg.from.id, randomHandleMsg, handleMsgMarkup());
 });
 
 /////////////////// FEEDBACK ////////////////////////

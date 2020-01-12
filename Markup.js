@@ -71,3 +71,9 @@ exports.feedbackStateMarkup = function feedbackStateMarkup() {
     parse_mode: "HTML"
   };
 };
+
+exports.handleMsgMarkup = function handleMsgMarkup() {
+  return {
+    parse_mode: "HTML"
+  };
+};
