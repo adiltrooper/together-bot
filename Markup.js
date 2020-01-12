@@ -77,3 +77,9 @@ exports.handleMsgMarkup = function handleMsgMarkup() {
     parse_mode: "HTML"
   };
 };
+
+exports.helpMarkup = function helpMarkup() {
+  return {
+    parse_mode: "HTML"
+  };
+};

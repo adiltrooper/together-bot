@@ -15,7 +15,8 @@ const {
   inUserStateMarkup,
   adminStateMarkup,
   feedbackStateMarkup,
-  handleMsgMarkup
+  handleMsgMarkup,
+  helpMarkup
 } = require("./Markup");
 
 const messagePollFn = require("./messagePollFn");
@@ -733,27 +734,42 @@ bot.onText(/Send Post/, async msg => {
 });
 
 bot.on("message", async msg => {
-  const userState = await session.getUserState(msg.chat.id).catch(err => {
-    console.log(err.message);
-  });
-  const adminState = await session.getAdminState().catch(err => {
-    console.log(err.message);
-  });
+  if (
+    msg.text !== "Back" &&
+    msg.text !== "Exit Admin Session" &&
+    msg.text !== "☀️Feelin' Adventurous" &&
+    msg.text !== "🧘🏼‍Feelin' Chill" &&
+    msg.text !== "🏠I Wanna Stay Home" &&
+    msg.text !== "/start" &&
+    msg.text !== "New Post" &&
+    msg.text !== "/admin" &&
+    msg.text !== "Send Post" &&
+    msg.text !== "Poll Post" &&
+    msg.text !== "/feedback" &&
+    msg.text !== "/help"
+  ) {
+    const userState = await session.getUserState(msg.chat.id).catch(err => {
+      console.log(err.message);
+    });
+    const adminState = await session.getAdminState().catch(err => {
+      console.log(err.message);
+    });
 
-  arrayOfHandleMsgs = [
-    `Sorry 😢
+    arrayOfHandleMsgs = [
+      `Sorry 😢
 My Maker did not make me a conversational bot. But if you’re feeling lonely, our team is always here to listen to your /feedback.`,
-    `Seems like you’re not sure how to use this bot. Get some /help`,
-    `I CAN'T SPEAK.
+      `Seems like you’re not sure how to use this bot. Get some /help`,
+      `I CAN'T SPEAK.
 Seems like you were trying to send us a /suggestion or /feedback. We are all EARS 👂🏼👂🏼👂🏼`,
-    `Beep Beep Im a Bot, I can't speak 🤐! Talk to some humans at /feedback. Or find an activity idea by clicking one of the buttons below!`
-  ];
+      `Beep Beep Im a Bot, I can't speak 🤐! Talk to some humans at /feedback. Or find an activity idea by clicking one of the buttons below!`
+    ];
 
-  if (userState == null && adminState == null) {
-    let randomHandleMsg =
-      arrayOfHandleMsgs[Math.floor(Math.random() * arrayOfHandleMsgs.length)];
+    if (userState == null && adminState == null) {
+      let randomHandleMsg =
+        arrayOfHandleMsgs[Math.floor(Math.random() * arrayOfHandleMsgs.length)];
 
-    bot.sendMessage(msg.from.id, randomHandleMsg, handleMsgMarkup());
+      bot.sendMessage(msg.from.id, randomHandleMsg, handleMsgMarkup());
+    }
   }
 });
 
@@ -846,7 +862,8 @@ If you can't find the buttons, tap the "box with foursquares" icon in the messag
 /help - see how to use the bot
 
 Have any further thoughts or questions? Get in touch with us by sliding into our insta DMs @dotogether.io or email us at social@dotogether.io.
-    `
+    `,
+    helpMarkup()
   );
 });
 
