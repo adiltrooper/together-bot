@@ -8,7 +8,10 @@ exports.dbStoreNewUser = function dbStoreNewUser(
   status
 ) {
   pool.getConnection(function(err, connection) {
-    if (err) console.log(err);
+    if (err) {
+      console.log(err);
+      return;
+    }
     connection.query(
       "INSERT INTO bot_user_db (chat_id, first_name, username, user_type, status) VALUES (?, ?, ?, ?, ?)",
       [chat_id, first_name, username, user_type, status],
@@ -17,7 +20,6 @@ exports.dbStoreNewUser = function dbStoreNewUser(
       }
     );
     connection.release();
-    if (err) console.log(err);
   });
 };
 
