@@ -19,8 +19,7 @@ const {
   helpMarkup
 } = require("./Markup");
 
-const messagePollFn = require("./messagePollFn");
-const imagePollFn = require("./imagePollFn");
+const pollFn = require("./pollFn");
 const { existPollReply } = require("./existPollReply");
 const { draftPollReply } = require("./draftPollReply");
 const { answerPollReplyConfig } = require("./answerPollReplyConfig");
@@ -416,7 +415,7 @@ bot.onText(/Send Post/, async msg => {
                 .sendMessage(
                   userId,
                   pollMessage,
-                  messagePollFn(option1, option2, option3, option4)
+                  pollFn([option1, option2, option3, option4])
                 )
                 .catch(err => {
                   console.log(err);
@@ -445,7 +444,7 @@ bot.onText(/Send Post/, async msg => {
                 .sendPhoto(
                   userId,
                   pollImage,
-                  imagePollFn(option1, option2, option3, option4, pollMessage)
+                  pollFn([option1, option2, option3, option4], pollMessage)
                 )
                 .catch(err => {
                   console.log(err);
