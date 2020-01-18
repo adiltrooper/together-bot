@@ -13,7 +13,6 @@ const {
 } = require("./storage");
 const {
   inUserStateMarkup,
-  adminStateMarkup,
   feedbackStateMarkup,
   handleMsgMarkup,
   helpMarkup
@@ -21,6 +20,7 @@ const {
 
 const messagePollFn = require("./messagePollFn");
 const imagePollFn = require("./imagePollFn");
+const { existPollReply } = require("./existPollReply");
 const { draftPollReply } = require("./draftPollReply");
 const { answerPollReplyConfig } = require("./answerPollReplyConfig");
 const indexUtils = require("./indexUtils");
@@ -44,7 +44,10 @@ const botSetupFuncs = [
   },
   {
     botFunction: bot.onText,
-    args: [/Poll Post/, indexUtils.pollPostCallback]
+    args: [
+      /Poll Post/,
+      async msg => indexUtils.pollPostCallback(msg, { existPollReply })
+    ]
   },
   {
     botFunction: bot.on,

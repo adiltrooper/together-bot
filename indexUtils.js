@@ -1,8 +1,7 @@
 const keys = require("./config/config_keys/keys");
 
 const { bot } = require("./config/config_bot");
-const { inUserStateMarkup } = require("./Markup");
-const { existPollReply } = require("./existPollReply");
+const { inUserStateMarkup, adminStateMarkup } = require("./Markup");
 const { session } = require("./session");
 
 ////////////// JOIN BOT //////////////////
@@ -51,7 +50,8 @@ exports.subsCountCallback = async (msg, dbCallbacks) => {
   }
 };
 
-exports.pollPostCallback = async msg => {
+exports.pollPostCallback = async (msg, dbCallbacks) => {
+  const { existPollReply } = dbCallbacks;
   const adminState = await session.getAdminState().catch(err => {
     console.log(err.message);
   });
@@ -73,7 +73,7 @@ exports.pollPostCallback = async msg => {
       });
       existPollReply(msg.chat.id, pollOptions, pollCount, pollVoterLength);
     }
-    showPollExisting();
+    await showPollExisting();
     bot.sendMessage(msg.chat.id, "Choose an Option or Exit", {
       reply_markup: {
         keyboard: [["Exit Admin Session"]],
