@@ -1,7 +1,6 @@
 const keys = require("./config/config_keys/keys");
 
 const { bot } = require("./config/config_bot");
-const { dbStoreNewUser } = require("./storage");
 const { inUserStateMarkup } = require("./Markup");
 
 ////////////// JOIN BOT //////////////////
