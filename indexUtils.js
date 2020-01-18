@@ -2,6 +2,8 @@ const keys = require("./config/config_keys/keys");
 
 const { bot } = require("./config/config_bot");
 const { inUserStateMarkup } = require("./Markup");
+const { existPollReply } = require("./existPollReply");
+const { session } = require("./session");
 
 ////////////// JOIN BOT //////////////////
 
@@ -29,4 +31,146 @@ exports.joinBotCallback = (msg, dbCallbacks) => {
     inUserStateMarkup()
   );
   dbStoreNewUser(chat_id, first_name, username, user_type, status);
+};
+
+exports.subsCountCallback = async (msg, dbCallbacks) => {
+  const { getSubsCount } = dbCallbacks;
+  const adminState = await session.getAdminState().catch(err => {
+    console.log(err.message);
+  });
+
+  if (adminState == "admin1") {
+    let subsCount = await getSubsCount().catch(err => {
+      console.log(err.message);
+    });
+    bot.sendMessage(
+      msg.chat.id,
+      `TogetherSG now has <b>${subsCount}</b> subscribers!`,
+      { parse_mode: "HTML" }
+    );
+  }
+};
+
+exports.pollPostCallback = async msg => {
+  const adminState = await session.getAdminState().catch(err => {
+    console.log(err.message);
+  });
+  const pollExists = await session.getPollTitle().catch(err => {
+    console.log(err.message);
+  });
+
+  if (adminState == "admin1" && pollExists) {
+    session.setAdminState("4");
+    async function showPollExisting() {
+      const pollOptions = await session.getPollOptions().catch(err => {
+        console.log(err.message);
+      });
+      const pollCount = await session.getPollCount().catch(err => {
+        console.log(err.message);
+      });
+      const pollVoterLength = await session.lengthPollVoter().catch(err => {
+        console.log(err.message);
+      });
+      existPollReply(msg.chat.id, pollOptions, pollCount, pollVoterLength);
+    }
+    showPollExisting();
+    bot.sendMessage(msg.chat.id, "Choose an Option or Exit", {
+      reply_markup: {
+        keyboard: [["Exit Admin Session"]],
+        resize_keyboard: true
+      }
+    });
+  } else if (adminState == "admin1" && !pollExists) {
+    session.delPollData();
+    session.delPollVoter();
+    session.setAdminState("5");
+    bot.sendMessage(msg.chat.id, "Draft your main message:", {
+      reply_markup: {
+        keyboard: [["Back", "Exit Admin Session"]],
+        resize_keyboard: true
+      }
+    });
+  }
+};
+
+exports.callbackQueryCallback = async (callbackQuery, dbCallbacks) => {
+  const { storeCompletePoll } = dbCallbacks;
+  const adminState = await session.getAdminState().catch(err => {
+    console.log(err.message);
+  });
+  if (
+    adminState == "admin4" &&
+    callbackQuery.data == "🛑Stop Poll & Create New 🛑"
+  ) {
+    bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
+    const pollOptions = await session.getPollOptions().catch(err => {
+      console.log(err.message);
+    });
+
+    pollOption1 = pollOptions[0];
+    pollOption2 = pollOptions[1];
+    pollOption3 = pollOptions[2];
+    pollOption4 = pollOptions[3];
+
+    const pollCount = await session.getPollCount().catch(err => {
+      console.log(err.message);
+    });
+    parseInt(pollCount[0])
+      ? (pollCount1 = parseInt(pollCount[0]))
+      : (pollCount1 = 0);
+    parseInt(pollCount[1])
+      ? (pollCount2 = parseInt(pollCount[1]))
+      : (pollCount2 = 0);
+    parseInt(pollCount[2])
+      ? (pollCount3 = parseInt(pollCount[2]))
+      : (pollCount3 = 0);
+    parseInt(pollCount[3])
+      ? (pollCount4 = parseInt(pollCount[3]))
+      : (pollCount4 = 0);
+
+    const pollTitle = await session.getPollTitle().catch(err => {
+      console.log(err.message);
+    });
+
+    storeCompletePoll(
+      pollTitle,
+      callbackQuery,
+      pollOption1,
+      pollCount1,
+      pollOption2,
+      pollCount2,
+      pollOption3,
+      pollCount3,
+      pollOption4,
+      pollCount4
+    );
+
+    session.delPollData();
+    session.delPollVoter();
+    session.setAdminState("5");
+    bot.sendMessage(
+      callbackQuery.from.id,
+      `
+      Current Poll has been Stopped and Saved
+
+<b>Create your New Poll Below 👇🏻
+Draft your main message:</b>
+      `,
+      {
+        reply_markup: {
+          keyboard: [["Back", "Exit Admin Session"]],
+          resize_keyboard: true
+        },
+        parse_mode: "HTML"
+      }
+    );
+  } else if (callbackQuery.data == "Keep Poll" && adminState == "admin4") {
+    bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
+    session.setAdminState("1");
+    bot.sendMessage(
+      callbackQuery.from.id,
+      `Welcome Back to the admin menu! Please select an Option:`,
+      adminStateMarkup()
+    );
+  }
 };
