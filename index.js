@@ -24,44 +24,19 @@ const imagePollFn = require("./imagePollFn");
 const { existPollReply } = require("./existPollReply");
 const { draftPollReply } = require("./draftPollReply");
 const { answerPollReplyConfig } = require("./answerPollReplyConfig");
+const { joinBotCallback } = require("./indexUtils");
 
 bot.setWebHook(keys.externalUrl + `:443/bot` + keys.botToken);
 
-////////////// JOIN BOT //////////////////
-
-bot.onText(/\/start/, msg => {
-  const { first_name, username, id: chat_id } = msg.chat;
-  var status = "normal";
-  var user_type, botAddressUser;
+const botSetupFuncs = [
   {
-    keys.adminsId.includes(chat_id)
-      ? (user_type = "admin")
-      : (user_type = "normal");
+    botFunction: bot.onText,
+    args: [/\/start/, msg => joinBotCallback(msg, { dbStoreNewUser })]
   }
+];
 
-  {
-    first_name.includes("?")
-      ? (botAddressUser = "There")
-      : (botAddressUser = first_name);
-  }
-
-  bot.sendPhoto(
-    chat_id,
-    "https://res.cloudinary.com/dotogether/image/upload/v1576154842/Listings/Welcome%20Image.png"
-  );
-  bot.sendMessage(
-    chat_id,
-    `<b>Hi ${botAddressUser}!
-
-Welcome to the Together Community!</b>
-
-What can this bot do for you?
-💡Get an outing idea with a single click below!
-💡Get specially curated ideas from the together team posted <b>3 Times Weekly</b>!
-  `,
-    inUserStateMarkup()
-  );
-  dbStoreNewUser(chat_id, first_name, username, user_type, status);
+botSetupFuncs.forEach(func => {
+  func.botFunction.bind(bot)(...func.args);
 });
 
 /////////////// ADMIN CHECK FUNCTION ///////////////////
