@@ -58,16 +58,17 @@ describe("adminsOnly function", () => {
   let stubs = [];
 
   beforeEach(() => {
-    stubs.push(sinon.stub(bot, "getChatMember"));
-    stubs.push(sinon.stub(session, "getAdminList"));
-    stubs.push(sinon.stub(bot, "sendMessage"));
-    stubs.push(sinon.stub(session, "setAdminList"));
-    stubs.push(sinon.stub(session, "setAdminState"));
+    stubs = [
+      sinon.stub(bot, "getChatMember"),
+      sinon.stub(session, "getAdminList"),
+      sinon.stub(bot, "sendMessage"),
+      sinon.stub(session, "setAdminList"),
+      sinon.stub(session, "setAdminState")
+    ];
   });
 
   afterEach(() => {
     stubs.forEach(stub => stub.restore());
-    stubs = [];
   });
 
   it("should set admin state to 1 when member is in admin list", async () => {
