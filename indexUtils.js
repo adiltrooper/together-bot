@@ -107,26 +107,15 @@ exports.callbackQueryCallback = async (callbackQuery, dbCallbacks) => {
       console.log(err.message);
     });
 
-    pollOption1 = pollOptions[0];
-    pollOption2 = pollOptions[1];
-    pollOption3 = pollOptions[2];
-    pollOption4 = pollOptions[3];
+    const [pollOption1, pollOption2, pollOption3, pollOption4] = pollOptions;
 
     const pollCount = await session.getPollCount().catch(err => {
       console.log(err.message);
     });
-    parseInt(pollCount[0])
-      ? (pollCount1 = parseInt(pollCount[0]))
-      : (pollCount1 = 0);
-    parseInt(pollCount[1])
-      ? (pollCount2 = parseInt(pollCount[1]))
-      : (pollCount2 = 0);
-    parseInt(pollCount[2])
-      ? (pollCount3 = parseInt(pollCount[2]))
-      : (pollCount3 = 0);
-    parseInt(pollCount[3])
-      ? (pollCount4 = parseInt(pollCount[3]))
-      : (pollCount4 = 0);
+    const pollCount1 = parseInt(pollCount[0]) || 0;
+    const pollCount2 = parseInt(pollCount[1]) || 0;
+    const pollCount3 = parseInt(pollCount[2]) || 0;
+    const pollCount4 = parseInt(pollCount[3]) || 0;
 
     const pollTitle = await session.getPollTitle().catch(err => {
       console.log(err.message);
