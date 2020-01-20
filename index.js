@@ -23,6 +23,7 @@ const pollFn = require("./pollFn");
 const { existPollReply } = require("./existPollReply");
 const { draftPollReply } = require("./draftPollReply");
 const { answerPollReplyConfig } = require("./answerPollReplyConfig");
+const { adminsOnly } = require("./indexUtils");
 
 bot.setWebHook(keys.externalUrl + `:443/bot` + keys.botToken);
 
@@ -62,32 +63,6 @@ What can this bot do for you?
   );
   dbStoreNewUser(chat_id, first_name, username, user_type, status);
 });
-
-/////////////// ADMIN CHECK FUNCTION ///////////////////
-
-const adminsOnly = async msg => {
-  const member = await bot
-    .getChatMember(msg.chat.id, msg.chat.id)
-    .catch(err => {
-      console.log(err.message);
-    });
-  var reply = await session.getAdminList().catch(err => {
-    console.log(err.message);
-  });
-  if (!reply) {
-    session.setAdminList();
-    var reply = keys.adminsId;
-  }
-  if (reply.includes(member.user.id)) {
-    session.setAdminState("1");
-    return true;
-  } else {
-    bot.sendMessage(
-      msg.chat.id,
-      `Sorry ${member.user.first_name}, you are not an admin :(`
-    );
-  }
-};
 
 ////////////////// ENTER ADMIN STATE /////////////////////
 
