@@ -23,7 +23,8 @@ const imagePollFn = require("./imagePollFn");
 const { existPollReply } = require("./existPollReply");
 const { draftPollReply } = require("./draftPollReply");
 const { answerPollReplyConfig } = require("./answerPollReplyConfig");
-const indexUtils = require("./indexUtils");
+const indexCallbacks = require("./indexCallbacks");
+const { adminsOnly } = require("./indexUtils");
 
 bot.setWebHook(keys.externalUrl + `:443/bot` + keys.botToken);
 
@@ -32,38 +33,35 @@ const botSetupFuncs = [
     botFunction: bot.onText,
     args: [
       /\/admin/,
-      msg =>
-        indexUtils.adminStateCallback(msg, {
-          adminsOnly: indexUtils.adminsOnly
-        })
+      msg => indexCallbacks.adminStateCallback(msg, { adminsOnly })
     ]
   },
   {
     botFunction: bot.onText,
     args: [
       /\/start/,
-      msg => indexUtils.joinBotCallback(msg, { dbStoreNewUser })
+      msg => indexCallbacks.joinBotCallback(msg, { dbStoreNewUser })
     ]
   },
   {
     botFunction: bot.onText,
     args: [
       /Subscriber Count/,
-      async msg => indexUtils.subsCountCallback(msg, { getSubsCount })
+      async msg => indexCallbacks.subsCountCallback(msg, { getSubsCount })
     ]
   },
   {
     botFunction: bot.onText,
     args: [
       /Poll Post/,
-      async msg => indexUtils.pollPostCallback(msg, { existPollReply })
+      async msg => indexCallbacks.pollPostCallback(msg, { existPollReply })
     ]
   },
   {
     botFunction: bot.on,
     args: [
       "callback_query",
-      async msg => indexUtils.pollPostCallback(msg, { storeCompletePoll })
+      async msg => indexCallbacks.pollPostCallback(msg, { storeCompletePoll })
     ]
   }
 ];
