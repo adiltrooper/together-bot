@@ -31,6 +31,13 @@ const botSetupFuncs = [
   {
     botFunction: bot.onText,
     args: [
+      /\/admin/,
+      msg => indexUtils.adminStateCallback(msg)
+    ]
+  },
+  {
+    botFunction: bot.onText,
+    args: [
       /\/start/,
       msg => indexUtils.joinBotCallback(msg, { dbStoreNewUser })
     ]
@@ -60,25 +67,6 @@ const botSetupFuncs = [
 
 botSetupFuncs.forEach(func => {
   func.botFunction.bind(bot)(...func.args);
-});
-
-////////////////// ENTER ADMIN STATE /////////////////////
-
-bot.onText(/\/admin/, async msg => {
-  const adminCheck = await adminsOnly(msg).catch(err => {
-    console.log(err.message);
-  });
-  if (adminCheck) {
-    session.setAdminState("1");
-    bot.sendMessage(
-      msg.chat.id,
-      `Hi <b>${msg.chat.first_name}</b>! Welcome to the admin menu!
-Please Select an Option:`,
-      adminStateMarkup()
-    );
-  } else {
-    console.log("Sorry you are not an admin");
-  }
 });
 
 bot.on("message", async msg => {

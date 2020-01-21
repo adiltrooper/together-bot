@@ -4,6 +4,51 @@ const { bot } = require("./config/config_bot");
 const { inUserStateMarkup, adminStateMarkup } = require("./Markup");
 const { session } = require("./session");
 
+////////////////// ENTER ADMIN STATE /////////////////////
+
+exports.adminStateCallback = async msg => {
+  const adminCheck = await adminsOnly(msg).catch(err => {
+    console.log(err.message);
+  });
+  if (adminCheck) {
+    session.setAdminState("1");
+    bot.sendMessage(
+      msg.chat.id,
+      `Hi <b>${msg.chat.first_name}</b>! Welcome to the admin menu!
+Please Select an Option:`,
+      adminStateMarkup()
+    );
+  } else {
+    console.log("Sorry you are not an admin");
+  }
+};
+
+/////////////// ADMIN CHECK FUNCTION ///////////////////
+
+exports.adminsOnly = async msg => {
+  const member = await bot
+    .getChatMember(msg.chat.id, msg.chat.id)
+    .catch(err => {
+      console.log(err.message);
+    });
+  var reply = await session.getAdminList().catch(err => {
+    console.log(err.message);
+  });
+  if (!reply) {
+    session.setAdminList();
+    var reply = keys.adminsId;
+  }
+  if (reply.includes(member.user.id)) {
+    session.setAdminState("1");
+    return true;
+  } else {
+    bot.sendMessage(
+      msg.chat.id,
+      `Sorry ${member.user.first_name}, you are not an admin :(`
+    );
+  }
+};
+
 ////////////// JOIN BOT //////////////////
 
 exports.joinBotCallback = (msg, dbCallbacks) => {
@@ -159,32 +204,6 @@ Draft your main message:</b>
       callbackQuery.from.id,
       `Welcome Back to the admin menu! Please select an Option:`,
       adminStateMarkup()
-    );
-  }
-};
-
-/////////////// ADMIN CHECK FUNCTION ///////////////////
-
-exports.adminsOnly = async msg => {
-  const member = await bot
-    .getChatMember(msg.chat.id, msg.chat.id)
-    .catch(err => {
-      console.log(err.message);
-    });
-  var reply = await session.getAdminList().catch(err => {
-    console.log(err.message);
-  });
-  if (!reply) {
-    session.setAdminList();
-    var reply = keys.adminsId;
-  }
-  if (reply.includes(member.user.id)) {
-    session.setAdminState("1");
-    return true;
-  } else {
-    bot.sendMessage(
-      msg.chat.id,
-      `Sorry ${member.user.first_name}, you are not an admin :(`
     );
   }
 };
