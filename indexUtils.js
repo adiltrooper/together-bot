@@ -6,7 +6,8 @@ const { session } = require("./session");
 
 ////////////////// ENTER ADMIN STATE /////////////////////
 
-exports.adminStateCallback = async msg => {
+exports.adminStateCallback = async (msg, dbCallbacks) => {
+  const { adminsOnly } = dbCallbacks;
   const adminCheck = await adminsOnly(msg).catch(err => {
     console.log(err.message);
   });
@@ -25,7 +26,7 @@ Please Select an Option:`,
 
 /////////////// ADMIN CHECK FUNCTION ///////////////////
 
-exports.adminsOnly = async msg => {
+const adminsOnly = async msg => {
   const member = await bot
     .getChatMember(msg.chat.id, msg.chat.id)
     .catch(err => {
@@ -48,6 +49,8 @@ exports.adminsOnly = async msg => {
     );
   }
 };
+
+exports.adminsOnly = adminsOnly;
 
 ////////////// JOIN BOT //////////////////
 

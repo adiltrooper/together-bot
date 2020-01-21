@@ -32,7 +32,10 @@ const botSetupFuncs = [
     botFunction: bot.onText,
     args: [
       /\/admin/,
-      msg => indexUtils.adminStateCallback(msg)
+      msg =>
+        indexUtils.adminStateCallback(msg, {
+          adminsOnly: indexUtils.adminsOnly
+        })
     ]
   },
   {

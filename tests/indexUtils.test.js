@@ -181,6 +181,50 @@ describe("joinBotCallback function", () => {
   });
 });
 
+describe("adminStateCallback function", () => {
+  let stubs = [];
+
+  beforeEach(() => {
+    stubs = [
+      sinon.stub(session, "setAdminState"),
+      sinon.stub(bot, "sendMessage")
+    ];
+  });
+
+  afterEach(() => {
+    stubs.forEach(stub => stub.restore());
+  });
+
+  it("should set adminstate and send message when adminscheck is true", async () => {
+    const adminsOnly = jest.fn().mockResolvedValueOnce(true);
+
+    await indexUtils.adminStateCallback(
+      { chat: { id: 1, first_name: "testname" } },
+      { adminsOnly }
+    );
+
+    sinon.assert.calledWith(session.setAdminState, "1");
+    sinon.assert.calledWith(
+      bot.sendMessage,
+      1,
+      sinon.match("testname"),
+      sinon.match.object
+    );
+  });
+
+  it("should set not adminstate and send message when adminscheck is false", async () => {
+    const adminsOnly = jest.fn().mockResolvedValueOnce(false);
+
+    await indexUtils.adminStateCallback(
+      { chat: { id: 1, first_name: "testname" } },
+      { adminsOnly }
+    );
+
+    sinon.assert.notCalled(session.setAdminState);
+    sinon.assert.notCalled(bot.sendMessage);
+  });
+});
+
 describe("subsCountCallback function", () => {
   let stubs = [];
 
