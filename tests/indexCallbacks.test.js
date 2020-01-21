@@ -68,6 +68,15 @@ describe("joinBotCallback function", () => {
 
 describe("adminStateCallback function", () => {
   let stubs = [];
+  let originalLog;
+
+  beforeAll(() => {
+    originalLog = console.log;
+  });
+
+  afterAll(() => {
+    console.log = originalLog;
+  });
 
   beforeEach(() => {
     stubs = [
@@ -98,6 +107,7 @@ describe("adminStateCallback function", () => {
   });
 
   it("should set not adminstate and send message when adminscheck is false", async () => {
+    console.log = jest.fn();
     const adminsOnly = jest.fn().mockResolvedValueOnce(false);
 
     await indexCallbacks.adminStateCallback(
@@ -107,6 +117,7 @@ describe("adminStateCallback function", () => {
 
     sinon.assert.notCalled(session.setAdminState);
     sinon.assert.notCalled(bot.sendMessage);
+    expect(console.log).toHaveBeenCalledWith("Sorry you are not an admin");
   });
 });
 
