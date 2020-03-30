@@ -752,7 +752,7 @@ bot.on("message", async msg => {
 My Maker did not make me a conversational bot. But if you’re feeling lonely, our team is always here to listen to your /feedback.`,
       `Seems like you’re not sure how to use this bot. Get some /help`,
       `I CAN'T SPEAK.
-Seems like you were trying to send us a /suggestion or /feedback. We are all EARS
+Seems like you were trying to send us a /feedback. We are all EARS
 
 👂🏼👂🏼👂🏼`,
       `Beep Beep Im a Bot, I can't speak 🤐!
@@ -848,9 +848,6 @@ bot.onText(/\/help/, msg => {
 Click the buttons below to <b>Generate Activity Ideas</b> based on your mood!
 
 If you can't find the buttons, tap the "box with foursquares" icon in the message bar.
-
-📨 Contribute Ideas
-/suggestion - share your fav outings with us and be featured!
 
 ☎️ Feedback
 /feedback - let us know what you think and if there are any bugs
