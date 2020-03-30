@@ -65,18 +65,19 @@ What can this bot do for you?
   bot.sendMessage(
     chat_id,
     `
-  Here's some Stay-Home-Ideas to get you started!
-  1. Explore the REAL surface of Mars
-  bit.ly/accessmarsTGTSG
-  2. Watch Netflix TOGETHER!
-  bit.ly/covidnetflixSG
-  3. Upskill and choose from 450 free Ivy League Courses
-  bit.ly/450freecoursesTGTSG
-  4. 80+ do-at-home science activities
-  bit.ly/doathomescienceTGTSG
-  5. Curated workouts in the comfort of your home
-  bit.ly/42RaceTGTSG
-  `
+Here's some Stay-Home-Ideas to get you started!
+🔭Explore the REAL surface of Mars
+bit.ly/accessmarsTGTSG
+📺Watch Netflix TOGETHER!
+bit.ly/covidnetflixSG
+📜Upskill and choose from 450 free Ivy League Courses
+bit.ly/450freecoursesTGTSG
+🧪80+ do-at-home science activities
+bit.ly/doathomescienceTGTSG
+🏋️Curated workouts in the comfort of your home
+bit.ly/42RaceTGTSG
+  `,
+    { disable_web_page_preview: true }
   );
   dbStoreNewUser(chat_id, first_name, username, user_type, status);
 });
