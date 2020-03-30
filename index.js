@@ -30,7 +30,7 @@ bot.setWebHook(keys.externalUrl + `:443/bot` + keys.botToken);
 
 ////////////// JOIN BOT //////////////////
 
-bot.onText(/\/start/, msg => {
+bot.onText(/\/start/, async msg => {
   const { first_name, username, id: chat_id } = msg.chat;
   var status = "normal";
   var user_type, botAddressUser;
@@ -46,11 +46,11 @@ bot.onText(/\/start/, msg => {
       : (botAddressUser = first_name);
   }
 
-  bot.sendPhoto(
+  await bot.sendPhoto(
     chat_id,
     "https://res.cloudinary.com/dotogether/image/upload/v1576154842/Listings/Welcome%20Image.png"
   );
-  bot.sendMessage(
+  await bot.sendMessage(
     chat_id,
     `<b>Hi ${botAddressUser}!
 
@@ -62,18 +62,23 @@ What can this bot do for you?
   `,
     inUserStateMarkup()
   );
-  bot.sendMessage(
+  await bot.sendMessage(
     chat_id,
     `
 Here's some Stay-Home-Ideas to get you started!
+
 🔭Explore the REAL surface of Mars
 bit.ly/accessmarsTGTSG
+
 📺Watch Netflix TOGETHER!
 bit.ly/covidnetflixSG
+
 📜Upskill and choose from 450 free Ivy League Courses
 bit.ly/450freecoursesTGTSG
+
 🧪80+ do-at-home science activities
 bit.ly/doathomescienceTGTSG
+
 🏋️Curated workouts in the comfort of your home
 bit.ly/42RaceTGTSG
   `,
