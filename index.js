@@ -57,30 +57,30 @@ bot.onText(/\/start/, async msg => {
 Welcome to the Together Community!</b>
 
 What can this bot do for you?
-💡Get an outing idea with a single click below!
+💡Get an Activity Idea with a single click below!
 💡Get specially curated ideas from the together team posted <b>3 Times Weekly</b>!
   `,
-    inUserStateMarkup()
+    inUserStayHomeStateMarkup()
   );
   await bot.sendMessage(
     chat_id,
     `
 Here's some Stay-Home-Ideas to get you started!
 
-🔭Explore the REAL surface of Mars
-bit.ly/accessmarsTGTSG
+🔭Play games tgt on Houseparty
+bit.ly/HousepartyTGTSG
 
 📺Watch Netflix TOGETHER!
 bit.ly/covidnetflixSG
 
-📜Upskill and choose from 450 free Ivy League Courses
-bit.ly/450freecoursesTGTSG
+📜Best Coding resource for Kids (Scratch by MIT)
+bit.ly/scratchmitTGTSG
 
-🧪80+ do-at-home science activities
-bit.ly/doathomescienceTGTSG
+🧪44 do-at-home experiments crafted by Dyson Engineers
+bit.ly/dysonexperimentsTGTSG
 
-🏋️Curated workouts in the comfort of your home
-bit.ly/42RaceTGTSG
+🏋️Every Workout FREE on the Nike Training Club App
+bit.ly/niketrainingclubTGTSG
   `,
     { disable_web_page_preview: true }
   );
@@ -561,7 +561,7 @@ bot.onText(/New Post/, async msg => {
     bot.sendMessage(
       msg.chat.id,
       "Something went wrong, Please inform Adil. You can try again if you want to.",
-      inUserStateMarkup()
+      inUserStayHomeStateMarkup()
     );
   }
 });
@@ -770,7 +770,7 @@ Seems like you were trying to send us a /feedback. We are all EARS
       let randomHandleMsg =
         arrayOfHandleMsgs[Math.floor(Math.random() * arrayOfHandleMsgs.length)];
 
-      bot.sendMessage(msg.from.id, randomHandleMsg, handleMsgMarkup());
+      bot.sendMessage(msg.from.id, randomHandleMsg, handleMsgStayHomeMarkup());
     }
   }
 });
@@ -820,7 +820,7 @@ bot.on("message", async msg => {
         `THANKS FOR YOUR FEEDBACK 🙏
 You're back in the normal bot mode!
 `,
-        inUserStateMarkup()
+        inUserStayHomeStateMarkup()
       );
     } else if (msg.text) {
       dbStoreUserFeedbackText(msg.from.id, msg.text);
@@ -829,7 +829,7 @@ You're back in the normal bot mode!
         msg.from.id,
         `THANKS FOR YOUR FEEDBACK 🙏
 You're back in the normal bot mode!`,
-        inUserStateMarkup()
+        inUserStayHomeStateMarkup()
       );
     } else if (msg.text == "Bye") {
       session.delUserState(msg.from.id);
@@ -838,7 +838,7 @@ You're back in the normal bot mode!`,
         `Another time then!
 You're back in the normal bot mode!
         `,
-        inUserStateMarkup()
+        inUserStayHomeStateMarkup()
       );
     }
   }
@@ -863,7 +863,7 @@ If you can't find the buttons, tap the "box with foursquares" icon in the messag
 
 Have any further thoughts or questions? Get in touch with us by sliding into our insta DMs @dotogether.io or email us at social@dotogether.io.
     `,
-    helpMarkup()
+    helpStayHomeMarkup()
   );
 });
 
@@ -871,7 +871,11 @@ Have any further thoughts or questions? Get in touch with us by sliding into our
 
 bot.onText(/Exit Admin Session/, async msg => {
   await session.setAdminStateNull();
-  bot.sendMessage(msg.from.id, "Back to User Mode", inUserStateMarkup());
+  bot.sendMessage(
+    msg.from.id,
+    "Back to User Mode",
+    inUserStayHomeStateMarkup()
+  );
 });
 
 bot.onText(/Back/, async msg => {
@@ -914,7 +918,8 @@ bot.on("message", async msg => {
   if (
     msg.text == "☀️Feelin' Adventurous" ||
     msg.text == "🧘🏼‍Feelin' Chill" ||
-    msg.text == "🏠I Wanna Stay Home"
+    msg.text == "🏠I Wanna Stay Home" ||
+    msg.text == "🏠Stay Home Ideas 🏠"
   ) {
     switch (msg.text) {
       case "☀️Feelin' Adventurous":
@@ -930,6 +935,12 @@ bot.on("message", async msg => {
         });
         break;
       case "🏠I Wanna Stay Home":
+        var cat_id = 3;
+        var cachedListing = await session.getCachedHome().catch(err => {
+          console.log(err.message);
+        });
+        break;
+      case "🏠Stay Home Ideas 🏠":
         var cat_id = 3;
         var cachedListing = await session.getCachedHome().catch(err => {
           console.log(err.message);

@@ -49,6 +49,16 @@ exports.inUserStateMarkup = function inUserStateMarkup() {
   };
 };
 
+exports.inUserStayHomeStateMarkup = function inUserStayHomeStateMarkup() {
+  return {
+    reply_markup: {
+      keyboard: [["🏠Stay Home Ideas 🏠"]],
+      resize_keyboard: true
+    },
+    parse_mode: "HTML"
+  };
+};
+
 exports.adminStateMarkup = function adminStateMarkup() {
   return {
     reply_markup: {
@@ -85,6 +95,16 @@ exports.handleMsgMarkup = function handleMsgMarkup() {
   };
 };
 
+exports.handleMsgStayHomeMarkup = function handleMsgStayHomeMarkup() {
+  return {
+    reply_markup: {
+      keyboard: [["🏠Stay Home Ideas 🏠"]],
+      resize_keyboard: true
+    },
+    parse_mode: "HTML"
+  };
+};
+
 exports.helpMarkup = function helpMarkup() {
   return {
     reply_markup: {
@@ -92,6 +112,16 @@ exports.helpMarkup = function helpMarkup() {
         ["☀️Feelin' Adventurous", "🧘🏼‍Feelin' Chill"],
         ["🏠I Wanna Stay Home"]
       ],
+      resize_keyboard: true
+    },
+    parse_mode: "HTML"
+  };
+};
+
+exports.helpStayHomeMarkup = function helpStayHomeMarkup() {
+  return {
+    reply_markup: {
+      keyboard: [["🏠Stay Home Ideas 🏠"]],
       resize_keyboard: true
     },
     parse_mode: "HTML"
