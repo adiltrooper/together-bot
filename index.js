@@ -13,10 +13,13 @@ const {
 } = require("./storage");
 const {
   inUserStateMarkup,
+  inUserStayHomeStateMarkup,
   adminStateMarkup,
   feedbackStateMarkup,
   handleMsgMarkup,
-  helpMarkup
+  handleStayHomeMsgMarkup,
+  helpMarkup,
+  helpStayHomeMarkup
 } = require("./Markup");
 
 const messagePollFn = require("./messagePollFn");
