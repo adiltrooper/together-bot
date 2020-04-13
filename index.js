@@ -922,7 +922,7 @@ bot.on("message", async msg => {
     msg.text == "☀️Feelin' Adventurous" ||
     msg.text == "🧘🏼‍Feelin' Chill" ||
     msg.text == "🏠I Wanna Stay Home" ||
-    msg.text == "🏠Stay Home Ideas 🏠"
+    msg.text == "🏠Give me a Stay Home Idea 🏠"
   ) {
     switch (msg.text) {
       case "☀️Feelin' Adventurous":
@@ -943,7 +943,7 @@ bot.on("message", async msg => {
           console.log(err.message);
         });
         break;
-      case "🏠Stay Home Ideas 🏠":
+      case "🏠Give me a Stay Home Idea 🏠":
         var cat_id = 3;
         var cachedListing = await session.getCachedHome().catch(err => {
           console.log(err.message);

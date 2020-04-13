@@ -52,7 +52,7 @@ exports.inUserStateMarkup = function inUserStateMarkup() {
 exports.inUserStayHomeStateMarkup = function inUserStayHomeStateMarkup() {
   return {
     reply_markup: {
-      keyboard: [["🏠Stay Home Ideas 🏠"]],
+      keyboard: [["🏠Give me a Stay Home Idea 🏠"]],
       resize_keyboard: true
     },
     parse_mode: "HTML"
@@ -98,7 +98,7 @@ exports.handleMsgMarkup = function handleMsgMarkup() {
 exports.handleMsgStayHomeMarkup = function handleMsgStayHomeMarkup() {
   return {
     reply_markup: {
-      keyboard: [["🏠Stay Home Ideas 🏠"]],
+      keyboard: [["🏠Give me a Stay Home Idea 🏠"]],
       resize_keyboard: true
     },
     parse_mode: "HTML"
@@ -121,7 +121,7 @@ exports.helpMarkup = function helpMarkup() {
 exports.helpStayHomeMarkup = function helpStayHomeMarkup() {
   return {
     reply_markup: {
-      keyboard: [["🏠Stay Home Ideas 🏠"]],
+      keyboard: [["🏠Give me a Stay Home Idea 🏠"]],
       resize_keyboard: true
     },
     parse_mode: "HTML"
