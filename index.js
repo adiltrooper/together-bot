@@ -19,7 +19,8 @@ const {
   handleMsgMarkup,
   handleMsgStayHomeMarkup,
   helpMarkup,
-  helpStayHomeMarkup
+  helpStayHomeMarkup,
+  pushUpdateMsgMarkup
 } = require("./Markup");
 
 const messagePollFn = require("./messagePollFn");
