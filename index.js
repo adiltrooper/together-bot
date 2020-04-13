@@ -819,7 +819,7 @@ the together team
     ) {
       console.log("HELLOOOOOoooooo");
       bot.sendMessage(
-        msg.from.id,
+        32759675,
         "Your Bot is now Up-To-Date",
         pushUpdateMsgMarkup()
       );
