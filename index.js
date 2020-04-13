@@ -260,6 +260,7 @@ bot.on("message", async msg => {
     msg.text !== "☀️Feelin' Adventurous" &&
     msg.text !== "🧘🏼‍Feelin' Chill" &&
     msg.text !== "🏠I Wanna Stay Home" &&
+    msg.text !== "🏠Give me a Stay Home Idea 🏠" &&
     msg.text !== "/start" &&
     msg.text !== "New Post" &&
     msg.text !== "/admin" &&
@@ -298,6 +299,7 @@ bot.on("message", async msg => {
     msg.text !== "☀️Feelin' Adventurous" &&
     msg.text !== "🧘🏼‍Feelin' Chill" &&
     msg.text !== "🏠I Wanna Stay Home" &&
+    msg.text !== "🏠Give me a Stay Home Idea 🏠" &&
     msg.text !== "/start" &&
     msg.text !== "New Post" &&
     msg.text !== "/admin" &&
@@ -580,6 +582,7 @@ bot.on("message", async msg => {
     msg.text !== "☀️Feelin' Adventurous" &&
     msg.text !== "🧘🏼‍Feelin' Chill" &&
     msg.text !== "🏠I Wanna Stay Home" &&
+    msg.text !== "🏠Give me a Stay Home Idea 🏠" &&
     msg.text !== "/start" &&
     msg.text !== "New Post" &&
     msg.text !== "/admin" &&
@@ -809,6 +812,7 @@ bot.on("message", async msg => {
     msg.text !== "☀️Feelin' Adventurous" &&
     msg.text !== "🧘🏼‍Feelin' Chill" &&
     msg.text !== "🏠I Wanna Stay Home" &&
+    msg.text !== "🏠Give me a Stay Home Idea 🏠" &&
     msg.text !== "/start" &&
     msg.text !== "New Post" &&
     msg.text !== "/admin" &&
@@ -1212,6 +1216,7 @@ ${short_desc}
 
                 function determineFormat2(price, poi, website) {
                   if (
+                    location !== null &&
                     price !== null &&
                     price !== 0 &&
                     poi !== null &&
@@ -1228,6 +1233,24 @@ ${short_desc}
 📮: ${website}
                 `);
                   } else if (
+                    location == null &&
+                    price !== null &&
+                    price !== 0 &&
+                    poi !== null &&
+                    website !== null
+                  ) {
+                    console.log("try0");
+                    return (caption2 = `<b>☀️${activity} ☀️</b>
+
+${short_desc}
+
+💸: from $${price}
+
+📍: ${poi}
+📮: ${website}
+                `);
+                  } else if (
+                    location !== null &&
                     (price == null || price == 0) &&
                     poi !== null &&
                     website !== null
@@ -1241,6 +1264,21 @@ ${short_desc}
 📮: ${website}
               `);
                   } else if (
+                    location == null &&
+                    (price == null || price == 0) &&
+                    poi !== null &&
+                    website !== null
+                  ) {
+                    console.log("try1");
+                    return (caption2 = `<b>☀️${activity} ☀️</b>
+
+${short_desc}
+
+📍: ${poi}
+📮: ${website}
+              `);
+                  } else if (
+                    location !== null &&
                     (price == null || price == 0) &&
                     poi == null &&
                     website !== null
@@ -1253,6 +1291,20 @@ ${short_desc}
 📮: ${website}
               `);
                   } else if (
+                    locaton == null &&
+                    (price == null || price == 0) &&
+                    poi == null &&
+                    website !== null
+                  ) {
+                    console.log("try2");
+                    return (caption2 = `<b>☀️${activity} ☀️</b>
+
+${short_desc}
+
+📮: ${website}
+              `);
+                  } else if (
+                    location !== null &&
                     price !== null &&
                     price !== 0 &&
                     poi == null &&
@@ -1268,6 +1320,23 @@ ${short_desc}
 📮: ${website}
 `);
                   } else if (
+                    location == null &&
+                    price !== null &&
+                    price !== 0 &&
+                    poi == null &&
+                    website !== null
+                  ) {
+                    console.log("try3");
+                    return (caption2 = `<b>☀️${activity} ☀️</b>
+
+${short_desc}
+
+💸: from $${price}
+
+📮: ${website}
+`);
+                  } else if (
+                    location !== null &&
                     (price == null || price == 0) &&
                     poi == null &&
                     website == null
@@ -1278,6 +1347,18 @@ ${short_desc}
 ${short_desc}
             `);
                   } else if (
+                    location == null &&
+                    (price == null || price == 0) &&
+                    poi == null &&
+                    website == null
+                  ) {
+                    console.log("try4");
+                    return (caption2 = `<b>☀️${activity} ☀️</b>
+
+${short_desc}
+            `);
+                  } else if (
+                    location !== null &&
                     (price !== null || price !== 0) &&
                     poi !== null &&
                     website == null
@@ -1288,6 +1369,29 @@ ${short_desc}
 
   📍: ${poi}`);
                   } else if (
+                    location == null &&
+                    (price !== null || price !== 0) &&
+                    poi !== null &&
+                    website == null
+                  ) {
+                    return (caption2 = `<b>☀️${activity} @ ${location}☀️</>
+
+  ${short_desc}
+
+  📍: ${poi}`);
+                  } else if (
+                    location !== null &&
+                    (price == null || price == 0) &&
+                    poi !== null &&
+                    website == null
+                  ) {
+                    return (caption2 = `<b>☀️${activity} @ ${location}☀️</>
+
+            ${short_desc}
+
+            📍: ${poi}`);
+                  } else if (
+                    location == null &&
                     (price == null || price == 0) &&
                     poi !== null &&
                     website == null
