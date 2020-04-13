@@ -811,11 +811,10 @@ bot.on("message", async msg => {
       msg.text ==
       `Your TogetherSG bot is now being updated
 
-      ...
+...
 
-      sincerely,
-      the together team
-
+sincerely,
+the together team
       `
     ) {
       bot.sendMessage(
