@@ -798,32 +798,15 @@ bot.on("message", async msg => {
     msg.text !== "Send Post" &&
     msg.text !== "Poll Post" &&
     msg.text !== "/feedback" &&
-    msg.text !== "/help"
+    msg.text !== "/help" &&
+    msg.text == `TESTER`
   ) {
-    const userState = await session.getUserState(msg.chat.id).catch(err => {
-      console.log(err.message);
-    });
-    const adminState = await session.getAdminState().catch(err => {
-      console.log(err.message);
-    });
-
-    if (
-      msg.text ==
-      `Your TogetherSG bot is now being updated
-
-...
-
-sincerely,
-the together team
-      `
-    ) {
-      console.log("HELLOOOOOoooooo");
-      bot.sendMessage(
-        32759675,
-        "Your Bot is now Up-To-Date",
-        pushUpdateMsgMarkup()
-      );
-    }
+    console.log("HELLOOOOOoooooo");
+    bot.sendMessage(
+      32759675,
+      "Your Bot is now Up-To-Date",
+      pushUpdateMsgMarkup()
+    );
   }
 });
 
