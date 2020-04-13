@@ -17,7 +17,7 @@ const {
   adminStateMarkup,
   feedbackStateMarkup,
   handleMsgMarkup,
-  handleStayHomeMsgMarkup,
+  handleMsgStayHomeMarkup,
   helpMarkup,
   helpStayHomeMarkup
 } = require("./Markup");
