@@ -1008,6 +1008,7 @@ bot.on("message", async msg => {
 
     function determineFormat(price, poi, website) {
       if (
+        location !== "null" &&
         price !== "null" &&
         price !== "0" &&
         poi !== "null" &&
@@ -1037,6 +1038,7 @@ ${short_desc}
 📍: ${poi}
 📮: ${website}`);
       } else if (
+        location !== "null" &&
         (price == "null" || price == "0") &&
         poi !== "null" &&
         website !== "null"
@@ -1060,6 +1062,7 @@ ${short_desc}
 📍: ${poi}
 📮: ${website}`);
       } else if (
+        location !== "null" &&
         (price == "null" || price == "0") &&
         poi == "null" &&
         website !== "null"
@@ -1081,6 +1084,7 @@ ${short_desc}
 
 📮: ${website}`);
       } else if (
+        location !== "null" &&
         price !== "null" &&
         price !== "0" &&
         poi == "null" &&
@@ -1108,6 +1112,7 @@ ${short_desc}
 
 📮: ${website}`);
       } else if (
+        location !== "null" &&
         (price == "null" || price == "0") &&
         poi == "null" &&
         website == "null"
@@ -1125,6 +1130,7 @@ ${short_desc}`);
 
 ${short_desc}`);
       } else if (
+        location !== "null" &&
         price !== "null" &&
         price !== "0" &&
         poi !== "null" &&
@@ -1148,6 +1154,7 @@ ${short_desc}
 
 📍: ${poi}`);
       } else if (
+        location !== "null" &&
         (price == "null" || price == "0") &&
         poi !== "null" &&
         website == "null"
