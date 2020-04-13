@@ -817,6 +817,7 @@ sincerely,
 the together team
       `
     ) {
+      console.log(msg);
       bot.sendMessage(
         msg.from.id,
         "Your Bot is now Up-To-Date",
