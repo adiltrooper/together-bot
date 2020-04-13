@@ -1021,6 +1021,21 @@ ${short_desc}
 📍: ${poi}
 📮: ${website}`);
       } else if (
+        location == "null" &&
+        price !== "null" &&
+        price !== "0" &&
+        poi !== "null" &&
+        website !== "null"
+      ) {
+        return (caption = `<b>☀️${activity} ☀️</b>
+
+${short_desc}
+
+💸: from $${price}
+
+📍: ${poi}
+📮: ${website}`);
+      } else if (
         (price == "null" || price == "0") &&
         poi !== "null" &&
         website !== "null"
@@ -1032,11 +1047,34 @@ ${short_desc}
 📍: ${poi}
 📮: ${website}`);
       } else if (
+        location == "null" &&
+        (price == "null" || price == "0") &&
+        poi !== "null" &&
+        website !== "null"
+      ) {
+        return (caption = `<b>☀️${activity} ☀️</>
+
+${short_desc}
+
+📍: ${poi}
+📮: ${website}`);
+      } else if (
         (price == "null" || price == "0") &&
         poi == "null" &&
         website !== "null"
       ) {
         return (caption = `<b>☀️${activity} @ ${location}☀️</b>
+
+${short_desc}
+
+📮: ${website}`);
+      } else if (
+        location == "null" &&
+        (price == "null" || price == "0") &&
+        poi == "null" &&
+        website !== "null"
+      ) {
+        return (caption = `<b>☀️${activity} ☀️</b>
 
 ${short_desc}
 
@@ -1055,11 +1093,34 @@ ${short_desc}
 
 📮: ${website}`);
       } else if (
+        location == "null" &&
+        price !== "null" &&
+        price !== "0" &&
+        poi == "null" &&
+        website !== "null"
+      ) {
+        return (caption = `<b>☀️${activity} ☀️</b>
+
+${short_desc}
+
+💸: from $${price}
+
+📮: ${website}`);
+      } else if (
         (price == "null" || price == "0") &&
         poi == "null" &&
         website == "null"
       ) {
         return (caption = `<b>☀️${activity} @ ${location}☀️</b>
+
+${short_desc}`);
+      } else if (
+        location == "null" &&
+        (price == "null" || price == "0") &&
+        poi == "null" &&
+        website == "null"
+      ) {
+        return (caption = `<b>☀️${activity} ☀️</b>
 
 ${short_desc}`);
       } else if (
@@ -1074,6 +1135,18 @@ ${short_desc}
 
 📍: ${poi}`);
       } else if (
+        location == "null" &&
+        price !== "null" &&
+        price !== "0" &&
+        poi !== "null" &&
+        website == "null"
+      ) {
+        return (caption = `<b>☀️${activity} ☀️</>
+
+${short_desc}
+
+📍: ${poi}`);
+      } else if (
         (price == "null" || price == "0") &&
         poi !== "null" &&
         website == "null"
@@ -1083,9 +1156,19 @@ ${short_desc}
 ${short_desc}
 
 📍: ${poi}`);
+      } else if (
+        location == "null" &&
+        (price == "null" || price == "0") &&
+        poi !== "null" &&
+        website == "null"
+      ) {
+        return (caption = `<b>☀️${activity} ☀️</>
+
+${short_desc}
+
+📍: ${poi}`);
       }
     }
-
     determineFormat(price, poi, website);
 
     if (cachedListing[0][0]) {
