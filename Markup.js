@@ -127,3 +127,13 @@ exports.helpStayHomeMarkup = function helpStayHomeMarkup() {
     parse_mode: "HTML"
   };
 };
+
+exports.pushUpdateMsgMarkup = function pushUpdateMsgMarkup() {
+  return {
+    reply_markup: {
+      keyboard: [["🏠Give me a Stay Home Idea 🏠"]],
+      resize_keyboard: true
+    },
+    parse_mode: "HTML"
+  };
+};

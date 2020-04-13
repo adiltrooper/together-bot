@@ -782,6 +782,51 @@ Seems like you were trying to send us a /feedback. We are all EARS
   }
 });
 
+//////////////////////// PUSH UPDATE WITH MESSAGE ///////////////////////////
+
+bot.on("message", async msg => {
+  if (
+    msg.text !== "Back" &&
+    msg.text !== "Exit Admin Session" &&
+    msg.text !== "☀️Feelin' Adventurous" &&
+    msg.text !== "🧘🏼‍Feelin' Chill" &&
+    msg.text !== "🏠I Wanna Stay Home" &&
+    msg.text !== "🏠Give me a Stay Home Idea 🏠" &&
+    msg.text !== "/start" &&
+    msg.text !== "New Post" &&
+    msg.text !== "/admin" &&
+    msg.text !== "Send Post" &&
+    msg.text !== "Poll Post" &&
+    msg.text !== "/feedback" &&
+    msg.text !== "/help"
+  ) {
+    const userState = await session.getUserState(msg.chat.id).catch(err => {
+      console.log(err.message);
+    });
+    const adminState = await session.getAdminState().catch(err => {
+      console.log(err.message);
+    });
+
+    if (
+      msg.text ==
+      `Your TogetherSG bot is now being updated
+
+      ...
+
+      sincerely,
+      the together team
+
+      `
+    ) {
+      bot.sendMessage(
+        msg.from.id,
+        "Your Bot is now Up-To-Date",
+        pushUpdateMsgMarkup()
+      );
+    }
+  }
+});
+
 /////////////////// FEEDBACK ////////////////////////
 
 bot.onText(/\/feedback/, msg => {
@@ -1291,7 +1336,7 @@ ${short_desc}
 📮: ${website}
               `);
                   } else if (
-                    locaton == null &&
+                    location == null &&
                     (price == null || price == 0) &&
                     poi == null &&
                     website !== null
