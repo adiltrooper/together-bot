@@ -740,6 +740,7 @@ bot.on("message", async msg => {
     msg.text !== "☀️Feelin' Adventurous" &&
     msg.text !== "🧘🏼‍Feelin' Chill" &&
     msg.text !== "🏠I Wanna Stay Home" &&
+    msg.text !== "🏠Give me a Stay Home Idea 🏠" &&
     msg.text !== "/start" &&
     msg.text !== "New Post" &&
     msg.text !== "/admin" &&
