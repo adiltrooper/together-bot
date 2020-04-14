@@ -893,10 +893,10 @@ bot.on("message", async msg => {
         });
       };
 
-      const updateAllBots = () => {
-        return retrieveUserList().then(() => {
-          bot.sendMessage(119860989, "All Bots have been updated");
-        });
+      const updateAllBots = async () => {
+        await retrieveUserList();
+        console.log("this is complete");
+        bot.sendMessage(119860989, "All Bots have been updated");
       };
 
       updateAllBots();
