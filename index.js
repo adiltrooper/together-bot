@@ -893,10 +893,12 @@ bot.on("message", async msg => {
         });
       };
 
-      async function updateAllBots() {
-        await retrieveUserList();
-        return bot.sendMessage(119860989, "All Bots have been updated");
-      }
+      const updateAllBots = () => {
+        return retrieveUserList().then(() => {
+          bot.sendMessage(119860989, "All Bots have been updated");
+        });
+      };
+
       updateAllBots();
     }
   }
