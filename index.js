@@ -836,7 +836,6 @@ bot.on("message", async msg => {
           console.log(err.message);
         });
         console.log(`This is the after ${userSendList}`);
-        console.log(typeof userSendList);
 
         if (userSendList.includes(",")) {
           var userSendList = userSendList
@@ -892,9 +891,9 @@ bot.on("message", async msg => {
           };
           setTimeout(postMessages, 1000);
         });
-        bot.sendMessage(119860989, "All Bots have been updated");
       };
       retrieveUserList();
+      bot.sendMessage(119860989, "All Bots have been updated");
     }
   }
 });
