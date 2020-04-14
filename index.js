@@ -893,9 +893,10 @@ bot.on("message", async msg => {
             };
             setTimeout(postMessages, 1000);
           });
-          bot.sendMessage(119860989, "All Bots have been updated");
         };
-        sendToUsers();
+        promise
+          .all(sendToUsers())
+          .then(() => bot.sendMessage(119860989, "All Updated"));
       };
       retrieveUserList();
     }
