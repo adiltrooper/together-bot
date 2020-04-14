@@ -131,7 +131,7 @@ exports.helpStayHomeMarkup = function helpStayHomeMarkup() {
 exports.pushUpdateMsgMarkup = function pushUpdateMsgMarkup() {
   return {
     reply_markup: {
-      keyboard: [["🏠Give me a Stay Home Idea 🏠"]],
+      keyboard: [["🏠Give me a Stay Home Idiot 🏠"]],
       resize_keyboard: true
     },
     parse_mode: "HTML"
