@@ -856,6 +856,7 @@ bot.on("message", async msg => {
 
         var userSendList = _.chunk(userSendList, 4);
         console.log(userSendList);
+
         const sendToUsers = async () => {
           await userSendList.map(subUserSendList => {
             const postMessages = () => {
@@ -894,8 +895,8 @@ bot.on("message", async msg => {
           });
           bot.sendMessage(119860989, "All Bots have been updated");
         };
+        sendToUsers();
       };
-
       retrieveUserList();
     }
   }
