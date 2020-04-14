@@ -894,8 +894,8 @@ bot.on("message", async msg => {
       };
 
       async function updateAllBots() {
-        return await retrieveUserList();
-        bot.sendMessage(119860989, "All Bots have been updated");
+        await retrieveUserList();
+        return bot.sendMessage(119860989, "All Bots have been updated");
       }
       updateAllBots();
     }
