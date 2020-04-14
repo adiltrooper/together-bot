@@ -890,9 +890,9 @@ bot.on("message", async msg => {
                 });
             });
           };
-          console.log("EVERYTHING SEEMS TO BE WORKING");
           setTimeout(postMessages, 1000);
         });
+        bot.sendMessage(119860989, "All Bots have been updated");
       };
       retrieveUserList();
     }
