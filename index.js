@@ -856,50 +856,47 @@ bot.on("message", async msg => {
 
         var userSendList = _.chunk(userSendList, 4);
         console.log(userSendList);
-        userSendList.map(subUserSendList => {
-          const postMessages = () => {
-            subUserSendList.map(userId => {
-              bot
-                .sendMessage(
-                  userId,
-                  "Your Bot is now Up-To-Date",
-                  pushUpdateMsgMarkup()
-                )
-                .catch(err => {
-                  if (err.response.statusCode == 403) {
-                    const blocked_id = err.response.request.body.substring(
-                      err.response.request.body.indexOf("=") + 1,
-                      err.response.request.body.lastIndexOf("&")
-                    );
-                    console.log(blocked_id);
-
-                    pool.getConnection(function(err, connection) {
-                      if (err) console.log(err);
-                      connection.query(
-                        "UPDATE bot_user_db SET status = ? WHERE chat_id = ?",
-                        ["blocked", blocked_id],
-                        function(err, results, fields) {
-                          if (err) console.log(err.message);
-                        }
+        const sendToUsers = async () => {
+          await userSendList.map(subUserSendList => {
+            const postMessages = () => {
+              subUserSendList.map(userId => {
+                bot
+                  .sendMessage(
+                    userId,
+                    "Your Bot is now Up-To-Date",
+                    pushUpdateMsgMarkup()
+                  )
+                  .catch(err => {
+                    if (err.response.statusCode == 403) {
+                      const blocked_id = err.response.request.body.substring(
+                        err.response.request.body.indexOf("=") + 1,
+                        err.response.request.body.lastIndexOf("&")
                       );
-                      connection.release();
-                      if (err) console.log(err);
-                    });
-                  }
-                });
-            });
-          };
-          setTimeout(postMessages, 5000);
-        });
+                      console.log(blocked_id);
+
+                      pool.getConnection(function(err, connection) {
+                        if (err) console.log(err);
+                        connection.query(
+                          "UPDATE bot_user_db SET status = ? WHERE chat_id = ?",
+                          ["blocked", blocked_id],
+                          function(err, results, fields) {
+                            if (err) console.log(err.message);
+                          }
+                        );
+                        connection.release();
+                        if (err) console.log(err);
+                      });
+                    }
+                  });
+              });
+            };
+            setTimeout(postMessages, 1000);
+          });
+          bot.sendMessage(119860989, "All Bots have been updated");
+        };
       };
 
-      const updateAllBots = async () => {
-        await retrieveUserList();
-        console.log("this is complete");
-        bot.sendMessage(119860989, "All Bots have been updated");
-      };
-
-      updateAllBots();
+      retrieveUserList();
     }
   }
 });
