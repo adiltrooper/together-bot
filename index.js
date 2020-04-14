@@ -752,7 +752,8 @@ bot.on("message", async msg => {
     msg.text !== "Send Post" &&
     msg.text !== "Poll Post" &&
     msg.text !== "/feedback" &&
-    msg.text !== "/help"
+    msg.text !== "/help" &&
+    msg.text !== "Update All Bots"
   ) {
     const userState = await session.getUserState(msg.chat.id).catch(err => {
       console.log(err.message);
@@ -896,7 +897,6 @@ bot.on("message", async msg => {
         await retrieveUserList();
         bot.sendMessage(119860989, "All Bots have been updated");
       }
-      //    retrieveUserList();
       updateAllBots();
     }
   }
@@ -938,7 +938,8 @@ bot.on("message", async msg => {
     msg.text !== "/admin" &&
     msg.text !== "Send Post" &&
     msg.text !== "Poll Post" &&
-    msg.text !== "/feedback"
+    msg.text !== "/feedback" &&
+    msg.text !== "Update All Bots"
   ) {
     if (msg.photo) {
       dbStoreUserFeedbackPhoto(msg.from.id, msg.photo, msg.caption);
