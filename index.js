@@ -653,7 +653,7 @@ bot.onText(/Send Post/, async msg => {
         console.log(err.message);
       });
       console.log(`This is the after ${userSendList}`);
-      console.log(typeOf(userSendList));
+      console.log(typeof userSendList);
 
       if (userSendList.includes(",")) {
         var userSendList = userSendList
