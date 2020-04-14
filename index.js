@@ -866,7 +866,6 @@ bot.on("message", async msg => {
                   pushUpdateMsgMarkup()
                 )
                 .catch(err => {
-                  console.log(err);
                   if (err.response.statusCode == 403) {
                     const blocked_id = err.response.request.body.substring(
                       err.response.request.body.indexOf("=") + 1,
@@ -894,7 +893,7 @@ bot.on("message", async msg => {
         });
       };
       async function updateAllBots() {
-        await retrieveUserList();
+        const complete = await retrieveUserList();
         bot.sendMessage(119860989, "All Bots have been updated");
       }
       updateAllBots();
