@@ -670,7 +670,7 @@ bot.onText(/Send Post/, async msg => {
         userSendList = userSendListTemp;
       }
 
-      var userSendList = _.chunk(userSendList, 2);
+      var userSendList = _.chunk(userSendList, 3);
       console.log(userSendList);
       userSendList.map(subUserSendList => {
         const postMessages = () => {
@@ -800,14 +800,42 @@ bot.on("message", async msg => {
     msg.text !== "Poll Post" &&
     msg.text !== "/feedback" &&
     msg.text !== "/help" &&
-    msg.text == `TESTER`
+    msg.text == `Update All Bots`
   ) {
-    console.log("HELLOOOOOoooooo");
-    bot.sendMessage(
-      32759675,
-      "Your Bot is now Up-To-Date",
-      pushUpdateMsgMarkup()
-    );
+    const { first_name, username, id: chat_id } = msg.chat;
+
+    if (chat_id == 119860989) {
+      async function getUsersFromDB() {
+        const connection = await pool.getConnectionAsync();
+        const query = new Promise((resolve, reject) => {
+          connection.query("SELECT chat_id FROM bot_user_db", function(
+            err,
+            results,
+            fields
+          ) {
+            if (err) {
+              console.log(err.message);
+            } else {
+              var userArray = [];
+              userArray = results.map(userData => {
+                return userData.chat_id;
+              });
+              session.setUserSendList(JSON.stringify(userArray));
+              resolve();
+            }
+          });
+        });
+        await query;
+        connection.release();
+      }
+
+      console.log("Bot Updating in Progress");
+      bot.sendMessage(
+        32759675,
+        "Your Bot is now Up-To-Date",
+        pushUpdateMsgMarkup()
+      );
+    }
   }
 });
 
