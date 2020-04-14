@@ -890,7 +890,7 @@ bot.on("message", async msg => {
                 });
             });
           };
-          setTimeout(postMessages, 1000);
+          setTimeout(postMessages, 5000);
         });
       };
       async function updateAllBots() {
