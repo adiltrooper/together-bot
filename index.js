@@ -830,12 +830,71 @@ bot.on("message", async msg => {
         connection.release();
       }
 
-      console.log("Bot Updating in Progress");
-      bot.sendMessage(
-        32759675,
-        "Your Bot is now Up-To-Date",
-        pushUpdateMsgMarkup()
-      );
+      const retrieveUserList = async () => {
+        await getUsersFromDB();
+        var userSendList = await session.getUserSendList().catch(err => {
+          console.log(err.message);
+        });
+        console.log(`This is the after ${userSendList}`);
+        console.log(typeof userSendList);
+
+        if (userSendList.includes(",")) {
+          var userSendList = userSendList
+            .slice(1, userSendList.length - 1)
+            .split(",")
+            .map(numberString => {
+              return Number(numberString);
+            });
+          console.log(userSendList);
+        } else {
+          var userSendList = userSendList.slice(1, userSendList.length - 1);
+          var userSendList = Number(userSendList);
+          var userSendListTemp = [];
+          userSendListTemp.push(userSendList);
+          userSendList = userSendListTemp;
+        }
+
+        var userSendList = _.chunk(userSendList, 4);
+        console.log(userSendList);
+        userSendList.map(subUserSendList => {
+          const postMessages = () => {
+            subUserSendList.map(userId => {
+              bot
+                .sendMessage(
+                  userId,
+                  "Your Bot is now Up-To-Date",
+                  pushUpdateMsgMarkup()
+                )
+                .catch(err => {
+                  console.log(err);
+                  if (err.response.statusCode == 403) {
+                    const blocked_id = err.response.request.body.substring(
+                      err.response.request.body.indexOf("=") + 1,
+                      err.response.request.body.lastIndexOf("&")
+                    );
+                    console.log(blocked_id);
+
+                    pool.getConnection(function(err, connection) {
+                      if (err) console.log(err);
+                      connection.query(
+                        "UPDATE bot_user_db SET status = ? WHERE chat_id = ?",
+                        ["blocked", blocked_id],
+                        function(err, results, fields) {
+                          if (err) console.log(err.message);
+                        }
+                      );
+                      connection.release();
+                      if (err) console.log(err);
+                    });
+                  }
+                });
+            });
+          };
+          console.log("EVERYTHING SEEMS TO BE WORKING");
+          setTimeout(postMessages, 1000);
+        });
+      };
+      retrieveUserList();
     }
   }
 });
