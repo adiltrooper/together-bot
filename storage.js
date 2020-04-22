@@ -90,6 +90,7 @@ exports.storeUserClickedCount = function storeUserClickedCount(
 ) {
 
   formattedClickedUser = clickedUser.map(Number);
+  formattedCat_Id = cat_Id.map(Number);
 
 
   pool.getConnection(function(err, connection) {
@@ -99,34 +100,34 @@ exports.storeUserClickedCount = function storeUserClickedCount(
       [
         formattedClickedUser[0],
         clickedDateTime[0],
-        cat_Id[0],
+        formattedCat_Id[0],
         formattedClickedUser[1],
         clickedDateTime[1],
-        cat_Id[1],
+        formattedCat_Id[1],
         formattedClickedUser[2],
         clickedDateTime[2],
-        cat_Id[2],
+        formattedCat_Id[2],
         formattedClickedUser[3],
         clickedDateTime[3],
-        cat_Id[3],
+        formattedCat_Id[3],
         formattedClickedUser[4],
         clickedDateTime[4],
-        cat_Id[4],
+        formattedCat_Id[4],
         formattedClickedUser[5],
         clickedDateTime[5],
-        cat_Id[5],
+        formattedCat_Id[5],
         formattedClickedUser[6],
         clickedDateTime[6],
-        cat_Id[6],
+        formattedCat_Id[6],
         formattedClickedUser[7],
         clickedDateTime[7],
-        cat_Id[7],
+        formattedCat_Id[7],
         formattedClickedUser[8],
         clickedDateTime[8],
-        cat_Id[8],
+        formattedCat_Id[8],
         formattedClickedUser[9],
         clickedDateTime[9],
-        cat_Id[9]
+        formattedCat_Id[9]
       ],
       function(err, results, fields) {
         if (err) {
