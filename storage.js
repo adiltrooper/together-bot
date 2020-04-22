@@ -88,39 +88,43 @@ exports.storeUserClickedCount = function storeUserClickedCount(
   clickedDateTime,
   cat_Id
 ) {
+
+  formattedClickedUser = clickedUser.map(Number);
+
+
   pool.getConnection(function(err, connection) {
     if (err) console.log(err);
     connection.query(
       "INSERT INTO bot_click_tracking (clickedUser, clickedDateTime, category) VALUES (?, ?, ?), (?, ?, ?), (?, ?, ?), (?, ?, ?), (?, ?, ?), (?, ?, ?), (?, ?, ?), (?, ?, ?), (?, ?, ?), (?, ?, ?)",
       [
-        clickedUser[0],
+        formattedClickedUser[0],
         clickedDateTime[0],
         cat_Id[0],
-        clickedUser[1],
+        formattedClickedUser[1],
         clickedDateTime[1],
         cat_Id[1],
-        clickedUser[2],
+        formattedClickedUser[2],
         clickedDateTime[2],
         cat_Id[2],
-        clickedUser[3],
+        formattedClickedUser[3],
         clickedDateTime[3],
         cat_Id[3],
-        clickedUser[4],
+        formattedClickedUser[4],
         clickedDateTime[4],
         cat_Id[4],
-        clickedUser[5],
+        formattedClickedUser[5],
         clickedDateTime[5],
         cat_Id[5],
-        clickedUser[6],
+        formattedClickedUser[6],
         clickedDateTime[6],
         cat_Id[6],
-        clickedUser[7],
+        formattedClickedUser[7],
         clickedDateTime[7],
         cat_Id[7],
-        clickedUser[8],
+        formattedClickedUser[8],
         clickedDateTime[8],
         cat_Id[8],
-        clickedUser[9],
+        formattedClickedUser[9],
         clickedDateTime[9],
         cat_Id[9]
       ],
