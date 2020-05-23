@@ -1605,7 +1605,7 @@ bot.onText(/\/shareanidea/, msg => {
     `Looks like you clicked on /shareanidea ! 
 
 Do you want to share an idea with the together community?
-`,
+`, {
     reply_markup: {
       inline_keyboard: [[
         {
@@ -1618,6 +1618,7 @@ Do you want to share an idea with the together community?
         }
       ]]
     }
+  }
   );
 });
 
