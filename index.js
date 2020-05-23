@@ -1599,7 +1599,7 @@ ${short_desc}
 ///////////////////// SUBMIT IDEA /////////////////////
 
 bot.onText(/\/shareanidea/, msg => {
-  session.setUserState(msg.chat.id, shareidea_1);
+  session.setUserState(msg.chat.id, "shareidea_1");
   bot.sendMessage(
     msg.from.id, 
     `Looks like you clicked on /shareanidea ! 
