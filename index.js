@@ -71,8 +71,8 @@ What can this bot do for you?
     `
 Here's some Stay-Home-Ideas to get you started!
 
-🔭Play games tgt on Houseparty
-bit.ly/HousepartyTGTSG
+🔭Ride Disney Theme Park's Rollercoasters Virtually
+bit.ly/virtualdisneyTGTSG
 
 📺Watch Netflix TOGETHER!
 bit.ly/covidnetflixSG
@@ -80,8 +80,8 @@ bit.ly/covidnetflixSG
 📜Best Coding resource for Kids (Scratch by MIT)
 bit.ly/scratchmitTGTSG
 
-🧪44 do-at-home experiments crafted by Dyson Engineers
-bit.ly/dysonexperimentsTGTSG
+🧠Maintain your mental health with an ALWAYS-FREE medication app
+bit.ly/meditoTGTSG
 
 🏋️Every Workout FREE on the Nike Training Club App
 bit.ly/niketrainingclubTGTSG
@@ -1594,3 +1594,42 @@ ${short_desc}
     }
   }
 });
+
+
+///////////////////// SUBMIT IDEA /////////////////////
+
+bot.onText(/\/shareanidea/, msg => {
+  session.setUserState(msg.chat.id, "feedback");
+  bot.sendMessage(
+    msg.from.id, 
+    `Looks like you clicked on /shareanidea ! 
+
+Do you want to share an idea with the together community?
+`,
+    reply_markup: {
+      inline_keyboard: [[
+        {
+          text: ' 👍🏻 Yes ',
+          callback_data: 'Yes'
+        },
+        {
+          text: ' 👎🏻 No ',
+          callback_data: 'No'
+        }
+      ]]
+    }
+  );
+});
+
+bot.on('callback_query', callbackQuery => {
+  if (callbackQuery == 'Yes') {
+     //increment userState
+     bot.sendMessage(callbackQuery.from.id, 
+      `Type your content and send.
+      wel also accept images or text`
+      )
+  } 
+
+  //else return to normal state
+})
+

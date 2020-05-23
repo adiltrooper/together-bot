@@ -1,0 +1,10 @@
+1. create command to trigger the submission of ideas (/share idea)
+2. trigger state management of userstate
+3. message reply to confirm they want to submit idea in inline keyboard (Yes No)
+4. if yes proceeed to increment user state else reduce and resume normal user
+5. if yes ask user to send and image with caption or just a message. multiple images accepted too
+6. after user sends something inline keyboard to ask if thats all or send more?
+store data in redis
+7. if send more, allow ues to send more
+8. if user done, persist data to mysql database
+9. thank user and return to normal user state. 
