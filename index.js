@@ -1626,7 +1626,8 @@ bot.on('callback_query', async callbackQuery => {
   const userState = await session.getUserState(callbackQuery.from.id).catch(err => {
     console.log(err.message);
   }); 
-  if (callbackQuery == 'Yes') {
+
+  if (userState == 'shareidea_1' && callbackQuery == 'Yes') {
      //increment userState
      console.log(callbackQuery.from)
      bot.sendMessage(callbackQuery.from.id, 
