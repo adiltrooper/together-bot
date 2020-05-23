@@ -1599,7 +1599,7 @@ ${short_desc}
 ///////////////////// SUBMIT IDEA /////////////////////
 
 bot.onText(/\/shareanidea/, msg => {
-  session.setUserState(msg.chat.id, "feedback");
+  session.setUserState(msg.chat.id, shareidea_1);
   bot.sendMessage(
     msg.from.id, 
     `Looks like you clicked on /shareanidea ! 
@@ -1622,9 +1622,13 @@ Do you want to share an idea with the together community?
   );
 });
 
-bot.on('callback_query', callbackQuery => {
+bot.on('callback_query', async callbackQuery => {
+  const userState = await session.getUserState(callbackQuery.from.id).catch(err => {
+    console.log(err.message);
+  }); 
   if (callbackQuery == 'Yes') {
      //increment userState
+     console.log(callbackQuery.from)
      bot.sendMessage(callbackQuery.from.id, 
       `Type your content and send.
       wel also accept images or text`
