@@ -1624,17 +1624,14 @@ Do you want to share an idea with the together community?
 });
 
 bot.on('callback_query', async callbackQuery => {
-  console.log('query in progress')
-  console.log(callbackQuery)
   const userState = await session.getUserState(callbackQuery.from.id).catch(err => {
     console.log(err.message);
   }); 
   console.log(`userState = ${userState}`)
 
-  if (userState == 'shareidea_1' && callbackQuery.data == 'Yes') {
+  if (userState == 'usershareidea_1' && callbackQuery.data == 'Yes') {
      //increment userState
-     console.log('ANOTHER STEP')
-     console.log(callbackQuery.from)
+     console.log('ANOTHER STEP');
      bot.sendMessage(callbackQuery.from.id, 
       `Type your content and send.
       wel also accept images or text`
