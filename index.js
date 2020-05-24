@@ -1628,9 +1628,11 @@ bot.on('callback_query', async callbackQuery => {
   const userState = await session.getUserState(callbackQuery.id).catch(err => {
     console.log(err.message);
   }); 
+  console.log(`userState = ${userState}`)
 
   if (userState == 'shareidea_1' && callbackQuery.data == 'Yes') {
      //increment userState
+     console.log('ANOTHER STEP')
      console.log(callbackQuery.from)
      bot.sendMessage(callbackQuery.from.id, 
       `Type your content and send.
