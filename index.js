@@ -1625,6 +1625,7 @@ Do you want to share an idea with the together community?
 
 bot.on('callback_query', async callbackQuery => {
   console.log('query in progress')
+  console.log(callbackQuery)
   const userState = await session.getUserState(callbackQuery.id).catch(err => {
     console.log(err.message);
   }); 
