@@ -17,10 +17,6 @@ class Session {
     }
   }
 
-  setUserStatus(userId, state) {
-    return redis.hset(`userState:${userId}`, state, `${state}`);
-  }
-
   setUserState(userId, state) {
     return redis.setex(`userState_${userId}`, 1200, `user${state}`);
   }
