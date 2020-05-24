@@ -1603,10 +1603,7 @@ bot.onText(/\/shareanidea/, msg => {
   session.setUserState(msg.chat.id, "shareidea_1");
   bot.sendMessage(
     msg.from.id, 
-    `Looks like you clicked on /shareanidea ! 
-
-Do you want to share an idea with the together community?
-`, {
+    `Ready to share your Stay-Home activity idea with the TogetherSG community?`, {
     reply_markup: {
       inline_keyboard: [[
         {
@@ -1631,13 +1628,41 @@ bot.on('callback_query', async callbackQuery => {
 
   if (userState == 'usershareidea_1' && callbackQuery.data == 'Yes') {
      //increment userState
+     session.setUserState(msg.chat.id, "shareidea_2");
      console.log('ANOTHER STEP');
      bot.sendMessage(callbackQuery.from.id, 
-      `Type your content and send.
-      wel also accept images or text`
+      `Send us your content below!.
+Describe the activity idea briefly! You paste links and send images too! 
+Bonus points if you have a picture of yourself doing the activity!
+`
       )
   } 
 
   //else return to normal state
 })
 
+bot.on('message', async msg => {
+  const userState = await session.getUserState(callbackQuery.from.id).catch(err => {
+    console.log(err.message);
+  }); 
+  if (userState == 'usershareidea_2') {
+    //ask if they are done or want to share more (inline keyboard)
+    bot.sendMessage(msg.from.id, `Any more content to share regarding this idea?`, {
+      reply_markup: {
+        inline_keyboard: [[
+          {
+            text: ' 👍🏻 Done',
+            callback_data: 'Done'
+          },
+          {
+            text: ' ➕ Add More ',
+            callback_data: 'Add More'
+          }
+        ]]
+      }
+    })
+  }
+})
+
+//if done, save content to db
+//if click not done, send prompt to add more
