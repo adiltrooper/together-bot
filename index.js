@@ -491,7 +491,8 @@ bot.onText(/Send Post/, async msg => {
 bot.on("callback_query", async callbackQuery => {
   if (
     callbackQuery.data !== "Keep Poll" &&
-    callbackQuery.data !== "🛑Stop Poll & Create New 🛑"
+    callbackQuery.data !== "🛑Stop Poll & Create New 🛑" &&
+    callbackQuery.data !== "Yes"
   ) {
     userPollSelection = callbackQuery.data;
 
