@@ -1624,11 +1624,12 @@ Do you want to share an idea with the together community?
 });
 
 bot.on('callback_query', async callbackQuery => {
-  const userState = await session.getUserState(callbackQuery.from.id).catch(err => {
+  console.log('query in progress')
+  const userState = await session.getUserState(callbackQuery.id).catch(err => {
     console.log(err.message);
   }); 
 
-  if (userState == 'shareidea_1' && callbackQuery == 'Yes') {
+  if (userState == 'shareidea_1' && callbackQuery.data == 'Yes') {
      //increment userState
      console.log(callbackQuery.from)
      bot.sendMessage(callbackQuery.from.id, 
