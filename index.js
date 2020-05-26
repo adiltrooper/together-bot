@@ -1628,7 +1628,7 @@ bot.on('callback_query', async callbackQuery => {
 
   if (userState == 'usershareidea_1' && callbackQuery.data == 'Yes') {
      //increment userState
-     session.setUserState(msg.chat.id, "shareidea_2");
+     session.setUserState(callbackQuery.from.id, "shareidea_2");
      console.log('ANOTHER STEP');
      bot.sendMessage(callbackQuery.from.id, 
       `Send us your content below!.
@@ -1647,7 +1647,7 @@ bot.on('message', async callbackQuery => {
   }); 
   if (userState == 'usershareidea_2') {
     //ask if they are done or want to share more (inline keyboard)
-    bot.sendMessage(msg.from.id, `Any more content to share regarding this idea?`, {
+    bot.sendMessage(callbackQuery.from.id, `Any more content to share regarding this idea?`, {
       reply_markup: {
         inline_keyboard: [[
           {
