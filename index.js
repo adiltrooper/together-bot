@@ -1641,7 +1641,7 @@ Bonus points if you have a picture of yourself doing the activity!
   //else return to normal state
 })
 
-bot.on('message', async msg => {
+bot.on('message', async callbackQuery => {
   const userState = await session.getUserState(callbackQuery.from.id).catch(err => {
     console.log(err.message);
   }); 
