@@ -1682,5 +1682,5 @@ bot.on('message', async msg => {
 
 bot.onText(/\/testapoll/, msg => {
   console.log(`testing poll happenin`)
-  bot.sendPoll(msg.chat.id, `THIS IS A TEST QUESTION!`, ['one', 'two'])
+  bot.sendPoll('@togetherSG_bot', `THIS IS A TEST QUESTION!`, ['one', 'two'])
 })
