@@ -1681,5 +1681,6 @@ bot.on('message', async msg => {
 //if click not done, send prompt to add more
 
 bot.on(/\/testapoll/, msg => {
+  console.log(`testing poll happenin`)
   bot.sendPoll(msg.chat.id, `THIS IS A TEST QUESTION!`, ['one', 'two'])
 })
