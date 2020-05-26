@@ -1626,28 +1626,41 @@ bot.on('callback_query', async callbackQuery => {
   }); 
   console.log(`userState = ${userState}`)
 
-  if (userState == 'usershareidea_1' && callbackQuery.data == 'Yes') {
+  if (userState == 'usershareidea_1') {
+    if (callbackQuery.data == 'Yes') {
      //increment userState
      session.setUserState(callbackQuery.from.id, "shareidea_2");
      console.log('ANOTHER STEP');
      bot.sendMessage(callbackQuery.from.id, 
       `Send us your content below!.
-Describe the activity idea briefly! You paste links and send images too! 
+Describe the activity idea briefly! You can paste links and send images too! If you're sending an image, just type your text in the caption!
+
 Bonus points if you have a picture of yourself doing the activity!
 `
       )
   } 
+}
+  if (userState == 'usershareidea_2') {
+    if (callbackQuery.data == 'Done') {
+      //
+    }
+
+    if (callbackQuery.date == 'Add More') {
+      //maintain state and ask for more content
+    }
+
+  }
 
   //else return to normal state
 })
 
-bot.on('message', async callbackQuery => {
-  const userState = await session.getUserState(callbackQuery.from.id).catch(err => {
+bot.on('message', async msg => {
+  const userState = await session.getUserState(msg.from.id).catch(err => {
     console.log(err.message);
   }); 
   if (userState == 'usershareidea_2') {
     //ask if they are done or want to share more (inline keyboard)
-    bot.sendMessage(callbackQuery.from.id, `Any more content to share regarding this idea?`, {
+    bot.sendMessage(msg.from.id, `Any more content to share regarding this idea?`, {
       reply_markup: {
         inline_keyboard: [[
           {
@@ -1666,3 +1679,7 @@ bot.on('message', async callbackQuery => {
 
 //if done, save content to db
 //if click not done, send prompt to add more
+
+bot.on(/\/testapoll/, msg => {
+  bot.sendPoll(msg.chat.id, `THIS IS A TEST QUESTION!`, ['one', 'two'])
+})
