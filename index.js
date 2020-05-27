@@ -1631,6 +1631,7 @@ bot.on('callback_query', async callbackQuery => {
 
   if (userState == 'usershareidea_1') {
     if (callbackQuery.data == 'Yes') {
+    bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
      session.setUserState(callbackQuery.from.id, "shareidea_2");
      bot.sendMessage(callbackQuery.from.id, 
       `Describe the activity idea briefly in a message! If you have any links, paste them too! 
@@ -1641,6 +1642,7 @@ Then click send!
 `, {parse_mode: "HTML"}
       )
   } else {
+    bot.answerCallbackQuery(callbackQuery.id, { show_alert: true });
     session.delUserState(callbackQuery.from.id)
     bot.sendMessage(callbackQuery.from.id, `Seems like you don't have any activity ideas to share at this time! 
     
