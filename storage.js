@@ -178,3 +178,23 @@ exports.dbStoreUserFeedbackPhoto = function dbStoreUserFeedbackPhoto(
     if (err) console.log(err);
   });
 };
+
+exports.dbStoreNewIdea = function dbStoreNewIdea(
+  user_id,
+  description
+) {
+  pool.getConnection(function(err, connection) {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    connection.query(
+      "INSERT INTO bot_submit_idea (user_id, description) VALUES (?, ?)",
+      [user_id, description],
+      function(err, results, fields) {
+        if (err) console.log(err.message);
+      }
+    );
+    connection.release();
+  });
+};

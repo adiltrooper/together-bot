@@ -9,7 +9,8 @@ const {
   storeCompletePoll,
   storeUserClickedCount,
   dbStoreUserFeedbackText,
-  dbStoreUserFeedbackPhoto
+  dbStoreUserFeedbackPhoto,
+  dbStoreNewIdea
 } = require("./storage");
 const {
   inUserStateMarkup,
@@ -1628,29 +1629,23 @@ bot.on('callback_query', async callbackQuery => {
 
   if (userState == 'usershareidea_1') {
     if (callbackQuery.data == 'Yes') {
-     //increment userState
      session.setUserState(callbackQuery.from.id, "shareidea_2");
-     console.log('ANOTHER STEP');
      bot.sendMessage(callbackQuery.from.id, 
       `Send us your content below!.
-Describe the activity idea briefly! You can paste links and send images too! If you're sending an image, just type your text in the caption!
-
-Bonus points if you have a picture of yourself doing the activity!
+Describe the activity idea briefly! If you have any links, paste them too! Then click Send!
+Note: At this time we're <em>not</em> accepting images! 
 `
       )
-  } 
-}
-  if (userState == 'usershareidea_2') {
-    if (callbackQuery.data == 'Done') {
-      //
-    }
-
-    if (callbackQuery.date == 'Add More') {
-      //maintain state and ask for more content
-    }
-
+  } else {
+    session.delUserState(callbackQuery.from.id)
+    bot.sendMessage(callbackQuery.from.id, `Seems like you don't have any activity ideas to share at this time! 
+    
+    Don't worry, whenever you do, we are here to help share your amazing ideas with the community!
+    `,
+    inUserStayHomeStateMarkup()
+    )
   }
-
+}
   //else return to normal state
 })
 
@@ -1659,28 +1654,7 @@ bot.on('message', async msg => {
     console.log(err.message);
   }); 
   if (userState == 'usershareidea_2') {
-    //ask if they are done or want to share more (inline keyboard)
-    bot.sendMessage(msg.from.id, `Any more content to share regarding this idea?`, {
-      reply_markup: {
-        inline_keyboard: [[
-          {
-            text: ' 👍🏻 Done',
-            callback_data: 'Done'
-          },
-          {
-            text: ' ➕ Add More ',
-            callback_data: 'Add More'
-          }
-        ]]
-      }
-    })
+    dbStoreNewIdea(msg.chat.id, msg.text)
+    bot.sendMessage(msg.from.id, `Thank you for contributing to the together community! If you have more ideas don't hesitate to share it with us!`)
   }
-})
-
-//if done, save content to db
-//if click not done, send prompt to add more
-
-bot.onText(/\/testapoll/, msg => {
-  console.log(`testing poll happenin`)
-  bot.sendPoll(@togethersg2_bot, `THIS IS A TEST QUESTION!`, ['one', 'two'])
 })
