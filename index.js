@@ -1673,6 +1673,6 @@ bot.on('message', async msg => {
 If you have more ideas don't hesitate to share it with us!
     
 ✌️✌️✌️
-    `,{parse_mode: "HTML"})
+    `,{parse_mode: "HTML"}, inUserStayHomeStateMarkup())
   }
 })
