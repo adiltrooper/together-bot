@@ -1663,6 +1663,7 @@ bot.on('message', async msg => {
   }); 
   if (userState == 'usershareidea_2') {
     dbStoreNewIdea(msg.chat.id, msg.text)
+    session.delUserState(callbackQuery.from.id)
     bot.sendMessage(msg.from.id, `Thank you for contributing to the together community! If you have more ideas don't hesitate to share it with us!`)
   }
 })
