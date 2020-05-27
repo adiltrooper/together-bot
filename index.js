@@ -755,6 +755,7 @@ bot.on("message", async msg => {
     msg.text !== "Poll Post" &&
     msg.text !== "/feedback" &&
     msg.text !== "/help" &&
+    msg.text !== "/shareanidea" &&
     msg.text !== "Update All Bots"
   ) {
     const userState = await session.getUserState(msg.chat.id).catch(err => {
@@ -1647,14 +1648,13 @@ Note: At this time we're <em>not</em> accepting images!
   }
 } else {
   session.delUserState(callbackQuery.from.id)
-  bot.sendMessage(callbackQuery.from.id, `Seems like you don't have any activity ideas to share at this time! 
+  bot.sendMessage(callbackQuery.from.id, `Seems like you would like to share an activity idea with the together community!
   
-  Don't worry, whenever you do, we are here to help share your amazing ideas with the community!
+  To do so, click ->  /shareanidea !
   `,
   inUserStayHomeStateMarkup()
   )
 }
-  //else return to normal state
 })
 
 bot.on('message', async msg => {
@@ -1665,11 +1665,11 @@ bot.on('message', async msg => {
     dbStoreNewIdea(msg.chat.id, msg.text)
     session.delUserState(msg.from.id)
     bot.sendMessage(msg.from.id, `
-    ✌️✌️✌️
+  ✌️✌️✌️
     
-    Thank you for contributing to the together community! If you have more ideas don't hesitate to share it with us!
+  Thank you for contributing to the together community! If you have more ideas don't hesitate to share it with us!
     
-    ✌️✌️✌️
+  ✌️✌️✌️
     `)
   }
 })
