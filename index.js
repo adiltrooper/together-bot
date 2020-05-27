@@ -494,7 +494,7 @@ bot.on("callback_query", async callbackQuery => {
     callbackQuery.data !== "Keep Poll" &&
     callbackQuery.data !== "🛑Stop Poll & Create New 🛑" &&
     callbackQuery.data !== "Yes" &&
-    callbackQuery.date !== "No"
+    callbackQuery.data !== "No"
   ) {
     userPollSelection = callbackQuery.data;
 
