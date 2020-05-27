@@ -1645,6 +1645,14 @@ Note: At this time we're <em>not</em> accepting images!
     inUserStayHomeStateMarkup()
     )
   }
+} else {
+  session.delUserState(callbackQuery.from.id)
+  bot.sendMessage(callbackQuery.from.id, `Seems like you don't have any activity ideas to share at this time! 
+  
+  Don't worry, whenever you do, we are here to help share your amazing ideas with the community!
+  `,
+  inUserStayHomeStateMarkup()
+  )
 }
   //else return to normal state
 })
