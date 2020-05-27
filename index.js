@@ -755,7 +755,7 @@ bot.on("message", async msg => {
     msg.text !== "Poll Post" &&
     msg.text !== "/feedback" &&
     msg.text !== "/help" &&
-    msg.text !== "/shareanidea" &&
+    msg.text !== "/shareidea" &&
     msg.text !== "Update All Bots"
   ) {
     const userState = await session.getUserState(msg.chat.id).catch(err => {
@@ -1601,7 +1601,7 @@ ${short_desc}
 
 ///////////////////// SUBMIT IDEA /////////////////////
 
-bot.onText(/\/shareanidea/, msg => {
+bot.onText(/\/shareidea/, msg => {
   session.setUserState(msg.chat.id, "shareidea_1");
   bot.sendMessage(
     msg.from.id, 
@@ -1609,7 +1609,7 @@ bot.onText(/\/shareanidea/, msg => {
     reply_markup: {
       inline_keyboard: [[
         {
-          text: ' 👌🏼 Yes ',
+          text: ' 🟢 Yes ',
           callback_data: 'Yes'
         },
         {
@@ -1652,7 +1652,7 @@ Then click send!
   session.delUserState(callbackQuery.from.id)
   bot.sendMessage(callbackQuery.from.id, `Seems like you would like to share an activity idea with the <b>together</b> community!
   
-  To do so, click ->  /shareanidea !
+  To do so, click ->  /shareidea !
   `, {parse_mode: "HTML"},
   inUserStayHomeStateMarkup()
   )
