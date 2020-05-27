@@ -32,10 +32,9 @@ exports.draftPollReplyMarkup = function draftPollReplyMarkup() {
 
 exports.answerPollReplyMarkup = function answerPollReplyMarkup() {
   return {
+    disable_web_page_preview: true,
     parse_mode: "HTML"
-  },
-  { disable_web_page_preview: true }
-  ;
+  }
 };
 
 exports.inUserStateMarkup = function inUserStateMarkup() {

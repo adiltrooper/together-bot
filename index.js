@@ -493,7 +493,8 @@ bot.on("callback_query", async callbackQuery => {
   if (
     callbackQuery.data !== "Keep Poll" &&
     callbackQuery.data !== "🛑Stop Poll & Create New 🛑" &&
-    callbackQuery.data !== "Yes"
+    callbackQuery.data !== "Yes" &&
+    callbackQuery.date !== "No"
   ) {
     userPollSelection = callbackQuery.data;
 
@@ -1643,7 +1644,7 @@ Then click send!
     session.delUserState(callbackQuery.from.id)
     bot.sendMessage(callbackQuery.from.id, `Seems like you don't have any activity ideas to share at this time! 
     
-    Don't worry, whenever you do, we are here to help share your amazing ideas with the community!
+Don't worry, whenever you do, we are here to help share your amazing ideas with the community!
     `,
     inUserStayHomeStateMarkup()
     )
@@ -1653,7 +1654,7 @@ Then click send!
   session.delUserState(callbackQuery.from.id)
   bot.sendMessage(callbackQuery.from.id, `Seems like you would like to share an activity idea with the <b>together</b> community!
   
-  To do so, click ->  /shareidea !
+To do so, click ->  /shareidea !
   `, {parse_mode: "HTML"},
   inUserStayHomeStateMarkup()
   )
