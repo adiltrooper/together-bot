@@ -1669,8 +1669,7 @@ bot.on('message', async msg => {
     bot.sendMessage(msg.from.id, `
   ✌️✌️✌️
 
-<b>Thank you for contributing to the together community!</b>
-  
+<b>Thank you for contributing to the TogetherSG community!</b>
 If you have more ideas don't hesitate to share it with us!
     
 ✌️✌️✌️
