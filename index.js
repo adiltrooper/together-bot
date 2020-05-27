@@ -1609,11 +1609,11 @@ bot.onText(/\/shareanidea/, msg => {
     reply_markup: {
       inline_keyboard: [[
         {
-          text: ' 👍🏻 Yes ',
+          text: ' 👌🏼 Yes ',
           callback_data: 'Yes'
         },
         {
-          text: ' 👎🏻 No ',
+          text: ' 🛑 No ',
           callback_data: 'No'
         }
       ]]
@@ -1632,9 +1632,11 @@ bot.on('callback_query', async callbackQuery => {
     if (callbackQuery.data == 'Yes') {
      session.setUserState(callbackQuery.from.id, "shareidea_2");
      bot.sendMessage(callbackQuery.from.id, 
-      `Send us your content below!.
-Describe the activity idea briefly! If you have any links, paste them too! Then click Send!
-<i>Note: At this time we're <em>not</em> accepting images!</i>
+      `Describe the activity idea briefly in a message! If you have any links, paste them too! 
+      
+Then click send!
+
+<i>Note: At this time we're <b>not</b> accepting images!</i>
 `, {parse_mode: "HTML"}
       )
   } else {
@@ -1666,12 +1668,12 @@ bot.on('message', async msg => {
     session.delUserState(msg.from.id)
     bot.sendMessage(msg.from.id, `
   ✌️✌️✌️
-    
-  <b>Thank you for contributing to the together community!</b>
+
+<b>Thank you for contributing to the together community!</b>
   
 If you have more ideas don't hesitate to share it with us!
     
-  ✌️✌️✌️
+✌️✌️✌️
     `,{parse_mode: "HTML"})
   }
 })
