@@ -1649,6 +1649,7 @@ Then click send!
     )
   }
 } else {
+  if (callbackQuery.data == 'Yes' || callbackQuery.data == 'No') {
   session.delUserState(callbackQuery.from.id)
   bot.sendMessage(callbackQuery.from.id, `Seems like you would like to share an activity idea with the <b>together</b> community!
   
@@ -1656,6 +1657,7 @@ Then click send!
   `, {parse_mode: "HTML"},
   inUserStayHomeStateMarkup()
   )
+}
 }
 })
 
