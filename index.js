@@ -1634,8 +1634,8 @@ bot.on('callback_query', async callbackQuery => {
      bot.sendMessage(callbackQuery.from.id, 
       `Send us your content below!.
 Describe the activity idea briefly! If you have any links, paste them too! Then click Send!
-Note: At this time we're <em>not</em> accepting images! 
-`
+<i>Note: At this time we're <em>not</em> accepting images!</i>
+`, {parse_mode: "HTML"}
       )
   } else {
     session.delUserState(callbackQuery.from.id)
@@ -1648,10 +1648,10 @@ Note: At this time we're <em>not</em> accepting images!
   }
 } else {
   session.delUserState(callbackQuery.from.id)
-  bot.sendMessage(callbackQuery.from.id, `Seems like you would like to share an activity idea with the together community!
+  bot.sendMessage(callbackQuery.from.id, `Seems like you would like to share an activity idea with the <b>together</b> community!
   
   To do so, click ->  /shareanidea !
-  `,
+  `, {parse_mode: "HTML"},
   inUserStayHomeStateMarkup()
   )
 }
@@ -1667,9 +1667,11 @@ bot.on('message', async msg => {
     bot.sendMessage(msg.from.id, `
   ✌️✌️✌️
     
-  Thank you for contributing to the together community! If you have more ideas don't hesitate to share it with us!
+  <b>Thank you for contributing to the together community!</b>
+  
+If you have more ideas don't hesitate to share it with us!
     
   ✌️✌️✌️
-    `)
+    `,{parse_mode: "HTML"})
   }
 })
